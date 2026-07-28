@@ -160,7 +160,6 @@ nav{
   animation: zoomF 2.5s cubic-bezier(0.25, 1, 0.3, 1) forwards;
 }
 
-/* F Harfi (Sade Gradient) */
 .intro-f {
   position: relative;
   color: #007aff;
@@ -360,6 +359,7 @@ nav{
   border-bottom:1px solid var(--border);
   display:flex;align-items:center;gap:16px;
   flex-shrink:0; min-height:77px; z-index:5;
+  flex-wrap: wrap;
 }
 .now-logo{
   width:48px;height:48px;border-radius:10px;
@@ -369,8 +369,50 @@ nav{
   overflow:hidden;padding:5px;flex-shrink:0;
 }
 .now-logo img{ max-width:100%;max-height:100%;object-fit:contain; }
-.now-info{flex:1; display:flex; align-items:center; gap:12px;}
+.now-info{flex:1; display:flex; align-items:center; gap:12px; min-width: 200px;}
 .now-ch-name{ font-family:'Barlow Condensed',sans-serif; font-size:22px;font-weight:800;letter-spacing:1px; }
+
+/* ─── YAYIN ALTERNATİFLERİ (SOURCE SWITCHER) ─── */
+.source-switcher-container {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+}
+.source-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--muted2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.source-btn-group {
+  display: flex;
+  gap: 4px;
+}
+.source-btn {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.source-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.source-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent-glow);
+}
 
 .btn-theater {
   background: rgba(255, 255, 255, 0.06);
@@ -434,6 +476,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .btn-theater span { font-size: 16px; }
   .btn-theater { padding: 6px 10px; }
   .btn-theater text { display: none; }
+  .source-switcher-container { width: 100%; justify-content: space-between; margin-top: 8px; }
 }
 </style>
 </head>
@@ -480,6 +523,13 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       <div class="now-logo" id="nowLogo"></div>
       <div class="now-info">
         <div class="now-ch-name" id="nowName"></div>
+        
+        <!-- YAYIN ALTERNATİFLERİ BUTONLARI -->
+        <div class="source-switcher-container" id="sourceSwitcher">
+          <span class="source-label">Kaynak:</span>
+          <div class="source-btn-group" id="sourceBtnGroup"></div>
+        </div>
+
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
           <span>⛶</span><span class="btn-text"> Sinema Modu</span>
         </button>
@@ -513,7 +563,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 <script>
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
 
-// Sayfa ilk yüklendiğinde animasyonu çalıştırıp ardından gizler
 window.addEventListener('DOMContentLoaded', () => {
   setTimeout(() => {
     document.getElementById('netflixIntro').classList.add('hidden');
@@ -524,7 +573,6 @@ function replayIntro() {
   const overlay = document.getElementById('netflixIntro');
   overlay.classList.remove('hidden');
   
-  // Animasyonu tekrar tetiklemek için DOM yenileme
   const fWrap = overlay.querySelector('.f-wrapper');
   const restText = overlay.querySelector('.intro-rest');
   
@@ -569,7 +617,7 @@ const channels = [
   {id:21, name:"Tivibu 1",       cat:"tr", logo:"https://royaltv33.com/img/tivibu1.png", stream:"https://justintaraftarium.net/ch?id=t1"},
   {id:22, name:"Tivibu 1 B",       cat:"tr", logo:"https://royaltv33.com/img/tivibu1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets1.m3u8"},
   {id:99, name:"Tivibu 2",       cat:"tr", logo:"https://royaltv33.com/img/tivibu2.png", stream:"https://justintaraftarium.net/ch?id=t2"},
-  {id:23, name:"Tivibu 2 B ",       cat:"tr", logo:"https://royaltv33.com/img/tivibu2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets2.m3u8"},
+  {id:23, name:"Tivibu 2 B",       cat:"tr", logo:"https://royaltv33.com/img/tivibu2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets2.m3u8"},
   {id:24, name:"Tivibu 3",       cat:"tr", logo:"https://royaltv33.com/img/tivibu3.png", stream:"https://justintaraftarium.net/ch?id=t3"},
   {id:25, name:"Tivibu 3 B",       cat:"tr", logo:"https://royaltv33.com/img/tivibu3.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets3.m3u8"},
   {id:26, name:"Tivibu 4",       cat:"tr", logo:"https://royaltv33.com/img/tivibu4.png", stream:"https://justintaraftarium.net/ch?id=t4"},
@@ -585,7 +633,7 @@ const channels = [
   {id:36, name:"A Spor",         cat:"tr", logo:"https://royaltv33.com/img/aspornew.png", stream:"https://justintaraftarium.net/ch?id=as"},
   {id:37, name:"TRT 1",          cat:"tr", logo:"https://royaltv33.com/img/trt1.png", stream:"https://justintaraftarium.net/ch?id=trt1"},
   {id:38, name:"ATV",            cat:"tr", logo:"https://royaltv33.com/img/atv.png", stream:"https://justintaraftarium.net/ch?id=atv"},
-  {id:39, name:"TV 8",    cat:"tr", logo:"https://royaltv33.com/img/tv8.png", stream:"https://justintaraftarium.net/ch?id=tv8"},
+  {id:39, name:"TV 8",            cat:"tr", logo:"https://royaltv33.com/img/tv8.png", stream:"https://justintaraftarium.net/ch?id=tv8"},
   {id:40, name:"TV 8,5",         cat:"tr", logo:"https://royaltv33.com/img/tv85.png", stream:"https://justintaraftarium.net/ch?id=tv85"},
   
   {id:41, name:"ABC",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-51.php"},
@@ -638,6 +686,11 @@ let hlsInstance = null;
 let selectedChannelObj = null;
 let plyrInstance = null;
 
+// Kanal adından ana kök ismi alma (Örn: "BeIN Sports 1 B" -> "BeIN Sports 1")
+function getBaseChannelName(name) {
+  return name.replace(/\s+[B-Z]$/i, '').trim();
+}
+
 function initPlyr() {
   if (!plyrInstance) {
     plyrInstance = new Plyr('#hlsPlayer', {
@@ -674,22 +727,28 @@ function renderList(){
     return matchesCategory && matchesSearch;
   });
 
+  // Aynı kanalın alternatif türevlerini ana listede gizle (Yalnızca kök kanallar gösterilir)
+  let displayedChannels = filtered.filter(c => !/\s+[B-Z]$/i.test(c.name));
+
   list.innerHTML='';
   const fragment = document.createDocumentFragment();
   
-  filtered.forEach(c=>{
+  displayedChannels.forEach(c=>{
     const countryObj = countries.find(item => item.code === c.cat);
     const flagSymbol = countryObj ? countryObj.flag : "🌐";
 
+    const baseName = getBaseChannelName(c.name);
+    const isParentActive = selectedChannelObj && getBaseChannelName(selectedChannelObj.name) === baseName;
+
     const card=document.createElement('div');
-    card.className='ch-card'+(activeId===c.id?' active':'');
+    card.className='ch-card'+(isParentActive ? ' active':'');
     card.innerHTML=`
       <div class="ch-card-flag">${flagSymbol}</div>
       <div class="ch-logo">
         <img src="${c.logo}" alt="${c.name}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>
       </div>
       <div class="ch-info">
-        <div class="ch-name">${c.name}</div>
+        <div class="ch-name">${baseName}</div>
       </div>
       <div class="ch-live-badge"></div>
     `;
@@ -699,15 +758,48 @@ function renderList(){
   list.appendChild(fragment);
 }
 
+function renderSourceSwitcher(channel) {
+  const container = document.getElementById('sourceSwitcher');
+  const group = document.getElementById('sourceBtnGroup');
+  const baseName = getBaseChannelName(channel.name);
+  
+  // Aynı kök isme sahip tüm alternatif yayınları bul
+  const alternatives = channels.filter(c => getBaseChannelName(c.name) === baseName);
+
+  if (alternatives.length > 1) {
+    container.style.display = "flex";
+    group.innerHTML = "";
+    
+    alternatives.forEach((alt, index) => {
+      const btn = document.createElement('button');
+      btn.className = `source-btn ${alt.id === channel.id ? 'active' : ''}`;
+      
+      // İsme göre alternatif numaralandırması (A, B, C...)
+      const label = index === 0 ? "Alternatif 1" : `Alternatif ${index + 1}`;
+      btn.textContent = label;
+      
+      btn.onclick = () => {
+        if (alt.id !== activeId) {
+          selectChannel(alt);
+        }
+      };
+      group.appendChild(btn);
+    });
+  } else {
+    container.style.display = "none";
+  }
+}
+
 function selectChannel(c){
   activeId=c.id;
   selectedChannelObj = c; 
   renderList();
+  renderSourceSwitcher(c);
 
   const logoEl = document.getElementById('nowLogo');
   logoEl.style.display = 'flex';
   logoEl.innerHTML = `<img src="${c.logo}" alt="${c.name}" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>`;
-  document.getElementById('nowName').textContent=c.name;
+  document.getElementById('nowName').textContent = getBaseChannelName(c.name);
   document.getElementById('theaterBtn').style.display = 'flex';
   document.getElementById('vidOverlay').style.display = 'none';
   
