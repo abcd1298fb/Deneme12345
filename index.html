@@ -558,10 +558,10 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 <div class="arcade-modal" id="arcadeModal">
   <div class="arcade-box">
     <button class="arcade-close" onclick="closeArcadeGame()">✕</button>
-    <div class="arcade-title">3D RETRO PENALTI</div>
+    <div class="arcade-title">RETRO PENALTI</div>
     <div class="arcade-score" id="arcadeScore">SKOR: 0 | REKOR: 0</div>
     <canvas id="gameCanvas" width="360" height="240"></canvas>
-    <div class="arcade-instructions">Topu Tutup Fırlatmak İstediğin Yöne Doğru Sürükle & Bırak!</div>
+    <div class="arcade-instructions">Topu tutup fırlatmak istediğin yöne sürükle & bırak!</div>
   </div>
 </div>
 
@@ -929,7 +929,7 @@ function filterChannels(q){
   renderList();
 }
 
-/* ─── RETRO ARCADE SİSTEMİ (KARŞIDAN GÖRÜNÜM PENALTI) ─── */
+/* ─── RETRO ARCADE SİSTEMİ (KLASİK 2D PENALTI) ─── */
 let arcadeLoop = null;
 let gameScore = 0;
 let highScore = localStorage.getItem('fatbok_arcade_highscore') || 0;
@@ -950,29 +950,26 @@ function initArcadeGame() {
   gameScore = 0;
   updateArcadeScore();
 
-  // Kale Sınırları (Karşıdan Görünüm)
-  const goal = { left: 60, right: 300, top: 40, bottom: 150 };
+  // Klasik Retro Kale Konumu (Üst kısımda sabit)
+  const goal = { left: 100, right: 260, top: 30, bottom: 80 };
   
   // Kaleci
   let keeper = {
     x: 180,
-    y: 130,
+    y: 55,
     targetX: 180,
-    targetY: 130,
-    width: 32,
-    height: 40,
+    width: 36,
+    height: 16,
     state: 'idle'
   };
 
-  // Top (Başlangıç: Penaltı Noktası - Yakında ve Büyük)
+  // Top (Başlangıç: Alt kısım, penaltı noktası)
   let ball = {
     x: 180,
-    y: 210,
-    radius: 12,
+    y: 200,
+    radius: 7,
     vx: 0,
     vy: 0,
-    vz: 0,
-    z: 1, // Büyüklük ölçeği
     isShot: false
   };
 
@@ -989,18 +986,13 @@ function initArcadeGame() {
 
   function resetBall() {
     ball.x = 180;
-    ball.y = 210;
-    ball.radius = 12;
+    ball.y = 200;
     ball.vx = 0;
     ball.vy = 0;
-    ball.vz = 0;
-    ball.z = 1;
     ball.isShot = false;
 
     keeper.x = 180;
-    keeper.y = 130;
     keeper.targetX = 180;
-    keeper.targetY = 130;
     keeper.state = 'idle';
   }
 
@@ -1017,7 +1009,6 @@ function initArcadeGame() {
   function onPointerDown(e) {
     if (ball.isShot) return;
     const pos = getPos(e);
-    // Topa tıklandı mı?
     const dist = Math.hypot(pos.x - ball.x, pos.y - ball.y);
     if (dist < 25) {
       drag.isDragging = true;
@@ -1042,25 +1033,16 @@ function initArcadeGame() {
     const dx = drag.currX - drag.startX;
     const dy = drag.currY - drag.startY;
 
-    // Yeterince güçlü sürükleme yapıldıysa topu fırlat
-    if (dy < -15) {
+    // Yukarı çekip bıraktığında fırlat (Klasik arcade mekaniği: Çektiğin yönün tersine veya çektiğin yöne pürüzsüz gidiş)
+    if (dy < -10) {
       ball.isShot = true;
-      ball.vx = dx * 0.25;
-      ball.vy = dy * 0.28;
-      ball.vz = -0.022; // Uzaklaştıkça küçülme hızı
+      ball.vx = dx * 0.18;
+      ball.vy = dy * 0.22; // Çok yukarı gitmemesi için hız sınırlandı
 
-      // Kalecinin Şansa Göre Atlaması (Sol, Sağ, Orta)
-      const options = [
-        { x: goal.left + 20, y: goal.top + 30 },   // Sol Üst
-        { x: goal.left + 30, y: goal.bottom - 20 }, // Sol Alt
-        { x: 180, y: goal.top + 20 },               // Orta
-        { x: goal.right - 30, y: goal.bottom - 20 },// Sağ Alt
-        { x: goal.right - 20, y: goal.top + 30 }    // Sağ Üst
-      ];
-      const choice = options[Math.floor(Math.random() * options.length)];
-      keeper.targetX = choice.x;
-      keeper.targetY = choice.y;
-      keeper.state = 'jumping';
+      // Kalecinin rastgele sağa/sola hamlesi
+      const keeperTargets = [goal.left + 25, 180, goal.right - 25];
+      keeper.targetX = keeperTargets[Math.floor(Math.random() * keeperTargets.length)];
+      keeper.state = 'moving';
     }
   }
 
@@ -1073,55 +1055,46 @@ function initArcadeGame() {
   window.ontouchend = onPointerUp;
 
   function update() {
-    // Kaleci Hareketi
-    if (keeper.state === 'jumping') {
-      keeper.x += (keeper.targetX - keeper.x) * 0.2;
-      keeper.y += (keeper.targetY - keeper.y) * 0.2;
+    // Kaleci hareketi
+    if (keeper.state === 'moving') {
+      keeper.x += (keeper.targetX - keeper.x) * 0.15;
     }
 
-    // Top Hareketi
+    // Top hareketi
     if (ball.isShot) {
       ball.x += ball.vx;
       ball.y += ball.vy;
-      ball.z += ball.vz;
-      if (ball.z < 0.4) ball.z = 0.4;
 
-      // Top Kaleye Ulaştı mı? (Z derinliği kale çizgisine erdiğinde)
-      if (ball.z <= 0.48) {
+      // Kale çizgisine veya üst sınıra ulaştığında kontrol et
+      if (ball.y <= goal.bottom) {
         ball.isShot = false;
 
         // Kaleci Kurtardı mı?
-        const kRect = {
-          left: keeper.x - keeper.width,
-          right: keeper.x + keeper.width,
-          top: keeper.y - keeper.height,
-          bottom: keeper.y + keeper.height
-        };
+        const kLeft = keeper.x - keeper.width / 2;
+        const kRight = keeper.x + keeper.width / 2;
 
-        if (ball.x >= kRect.left && ball.x <= kRect.right &&
-            ball.y >= kRect.top && ball.y <= kRect.bottom) {
+        if (ball.x >= kLeft && ball.x <= kRight && ball.y <= goal.bottom && ball.y >= goal.top) {
           goalMessage = "KURTARILDI!";
-          messageTimer = 45;
-          setTimeout(resetBall, 1000);
+          messageTimer = 40;
+          setTimeout(resetBall, 900);
         }
-        // Kaleye girdi mi? (GOL)
-        else if (ball.x >= goal.left + 8 && ball.x <= goal.right - 8 &&
-                 ball.y >= goal.top + 8 && ball.y <= goal.bottom) {
+        // GOL mü?
+        else if (ball.x >= goal.left && ball.x <= goal.right) {
           gameScore++;
           if (gameScore > highScore) {
             highScore = gameScore;
             localStorage.setItem('fatbok_arcade_highscore', highScore);
           }
           updateArcadeScore();
-          goalMessage = "GOOOOOOLLLL!";
-          messageTimer = 45;
-          setTimeout(resetBall, 1000);
+          goalMessage = "GOOOLL!";
+          messageTimer = 40;
+          setTimeout(resetBall, 900);
         }
-        // Aut
+        // Dışarı / Aut
         else {
           goalMessage = "AUT!";
-          messageTimer = 45;
-          setTimeout(resetBall, 1000);
+          messageTimer = 40;
+          setTimeout(resetBall, 900);
         }
       }
     }
@@ -1130,62 +1103,35 @@ function initArcadeGame() {
   function draw() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Arka Plan / Saha Desenleri (Perspektif Saha)
-    ctx.fillStyle = "#1e7e34";
+    // Retro Saha Zemin (Yeşil)
+    ctx.fillStyle = "#1b5e20";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Tribün / Kale Arkası Renklendirmesi
-    ctx.fillStyle = "#112211";
-    ctx.fillRect(0, 0, canvas.width, 40);
-
-    // Kale Ağları Karesi
-    ctx.fillStyle = "#0c3b16";
-    ctx.fillRect(goal.left, goal.top, goal.right - goal.left, goal.bottom - goal.top);
-
-    // Kale File Çizgileri
-    ctx.strokeStyle = "rgba(255, 255, 255, 0.25)";
-    ctx.lineWidth = 1;
-    for (let x = goal.left; x <= goal.right; x += 15) {
-      ctx.beginPath(); ctx.moveTo(x, goal.top); ctx.lineTo(x, goal.bottom); ctx.stroke();
-    }
-    for (let y = goal.top; y <= goal.bottom; y += 15) {
-      ctx.beginPath(); ctx.moveTo(goal.left, y); ctx.lineTo(goal.right, y); ctx.stroke();
-    }
-
-    // Beyaz Kale Direkleri (Karşıdan Görünüm)
-    ctx.strokeStyle = "#ffffff";
-    ctx.lineWidth = 6;
-    ctx.beginPath();
-    ctx.moveTo(goal.left, goal.bottom);
-    ctx.lineTo(goal.left, goal.top);
-    ctx.lineTo(goal.right, goal.top);
-    ctx.lineTo(goal.right, goal.bottom);
-    ctx.stroke();
-
-    // Ceza Sahası Çizgisi Perspektifi
-    ctx.strokeStyle = "rgba(255,255,255,0.7)";
+    // Saha Çizgileri (Beyaz)
+    ctx.strokeStyle = "rgba(255,255,255,0.5)";
     ctx.lineWidth = 2;
-    ctx.beginPath();
-    ctx.moveTo(10, 240);
-    ctx.lineTo(goal.left - 20, goal.bottom);
-    ctx.lineTo(goal.right + 20, goal.bottom);
-    ctx.lineTo(350, 240);
-    ctx.stroke();
+    // Ceza sahası çizgisi
+    ctx.strokeRect(60, 30, 240, 120);
+    // Penaltı noktası
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(178, 175, 4, 4);
 
-    // Kaleci (Retro 16-Bit Görünümlü Bloklar)
-    ctx.fillStyle = "#ff0055"; // Kaleci Forması
-    ctx.fillRect(keeper.x - 12, keeper.y - 18, 24, 28);
-    ctx.fillStyle = "#ffcc99"; // Kaleci Kafası
-    ctx.fillRect(keeper.x - 8, keeper.y - 28, 16, 10);
-    ctx.fillStyle = "#00ffff"; // Kaleci Eldivenleri
-    ctx.fillRect(keeper.x - 18, keeper.y - 12, 6, 8);
-    ctx.fillRect(keeper.x + 12, keeper.y - 12, 6, 8);
+    // Retro Kale (Üstten Görünüm/Klasik Piksel)
+    ctx.strokeStyle = "#ffffff";
+    ctx.lineWidth = 4;
+    ctx.strokeRect(goal.left, goal.top, goal.right - goal.left, goal.bottom - goal.top);
 
-    // Nişan / Sürükleme Ok Çizgisi
+    // Kaleci (Retro Çubuk/Blok)
+    ctx.fillStyle = "#ff0055";
+    ctx.fillRect(keeper.x - keeper.width / 2, keeper.y - keeper.height / 2, keeper.width, keeper.height);
+    ctx.fillStyle = "#ffffff"; // Kaleci kafası
+    ctx.fillRect(keeper.x - 4, keeper.y - 12, 8, 8);
+
+    // Çekme / Nişan Çizgisi
     if (drag.isDragging && !ball.isShot) {
       ctx.strokeStyle = "#00ffcc";
-      ctx.lineWidth = 3;
-      ctx.setLineDash([4, 4]);
+      ctx.lineWidth = 2;
+      ctx.setLineDash([3, 3]);
       ctx.beginPath();
       ctx.moveTo(ball.x, ball.y);
       ctx.lineTo(drag.currX, drag.currY);
@@ -1193,32 +1139,21 @@ function initArcadeGame() {
       ctx.setLineDash([]);
     }
 
-    // Top (Mevcut Büyüklüğüne Göre Derinlikli Çizim)
-    ctx.save();
-    const currentRadius = ball.radius * ball.z;
-    
-    // Top Gölgesi
-    ctx.fillStyle = "rgba(0,0,0,0.3)";
-    ctx.beginPath();
-    ctx.ellipse(ball.x, ball.y + currentRadius * 0.8, currentRadius, currentRadius * 0.4, 0, 0, Math.PI * 2);
-    ctx.fill();
-
-    // Top Gövdesi
+    // Top (Klasik 2D Küçük Beyaz Top)
     ctx.fillStyle = "#ffffff";
     ctx.beginPath();
-    ctx.arc(ball.x, ball.y, Math.max(currentRadius, 3), 0, Math.PI * 2);
+    ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = "#000";
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = "#000000";
+    ctx.lineWidth = 1;
     ctx.stroke();
-    ctx.restore();
 
-    // Skor / Gol Mesajı
+    // Skor / Durum Mesajı
     if (messageTimer > 0) {
-      ctx.fillStyle = goalMessage === "GOOOOOOLLLL!" ? "#00ffcc" : "#ff3333";
-      ctx.font = "12px 'Press Start 2P'";
+      ctx.fillStyle = goalMessage === "GOOOLL!" ? "#00ffcc" : "#ff3333";
+      ctx.font = "10px 'Press Start 2P'";
       ctx.textAlign = "center";
-      ctx.fillText(goalMessage, 180, 100);
+      ctx.fillText(goalMessage, 180, 125);
       messageTimer--;
     }
   }
