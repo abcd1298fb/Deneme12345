@@ -384,16 +384,80 @@ nav{
 .btn-theater:hover { background: var(--accent); border-color: var(--accent); }
 .btn-theater.active { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
 
+/* Aspect Ratio Seçici CSS */
+.aspect-ratio-selector {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 10px; border-radius: 6px;
+  font-size: 13px; font-weight: 600;
+  outline: none; cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.aspect-ratio-selector option {
+  background: #060e20;
+  color: #fff;
+}
+.aspect-ratio-selector:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--accent); }
+
 .now-badges{display:flex;gap:8px;margin-left:auto}
 .badge{ padding:5px 12px;border-radius:6px; font-size:11px;font-weight:700;letter-spacing:1px; }
 .badge-live{background:rgba(0, 122, 255, 0.15);color:var(--accent);border:1px solid rgba(0, 122, 255, 0.3);display:flex;align-items:center;gap:5px}
 
-.video-wrap{ flex:1;background:#000;position:relative;overflow:hidden; z-index:5; }
-iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none; background:#000; }
+.video-wrap{ flex:1;background:#000;position:relative;overflow:hidden; z-index:5; display:flex; align-items:center; justify-content:center; }
+iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none; background:#000; transition: all 0.3s ease; }
 .vid-overlay{ position:absolute;inset:0; background: rgba(1, 3, 8, 0.95); z-index:10; }
 
 .plyr { height: 100% !important; width: 100% !important; }
-.plyr__video-wrapper { height: 100% !important; }
+.plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
+.plyr video { transition: transform 0.3s ease, object-fit 0.3s ease; }
+
+/* ─── GLASSMORPHISM LOADING SKELETON ─── */
+.skeleton-loader {
+  position: absolute; inset: 0;
+  background: rgba(6, 12, 28, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  z-index: 15;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.skeleton-loader.active { opacity: 1; pointer-events: auto; }
+
+.glass-card {
+  width: min(85%, 480px);
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  display: flex; flex-direction: column; gap: 16px; align-items: center;
+  position: relative; overflow: hidden;
+}
+
+.skeleton-box {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.skeleton-box::after {
+  content: "";
+  position: absolute; top: 0; right: 0; bottom: 0; left: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer {
+  100% { transform: translateX(100%); }
+}
+
+.sk-logo { width: 64px; height: 64px; border-radius: 12px; }
+.sk-title { width: 60%; height: 20px; }
+.sk-subtitle { width: 40%; height: 12px; }
+.sk-bar { width: 100%; height: 6px; border-radius: 3px; margin-top: 10px; }
 
 .adv-interstitial {
   position: absolute; inset: 0;
@@ -434,6 +498,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .btn-theater span { font-size: 16px; }
   .btn-theater { padding: 6px 10px; }
   .btn-theater text { display: none; }
+  .aspect-ratio-selector { padding: 4px 6px; font-size: 11px; }
 }
 </style>
 </head>
@@ -483,15 +548,32 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
           <span>⛶</span><span class="btn-text"> Sinema Modu</span>
         </button>
+        <!-- Aspect Ratio Seçici Dropdown -->
+        <select class="aspect-ratio-selector" id="aspectSelect" onchange="changeAspectRatio(this.value)" style="display:none;">
+          <option value="16:9">📐 16:9</option>
+          <option value="4:3">📐 4:3</option>
+          <option value="21:9">📐 21:9</option>
+          <option value="stretch">📐 Sığdır (Stretch)</option>
+        </select>
       </div>
       <div class="now-badges">
         <div class="badge badge-live"><div class="live-dot"></div>CANLI</div>
       </div>
     </div>
 
-    <div class="video-wrap">
+    <div class="video-wrap" id="videoWrap">
       <div class="vid-overlay" id="vidOverlay"></div>
       
+      <!-- Glassmorphism Skeleton Overlay -->
+      <div class="skeleton-loader" id="skeletonLoader">
+        <div class="glass-card">
+          <div class="skeleton-box sk-logo"></div>
+          <div class="skeleton-box sk-title"></div>
+          <div class="skeleton-box sk-subtitle"></div>
+          <div class="skeleton-box sk-bar"></div>
+        </div>
+      </div>
+
       <div id="advInterstitial" class="adv-interstitial" style="display: none;">
         <div class="adv-interstitial-card">
           <h3>Yayın Hazırlanıyor</h3>
@@ -709,6 +791,7 @@ function selectChannel(c){
   logoEl.innerHTML = `<img src="${c.logo}" alt="${c.name}" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>`;
   document.getElementById('nowName').textContent=c.name;
   document.getElementById('theaterBtn').style.display = 'flex';
+  document.getElementById('aspectSelect').style.display = 'inline-block';
   document.getElementById('vidOverlay').style.display = 'none';
   
   const iframePlayer = document.getElementById('embedPlayer');
@@ -767,7 +850,19 @@ function handleStreamStart() {
   startActualStream(selectedChannelObj);
 }
 
+function showSkeleton() {
+  const sk = document.getElementById('skeletonLoader');
+  sk.classList.add('active');
+}
+
+function hideSkeleton() {
+  const sk = document.getElementById('skeletonLoader');
+  sk.classList.remove('active');
+}
+
 function startActualStream(c) {
+  showSkeleton();
+
   const iframePlayer = document.getElementById('embedPlayer');
   const plyrWrapper = document.getElementById('plyrWrapper');
   const hlsPlayer = document.getElementById('hlsPlayer');
@@ -782,17 +877,57 @@ function startActualStream(c) {
       hlsInstance.loadSource(c.stream);
       hlsInstance.attachMedia(hlsPlayer);
       hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
-        hlsPlayer.play();
+        hlsPlayer.play().catch(() => {});
+        hideSkeleton();
+      });
+      hlsInstance.on(Hls.Events.ERROR, function() {
+        hideSkeleton();
       });
     } else if (hlsPlayer.canPlayType('application/vnd.apple.mpegurl')) {
       hlsPlayer.src = c.stream;
-      hlsPlayer.play();
+      hlsPlayer.play().catch(() => {});
+      hideSkeleton();
     }
   } else {
     iframePlayer.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
     iframePlayer.style.display = "block";
     iframePlayer.src = c.stream; 
+    
+    iframePlayer.onload = function() {
+      hideSkeleton();
+    };
+    setTimeout(() => { hideSkeleton(); }, 2500);
   }
+}
+
+function changeAspectRatio(ratio) {
+  const hlsVideo = document.querySelector('#hlsPlayer');
+  const iframePlayer = document.getElementById('embedPlayer');
+  const plyrWrapper = document.getElementById('plyrWrapper');
+
+  const elements = [hlsVideo, iframePlayer, plyrWrapper];
+
+  elements.forEach(el => {
+    if (!el) return;
+    switch (ratio) {
+      case '16:9':
+        el.style.objectFit = 'contain';
+        el.style.transform = 'scale(1)';
+        break;
+      case '4:3':
+        el.style.objectFit = 'contain';
+        el.style.transform = 'scaleX(0.75)';
+        break;
+      case '21:9':
+        el.style.objectFit = 'cover';
+        el.style.transform = 'scaleY(0.85)';
+        break;
+      case 'stretch':
+        el.style.objectFit = 'fill';
+        el.style.transform = 'scale(1)';
+        break;
+    }
+  });
 }
 
 function setAmbientColor(cat) {
