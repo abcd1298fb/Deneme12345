@@ -49,31 +49,26 @@ body{
   background: radial-gradient(circle at 50% 50%, #030a1e 0%, #010307 100%);
   contain: strict;
 }
+
+/* 1. MADDENİN UYGULANMASI: Arka plan ağır animasyonları kaldırıldı, Blur düşürüldü */
 .liquid-bg::before, .liquid-bg::after {
   content: '';
   position: absolute;
   width: 600px; height: 600px;
   border-radius: 50%;
   background: linear-gradient(135deg, #002266, #0055ff);
-  filter: blur(80px);
+  filter: blur(40px); /* 80px yerine 40px GPU yükünü azalttı */
   opacity: 0.35;
   will-change: transform;
   transform: translateZ(0);
-  animation: liquidFloat 25s infinite ease-in-out;
+  /* animation kaldırıldı */
 }
 .liquid-bg::after {
   background: linear-gradient(135deg, #001133, #007aff);
   right: -50px; top: -50px;
   width: 500px; height: 500px;
   opacity: 0.2;
-  animation: liquidFloat 30s infinite ease-in-out reverse;
-  animation-delay: -5s;
-}
-
-@keyframes liquidFloat {
-  0% { transform: translate3d(-20px, -20px, 0) scale(1); }
-  50% { transform: translate3d(30px, 20px, 0) scale(1.08); }
-  100% { transform: translate3d(-20px, -20px, 0) scale(1); }
+  /* animation kaldırıldı */
 }
 
 /* ─── NAV ─── */
@@ -189,10 +184,9 @@ nav{
   line-height: 1;
   transform-origin: center center;
   z-index: 2;
-  animation: zoomF 4.5s cubic-bezier(0.25, 1, 0.3, 1) forwards;
+  animation: zoomF 2.5s cubic-bezier(0.25, 1, 0.3, 1) forwards;
 }
 
-/* F Harfi (Sade Gradient) */
 .intro-f {
   position: relative;
   color: var(--accent);
@@ -213,7 +207,7 @@ nav{
   overflow: hidden;
   vertical-align: bottom;
   transform-origin: left center;
-  animation: fadeOutRest 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  animation: fadeOutRest 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards;
 }
 
 @keyframes fadeOutRest {
@@ -222,12 +216,12 @@ nav{
   100% { opacity: 0; max-width: 0px; }
 }
 
+/* 1. MADDENİN UYGULANMASI: Aşırı scale(65) kasması makul scale(2.5) değerine çekildi */
 @keyframes zoomF {
   0% { transform: scale(1); }
-  30% { transform: scale(1.1); }
-  65% { transform: scale(3.5); opacity: 1; }
-  90% { opacity: 0.8; }
-  100% { transform: scale(65); opacity: 0; }
+  40% { transform: scale(1.1); }
+  70% { transform: scale(2); opacity: 1; }
+  100% { transform: scale(2.5); opacity: 0; }
 }
 
 /* ─── LAYOUT ─── */
@@ -294,6 +288,8 @@ nav{
   flex:1;overflow-y:auto;padding:8px;
   position: relative;
   will-change: scroll-position;
+  contain: strict; /* CSS Render Optimizasyonu */
+  content-visibility: auto;
 }
 .ch-list::-webkit-scrollbar{width:4px}
 .ch-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px}
@@ -445,11 +441,10 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 .plyr video { transition: transform 0.3s ease, object-fit 0.3s ease; }
 
 /* ─── GLASSMORPHISM LOADING SKELETON ─── */
+/* 1. MADDENİN UYGULANMASI: Ağır kasmaya yol açan backdrop-filter: blur() kaldırıldı, yüksek opaklıklı solid/gradient background eklendi */
 .skeleton-loader {
   position: absolute; inset: 0;
-  background: rgba(6, 12, 28, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(6, 12, 28, 0.95); /* Yüksek opaklık */
   z-index: 15;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 20px;
@@ -551,7 +546,8 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="nav-logo" onclick="replayIntro()">FATBOK</div>
   <div class="nav-search">
     <span class="search-icon">🔍</span>
-    <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="filterChannels(this.value)"/>
+    <!-- 2. MADDENIN UYGULANMASI: Debounce eklendi -->
+    <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="handleSearchInput(this.value)"/>
   </div>
   <div class="nav-spacer">
     <div class="theme-picker-wrap">
@@ -607,7 +603,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
     <div class="video-wrap" id="videoWrap">
       <div class="vid-overlay" id="vidOverlay"></div>
       
-      <!-- Glassmorphism Skeleton Overlay -->
+      <!-- Loading Skeleton Overlay -->
       <div class="skeleton-loader" id="skeletonLoader">
         <div class="glass-card">
           <div class="skeleton-box sk-logo"></div>
@@ -669,26 +665,25 @@ window.addEventListener('DOMContentLoaded', () => {
 
   setTimeout(() => {
     document.getElementById('netflixIntro').classList.add('hidden');
-  }, 4200);
+  }, 2600);
 });
 
 function replayIntro() {
   const overlay = document.getElementById('netflixIntro');
   overlay.classList.remove('hidden');
   
-  // Animasyonu tekrar tetiklemek için DOM yenileme
   const fWrap = overlay.querySelector('.f-wrapper');
   const restText = overlay.querySelector('.intro-rest');
   
   fWrap.style.animation = 'none';
   restText.style.animation = 'none';
   void fWrap.offsetWidth;
-  fWrap.style.animation = 'zoomF 4.5s cubic-bezier(0.25, 1, 0.3, 1) forwards';
-  restText.style.animation = 'fadeOutRest 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards';
+  fWrap.style.animation = 'zoomF 2.5s cubic-bezier(0.25, 1, 0.3, 1) forwards';
+  restText.style.animation = 'fadeOutRest 2.0s cubic-bezier(0.4, 0, 0.2, 1) forwards';
 
   setTimeout(() => {
     overlay.classList.add('hidden');
-  }, 4200);
+  }, 2600);
 }
 
 const countries = [
@@ -789,6 +784,7 @@ let activeId = null;
 let hlsInstance = null;
 let selectedChannelObj = null;
 let plyrInstance = null;
+let searchTimeout = null;
 
 function initPlyr() {
   if (!plyrInstance) {
@@ -818,24 +814,23 @@ function renderCountryFilters() {
   container.appendChild(fragment);
 }
 
+// 2. MADDENİN UYGULANMASI: İlk seferde tüm DOM elemanları oluşturulur.
 function renderList(){
   const list = document.getElementById('chList');
-  let filtered = channels.filter(c=>{
-    const matchesCategory = (c.cat === currentCategory);
-    const matchesSearch = (!currentSearch || c.name.toLowerCase().includes(currentSearch.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
-
   list.innerHTML='';
   const fragment = document.createDocumentFragment();
   
-  filtered.forEach(c=>{
+  channels.forEach(c => {
     const countryObj = countries.find(item => item.code === c.cat);
     const flagSymbol = countryObj ? countryObj.flag : "🌐";
 
-    const card=document.createElement('div');
-    card.className='ch-card'+(activeId===c.id?' active':'');
-    card.innerHTML=`
+    const card = document.createElement('div');
+    card.className = 'ch-card' + (activeId === c.id ? ' active' : '');
+    card.dataset.id = c.id;
+    card.dataset.cat = c.cat;
+    card.dataset.name = c.name.toLowerCase();
+
+    card.innerHTML = `
       <div class="ch-card-flag">${flagSymbol}</div>
       <div class="ch-logo">
         <img src="${c.logo}" alt="${c.name}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>
@@ -845,16 +840,54 @@ function renderList(){
       </div>
       <div class="ch-live-badge"></div>
     `;
-    card.onclick=()=>selectChannel(c);
+    card.onclick = () => selectChannel(c);
     fragment.appendChild(card);
   });
   list.appendChild(fragment);
+  filterChannels(); // Görünürlüğü hemen ayarla
+}
+
+// 2. MADDENİN UYGULANMASI: DOM silinmez, sadece display CSS değeri değiştirilir.
+function filterChannels(){
+  const cards = document.querySelectorAll('.ch-card');
+  const searchLower = currentSearch.toLowerCase();
+
+  cards.forEach(card => {
+    const cat = card.dataset.cat;
+    const name = card.dataset.name;
+    
+    const matchesCategory = (cat === currentCategory);
+    const matchesSearch = (!searchLower || name.includes(searchLower));
+
+    if (matchesCategory && matchesSearch) {
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// 2. MADDENİN UYGULANMASI: Debounce mekanizması eklendi
+function handleSearchInput(q) {
+  currentSearch = q;
+  clearTimeout(searchTimeout);
+  searchTimeout = setTimeout(() => {
+    filterChannels();
+  }, 150); // 150ms geciktirme ile CPU yükünü engeller
 }
 
 function selectChannel(c){
-  activeId=c.id;
+  activeId = c.id;
   selectedChannelObj = c; 
-  renderList();
+
+  // Kartların aktiflik sınıfını güncelle
+  document.querySelectorAll('.ch-card').forEach(card => {
+    if(parseInt(card.dataset.id) === c.id) {
+      card.classList.add('active');
+    } else {
+      card.classList.remove('active');
+    }
+  });
 
   const logoEl = document.getElementById('nowLogo');
   logoEl.style.display = 'flex';
@@ -1019,11 +1052,6 @@ function toggleTheaterMode() {
   } else {
     if(btnText) btnText.textContent = " Sinema Modu";
   }
-}
-
-function filterChannels(q){
-  currentSearch=q;
-  renderList();
 }
 
 renderCountryFilters();
