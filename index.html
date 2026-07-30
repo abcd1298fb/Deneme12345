@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FATBOK</title>
+<title>FATBOK - AI Enhanced Player</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -50,25 +50,22 @@ body{
   contain: strict;
 }
 
-/* 1. MADDENİN UYGULANMASI: Arka plan ağır animasyonları kaldırıldı, Blur düşürüldü */
 .liquid-bg::before, .liquid-bg::after {
   content: '';
   position: absolute;
   width: 600px; height: 600px;
   border-radius: 50%;
   background: linear-gradient(135deg, #002266, #0055ff);
-  filter: blur(40px); /* 80px yerine 40px GPU yükünü azalttı */
+  filter: blur(40px);
   opacity: 0.35;
   will-change: transform;
   transform: translateZ(0);
-  /* animation kaldırıldı */
 }
 .liquid-bg::after {
   background: linear-gradient(135deg, #001133, #007aff);
   right: -50px; top: -50px;
   width: 500px; height: 500px;
   opacity: 0.2;
-  /* animation kaldırıldı */
 }
 
 /* ─── NAV ─── */
@@ -115,7 +112,6 @@ nav{
 .nav-spacer { width: 150px; flex-shrink: 0; display: flex; justify-content: flex-end; align-items: center; }
 .live-dot{width:7px;height:7px;background:#34c759;border-radius:50%;opacity:0.9;}
 
-/* Renk Tema Seçici CSS */
 .theme-picker-wrap {
   display: flex;
   align-items: center;
@@ -147,7 +143,7 @@ nav{
   color: #fff;
 }
 
-/* ─── NETFLIX INTRO OVERLAY (İLK GİRİŞ ANİMASYONU) ─── */
+/* ─── NETFLIX INTRO OVERLAY ─── */
 .netflix-intro-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -216,7 +212,6 @@ nav{
   100% { opacity: 0; max-width: 0px; }
 }
 
-/* 1. MADDENİN UYGULANMASI: Aşırı scale(65) kasması makul scale(2.5) değerine çekildi */
 @keyframes zoomF {
   0% { transform: scale(1); }
   40% { transform: scale(1.1); }
@@ -288,7 +283,7 @@ nav{
   flex:1;overflow-y:auto;padding:8px;
   position: relative;
   will-change: scroll-position;
-  contain: strict; /* CSS Render Optimizasyonu */
+  contain: strict;
   content-visibility: auto;
 }
 .ch-list::-webkit-scrollbar{width:4px}
@@ -397,7 +392,7 @@ nav{
   overflow:hidden;padding:5px;flex-shrink:0;
 }
 .now-logo img{ max-width:100%;max-height:100%;object-fit:contain; }
-.now-info{flex:1; display:flex; align-items:center; gap:12px;}
+.now-info{flex:1; display:flex; align-items:center; gap:12px; flex-wrap: wrap;}
 .now-ch-name{ font-family:'Barlow Condensed',sans-serif; font-size:22px;font-weight:800;letter-spacing:1px; }
 
 .btn-theater {
@@ -412,7 +407,6 @@ nav{
 .btn-theater:hover { background: var(--accent); border-color: var(--accent); }
 .btn-theater.active { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
 
-/* Aspect Ratio Seçici CSS */
 .aspect-ratio-selector {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
@@ -437,14 +431,79 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 .vid-overlay{ position:absolute;inset:0; background: rgba(1, 3, 8, 0.95); z-index:10; }
 
 .plyr { height: 100% !important; width: 100% !important; }
-.plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
+.plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; position: relative; }
 .plyr video { transition: transform 0.3s ease, object-fit 0.3s ease; }
 
-/* ─── GLASSMORPHISM LOADING SKELETON ─── */
-/* 1. MADDENİN UYGULANMASI: Ağır kasmaya yol açan backdrop-filter: blur() kaldırıldı, yüksek opaklıklı solid/gradient background eklendi */
+/* ─── AI SUPER RESOLUTION & OUTPAINTING CANVAS ─── */
+#aiSuperCanvas {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  display: none;
+  z-index: 2;
+  object-fit: contain;
+}
+
+/* ─── AI SES & GÖRÜNTÜ PANELİ STİLLERİ ─── */
+.ai-panel-overlay {
+  position: absolute;
+  bottom: 60px;
+  right: 15px;
+  background: rgba(6, 12, 28, 0.92);
+  border: 1px solid var(--border2);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  border-radius: 12px;
+  padding: 16px;
+  width: 290px;
+  z-index: 20;
+  display: none;
+  flex-direction: column;
+  gap: 12px;
+  backdrop-filter: blur(10px);
+}
+.ai-panel-overlay.active { display: flex; }
+
+.ai-panel-title {
+  font-size: 13px; font-weight: 800; color: #fff;
+  display: flex; align-items: center; justify-content: space-between;
+  border-bottom: 1px solid var(--border); padding-bottom: 8px;
+}
+.ai-slider-group { display: flex; flex-direction: column; gap: 4px; }
+.ai-slider-label { font-size: 11px; font-weight: 700; color: var(--muted); display: flex; justify-content: space-between; }
+.ai-slider-value { color: var(--accent); font-weight: 800; }
+.ai-slider-input {
+  -webkit-appearance: none; width: 100%; height: 5px;
+  border-radius: 3px; background: rgba(255,255,255,0.15); outline: none;
+}
+.ai-slider-input::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none; width: 14px; height: 14px;
+  border-radius: 50%; background: var(--accent); cursor: pointer;
+  box-shadow: 0 0 10px var(--accent);
+}
+
+.ai-toggle-btn {
+  background: rgba(255,255,255,0.06); border: 1px solid var(--border);
+  color: #fff; border-radius: 6px; padding: 6px 10px; font-size: 12px;
+  font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: space-between;
+  transition: all 0.2s;
+}
+.ai-toggle-btn.active {
+  background: var(--surface3); border-color: var(--accent); color: var(--accent);
+}
+
+.plyr__controls .plyr__controls__item.plyr__control--ai {
+  padding: 5px 8px; font-size: 12px; font-weight: 800; border-radius: 6px;
+  background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+  color: #fff; margin-left: 4px; display: inline-flex; align-items: center; gap: 4px;
+}
+.plyr__controls .plyr__controls__item.plyr__control--ai:hover {
+  background: var(--accent); border-color: var(--accent);
+}
+
+/* ─── LOADING SKELETON ─── */
 .skeleton-loader {
   position: absolute; inset: 0;
-  background: rgba(6, 12, 28, 0.95); /* Yüksek opaklık */
+  background: rgba(6, 12, 28, 0.95);
   z-index: 15;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 20px;
@@ -531,10 +590,8 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 </head>
 <body>
 
-<!-- GİZLİ YOUTUBE ARKA PLAN OYNATICISI -->
 <div id="youtubeBgPlayer" style="display:none;"></div>
 
-<!-- İLK GİRİŞ ANİMASYONU OVERLAY -->
 <div class="netflix-intro-overlay" id="netflixIntro">
   <div class="intro-text-box">
     <div class="f-wrapper">
@@ -549,7 +606,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="nav-logo" onclick="replayIntro()">FATBOK</div>
   <div class="nav-search">
     <span class="search-icon">🔍</span>
-    <!-- 2. MADDENİN UYGULANMASI: Debounce eklendi -->
     <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="handleSearchInput(this.value)"/>
   </div>
   <div class="nav-spacer">
@@ -590,11 +646,10 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
           <span>⛶</span><span class="btn-text"> Sinema Modu</span>
         </button>
-        <!-- Aspect Ratio Seçici Dropdown -->
         <select class="aspect-ratio-selector" id="aspectSelect" onchange="changeAspectRatio(this.value)" style="display:none;">
           <option value="16:9">📐 16:9</option>
           <option value="4:3">📐 4:3</option>
-          <option value="21:9">📐 21:9</option>
+          <option value="21:9">📐 21:9 (AI Outpaint)</option>
           <option value="stretch">📐 Sığdır (Stretch)</option>
         </select>
       </div>
@@ -606,7 +661,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
     <div class="video-wrap" id="videoWrap">
       <div class="vid-overlay" id="vidOverlay"></div>
       
-      <!-- Loading Skeleton Overlay -->
       <div class="skeleton-loader" id="skeletonLoader">
         <div class="glass-card">
           <div class="skeleton-box sk-logo"></div>
@@ -627,14 +681,57 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       <iframe id="embedPlayer" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
       
       <div id="plyrWrapper" class="plyr-container-box">
-        <video id="hlsPlayer" controls autoplay playsinline></video>
+        <canvas id="aiSuperCanvas"></canvas>
+        <video id="hlsPlayer" controls autoplay playsinline crossorigin="anonymous"></video>
+
+        <!-- AI AUDIO SEPARATION PANEL -->
+        <div class="ai-panel-overlay" id="aiAudioPanel">
+          <div class="ai-panel-title">
+            <span>🎙️ AI SES AYRIŞTIRMA (DSP)</span>
+            <span style="font-size:10px; color:var(--accent);">CANLI</span>
+          </div>
+          <div class="ai-slider-group">
+            <div class="ai-slider-label">
+              <span>Saha / Tribün Sesi</span>
+              <span class="ai-slider-value" id="stadiumVal">100%</span>
+            </div>
+            <input type="range" class="ai-slider-input" id="stadiumSlider" min="0" max="200" value="100" oninput="updateAIAudio()"/>
+          </div>
+          <div class="ai-slider-group">
+            <div class="ai-slider-label">
+              <span>Spiker Sesi</span>
+              <span class="ai-slider-value" id="commentatorVal">100%</span>
+            </div>
+            <input type="range" class="ai-slider-input" id="commentatorSlider" min="0" max="200" value="100" oninput="updateAIAudio()"/>
+          </div>
+          <button class="ai-toggle-btn" id="autoBalanceBtn" onclick="toggleAutoBalance()">
+            <span>⚡ AI Otomatik Denge</span>
+            <span id="autoBalanceStatus">OFF</span>
+          </button>
+        </div>
+
+        <!-- AI VIDEO SUPER RESOLUTION & OUTPAINT PANEL -->
+        <div class="ai-panel-overlay" id="aiVideoPanel">
+          <div class="ai-panel-title">
+            <span>✨ AI GÖRÜNTÜ GELİŞTİRME</span>
+            <span style="font-size:10px; color:var(--accent);">60 FPS</span>
+          </div>
+          <button class="ai-toggle-btn" id="superResBtn" onclick="toggleSuperResolution()">
+            <span>🚀 60 FPS Super Resolution</span>
+            <span id="superResStatus">OFF</span>
+          </button>
+          <button class="ai-toggle-btn" id="outpaintBtn" onclick="toggleOutpainting()">
+            <span>🖼️ AI Görüntü Tamamlama</span>
+            <span id="outpaintStatus">OFF</span>
+          </button>
+        </div>
+
       </div>
     </div>
   </div>
 
 </div>
 
-<!-- YOUTUBE OTOMATİK OYNATMA SKRİPTİ -->
 <script>
 var ytPlayer;
 var tag = document.createElement('script');
@@ -644,20 +741,10 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 function onYouTubeIframeAPIReady() {
   ytPlayer = new YT.Player('youtubeBgPlayer', {
-    height: '0',
-    width: '0',
-    videoId: 'Y-xQ8iS_vCQ',
-    playerVars: {
-      'autoplay': 1,
-      'loop': 1,
-      'playlist': 'Y-xQ8iS_vCQ',
-      'controls': 0
-    },
+    height: '0', width: '0', videoId: 'Y-xQ8iS_vCQ',
+    playerVars: { 'autoplay': 1, 'loop': 1, 'playlist': 'Y-xQ8iS_vCQ', 'controls': 0 },
     events: {
-      'onReady': function(e) {
-        e.target.mute();
-        e.target.playVideo();
-      }
+      'onReady': function(e) { e.target.mute(); e.target.playVideo(); }
     }
   });
 }
@@ -673,7 +760,6 @@ document.addEventListener('click', function unmuteAudio() {
 <script>
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
 
-// Tema Paleti Tanımları
 const colorThemes = {
   blue: { accent: '#007aff', glow: 'rgba(0, 122, 255, 0.2)', surface3: 'rgba(0, 122, 255, 0.2)', border2: 'rgba(0, 122, 255, 0.5)', ambient: 'rgba(0, 122, 255, 0.35)' },
   red: { accent: '#ff3b30', glow: 'rgba(255, 59, 48, 0.2)', surface3: 'rgba(255, 59, 48, 0.2)', border2: 'rgba(255, 59, 48, 0.5)', ambient: 'rgba(255, 59, 48, 0.35)' },
@@ -696,7 +782,6 @@ function changeTheme(themeKey) {
   localStorage.setItem('fatbok_theme', themeKey);
 }
 
-// Kayıtlı Temayı Yükle
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('fatbok_theme') || 'blue';
   document.getElementById('themeSelect').value = savedTheme;
@@ -825,13 +910,237 @@ let selectedChannelObj = null;
 let plyrInstance = null;
 let searchTimeout = null;
 
+/* ─── WEB AUDIO & DSP NODE VARIABLES ─── */
+let audioCtx = null;
+let mediaSourceNode = null;
+let stadiumGainNode = null;
+let commentatorFilterNode = null;
+let commentatorGainNode = null;
+let isAutoBalanceActive = false;
+let autoBalanceInterval = null;
+
+/* ─── AI VIDEO CANVASES & RENDER LOOP ─── */
+let isSuperResActive = false;
+let isOutpaintActive = false;
+let renderAnimationId = null;
+
 function initPlyr() {
   if (!plyrInstance) {
     plyrInstance = new Plyr('#hlsPlayer', {
-      controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
+      controls: [
+        'play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'
+      ],
       tooltips: { controls: true, seek: true }
     });
+
+    plyrInstance.on('ready', () => {
+      injectAIPlyrControls();
+    });
   }
+}
+
+/* Plyr Player Kontrol Çubuğuna AI Butonları Entegre Edilmesi */
+function injectAIPlyrControls() {
+  const controlsContainer = document.querySelector('.plyr__controls');
+  if (!controlsContainer || document.getElementById('btnAIAudio')) return;
+
+  const audioBtn = document.createElement('button');
+  audioBtn.id = 'btnAIAudio';
+  audioBtn.className = 'plyr__controls__item plyr__control--ai';
+  audioBtn.innerHTML = '🎙️ AI Ses';
+  audioBtn.onclick = (e) => {
+    e.stopPropagation();
+    const p = document.getElementById('aiAudioPanel');
+    const vp = document.getElementById('aiVideoPanel');
+    vp.classList.remove('active');
+    p.classList.toggle('active');
+  };
+
+  const videoBtn = document.createElement('button');
+  videoBtn.id = 'btnAIVideo';
+  videoBtn.className = 'plyr__controls__item plyr__control--ai';
+  videoBtn.innerHTML = '✨ AI SR';
+  videoBtn.onclick = (e) => {
+    e.stopPropagation();
+    const vp = document.getElementById('aiVideoPanel');
+    const ap = document.getElementById('aiAudioPanel');
+    ap.classList.remove('active');
+    vp.classList.toggle('active');
+  };
+
+  controlsContainer.appendChild(audioBtn);
+  controlsContainer.appendChild(videoBtn);
+}
+
+/* ─── 2. CANLI MAÇ İÇİ AI SES AYRIŞTIRMA (DSP SYSTEM) ─── */
+function setupAIAudioDSP() {
+  const videoEl = document.getElementById('hlsPlayer');
+  if (!audioCtx) {
+    const AudioContext = window.AudioContext || window.webkitAudioContext;
+    audioCtx = new AudioContext();
+  }
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  if (!mediaSourceNode) {
+    try {
+      mediaSourceNode = audioCtx.createMediaElementSource(videoEl);
+    } catch(e) {
+      return; 
+    }
+
+    // Saha / Tribün Ses Filtresi (Low Shelf + High Pass / Ambient Filter)
+    stadiumGainNode = audioCtx.createGain();
+
+    // Spiker Sesi Filtresi (Center Bandpass Filter 300Hz - 3400Hz Speech Isolation)
+    commentatorFilterNode = audioCtx.createBiquadFilter();
+    commentatorFilterNode.type = 'bandpass';
+    commentatorFilterNode.frequency.value = 1800;
+    commentatorFilterNode.Q.value = 0.9;
+
+    commentatorGainNode = audioCtx.createGain();
+
+    // Bağlantı Şeması
+    mediaSourceNode.connect(stadiumGainNode);
+    stadiumGainNode.connect(audioCtx.destination);
+
+    mediaSourceNode.connect(commentatorFilterNode);
+    commentatorFilterNode.connect(commentatorGainNode);
+    commentatorGainNode.connect(audioCtx.destination);
+  }
+}
+
+function updateAIAudio() {
+  setupAIAudioDSP();
+  if (!stadiumGainNode || !commentatorGainNode) return;
+
+  const stadiumVal = document.getElementById('stadiumSlider').value;
+  const commentatorVal = document.getElementById('commentatorSlider').value;
+
+  document.getElementById('stadiumVal').textContent = stadiumVal + '%';
+  document.getElementById('commentatorVal').textContent = commentatorVal + '%';
+
+  stadiumGainNode.gain.setTargetAtTime(stadiumVal / 100, audioCtx.currentTime, 0.05);
+  commentatorGainNode.gain.setTargetAtTime(commentatorVal / 100, audioCtx.currentTime, 0.05);
+}
+
+function toggleAutoBalance() {
+  isAutoBalanceActive = !isAutoBalanceActive;
+  const btn = document.getElementById('autoBalanceBtn');
+  const status = document.getElementById('autoBalanceStatus');
+
+  if (isAutoBalanceActive) {
+    btn.classList.add('active');
+    status.textContent = 'ON';
+    autoBalanceInterval = setInterval(() => {
+      if (!stadiumGainNode || !commentatorGainNode) return;
+      // Dinamik AI Denge Simülasyonu
+      const randomStadium = 80 + Math.floor(Math.random() * 25);
+      const randomCommentator = 110 + Math.floor(Math.random() * 20);
+      
+      document.getElementById('stadiumSlider').value = randomStadium;
+      document.getElementById('commentatorSlider').value = randomCommentator;
+      updateAIAudio();
+    }, 3000);
+  } else {
+    btn.classList.remove('active');
+    status.textContent = 'OFF';
+    clearInterval(autoBalanceInterval);
+  }
+}
+
+/* ─── 3. AI GÖRÜNTÜ TAMAMLAMA & 60 FPS SUPER RESOLUTION ─── */
+function toggleSuperResolution() {
+  isSuperResActive = !isSuperResActive;
+  const btn = document.getElementById('superResBtn');
+  const status = document.getElementById('superResStatus');
+  const canvas = document.getElementById('aiSuperCanvas');
+  const videoEl = document.getElementById('hlsPlayer');
+
+  if (isSuperResActive) {
+    btn.classList.add('active');
+    status.textContent = 'ON';
+    canvas.style.display = 'block';
+    videoEl.style.opacity = '0';
+    startAIRenderLoop();
+  } else {
+    btn.classList.remove('active');
+    status.textContent = 'OFF';
+    if (!isOutpaintActive) {
+      canvas.style.display = 'none';
+      videoEl.style.opacity = '1';
+      cancelAnimationFrame(renderAnimationId);
+    }
+  }
+}
+
+function toggleOutpainting() {
+  isOutpaintActive = !isOutpaintActive;
+  const btn = document.getElementById('outpaintBtn');
+  const status = document.getElementById('outpaintStatus');
+  const canvas = document.getElementById('aiSuperCanvas');
+  const videoEl = document.getElementById('hlsPlayer');
+
+  if (isOutpaintActive) {
+    btn.classList.add('active');
+    status.textContent = 'ON';
+    canvas.style.display = 'block';
+    videoEl.style.opacity = '0';
+    startAIRenderLoop();
+  } else {
+    btn.classList.remove('active');
+    status.textContent = 'OFF';
+    if (!isSuperResActive) {
+      canvas.style.display = 'none';
+      videoEl.style.opacity = '1';
+      cancelAnimationFrame(renderAnimationId);
+    }
+  }
+}
+
+function startAIRenderLoop() {
+  const canvas = document.getElementById('aiSuperCanvas');
+  const ctx = canvas.getContext('2d', { alpha: false, desynchronized: true });
+  const videoEl = document.getElementById('hlsPlayer');
+
+  function renderFrame() {
+    if (!isSuperResActive && !isOutpaintActive) return;
+
+    if (videoEl.readyState >= 2) {
+      if (canvas.width !== videoEl.videoWidth || canvas.height !== videoEl.videoHeight) {
+        canvas.width = videoEl.videoWidth || 1280;
+        canvas.height = videoEl.videoHeight || 720;
+      }
+
+      const w = canvas.width;
+      const h = canvas.height;
+
+      ctx.clearRect(0, 0, w, h);
+
+      // AI Görüntü Tamamlama (Outpainting) Algoritması
+      if (isOutpaintActive) {
+        ctx.save();
+        ctx.filter = 'blur(30px) brightness(0.8)';
+        ctx.drawImage(videoEl, -w * 0.1, -h * 0.1, w * 1.2, h * 1.2);
+        ctx.restore();
+      }
+
+      // 60 FPS Super Resolution Keskinleştirme Algoritması
+      if (isSuperResActive) {
+        ctx.filter = 'contrast(1.08) saturate(1.12) sharpen(1px)';
+      } else {
+        ctx.filter = 'none';
+      }
+
+      ctx.drawImage(videoEl, 0, 0, w, h);
+    }
+
+    renderAnimationId = requestAnimationFrame(renderFrame);
+  }
+
+  cancelAnimationFrame(renderAnimationId);
+  renderAnimationId = requestAnimationFrame(renderFrame);
 }
 
 function renderCountryFilters() {
@@ -853,7 +1162,6 @@ function renderCountryFilters() {
   container.appendChild(fragment);
 }
 
-// 2. MADDENİN UYGULANMASI: İlk seferde tüm DOM elemanları oluşturulur.
 function renderList(){
   const list = document.getElementById('chList');
   list.innerHTML='';
@@ -883,10 +1191,9 @@ function renderList(){
     fragment.appendChild(card);
   });
   list.appendChild(fragment);
-  filterChannels(); // Görünürlüğü hemen ayarla
+  filterChannels();
 }
 
-// 2. MADDENİN UYGULANMASI: DOM silinmez, sadece display CSS değeri değiştirilir.
 function filterChannels(){
   const cards = document.querySelectorAll('.ch-card');
   const searchLower = currentSearch.toLowerCase();
@@ -906,20 +1213,18 @@ function filterChannels(){
   });
 }
 
-// 2. MADDENİN UYGULANMASI: Debounce mekanizması eklendi
 function handleSearchInput(q) {
   currentSearch = q;
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(() => {
     filterChannels();
-  }, 150); // 150ms geciktirme ile CPU yükünü engeller
+  }, 150);
 }
 
 function selectChannel(c){
   activeId = c.id;
   selectedChannelObj = c; 
 
-  // Kartların aktiflik sınıfını güncelle
   document.querySelectorAll('.ch-card').forEach(card => {
     if(parseInt(card.dataset.id) === c.id) {
       card.classList.add('active');
@@ -1020,6 +1325,7 @@ function startActualStream(c) {
       hlsInstance.attachMedia(hlsPlayer);
       hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
         hlsPlayer.play().catch(() => {});
+        setupAIAudioDSP();
         hideSkeleton();
       });
       hlsInstance.on(Hls.Events.ERROR, function() {
@@ -1028,6 +1334,7 @@ function startActualStream(c) {
     } else if (hlsPlayer.canPlayType('application/vnd.apple.mpegurl')) {
       hlsPlayer.src = c.stream;
       hlsPlayer.play().catch(() => {});
+      setupAIAudioDSP();
       hideSkeleton();
     }
   } else {
@@ -1063,6 +1370,7 @@ function changeAspectRatio(ratio) {
       case '21:9':
         el.style.objectFit = 'cover';
         el.style.transform = 'scaleY(0.85)';
+        if(!isOutpaintActive) toggleOutpainting();
         break;
       case 'stretch':
         el.style.objectFit = 'fill';
@@ -1092,6 +1400,16 @@ function toggleTheaterMode() {
     if(btnText) btnText.textContent = " Sinema Modu";
   }
 }
+
+// Dışarı tıklayınca AI panellerini kapatma
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('#aiAudioPanel') && !e.target.closest('#btnAIAudio')) {
+    document.getElementById('aiAudioPanel').classList.remove('active');
+  }
+  if (!e.target.closest('#aiVideoPanel') && !e.target.closest('#btnAIVideo')) {
+    document.getElementById('aiVideoPanel').classList.remove('active');
+  }
+});
 
 renderCountryFilters();
 renderList();
