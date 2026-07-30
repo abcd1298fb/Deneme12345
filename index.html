@@ -531,6 +531,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 </head>
 <body>
 
+<!-- GİZLİ YOUTUBE ARKA PLAN OYNATICISI -->
+<div id="youtubeBgPlayer" style="display:none;"></div>
+
 <!-- İLK GİRİŞ ANİMASYONU OVERLAY -->
 <div class="netflix-intro-overlay" id="netflixIntro">
   <div class="intro-text-box">
@@ -546,7 +549,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="nav-logo" onclick="replayIntro()">FATBOK</div>
   <div class="nav-search">
     <span class="search-icon">🔍</span>
-    <!-- 2. MADDENIN UYGULANMASI: Debounce eklendi -->
+    <!-- 2. MADDENİN UYGULANMASI: Debounce eklendi -->
     <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="handleSearchInput(this.value)"/>
   </div>
   <div class="nav-spacer">
@@ -630,6 +633,42 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   </div>
 
 </div>
+
+<!-- YOUTUBE OTOMATİK OYNATMA SKRİPTİ -->
+<script>
+var ytPlayer;
+var tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+function onYouTubeIframeAPIReady() {
+  ytPlayer = new YT.Player('youtubeBgPlayer', {
+    height: '0',
+    width: '0',
+    videoId: 'Y-xQ8iS_vCQ',
+    playerVars: {
+      'autoplay': 1,
+      'loop': 1,
+      'playlist': 'Y-xQ8iS_vCQ',
+      'controls': 0
+    },
+    events: {
+      'onReady': function(e) {
+        e.target.mute();
+        e.target.playVideo();
+      }
+    }
+  });
+}
+
+document.addEventListener('click', function unmuteAudio() {
+  if (ytPlayer && ytPlayer.unMute) {
+    ytPlayer.unMute();
+    ytPlayer.setVolume(100);
+  }
+}, { once: true });
+</script>
 
 <script>
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
