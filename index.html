@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Canlı TV Yayın</title>
-    <!-- HLS.js Kütüphanesi -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <!-- MPEG-TS (MPEG Transport Stream) Oynatıcı Kütüphanesi -->
+    <script src="https://cdn.jsdelivr.net/npm/mpegts.js@1.7.3/dist/mpegts.min.js"></script>
     <style>
         * {
             box-sizing: border-box;
@@ -17,11 +17,10 @@
             color: #fff;
             font-family: system-ui, -apple-system, sans-serif;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 20px;
+            padding: 10px;
         }
         .player-wrapper {
             width: 100%;
@@ -41,51 +40,31 @@
 <body>
 
     <div class="player-wrapper">
-        <video id="video" controls autoplay muted playsinline></video>
+        <video id="videoElement" controls autoplay muted playsinline></video>
     </div>
 
     <script>
-      const video = document.getElementById('video');
-      // Vercel serverless proxy adresimiz
-      const streamSrc = '/api/stream';
+      document.addEventListener('DOMContentLoaded', function () {
+        if (mpegts.getPluginSupport().isSupported()) {
+          var videoElement = document.getElementById('videoElement');
+          var player = mpegts.createPlayer({
+            type: 'mse', // Media Source Extensions
+            isLive: true,
+            url: '/api/stream' // Proxy endpoint'imiz
+          }, {
+            enableStashBuffer: false,
+            liveBufferLatencyChasing: true
+          });
 
-      if (Hls.isSupported()) {
-        const hls = new Hls({
-          enableWorker: true,
-          lowLatencyMode: true
-        });
-        
-        hls.loadSource(streamSrc);
-        hls.attachMedia(video);
-        
-        hls.on(Hls.Events.MANIFEST_PARSED, function() {
-          video.play().catch(e => console.log("Otomatik oynatma engellendi, oynata basın:", e));
-        });
-
-        hls.on(Hls.Events.ERROR, function(event, data) {
-          if (data.fatal) {
-            console.error("HLS Kritik Hata:", data);
-            switch (data.type) {
-              case Hls.ErrorTypes.NETWORK_ERROR:
-                hls.startLoad();
-                break;
-              case Hls.ErrorTypes.MEDIA_ERROR:
-                hls.recoverMediaError();
-                break;
-              default:
-                hls.destroy();
-                break;
-            }
-          }
-        });
-      } 
-      // Safari / iOS yerel HLS desteği için
-      else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        video.src = streamSrc;
-        video.addEventListener('loadedmetadata', function() {
-          video.play();
-        });
-      }
+          player.attachMediaElement(videoElement);
+          player.load();
+          player.play().catch(function(error) {
+            console.log("Otomatik oynatma engellendi, oynata basın:", error);
+          });
+        } else {
+          alert('Tarayıcınız MPEG-TS akışlarını desteklemiyor.');
+        }
+      });
     </script>
 </body>
 </html>
