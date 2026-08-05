@@ -152,7 +152,7 @@ nav{
   color: #fff;
 }
 
-/* ─── NETFLIX INTRO OVERLAY (İLK GİRİŞ ANİMASYONU) ─── */
+/* ─── NETFLIX INTRO OVERLAY ─── */
 .netflix-intro-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -192,7 +192,6 @@ nav{
   animation: zoomF 4.5s cubic-bezier(0.25, 1, 0.3, 1) forwards;
 }
 
-/* F Harfi (Sade Gradient) */
 .intro-f {
   position: relative;
   color: var(--accent);
@@ -416,7 +415,6 @@ nav{
 .btn-theater:hover { background: var(--accent); border-color: var(--accent); }
 .btn-theater.active { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
 
-/* Aspect Ratio Seçici CSS */
 .aspect-ratio-selector {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
@@ -444,7 +442,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 .plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
 .plyr video { transition: transform 0.3s ease, object-fit 0.3s ease; }
 
-/* ─── GLASSMORPHISM LOADING SKELETON ─── */
 .skeleton-loader {
   position: absolute; inset: 0;
   background: rgba(6, 12, 28, 0.7);
@@ -536,7 +533,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 </head>
 <body>
 
-<!-- İLK GİRİŞ ANİMASYONU OVERLAY -->
 <div class="netflix-intro-overlay" id="netflixIntro">
   <div class="intro-text-box">
     <div class="f-wrapper">
@@ -591,7 +587,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
           <span>⛶</span><span class="btn-text"> Sinema Modu</span>
         </button>
-        <!-- Aspect Ratio Seçici Dropdown -->
         <select class="aspect-ratio-selector" id="aspectSelect" onchange="changeAspectRatio(this.value)" style="display:none;">
           <option value="16:9">📐 16:9</option>
           <option value="4:3">📐 4:3</option>
@@ -607,7 +602,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
     <div class="video-wrap" id="videoWrap">
       <div class="vid-overlay" id="vidOverlay"></div>
       
-      <!-- Glassmorphism Skeleton Overlay -->
       <div class="skeleton-loader" id="skeletonLoader">
         <div class="glass-card">
           <div class="skeleton-box sk-logo"></div>
@@ -636,9 +630,11 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 </div>
 
 <script>
+// POP-UP ve Reklam Penceresi Açılmasını Kökten Engelleme
+window.open = function() { return null; };
+
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
 
-// Tema Paleti Tanımları
 const colorThemes = {
   blue: { accent: '#007aff', glow: 'rgba(0, 122, 255, 0.2)', surface3: 'rgba(0, 122, 255, 0.2)', border2: 'rgba(0, 122, 255, 0.5)', ambient: 'rgba(0, 122, 255, 0.35)' },
   red: { accent: '#ff3b30', glow: 'rgba(255, 59, 48, 0.2)', surface3: 'rgba(255, 59, 48, 0.2)', border2: 'rgba(255, 59, 48, 0.5)', ambient: 'rgba(255, 59, 48, 0.35)' },
@@ -661,7 +657,6 @@ function changeTheme(themeKey) {
   localStorage.setItem('fatbok_theme', themeKey);
 }
 
-// Kayıtlı Temayı Yükle
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('fatbok_theme') || 'blue';
   document.getElementById('themeSelect').value = savedTheme;
@@ -676,7 +671,6 @@ function replayIntro() {
   const overlay = document.getElementById('netflixIntro');
   overlay.classList.remove('hidden');
   
-  // Animasyonu tekrar tetiklemek için DOM yenileme
   const fWrap = overlay.querySelector('.f-wrapper');
   const restText = overlay.querySelector('.intro-rest');
   
@@ -942,7 +936,6 @@ function startActualStream(c) {
     plyrWrapper.style.display = "block";
     initPlyr(); 
     
-    // Otomatik Sesi Açma Ayarları (%100 Seviye)
     hlsPlayer.muted = false;
     hlsPlayer.volume = 1.0;
     
@@ -954,7 +947,6 @@ function startActualStream(c) {
         var playPromise = hlsPlayer.play();
         if (playPromise !== undefined) {
           playPromise.catch(() => {
-            // Tarayıcı kısıtlamasına takılırsa ilk etapta sessiz başlatır, ardından tıklamayla sesi açar
             hlsPlayer.muted = true;
             hlsPlayer.play();
           });
@@ -971,12 +963,16 @@ function startActualStream(c) {
       hideSkeleton();
     }
   } else {
-    // DLHD / Embed yayınlarda kısıtlayıcı sandbox kaldırılarak ses/tam ekran erişimine izin veriliyor
-    iframePlayer.removeAttribute('sandbox');
+    // DLHD yayınları için Pop-Up Engellemeli Sandbox Yapılandırması (Pop-up'sız ses ve görüntü erişimi)
+    iframePlayer.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-presentation allow-pointer-lock');
     iframePlayer.style.display = "block";
     iframePlayer.src = c.stream; 
     
     iframePlayer.onload = function() {
+      // DLHD iframe içinde pop-up tetikleyicilerini devredışı bırakma denemesi
+      try {
+        iframePlayer.contentWindow.open = function() { return null; };
+      } catch(e) {}
       hideSkeleton();
     };
     setTimeout(() => { hideSkeleton(); }, 2500);
