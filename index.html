@@ -438,6 +438,16 @@ nav{
 iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none; background:#000; transition: all 0.3s ease; }
 .vid-overlay{ position:absolute;inset:0; background: rgba(1, 3, 8, 0.95); z-index:10; }
 
+/* Akıllı Tıklama Katmanı (Overlay Shield) */
+.click-shield {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  cursor: pointer;
+  background: transparent;
+  display: none;
+}
+
 .plyr { height: 100% !important; width: 100% !important; }
 .plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
 .plyr video { transition: transform 0.3s ease, object-fit 0.3s ease; }
@@ -619,6 +629,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         </div>
       </div>
 
+      <!-- Tıklama Engelleyici Koruma Katmanı -->
+      <div id="clickShield" class="click-shield" onclick="removeShield()"></div>
+
       <iframe id="embedPlayer" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
       
       <div id="plyrWrapper" class="plyr-container-box">
@@ -630,9 +643,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 </div>
 
 <script>
-// POP-UP ve Reklam Penceresi Açılmasını Kökten Engelleme
-window.open = function() { return null; };
-
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
 
 const colorThemes = {
@@ -930,8 +940,10 @@ function startActualStream(c) {
   const iframePlayer = document.getElementById('embedPlayer');
   const plyrWrapper = document.getElementById('plyrWrapper');
   const hlsPlayer = document.getElementById('hlsPlayer');
+  const clickShield = document.getElementById('clickShield');
 
   if (c.stream.includes('.m3u8')) {
+    clickShield.style.display = "none";
     iframePlayer.removeAttribute('sandbox');
     plyrWrapper.style.display = "block";
     initPlyr(); 
@@ -963,19 +975,23 @@ function startActualStream(c) {
       hideSkeleton();
     }
   } else {
-    // DLHD yayınları için Pop-Up Engellemeli Sandbox Yapılandırması (Pop-up'sız ses ve görüntü erişimi)
-    iframePlayer.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms allow-presentation allow-pointer-lock');
+    // DLHD yayınlar için koruma kalkanını ve tam erişimli iframe yüklemesini aktifleştir
+    clickShield.style.display = "block";
+    iframePlayer.removeAttribute('sandbox');
     iframePlayer.style.display = "block";
     iframePlayer.src = c.stream; 
     
     iframePlayer.onload = function() {
-      // DLHD iframe içinde pop-up tetikleyicilerini devredışı bırakma denemesi
-      try {
-        iframePlayer.contentWindow.open = function() { return null; };
-      } catch(e) {}
       hideSkeleton();
     };
     setTimeout(() => { hideSkeleton(); }, 2500);
+  }
+}
+
+function removeShield() {
+  const clickShield = document.getElementById('clickShield');
+  if (clickShield) {
+    clickShield.style.display = "none";
   }
 }
 
