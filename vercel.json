@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/get-dlhd-stream",
+      "dest": "/api/get-dlhd-stream.js"
+    },
+    {
+      "src": "/api/proxy-hls",
+      "dest": "/api/proxy-hls.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ]
+}
