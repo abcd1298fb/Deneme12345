@@ -145,6 +145,7 @@ nav.scrolled {
   transform: translateY(-6px) scale(1.04);
   z-index:50;
   border-color: rgba(229, 9, 20, 0.5);
+  background: var(--surface-hover);
   box-shadow: 0 16px 45px rgba(229, 9, 20, 0.25), inset 0 0 15px rgba(229, 9, 20, 0.1);
 }
 .card-content-inner{
@@ -295,7 +296,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">🔥 Trendler</div>
     <div class="row-container">
-      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" oncontextmenu="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.'); return false;" ontouchstart="window.pressTimer = setTimeout(() => { openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.'); }, 600);" ontouchend="clearTimeout(window.pressTimer)" onclick="location.href='watch.html'">
+      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onclick="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.')">
         <div class="card-content-inner">
           <div class="card-title">House of the Dragon</div>
           <div class="card-subtitle">Sezon 1 • Bölüm 1</div>
@@ -308,7 +309,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">⚡ Son Eklenen Diziler</div>
     <div class="row-container">
-      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" oncontextmenu="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.'); return false;" ontouchstart="window.pressTimer = setTimeout(() => { openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.'); }, 600);" ontouchend="clearTimeout(window.pressTimer)" onclick="location.href='watch.html'">
+      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onclick="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.')">
         <div class="card-content-inner">
           <div class="card-title">House of the Dragon</div>
           <div class="card-subtitle">Sezon 1 • Bölüm 1</div>
@@ -361,7 +362,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
       <h2 class="modal-title" id="modalTitle">İçerik Adı</h2>
       <p class="modal-desc" id="modalDesc">Açıklama alanı burada yer alacak...</p>
       <div class="modal-actions">
-        <a href="watch.html" class="btn btn-primary">▶ Hemen İzle</a>
+        <a href="house-of-the-dragon.html" class="btn btn-primary" id="modalWatchBtn">▶ Hemen İzle</a>
       </div>
     </div>
   </div>
@@ -375,6 +376,14 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
 function openModal(title, desc) {
   document.getElementById('modalTitle').innerText = title;
   document.getElementById('modalDesc').innerText = desc;
+  
+  const watchBtn = document.getElementById('modalWatchBtn');
+  if (title === 'House of the Dragon') {
+    watchBtn.setAttribute('href', 'house-of-the-dragon.html');
+  } else {
+    watchBtn.setAttribute('href', 'watch.html');
+  }
+
   document.getElementById('modalOverlay').style.display = 'flex';
 }
 
