@@ -186,6 +186,30 @@
             background: var(--accent);
         }
 
+        /* Bölümler Arası Geçiş Butonları */
+        .inline-player-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            padding: 15px;
+            background: rgba(10, 5, 5, 0.95);
+            border-top: 1px solid rgba(229, 9, 20, 0.2);
+        }
+        .inline-player-controls button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .inline-player-controls button:hover {
+            background: var(--accent);
+            border-color: #fff;
+        }
+
         /* Bölüm Grid Yapısı */
         .grid {
             display: grid;
@@ -356,6 +380,11 @@
                     <p class="vjs-no-js">Tarayıcınız video oynatmayı desteklemiyor.</p>
                 </video>
             </div>
+            <!-- Önceki / Sonraki Bölüm Butonları -->
+            <div class="inline-player-controls">
+                <button onclick="changeEpisode(-1)">◀ Önceki Bölüm</button>
+                <button onclick="changeEpisode(1)">Sonraki Bölüm ▶</button>
+            </div>
         </div>
 
         <div id="episodes" class="grid"></div>
@@ -383,29 +412,31 @@
     <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script>
         let player = null;
+        let currentSeason = "1";
+        let currentIndex = 0;
 
         const hotdData = {
             "1": [
                 { title: "The Heirs of the Dragon", imdb: "8.7", stream: "https://one.makesomthingup.click/mEILh8wEUeeK4UuU5kUipBvf/master.m3u8" },
                 { title: "The Rogue Prince", imdb: "8.3", stream: "https://one.makesomthingup.click/PSnxBQOl0Ft0GoRnM_OXU7sI/master.m3u8" },
-                { title: "Second of His Name", imdb: "8.7", stream: "" },
-                { title: "King of the Narrow Sea", imdb: "8.4", stream: "" },
-                { title: "We Light the Way", imdb: "8.8", stream: "" },
-                { title: "The Princess and the Queen", imdb: "8.0", stream: "" },
-                { title: "Driftmark", imdb: "9.1", stream: "" },
-                { title: "The Lord of the Tides", imdb: "9.3", stream: "" },
-                { title: "The Green Council", imdb: "8.7", stream: "" },
-                { title: "The Black Queen", imdb: "9.3", stream: "" }
+                { title: "Second of His Name", imdb: "8.7", stream: "https://one.makesomthingup.click/dCCcgpeaUNb8GlLeRXP53Yf7/master.m3u8" },
+                { title: "King of the Narrow Sea", imdb: "8.4", stream: "https://one.makesomthingup.click/FgGrsgsJMkgjb38PhDtktXtV/master.m3u8" },
+                { title: "We Light the Way", imdb: "8.8", stream: "https://one.makesomthingup.click/6pN4D3CS2rjYAKmhE1DIM_pf/master.m3u8" },
+                { title: "The Princess and the Queen", imdb: "8.0", stream: "https://one.makesomthingup.click/UCjGldrrSQJURy6RG3St2SPt/master.m3u8" },
+                { title: "Driftmark", imdb: "9.1", stream: "https://one.makesomthingup.click/ppj6GDS_piIXeMfs5cYVFXLw/master.m3u8" },
+                { title: "The Lord of the Tides", imdb: "9.3", stream: "https://one.makesomthingup.click/_vDeKCTRNOI57rQ5IUXDlXsp/master.m3u8" },
+                { title: "The Green Council", imdb: "8.7", stream: "https://one.makesomthingup.click/1WoEyyTR5EcKJLeskxdMH0T_/master.m3u8" },
+                { title: "The Black Queen", imdb: "9.3", stream: "https://one.makesomthingup.click/M3dTl3RiKPB3ecIJCLI4VdFE/master.m3u8" }
             ],
             "2": [
-                { title: "A Son for a Son", imdb: "8.2", stream: "" },
-                { title: "Rhaenyra the Cruel", imdb: "8.2", stream: "" },
-                { title: "The Burning Mill", imdb: "7.6", stream: "" },
-                { title: "The Red Dragon and the Gold", imdb: "9.4", stream: "" },
-                { title: "Regent", imdb: "7.3", stream: "" },
-                { title: "Smallfolk", imdb: "6.3", stream: "" },
-                { title: "The Red Sowing", imdb: "8.8", stream: "" },
-                { title: "The Queen Who Ever Was", imdb: "6.5", stream: "" }
+                { title: "A Son for a Son", imdb: "8.2", stream: "https://one.makesomthingup.click/NBxI7SheChEboAKSV55p2nC7/master.m3u8" },
+                { title: "Rhaenyra the Cruel", imdb: "8.2", stream: "https://one.makesomthingup.click/FdpDgJia9ifcmG8QV04bXaI7/master.m3u8" },
+                { title: "The Burning Mill", imdb: "7.6", stream: "https://one.makesomthingup.click/SUlhJoE6isBKMs6xX6hAQD5U/master.m3u8" },
+                { title: "The Red Dragon and the Gold", imdb: "9.4", stream: "https://one.makesomthingup.click/7mJKo1bywcYhJaDNq0NcPt2F/master.m3u8" },
+                { title: "Regent", imdb: "7.3", stream: "https://one.makesomthingup.click/O_FXVos608IbA2yQOtXVXOx6/master.m3u8" },
+                { title: "Smallfolk", imdb: "6.3", stream: "https://one.makesomthingup.click/HVsItc3w1JdmtzHLNxKGAIAJ/master.m3u8" },
+                { title: "The Red Sowing", imdb: "8.8", stream: "https://one.makesomthingup.click/1FaQe9F0UCt_pz41jSo8xKzA/master.m3u8" },
+                { title: "The Queen Who Ever Was", imdb: "6.5", stream: "https://one.makesomthingup.click/xEQ5YBCJrVQwiaqb4jZDF4gG/master.m3u8" }
             ],
             "3": [
                 { title: "Salt and Sea, Fire and Blood", imdb: "9.2", stream: "" },
@@ -428,7 +459,7 @@
             hotdData[season].forEach((ep, index) => {
                 const subText = `${season}. Sezon ${index + 1}. Bölüm`;
                 container.innerHTML += `
-                    <div class="card" onclick="playEpisode('${ep.stream}', '${ep.title}', '${subText}')">
+                    <div class="card" onclick="playEpisode('${ep.stream}', '${ep.title}', '${subText}', '${season}', ${index})">
                         <div class="imdb-badge">★ ${ep.imdb}</div>
                         <img src="${coverImage}" alt="Episode Cover">
                         <div class="info">
@@ -440,11 +471,14 @@
             });
         }
 
-        function playEpisode(streamUrl, title, subText) {
+        function playEpisode(streamUrl, title, subText, season, index) {
             if (!streamUrl) {
                 alert("Bu bölümün yayını henüz eklenmedi!");
                 return;
             }
+
+            currentSeason = season;
+            currentIndex = index;
 
             document.getElementById('activeTitle').innerText = title;
             document.getElementById('activeSub').innerText = subText;
@@ -465,6 +499,19 @@
             player.ready(function() {
                 player.play();
             });
+        }
+
+        function changeEpisode(step) {
+            const episodes = hotdData[currentSeason];
+            let newIndex = currentIndex + step;
+
+            if (newIndex >= 0 && newIndex < episodes.length) {
+                const ep = episodes[newIndex];
+                const subText = `${currentSeason}. Sezon ${newIndex + 1}. Bölüm`;
+                playEpisode(ep.stream, ep.title, subText, currentSeason, newIndex);
+            } else {
+                alert("Bu sezonda başka bölüm yok!");
+            }
         }
 
         function stopPlayer() {
