@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House of the Dragon - Bölümler</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #0a0505;
+            --surface: rgba(25, 10, 10, 0.45);
+            --surface-hover: rgba(45, 15, 15, 0.6);
+            --accent: #e50914;
+            --text: #ffffff;
+            --muted: #b3b3b3;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Manrope', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 90px;
+            position: relative;
+        }
+
+        /* Atmosfer / Kırmızı Loş Işık */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -150px; left: 50%;
+            transform: translateX(-50%);
+            width: 700px; height: 350px;
+            background: radial-gradient(ellipse, rgba(229, 9, 20, 0.22) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -100px; right: -100px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(180, 0, 10, 0.12) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            height: 65px;
+            background: rgba(15, 5, 5, 0.65);
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 0 4%;
+            border-bottom: 1px solid rgba(229, 9, 20, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .nav-logo {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 28px; font-weight: 900; letter-spacing: 2px;
+            color: var(--accent);
+            text-decoration: none;
+            text-shadow: 0 0 15px rgba(229, 9, 20, 0.7);
+        }
+
+        /* Ana İçerik Alanı */
+        .container {
+            padding: 95px 4% 30px 4%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            color: #fff;
+        }
+
+        .season-selector-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .season-selector-wrapper label {
+            font-size: 14px;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        select {
+            background: rgba(25, 10, 10, 0.8);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 12px;
+            border: 1px solid rgba(229, 9, 20, 0.3);
+            font-size: 14px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+        select:hover, select:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
+        }
+
+        /* Bölüm Grid Yapısı */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--surface);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-6px) scale(1.02);
+            border-color: rgba(229, 9, 20, 0.5);
+            background: var(--surface-hover);
+            box-shadow: 0 16px 45px rgba(229, 9, 20, 0.25);
+        }
+
+        .card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+        }
+
+        .info {
+            padding: 15px;
+            background: linear-gradient(180deg, transparent 0%, rgba(10,5,5,0.95) 100%);
+        }
+
+        h3 {
+            font-size: 14px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        p {
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* 3D Alt Navigasyon Barı */
+        .bottom-nav-wrapper {
+            position: fixed;
+            bottom: 15px; left: 0; right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 1500;
+            padding: 0 16px;
+            pointer-events: none;
+        }
+
+        .bottom-nav {
+            pointer-events: auto;
+            width: 100%;
+            max-width: 420px;
+            height: 64px;
+            background: rgba(20, 8, 8, 0.6);
+            border: 1px solid rgba(229, 9, 20, 0.25);
+            border-radius: 22px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(229, 9, 20, 0.15);
+            padding: 0 8px;
+        }
+
+        .bottom-nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            transition: all 0.3s;
+            padding: 6px 14px;
+            border-radius: 14px;
+        }
+
+        .bottom-nav-item svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .bottom-nav-item:hover { color: #fff; }
+
+        .bottom-nav-item.active {
+            color: #ffffff;
+            background: linear-gradient(180deg, #ff1e27 0%, #a00008 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.7);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-left">
+            <a class="nav-logo" href="index.html">FATBOK</a>
+        </div>
+    </nav>
+
+    <!-- İçerik -->
+    <div class="container">
+        <div class="header-section">
+            <h1>House of the Dragon</h1>
+            <div class="season-selector-wrapper">
+                <label for="season-select">Sezon:</label>
+                <select id="season-select" onchange="updateEpisodes()">
+                    <option value="1">1. Sezon</option>
+                    <option value="2">2. Sezon</option>
+                </select>
+            </div>
+        </div>
+        <div id="episodes" class="grid"></div>
+    </div>
+
+    <!-- Alt Navigasyon Barı -->
+    <div class="bottom-nav-wrapper">
+        <div class="bottom-nav">
+            <a href="index.html" class="bottom-nav-item">
+                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                Anasayfa
+            </a>
+            <a href="filmler.html" class="bottom-nav-item">
+                <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+                Filmler
+            </a>
+            <a href="diziler.html" class="bottom-nav-item active">
+                <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+                Diziler
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const hotdData = {
+            "1": [
+                "The Heirs of the Dragon", "The Rogue Prince", "Second of His Name",
+                "King of the Narrow Sea", "We Light the Way", "The Princess and the Queen",
+                "Driftmark", "The Lord of the Tides", "The Green Council", "The Black Queen"
+            ],
+            "2": [
+                "A Son for a Son", "Rhaenyra the Cruel", "The Burning Mill",
+                "The Red Dragon and the Gold", "Regent", "Smallfolk",
+                "The Red Sowing", "The Queen Who Ever Was"
+            ]
+        };
+        const coverImage = "https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg";
+
+        function updateEpisodes() {
+            const season = document.getElementById('season-select').value;
+            const container = document.getElementById('episodes');
+            container.innerHTML = '';
+            
+            hotdData[season].forEach((title, index) => {
+                container.innerHTML += `
+                    <div class="card">
+                        <img src="${coverImage}" alt="Episode Cover">
+                        <div class="info">
+                            <h3>${title}</h3>
+                            <p>${season}. Sezon ${index + 1}. Bölüm</p>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+        
+        // Sayfa açıldığında 1. sezonu yükle
+        updateEpisodes();
+    </script>
+</body>
+</html>
