@@ -14,7 +14,7 @@
   --surface-hover:#2a2a2a;
   --accent:#e50914;
   --text:#ffffff;
-  --muted:#b3b3b3;
+  --muted:#94a3b8;
 }
 html{scroll-behavior:smooth}
 body{
@@ -23,7 +23,7 @@ body{
   font-family:'Manrope',sans-serif;
   min-height:100vh;
   overflow-x:hidden;
-  padding-bottom: 80px; /* Alt bar için boşluk */
+  padding-bottom: 90px; /* Alt barın altında içerik kalmaması için boşluk */
 }
 
 /* NAVBAR */
@@ -111,41 +111,77 @@ nav{
 .card-title{font-size:14px;font-weight:700;color:#fff;letter-spacing:0.5px;}
 .card-subtitle{font-size:11px;color:var(--muted);margin-top:4px;}
 
-/* ALT NAVİGASYON BARI (GÖNDERDİĞİN RESİMDEKİ TARZ) */
-.bottom-nav {
+/* MODERN 3D VE BLURLU (GLASSMORPHISM) OVAL ALT NAVİGASYON BARI */
+.bottom-nav-wrapper {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 70px;
-  background: rgba(18, 18, 18, 0.95);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  bottom: 15px; left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 1500;
+  padding: 0 16px;
+  pointer-events: none; /* Kenar boşluklarının tıklamaya engel olmaması için */
+}
+
+.bottom-nav {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 420px;
+  height: 64px;
+  background: rgba(15, 15, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
   display: flex;
   justify-content: space-around;
   align-items: center;
-  z-index: 1500;
-  backdrop-filter: blur(12px);
-  padding: 0 10px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  /* 3D Derinlik ve Işık Efektleri */
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.8),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2),
+    inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+  padding: 0 8px;
 }
+
 .bottom-nav-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
+  justify-content: center;
+  gap: 3px;
   color: var(--muted);
   text-decoration: none;
   font-size: 11px;
-  font-weight: 600;
-  transition: color 0.2s;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: 'Manrope', sans-serif;
-  flex: 1;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  padding: 6px 14px;
+  border-radius: 14px;
 }
-.bottom-nav-item svg { width: 22px; height: 22px; fill: currentColor; }
-.bottom-nav-item:hover, .bottom-nav-item.active { color: var(--accent); }
 
-/* ORTADAKİ VEYA AKTİF ÖZEL BUTON EFEKTİ */
-.bottom-nav-item.active svg { filter: drop-shadow(0 0 6px rgba(229, 9, 20, 0.6)); }
+.bottom-nav-item svg { 
+  width: 20px; 
+  height: 20px; 
+  fill: currentColor; 
+  transition: transform 0.2s ease;
+}
+
+.bottom-nav-item:hover {
+  color: #fff;
+}
+
+/* AKTİF OLAN DÜĞME (GÖRSELDEKİ KAN KIRMIZISI 3D EFEKT) */
+.bottom-nav-item.active {
+  color: #ffffff;
+  background: linear-gradient(180deg, #ff1e27 0%, #b30008 100%);
+  box-shadow: 
+    0 4px 12px rgba(229, 9, 20, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.bottom-nav-item.active svg {
+  transform: scale(1.1);
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
 
 /* MODAL PENCERE */
 .modal-overlay{
@@ -199,7 +235,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
 <!-- KATEGORİ SATIRLARI -->
 <div class="content-rows" id="contentRows">
   
-  <!-- Trendler (Eski Popüler Yapımlar) -->
+  <!-- Trendler -->
   <div class="row-section">
     <div class="row-title">🔥 Trendler</div>
     <div class="row-container">
@@ -251,20 +287,22 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
 
 </div>
 
-<!-- EN ALTTAKİ SABİT NAVİGASYON BARI -->
-<div class="bottom-nav">
-  <a href="index.html" class="bottom-nav-item active">
-    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-    Anasayfa
-  </a>
-  <a href="filmler.html" class="bottom-nav-item">
-    <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
-    Filmler
-  </a>
-  <a href="diziler.html" class="bottom-nav-item">
-    <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
-    Diziler
-  </a>
+<!-- 3D OVAL VE BLURLU SABİT NAVİGASYON BARI -->
+<div class="bottom-nav-wrapper">
+  <div class="bottom-nav">
+    <a href="index.html" class="bottom-nav-item active">
+      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+      Anasayfa
+    </a>
+    <a href="filmler.html" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+      Filmler
+    </a>
+    <a href="diziler.html" class="bottom-nav-item">
+      <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+      Diziler
+    </a>
+  </div>
 </div>
 
 <!-- MODAL PENCERE -->
