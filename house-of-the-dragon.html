@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>House of the Dragon - Bölümler</title>
-    <!-- Video.js Güncel CDN Stili -->
-    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <!-- Plyr Modern Oynatıcı CDN Stili ve HLS.js -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -15,6 +16,7 @@
             --accent: #e50914;
             --text: #ffffff;
             --muted: #b3b3b3;
+            --plyr-color-main: #e50914; /* Plyr ana rengini kırmızı yaptık */
         }
         html { scroll-behavior: smooth; }
         body {
@@ -121,7 +123,7 @@
             box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
         }
 
-        /* OYNATICI ALANI */
+        /* MODERN PLYR OYNATICI ALANI */
         #activePlayerSection {
             display: none;
             margin-bottom: 30px;
@@ -129,25 +131,19 @@
             border: 1px solid rgba(229, 9, 20, 0.4);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(229, 9, 20, 0.15);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 35px rgba(229, 9, 20, 0.2);
         }
 
         .inline-player-box {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Oran */
             background: #000;
         }
 
-        .video-js {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100% !important;
-            height: 100% !important;
-            background-color: #000;
-        }
-        .vjs-play-progress {
-            background: var(--accent) !important;
+        /* Plyr Tasarım Uyumlandırması */
+        .plyr {
+            border-radius: 0 0 16px 16px;
+            max-height: 70vh;
         }
 
         .inline-player-header {
@@ -323,7 +319,7 @@
             </div>
         </div>
 
-        <!-- ÜST OYNATICI ALANI -->
+        <!-- ÜST OYNATICI ALANI (Plyr) -->
         <div id="activePlayerSection">
             <div class="inline-player-header">
                 <div class="inline-player-title">
@@ -333,9 +329,7 @@
                 <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
             <div class="inline-player-box">
-                <video id="hotd-player" class="video-js vjs-big-play-button-centered" controls preload="auto" data-setup='{}'>
-                    <p class="vjs-no-js">Tarayıcınız video oynatmayı desteklemiyor.</p>
-                </video>
+                <video id="plyr-player" controls playsinline></video>
             </div>
         </div>
 
@@ -360,10 +354,11 @@
         </div>
     </div>
 
-    <!-- Video.js Script -->
-    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <!-- Plyr Script -->
+    <script src="https://cdn.plyr.io/3.7.8/plyr.js"></script>
     <script>
         let player = null;
+        let hls = null;
 
         const hotdData = {
             "1": [
@@ -433,24 +428,46 @@
             playerSection.style.display = 'block';
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            if (!player) {
-                player = videojs('hotd-player');
+            const video = document.getElementById('plyr-player');
+
+            if (Hls.isSupported()) {
+                if (hls) {
+                    hls.destroy();
+                }
+                hls = new Hls();
+                hls.loadSource(streamUrl);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    if (!player) {
+                        player = new Plyr(video, {
+                            controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'captions', 'settings', 'pip', 'airplay', 'fullscreen'],
+                            settings: ['captions', 'quality', 'speed']
+                        });
+                    }
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamUrl;
+                if (!player) {
+                    player = new Plyr(video);
+                }
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
             }
-            
-            player.src({
-                src: streamUrl,
-                type: 'application/x-mpegURL'
-            });
-            
-            player.ready(function() {
-                player.play();
-            });
         }
 
         function stopPlayer() {
+            const video = document.getElementById('plyr-player');
+            video.pause();
+            video.src = "";
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
             if (player) {
-                player.pause();
-                player.src("");
+                player.destroy();
+                player = null;
             }
             document.getElementById('activePlayerSection').style.display = 'none';
         }
