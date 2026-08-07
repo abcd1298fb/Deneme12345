@@ -138,7 +138,6 @@
             flex-direction: column;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
-            text-decoration: none;
         }
 
         .card:hover {
@@ -172,6 +171,76 @@
 
         p {
             font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* SİTE İÇİ OYNATICI MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 3, 3, 0.9);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal {
+            background: rgba(25, 10, 10, 0.95);
+            border: 1px solid rgba(229, 9, 20, 0.4);
+            width: 100%;
+            max-width: 850px;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 35px rgba(229, 9, 20, 0.2);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 10;
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s;
+        }
+        .modal-close:hover { background: rgba(229, 9, 20, 0.5); }
+
+        .player-container {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background: #000;
+        }
+
+        .player-container iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .modal-player-info {
+            padding: 20px;
+        }
+
+        .modal-player-info h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 24px;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        .modal-player-info p {
+            font-size: 13px;
             color: var(--muted);
         }
 
@@ -259,6 +328,20 @@
         <div id="episodes" class="grid"></div>
     </div>
 
+    <!-- SİTE İÇİ VİDEO OYNATICI MODAL -->
+    <div class="modal-overlay" id="playerModal" onclick="closePlayerModal(event)">
+        <div class="modal" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closePlayer()">✕</button>
+            <div class="player-container">
+                <iframe id="livepushIframe" src="" allowfullscreen></iframe>
+            </div>
+            <div class="modal-player-info">
+                <h2 id="modalEpTitle">Bölüm Adı</h2>
+                <p id="modalEpSub">Sezon Bilgisi</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Alt Navigasyon Barı -->
     <div class="bottom-nav-wrapper">
         <div class="bottom-nav">
@@ -282,34 +365,34 @@
             "1": [
                 { title: "The Heirs of the Dragon", link: "https://livepush.io/hlsplayer/index.html?src=https%3A%2F%2Fone.makesomthingup.click%2FmEILh8wEUeeK4UuU5kUipBvf%2Fmaster.m3u8" },
                 { title: "The Rogue Prince", link: "https://livepush.io/hlsplayer/index.html?src=https%3A%2F%2Fone.makesomthingup.click%2FPSnxBQOl0Ft0GoRnM_OXU7sI%2Fmaster.m3u8" },
-                { title: "Second of His Name", link: "#" },
-                { title: "King of the Narrow Sea", link: "#" },
-                { title: "We Light the Way", link: "#" },
-                { title: "The Princess and the Queen", link: "#" },
-                { title: "Driftmark", link: "#" },
-                { title: "The Lord of the Tides", link: "#" },
-                { title: "The Green Council", link: "#" },
-                { title: "The Black Queen", link: "#" }
+                { title: "Second of His Name", link: "" },
+                { title: "King of the Narrow Sea", link: "" },
+                { title: "We Light the Way", link: "" },
+                { title: "The Princess and the Queen", link: "" },
+                { title: "Driftmark", link: "" },
+                { title: "The Lord of the Tides", link: "" },
+                { title: "The Green Council", link: "" },
+                { title: "The Black Queen", link: "" }
             ],
             "2": [
-                { title: "A Son for a Son", link: "#" },
-                { title: "Rhaenyra the Cruel", link: "#" },
-                { title: "The Burning Mill", link: "#" },
-                { title: "The Red Dragon and the Gold", link: "#" },
-                { title: "Regent", link: "#" },
-                { title: "Smallfolk", link: "#" },
-                { title: "The Red Sowing", link: "#" },
-                { title: "The Queen Who Ever Was", link: "#" }
+                { title: "A Son for a Son", link: "" },
+                { title: "Rhaenyra the Cruel", link: "" },
+                { title: "The Burning Mill", link: "" },
+                { title: "The Red Dragon and the Gold", link: "" },
+                { title: "Regent", link: "" },
+                { title: "Smallfolk", link: "" },
+                { title: "The Red Sowing", link: "" },
+                { title: "The Queen Who Ever Was", link: "" }
             ],
             "3": [
-                { title: "Salt and Sea, Fire and Blood", link: "#" },
-                { title: "Queen's Landing", link: "#" },
-                { title: "Rhaenyra Triumphant", link: "#" },
-                { title: "Tumbleton", link: "#" },
-                { title: "Unbowed and Unbent", link: "#" },
-                { title: "Faceless Men", link: "#" },
-                { title: "The Dragon in Winter", link: "#" },
-                { title: "Episode 8", link: "#" }
+                { title: "Salt and Sea, Fire and Blood", link: "" },
+                { title: "Queen's Landing", link: "" },
+                { title: "Rhaenyra Triumphant", link: "" },
+                { title: "Tumbleton", link: "" },
+                { title: "Unbowed and Unbent", link: "" },
+                { title: "Faceless Men", link: "" },
+                { title: "The Dragon in Winter", link: "" },
+                { title: "Episode 8", link: "" }
             ]
         };
         const coverImage = "https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg";
@@ -320,16 +403,39 @@
             container.innerHTML = '';
             
             hotdData[season].forEach((ep, index) => {
+                const subText = `${season}. Sezon ${index + 1}. Bölüm`;
                 container.innerHTML += `
-                    <a href="${ep.link}" class="card">
+                    <div class="card" onclick="openPlayer('${ep.link}', '${ep.title}', '${subText}')">
                         <img src="${coverImage}" alt="Episode Cover">
                         <div class="info">
                             <h3>${ep.title}</h3>
-                            <p>${season}. Sezon ${index + 1}. Bölüm</p>
+                            <p>${subText}</p>
                         </div>
-                    </a>
+                    </div>
                 `;
             });
+        }
+
+        function openPlayer(link, title, subText) {
+            if (!link) {
+                alert("Bu bölümün yayını henüz eklenmedi!");
+                return;
+            }
+            document.getElementById('modalEpTitle').innerText = title;
+            document.getElementById('modalEpSub').innerText = subText;
+            document.getElementById('livepushIframe').src = link;
+            document.getElementById('playerModal').style.display = 'flex';
+        }
+
+        function closePlayer() {
+            document.getElementById('playerModal').style.display = 'none';
+            document.getElementById('livepushIframe').src = ''; // Kapatınca videoyu durdur
+        }
+
+        function closePlayerModal(e) {
+            if (e.target.id === 'playerModal') {
+                closePlayer();
+            }
         }
         
         // Sayfa açıldığında 1. sezonu yükle
