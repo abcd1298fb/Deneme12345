@@ -295,7 +295,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">🔥 Trendler</div>
     <div class="row-container">
-      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onmousedown="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.')" ontouchstart="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.')">
+      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" oncontextmenu="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.'); return false;" ontouchstart="window.pressTimer = setTimeout(() => { openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.'); }, 600);" ontouchend="clearTimeout(window.pressTimer)" onclick="location.href='watch.html'">
         <div class="card-content-inner">
           <div class="card-title">House of the Dragon</div>
           <div class="card-subtitle">Sezon 1 • Bölüm 1</div>
@@ -308,7 +308,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">⚡ Son Eklenen Diziler</div>
     <div class="row-container">
-      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onmousedown="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.')" ontouchstart="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.')">
+      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" oncontextmenu="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.'); return false;" ontouchstart="window.pressTimer = setTimeout(() => { openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.'); }, 600);" ontouchend="clearTimeout(window.pressTimer)" onclick="location.href='watch.html'">
         <div class="card-content-inner">
           <div class="card-title">House of the Dragon</div>
           <div class="card-subtitle">Sezon 1 • Bölüm 1</div>
@@ -354,7 +354,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
 <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
   <div class="modal" id="modalContent">
     <button class="modal-close" onclick="closeModalBtn()">✕</button>
-    <div class="modal-header-box">
+    <div class="modal-header-box" id="modalHeaderBox">
       <span>🎬</span>
     </div>
     <div class="modal-body">
