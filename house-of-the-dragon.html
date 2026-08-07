@@ -205,6 +205,7 @@
             flex-direction: column;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
+            position: relative;
         }
 
         .card:hover {
@@ -219,6 +220,24 @@
             height: 160px;
             object-fit: cover;
             border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+        }
+
+        /* IMDb Puan Rozeti */
+        .imdb-badge {
+            position: absolute;
+            top: 10px; right: 10px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(245, 197, 24, 0.4);
+            color: #f5c518;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .info {
@@ -367,36 +386,36 @@
 
         const hotdData = {
             "1": [
-                { title: "The Heirs of the Dragon", stream: "https://one.makesomthingup.click/mEILh8wEUeeK4UuU5kUipBvf/master.m3u8" },
-                { title: "The Rogue Prince", stream: "https://one.makesomthingup.click/PSnxBQOl0Ft0GoRnM_OXU7sI/master.m3u8" },
-                { title: "Second of His Name", stream: "" },
-                { title: "King of the Narrow Sea", stream: "" },
-                { title: "We Light the Way", stream: "" },
-                { title: "The Princess and the Queen", stream: "" },
-                { title: "Driftmark", stream: "" },
-                { title: "The Lord of the Tides", stream: "" },
-                { title: "The Green Council", stream: "" },
-                { title: "The Black Queen", stream: "" }
+                { title: "The Heirs of the Dragon", imdb: "8.7", stream: "https://one.makesomthingup.click/mEILh8wEUeeK4UuU5kUipBvf/master.m3u8" },
+                { title: "The Rogue Prince", imdb: "8.3", stream: "https://one.makesomthingup.click/PSnxBQOl0Ft0GoRnM_OXU7sI/master.m3u8" },
+                { title: "Second of His Name", imdb: "8.7", stream: "" },
+                { title: "King of the Narrow Sea", imdb: "8.4", stream: "" },
+                { title: "We Light the Way", imdb: "8.8", stream: "" },
+                { title: "The Princess and the Queen", imdb: "8.0", stream: "" },
+                { title: "Driftmark", imdb: "9.1", stream: "" },
+                { title: "The Lord of the Tides", imdb: "9.3", stream: "" },
+                { title: "The Green Council", imdb: "8.7", stream: "" },
+                { title: "The Black Queen", imdb: "9.3", stream: "" }
             ],
             "2": [
-                { title: "A Son for a Son", stream: "" },
-                { title: "Rhaenyra the Cruel", stream: "" },
-                { title: "The Burning Mill", stream: "" },
-                { title: "The Red Dragon and the Gold", stream: "" },
-                { title: "Regent", stream: "" },
-                { title: "Smallfolk", stream: "" },
-                { title: "The Red Sowing", stream: "" },
-                { title: "The Queen Who Ever Was", stream: "" }
+                { title: "A Son for a Son", imdb: "8.2", stream: "" },
+                { title: "Rhaenyra the Cruel", imdb: "8.2", stream: "" },
+                { title: "The Burning Mill", imdb: "7.6", stream: "" },
+                { title: "The Red Dragon and the Gold", imdb: "9.4", stream: "" },
+                { title: "Regent", imdb: "7.3", stream: "" },
+                { title: "Smallfolk", imdb: "6.3", stream: "" },
+                { title: "The Red Sowing", imdb: "8.8", stream: "" },
+                { title: "The Queen Who Ever Was", imdb: "6.5", stream: "" }
             ],
             "3": [
-                { title: "Salt and Sea, Fire and Blood", stream: "" },
-                { title: "Queen's Landing", stream: "" },
-                { title: "Rhaenyra Triumphant", stream: "" },
-                { title: "Tumbleton", stream: "" },
-                { title: "Unbowed and Unbent", stream: "" },
-                { title: "Faceless Men", stream: "" },
-                { title: "The Dragon in Winter", stream: "" },
-                { title: "Episode 8", stream: "" }
+                { title: "Salt and Sea, Fire and Blood", imdb: "9.2", stream: "" },
+                { title: "Queen's Landing", imdb: "9.3", stream: "" },
+                { title: "Rhaenyra Triumphant", imdb: "8.2", stream: "" },
+                { title: "Tumbleton", imdb: "7.5", stream: "" },
+                { title: "Unbowed and Unbent", imdb: "7.7", stream: "" },
+                { title: "Faceless Men", imdb: "7.7", stream: "" },
+                { title: "The Dragon in Winter", imdb: "8.3", stream: "" },
+                { title: "Episode 8", imdb: "8.0", stream: "" }
             ]
         };
         const coverImage = "https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg";
@@ -410,6 +429,7 @@
                 const subText = `${season}. Sezon ${index + 1}. Bölüm`;
                 container.innerHTML += `
                     <div class="card" onclick="playEpisode('${ep.stream}', '${ep.title}', '${subText}')">
+                        <div class="imdb-badge">★ ${ep.imdb}</div>
                         <img src="${coverImage}" alt="Episode Cover">
                         <div class="info">
                             <h3>${ep.title}</h3>
