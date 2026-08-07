@@ -119,6 +119,67 @@
             box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
         }
 
+        /* SİTE İÇİ DİREKT OYNATICI (INLINE PLAYER) ALANI */
+        #activePlayerSection {
+            display: none;
+            margin-bottom: 30px;
+            background: rgba(20, 8, 8, 0.85);
+            border: 1px solid rgba(229, 9, 20, 0.4);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(229, 9, 20, 0.15);
+        }
+
+        .inline-player-box {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Oran */
+            background: #000;
+        }
+
+        .inline-player-box iframe {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            border: none;
+        }
+
+        .inline-player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(180deg, rgba(30,10,10,0.8) 0%, rgba(15,5,5,0.95) 100%);
+            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+        }
+
+        .inline-player-title h3 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 22px;
+            color: #fff;
+        }
+
+        .inline-player-title p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .close-player-btn {
+            background: rgba(229, 9, 20, 0.2);
+            border: 1px solid rgba(229, 9, 20, 0.4);
+            color: #fff;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .close-player-btn:hover {
+            background: var(--accent);
+        }
+
         /* Bölüm Grid Yapısı */
         .grid {
             display: grid;
@@ -171,76 +232,6 @@
 
         p {
             font-size: 11px;
-            color: var(--muted);
-        }
-
-        /* SİTE İÇİ OYNATICI MODAL */
-        .modal-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(10, 3, 3, 0.9);
-            z-index: 2000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-        }
-
-        .modal {
-            background: rgba(25, 10, 10, 0.95);
-            border: 1px solid rgba(229, 9, 20, 0.4);
-            width: 100%;
-            max-width: 850px;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 35px rgba(229, 9, 20, 0.2);
-            position: relative;
-        }
-
-        .modal-close {
-            position: absolute;
-            top: 12px; right: 12px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: #fff;
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            font-size: 16px;
-            cursor: pointer;
-            z-index: 10;
-            display: flex; align-items: center; justify-content: center;
-            transition: background 0.2s;
-        }
-        .modal-close:hover { background: rgba(229, 9, 20, 0.5); }
-
-        .player-container {
-            position: relative;
-            width: 100%;
-            padding-top: 56.25%; /* 16:9 Aspect Ratio */
-            background: #000;
-        }
-
-        .player-container iframe {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border: none;
-        }
-
-        .modal-player-info {
-            padding: 20px;
-        }
-
-        .modal-player-info h2 {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 24px;
-            color: #fff;
-            margin-bottom: 4px;
-        }
-
-        .modal-player-info p {
-            font-size: 13px;
             color: var(--muted);
         }
 
@@ -325,21 +316,22 @@
                 </select>
             </div>
         </div>
-        <div id="episodes" class="grid"></div>
-    </div>
 
-    <!-- SİTE İÇİ VİDEO OYNATICI MODAL -->
-    <div class="modal-overlay" id="playerModal" onclick="closePlayerModal(event)">
-        <div class="modal" onclick="event.stopPropagation()">
-            <button class="modal-close" onclick="closePlayer()">✕</button>
-            <div class="player-container">
-                <iframe id="livepushIframe" src="" allowfullscreen></iframe>
+        <!-- SİTE İÇİ DİREKT OYNATICI (Tıklayınca burada açılacak) -->
+        <div id="activePlayerSection">
+            <div class="inline-player-header">
+                <div class="inline-player-title">
+                    <h3 id="activeTitle">Bölüm Adı</h3>
+                    <p id="activeSub">Sezon Bilgisi</p>
+                </div>
+                <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
-            <div class="modal-player-info">
-                <h2 id="modalEpTitle">Bölüm Adı</h2>
-                <p id="modalEpSub">Sezon Bilgisi</p>
+            <div class="inline-player-box">
+                <iframe id="inlineIframe" src="" allowfullscreen></iframe>
             </div>
         </div>
+
+        <div id="episodes" class="grid"></div>
     </div>
 
     <!-- Alt Navigasyon Barı -->
@@ -405,7 +397,7 @@
             hotdData[season].forEach((ep, index) => {
                 const subText = `${season}. Sezon ${index + 1}. Bölüm`;
                 container.innerHTML += `
-                    <div class="card" onclick="openPlayer('${ep.link}', '${ep.title}', '${subText}')">
+                    <div class="card" onclick="playEpisode('${ep.link}', '${ep.title}', '${subText}')">
                         <img src="${coverImage}" alt="Episode Cover">
                         <div class="info">
                             <h3>${ep.title}</h3>
@@ -416,26 +408,25 @@
             });
         }
 
-        function openPlayer(link, title, subText) {
+        function playEpisode(link, title, subText) {
             if (!link) {
                 alert("Bu bölümün yayını henüz eklenmedi!");
                 return;
             }
-            document.getElementById('modalEpTitle').innerText = title;
-            document.getElementById('modalEpSub').innerText = subText;
-            document.getElementById('livepushIframe').src = link;
-            document.getElementById('playerModal').style.display = 'flex';
+            document.getElementById('activeTitle').innerText = title;
+            document.getElementById('activeSub').innerText = subText;
+            document.getElementById('inlineIframe').src = link;
+            
+            const playerSection = document.getElementById('activePlayerSection');
+            playerSection.style.display = 'block';
+            
+            // Oynatıcı açıldığında sayfayı yumuşakca yukarı kaydırarak direkt ekrana getir
+            playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        function closePlayer() {
-            document.getElementById('playerModal').style.display = 'none';
-            document.getElementById('livepushIframe').src = ''; // Kapatınca videoyu durdur
-        }
-
-        function closePlayerModal(e) {
-            if (e.target.id === 'playerModal') {
-                closePlayer();
-            }
+        function stopPlayer() {
+            document.getElementById('activePlayerSection').style.display = 'none';
+            document.getElementById('inlineIframe').src = ''; // Kapatınca durdur
         }
         
         // Sayfa açıldığında 1. sezonu yükle
