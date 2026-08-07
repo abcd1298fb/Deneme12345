@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>House of the Dragon - Bölümler</title>
-    <!-- Video.js Kütüphanesi ve Teması -->
-    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <!-- Video.js Güncel CDN Stili -->
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -121,7 +121,7 @@
             box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
         }
 
-        /* VİDEO.JS OYNATICI ALANI (Çoklu Ses/Dublaj ve Altyazı Destekli) */
+        /* OYNATICI ALANI */
         #activePlayerSection {
             display: none;
             margin-bottom: 30px;
@@ -139,7 +139,6 @@
             background: #000;
         }
 
-        /* Video.js Özelleştirmeleri */
         .video-js {
             position: absolute;
             top: 0; left: 0;
@@ -147,10 +146,7 @@
             height: 100% !important;
             background-color: #000;
         }
-        .vjs-theme-city .vjs-control-bar {
-            background: rgba(15, 5, 5, 0.9) !important;
-        }
-        .vjs-theme-city .vjs-play-progress {
+        .vjs-play-progress {
             background: var(--accent) !important;
         }
 
@@ -327,7 +323,7 @@
             </div>
         </div>
 
-        <!-- ÜST OYNATICI ALANI (Video.js - Çoklu Dil/Dublaj & Altyazı Destekli) -->
+        <!-- ÜST OYNATICI ALANI -->
         <div id="activePlayerSection">
             <div class="inline-player-header">
                 <div class="inline-player-title">
@@ -337,10 +333,8 @@
                 <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
             <div class="inline-player-box">
-                <video id="my-video" class="video-js vjs-theme-city" controls preload="auto" data-setup='{}'>
-                    <p class="vjs-no-js">
-                        Tarayıcınız video oynatmayı desteklemiyor. Lütfen güncelleyin.
-                    </p>
+                <video id="hotd-player" class="video-js vjs-big-play-button-centered" controls preload="auto" data-setup='{}'>
+                    <p class="vjs-no-js">Tarayıcınız video oynatmayı desteklemiyor.</p>
                 </video>
             </div>
         </div>
@@ -367,7 +361,7 @@
     </div>
 
     <!-- Video.js Script -->
-    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script>
         let player = null;
 
@@ -375,24 +369,24 @@
             "1": [
                 { title: "The Heirs of the Dragon", stream: "https://one.makesomthingup.click/mEILh8wEUeeK4UuU5kUipBvf/master.m3u8" },
                 { title: "The Rogue Prince", stream: "https://one.makesomthingup.click/PSnxBQOl0Ft0GoRnM_OXU7sI/master.m3u8" },
-                { title: "Second of His Name", stream: "https://one.makesomthingup.click/dCCcgpeaUNb8GlLeRXP53Yf7/master.m3u8" },
-                { title: "King of the Narrow Sea", stream: "https://one.makesomthingup.click/FgGrsgsJMkgjb38PhDtktXtV/master.m3u8" },
-                { title: "We Light the Way", stream: "https://one.makesomthingup.click/6pN4D3CS2rjYAKmhE1DIM_pf/master.m3u8" },
-                { title: "The Princess and the Queen", stream: "https://one.makesomthingup.click/UCjGldrrSQJURy6RG3St2SPt/master.m3u8" },
-                { title: "Driftmark", stream: "https://one.makesomthingup.click/ppj6GDS_piIXeMfs5cYVFXLw/master.m3u8" },
-                { title: "The Lord of the Tides", stream: "https://one.makesomthingup.click/_vDeKCTRNOI57rQ5IUXDlXsp/master.m3u8" },
-                { title: "The Green Council", stream: "https://one.makesomthingup.click/1WoEyyTR5EcKJLeskxdMH0T_/master.m3u8" },
-                { title: "The Black Queen", stream: "https://one.makesomthingup.click/M3dTl3RiKPB3ecIJCLI4VdFE/master.m3u8" }
+                { title: "Second of His Name", stream: "" },
+                { title: "King of the Narrow Sea", stream: "" },
+                { title: "We Light the Way", stream: "" },
+                { title: "The Princess and the Queen", stream: "" },
+                { title: "Driftmark", stream: "" },
+                { title: "The Lord of the Tides", stream: "" },
+                { title: "The Green Council", stream: "" },
+                { title: "The Black Queen", stream: "" }
             ],
             "2": [
-                { title: "A Son for a Son", stream: "https://one.makesomthingup.click/NBxI7SheChEboAKSV55p2nC7/master.m3u8" },
-                { title: "Rhaenyra the Cruel", stream: "https://one.makesomthingup.click/FdpDgJia9ifcmG8QV04bXaI7/master.m3u8" },
-                { title: "The Burning Mill", stream: "https://one.makesomthingup.click/SUlhJoE6isBKMs6xX6hAQD5U/master.m3u8" },
-                { title: "The Red Dragon and the Gold", stream: "https://one.makesomthingup.click/7mJKo1bywcYhJaDNq0NcPt2F/master.m3u8" },
-                { title: "Regent", stream: "https://one.makesomthingup.click/O_FXVos608IbA2yQOtXVXOx6/master.m3u8" },
-                { title: "Smallfolk", stream: "https://one.makesomthingup.click/HVsItc3w1JdmtzHLNxKGAIAJ/master.m3u8" },
-                { title: "The Red Sowing", stream: "https://one.makesomthingup.click/1FaQe9F0UCt_pz41jSo8xKzA/master.m3u8" },
-                { title: "The Queen Who Ever Was", stream: "https://one.makesomthingup.click/xEQ5YBCJrVQwiaqb4jZDF4gG/master.m3u8" }
+                { title: "A Son for a Son", stream: "" },
+                { title: "Rhaenyra the Cruel", stream: "" },
+                { title: "The Burning Mill", stream: "" },
+                { title: "The Red Dragon and the Gold", stream: "" },
+                { title: "Regent", stream: "" },
+                { title: "Smallfolk", stream: "" },
+                { title: "The Red Sowing", stream: "" },
+                { title: "The Queen Who Ever Was", stream: "" }
             ],
             "3": [
                 { title: "Salt and Sea, Fire and Blood", stream: "" },
@@ -439,14 +433,13 @@
             playerSection.style.display = 'block';
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            // Video.js Player'ı başlat veya mevcut kaynağı değiştir
             if (!player) {
-                player = videojs('my-video');
+                player = videojs('hotd-player');
             }
             
             player.src({
                 src: streamUrl,
-                type: 'application/x-mpegURL' // HLS akışları için
+                type: 'application/x-mpegURL'
             });
             
             player.ready(function() {
