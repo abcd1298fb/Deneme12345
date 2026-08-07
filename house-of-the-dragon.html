@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>House of the Dragon - Bölümler</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js"></script>
+    <!-- Video.js Kütüphanesi ve Teması -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -120,7 +121,7 @@
             box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
         }
 
-        /* DİREKT VİDEO OYNATICI (INLINE PLAYER) ALANI */
+        /* VİDEO.JS OYNATICI ALANI (Çoklu Ses/Dublaj ve Altyazı Destekli) */
         #activePlayerSection {
             display: none;
             margin-bottom: 30px;
@@ -138,12 +139,19 @@
             background: #000;
         }
 
-        .inline-player-box video {
+        /* Video.js Özelleştirmeleri */
+        .video-js {
             position: absolute;
             top: 0; left: 0;
-            width: 100%; height: 100%;
-            object-fit: contain;
-            outline: none;
+            width: 100% !important;
+            height: 100% !important;
+            background-color: #000;
+        }
+        .vjs-theme-city .vjs-control-bar {
+            background: rgba(15, 5, 5, 0.9) !important;
+        }
+        .vjs-theme-city .vjs-play-progress {
+            background: var(--accent) !important;
         }
 
         .inline-player-header {
@@ -319,7 +327,7 @@
             </div>
         </div>
 
-        <!-- DİREKT SİTE İÇİ VİDEO OYNATICI (Bölüme tıklandığında video burada oynar) -->
+        <!-- ÜST OYNATICI ALANI (Video.js - Çoklu Dil/Dublaj & Altyazı Destekli) -->
         <div id="activePlayerSection">
             <div class="inline-player-header">
                 <div class="inline-player-title">
@@ -329,7 +337,11 @@
                 <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
             <div class="inline-player-box">
-                <video id="videoPlayer" controls autoplay></video>
+                <video id="my-video" class="video-js vjs-theme-city" controls preload="auto" data-setup='{}'>
+                    <p class="vjs-no-js">
+                        Tarayıcınız video oynatmayı desteklemiyor. Lütfen güncelleyin.
+                    </p>
+                </video>
             </div>
         </div>
 
@@ -344,7 +356,7 @@
                 Anasayfa
             </a>
             <a href="filmler.html" class="bottom-nav-item">
-                <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4H-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
                 Filmler
             </a>
             <a href="diziler.html" class="bottom-nav-item active">
@@ -354,8 +366,10 @@
         </div>
     </div>
 
+    <!-- Video.js Script -->
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
     <script>
-        let hls = null;
+        let player = null;
 
         const hotdData = {
             "1": [
@@ -425,35 +439,25 @@
             playerSection.style.display = 'block';
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            const video = document.getElementById('videoPlayer');
-
-            // HLS.js entegrasyonu ile doğrudan .m3u8 yayını oynatılır
-            if (Hls.isSupported()) {
-                if (hls) {
-                    hls.destroy();
-                }
-                hls = new Hls();
-                hls.loadSource(streamUrl);
-                hls.attachMedia(video);
-                hls.on(Hls.Events.MANIFEST_PARSED, function() {
-                    video.play();
-                });
-            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                // Safari ve yerleşik HLS destekleyen tarayıcılar için
-                video.src = streamUrl;
-                video.addEventListener('loadedmetadata', function() {
-                    video.play();
-                });
+            // Video.js Player'ı başlat veya mevcut kaynağı değiştir
+            if (!player) {
+                player = videojs('my-video');
             }
+            
+            player.src({
+                src: streamUrl,
+                type: 'application/x-mpegURL' // HLS akışları için
+            });
+            
+            player.ready(function() {
+                player.play();
+            });
         }
 
         function stopPlayer() {
-            const video = document.getElementById('videoPlayer');
-            video.pause();
-            video.src = "";
-            if (hls) {
-                hls.destroy();
-                hls = null;
+            if (player) {
+                player.pause();
+                player.src("");
             }
             document.getElementById('activePlayerSection').style.display = 'none';
         }
