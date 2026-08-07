@@ -255,9 +255,9 @@ nav.scrolled {
 .modal-close:hover { background: rgba(229, 9, 20, 0.4); }
 
 .modal-header-box{
-  height:180px;width:100%;background: rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(229, 9, 20, 0.2);
+  height:220px;width:100%;background: rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(229, 9, 20, 0.2);
+  background-size: cover; background-position: center;
 }
-.modal-header-box span { font-size: 36px; color: var(--muted); }
 .modal-body{padding:24px;}
 .modal-title{font-family:'Barlow Condensed',sans-serif;font-size:28px;font-weight:900;margin-bottom:8px;}
 .modal-desc{color:#b3b3b3;font-size:13px;line-height:1.6;margin-bottom:20px;}
@@ -296,7 +296,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">🔥 Trendler</div>
     <div class="row-container">
-      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onclick="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.')">
+      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onclick="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.', 'https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg')">
         <div class="card-content-inner">
           <div class="card-title">House of the Dragon</div>
           <div class="card-subtitle">Sezon 1 • Bölüm 1</div>
@@ -309,7 +309,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">⚡ Son Eklenen Diziler</div>
     <div class="row-container">
-      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onclick="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.')">
+      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onclick="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.', 'https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg')">
         <div class="card-content-inner">
           <div class="card-title">House of the Dragon</div>
           <div class="card-subtitle">Sezon 1 • Bölüm 1</div>
@@ -322,7 +322,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">🎬 Son Eklenen Filmler</div>
     <div class="row-container">
-      <div class="card" onclick="openModal('Film Örneği 1', 'Film açıklaması buraya gelecek.')">
+      <div class="card" onclick="openModal('Film Örneği 1', 'Film açıklaması buraya gelecek.', '')">
         <div class="card-content-inner">
           <div class="card-title">Film Adı 1</div>
           <div class="card-subtitle">2026 • Sinema</div>
@@ -356,7 +356,7 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="modal" id="modalContent">
     <button class="modal-close" onclick="closeModalBtn()">✕</button>
     <div class="modal-header-box" id="modalHeaderBox">
-      <span>🎬</span>
+      <span id="modalHeaderFallback">🎬</span>
     </div>
     <div class="modal-body">
       <h2 class="modal-title" id="modalTitle">İçerik Adı</h2>
@@ -373,10 +373,21 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
 </footer>
 
 <script>
-function openModal(title, desc) {
+function openModal(title, desc, headerImg) {
   document.getElementById('modalTitle').innerText = title;
   document.getElementById('modalDesc').innerText = desc;
   
+  const headerBox = document.getElementById('modalHeaderBox');
+  const fallback = document.getElementById('modalHeaderFallback');
+  
+  if (headerImg && headerImg !== '') {
+    headerBox.style.backgroundImage = `url('${headerImg}')`;
+    fallback.style.display = 'none';
+  } else {
+    headerBox.style.backgroundImage = 'none';
+    fallback.style.display = 'block';
+  }
+
   const watchBtn = document.getElementById('modalWatchBtn');
   if (title === 'House of the Dragon') {
     watchBtn.setAttribute('href', 'house-of-the-dragon.html');
