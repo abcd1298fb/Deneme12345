@@ -138,6 +138,7 @@
             flex-direction: column;
             transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
+            text-decoration: none;
         }
 
         .card:hover {
@@ -279,19 +280,36 @@
     <script>
         const hotdData = {
             "1": [
-                "The Heirs of the Dragon", "The Rogue Prince", "Second of His Name",
-                "King of the Narrow Sea", "We Light the Way", "The Princess and the Queen",
-                "Driftmark", "The Lord of the Tides", "The Green Council", "The Black Queen"
+                { title: "The Heirs of the Dragon", link: "https://livepush.io/hlsplayer/index.html?src=https%3A%2F%2Fone.makesomthingup.click%2FmEILh8wEUeeK4UuU5kUipBvf%2Fmaster.m3u8" },
+                { title: "The Rogue Prince", link: "https://livepush.io/hlsplayer/index.html?src=https%3A%2F%2Fone.makesomthingup.click%2FPSnxBQOl0Ft0GoRnM_OXU7sI%2Fmaster.m3u8" },
+                { title: "Second of His Name", link: "#" },
+                { title: "King of the Narrow Sea", link: "#" },
+                { title: "We Light the Way", link: "#" },
+                { title: "The Princess and the Queen", link: "#" },
+                { title: "Driftmark", link: "#" },
+                { title: "The Lord of the Tides", link: "#" },
+                { title: "The Green Council", link: "#" },
+                { title: "The Black Queen", link: "#" }
             ],
             "2": [
-                "A Son for a Son", "Rhaenyra the Cruel", "The Burning Mill",
-                "The Red Dragon and the Gold", "Regent", "Smallfolk",
-                "The Red Sowing", "The Queen Who Ever Was"
+                { title: "A Son for a Son", link: "#" },
+                { title: "Rhaenyra the Cruel", link: "#" },
+                { title: "The Burning Mill", link: "#" },
+                { title: "The Red Dragon and the Gold", link: "#" },
+                { title: "Regent", link: "#" },
+                { title: "Smallfolk", link: "#" },
+                { title: "The Red Sowing", link: "#" },
+                { title: "The Queen Who Ever Was", link: "#" }
             ],
             "3": [
-                "Salt and Sea, Fire and Blood", "Queen's Landing", "Rhaenyra Triumphant",
-                "Tumbleton", "Unbowed and Unbent", "Faceless Men",
-                "The Dragon in Winter", "Episode 8"
+                { title: "Salt and Sea, Fire and Blood", link: "#" },
+                { title: "Queen's Landing", link: "#" },
+                { title: "Rhaenyra Triumphant", link: "#" },
+                { title: "Tumbleton", link: "#" },
+                { title: "Unbowed and Unbent", link: "#" },
+                { title: "Faceless Men", link: "#" },
+                { title: "The Dragon in Winter", link: "#" },
+                { title: "Episode 8", link: "#" }
             ]
         };
         const coverImage = "https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg";
@@ -301,15 +319,15 @@
             const container = document.getElementById('episodes');
             container.innerHTML = '';
             
-            hotdData[season].forEach((title, index) => {
+            hotdData[season].forEach((ep, index) => {
                 container.innerHTML += `
-                    <div class="card">
+                    <a href="${ep.link}" class="card">
                         <img src="${coverImage}" alt="Episode Cover">
                         <div class="info">
-                            <h3>${title}</h3>
+                            <h3>${ep.title}</h3>
                             <p>${season}. Sezon ${index + 1}. Bölüm</p>
                         </div>
-                    </div>
+                    </a>
                 `;
             });
         }
