@@ -9,12 +9,12 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#0a0d14;
-  --surface: rgba(25, 30, 45, 0.45);
-  --surface-hover: rgba(40, 50, 75, 0.6);
+  --bg:#0a0505;
+  --surface: rgba(25, 10, 10, 0.45);
+  --surface-hover: rgba(45, 15, 15, 0.6);
   --accent:#e50914;
   --text:#ffffff;
-  --muted:#94a3b8;
+  --muted:#b3b3b3;
 }
 html{scroll-behavior:smooth}
 body{
@@ -27,43 +27,44 @@ body{
   position: relative;
 }
 
-/* ARKA PLANA LİKİD/CAM IŞIK VURGULARI */
+/* NETFLIX TARZI KIRMIZI LOŞ IŞIK SÜZMESİ (ATMOSFER) */
 body::before {
   content: '';
   position: fixed;
-  top: -200px; left: -200px;
-  width: 500px; height: 500px;
-  background: radial-gradient(circle, rgba(229, 9, 20, 0.15) 0%, transparent 70%);
+  top: -150px; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 350px;
+  background: radial-gradient(ellipse, rgba(229, 9, 20, 0.22) 0%, transparent 70%);
   z-index: -1;
   pointer-events: none;
 }
 body::after {
   content: '';
   position: fixed;
-  bottom: -200px; right: -200px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(0, 122, 255, 0.1) 0%, transparent 70%);
+  bottom: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(180, 0, 10, 0.12) 0%, transparent 70%);
   z-index: -1;
   pointer-events: none;
 }
 
-/* NAVBAR - LIQUID GLASS */
+/* NAVBAR - LIQUID GLASS & RED GLOW */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:1000;
   height:65px;
-  background: rgba(15, 20, 30, 0.65);
+  background: rgba(15, 5, 5, 0.65);
   display:flex;align-items:center;
   justify-content:space-between;
   padding:0 4%;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(229, 9, 20, 0.15);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
   transition: background 0.3s;
 }
 nav.scrolled { 
-  background: rgba(10, 13, 20, 0.85); 
-  border-bottom: 1px solid rgba(255,255,255,0.12); 
+  background: rgba(10, 3, 3, 0.88); 
+  border-bottom: 1px solid rgba(229, 9, 20, 0.25); 
 }
 .nav-left{display:flex;align-items:center;gap:30px}
 
@@ -73,7 +74,7 @@ nav.scrolled {
   font-size:28px;font-weight:900;letter-spacing:2px;
   color:var(--accent);
   text-decoration:none;
-  text-shadow: 0 0 15px rgba(229, 9, 20, 0.6);
+  text-shadow: 0 0 15px rgba(229, 9, 20, 0.7);
   cursor:pointer;
 }
 
@@ -82,8 +83,8 @@ nav.scrolled {
 /* LIQUID GLASS ARAMA ALANI */
 .search-container{position:relative;display:flex;align-items:center;}
 .search-input{
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   padding:7px 12px 7px 34px;border-radius:10px;color:#fff;font-size:13px;outline:none;width:150px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -91,64 +92,47 @@ nav.scrolled {
 }
 .search-input:focus{
   width:210px;
-  border-color: rgba(255, 255, 255, 0.4);
-  background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 20px rgba(255,255,255,0.1);
+  border-color: rgba(229, 9, 20, 0.6);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 0 20px rgba(229, 9, 20, 0.2);
 }
 .search-icon{position:absolute;left:10px;color:var(--muted);font-size:13px;pointer-events:none;}
 
-/* HERO BÖLÜMÜ */
+/* HERO BÖLÜMÜ (YAZILAR SİLİNDİ) */
 .hero{
-  height:60vh;position:relative;
-  background: linear-gradient(135deg, rgba(20,25,35,0.8), rgba(10,13,20,0.9));
+  height:40vh;position:relative;
+  background: linear-gradient(180deg, rgba(20,5,5,0.7), rgba(10,5,5,0.9));
   display:flex;align-items:flex-end;
-  padding:0 4% 50px 4%;
+  padding:0 4% 40px 4%;
   margin-top: 65px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+  border-bottom: 1px solid rgba(229, 9, 20, 0.1);
 }
-.hero-content{position:relative;z-index:10;max-width:550px}
-.hero-title{font-family:'Barlow Condensed',sans-serif;font-size:clamp(34px, 6vw, 56px);font-weight:900;line-height:1.1;margin-bottom:10px;text-shadow:2px 2px 8px rgba(0,0,0,0.8)}
-.hero-desc{font-size:13px;line-height:1.5;color:#d1d5db;margin-bottom:16px;}
-.hero-btns{display:flex;gap:10px}
-.btn{
-  padding:8px 20px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;border:none;display:flex;align-items:center;gap:6px;transition:opacity 0.2s;text-decoration:none;
-}
-.btn-primary{background:#fff;color:#000;}
-.btn-primary:hover{opacity:0.85}
-.btn-secondary{
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  color:#fff;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-.btn-secondary:hover{background: rgba(255, 255, 255, 0.15)}
 
 /* İÇERİK KISMI */
-.content-rows{padding:20px 4%;position:relative;z-index:20;}
+.content-rows{padding:25px 4%;position:relative;z-index:20;}
 .row-section { margin-bottom: 30px; }
-.row-title{font-size:18px;font-weight:700;margin-bottom:12px;color:#e5e7eb;letter-spacing:0.5px;}
+.row-title{font-size:18px;font-weight:700;margin-bottom:12px;color:#f3f4f6;letter-spacing:0.5px;}
 .row-container{
   display:flex;gap:14px;overflow-x:auto;padding-bottom:15px;scroll-behavior:smooth;
   -webkit-overflow-scrolling: touch;
 }
 .row-container::-webkit-scrollbar{height:4px}
-.row-container::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px}
+.row-container::-webkit-scrollbar-thumb{background:rgba(229, 9, 20, 0.3);border-radius:2px}
 
-/* DİKEY (POSTER) LİKİT CAM KART YAPISI */
+/* DİKEY LİKİT CAM KART YAPISI */
 .card{
   min-width: 140px; 
-  height: 210px; /* Dikey oran (Poster/Film kapağı için ideal) */
+  height: 210px; 
   background: var(--surface);
   border-radius: 12px;
   overflow: hidden; 
   position: relative; 
   cursor: pointer; 
   flex-shrink: 0;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.07);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
   display: flex; flex-direction: column; justify-content: flex-end;
   transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
 }
@@ -158,15 +142,15 @@ nav.scrolled {
 .card:hover{
   transform: translateY(-6px) scale(1.04);
   z-index:50;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(229, 9, 20, 0.5);
   background: var(--surface-hover);
-  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.7), inset 0 0 15px rgba(255,255,255,0.05);
+  box-shadow: 0 16px 45px rgba(229, 9, 20, 0.25), inset 0 0 15px rgba(229, 9, 20, 0.1);
 }
 .card-content-inner{
   text-align: left; 
   padding: 12px; 
   width: 100%;
-  background: linear-gradient(180deg, transparent 0%, rgba(10,13,20,0.9) 80%);
+  background: linear-gradient(180deg, transparent 0%, rgba(10,5,5,0.95) 80%);
 }
 .card-title{font-size:13px;font-weight:700;color:#fff;letter-spacing:0.3px;white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .card-subtitle{font-size:10px;color:var(--muted);margin-top:2px;}
@@ -187,8 +171,8 @@ nav.scrolled {
   width: 100%;
   max-width: 420px;
   height: 64px;
-  background: rgba(18, 22, 35, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(20, 8, 8, 0.6);
+  border: 1px solid rgba(229, 9, 20, 0.25);
   border-radius: 22px;
   display: flex;
   justify-content: space-around;
@@ -196,9 +180,9 @@ nav.scrolled {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   box-shadow: 
-    0 25px 50px rgba(0, 0, 0, 0.7),
-    inset 0 1px 2px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.6);
+    0 25px 50px rgba(0, 0, 0, 0.8),
+    0 0 25px rgba(229, 9, 20, 0.15),
+    inset 0 1px 2px rgba(255, 255, 255, 0.2);
   padding: 0 8px;
 }
 
@@ -230,11 +214,11 @@ nav.scrolled {
 
 .bottom-nav-item.active {
   color: #ffffff;
-  background: linear-gradient(180deg, rgba(255, 30, 40, 0.9) 0%, rgba(160, 0, 10, 0.9) 100%);
+  background: linear-gradient(180deg, #ff1e27 0%, #a00008 100%);
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: 
-    0 6px 20px rgba(229, 9, 20, 0.6),
-    inset 0 1px 1px rgba(255, 255, 255, 0.5);
+    0 6px 20px rgba(229, 9, 20, 0.7),
+    inset 0 1px 1px rgba(255, 255, 255, 0.4);
 }
 
 .bottom-nav-item.active svg {
@@ -244,17 +228,17 @@ nav.scrolled {
 
 /* MODAL PENCERE */
 .modal-overlay{
-  position:fixed;inset:0;background:rgba(5, 7, 12, 0.8);z-index:2000;display:none;align-items:center;justify-content:center;padding:15px;
+  position:fixed;inset:0;background:rgba(10, 3, 3, 0.85);z-index:2000;display:none;align-items:center;justify-content:center;padding:15px;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 .modal{
-  background: rgba(20, 25, 38, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(25, 10, 10, 0.9);
+  border: 1px solid rgba(229, 9, 20, 0.3);
   backdrop-filter: blur(25px);
   -webkit-backdrop-filter: blur(25px);
   width:100%;max-width:600px;border-radius:16px;overflow:hidden;
-  box-shadow: 0 25px 60px rgba(0,0,0,0.8), inset 0 1px 1px rgba(255,255,255,0.2);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.9), 0 0 30px rgba(229, 9, 20, 0.15);
   position:relative;
   max-height: 90vh; overflow-y: auto;
 }
@@ -266,10 +250,10 @@ nav.scrolled {
   backdrop-filter: blur(5px);
   transition: background 0.2s;
 }
-.modal-close:hover { background: rgba(255, 255, 255, 0.2); }
+.modal-close:hover { background: rgba(229, 9, 20, 0.4); }
 
 .modal-header-box{
-  height:180px;width:100%;background: rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(255,255,255,0.08);
+  height:180px;width:100%;background: rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;border-bottom:1px solid rgba(229, 9, 20, 0.2);
 }
 .modal-header-box span { font-size: 36px; color: var(--muted); }
 .modal-body{padding:24px;}
@@ -277,7 +261,13 @@ nav.scrolled {
 .modal-desc{color:#b3b3b3;font-size:13px;line-height:1.6;margin-bottom:20px;}
 .modal-actions{display:flex;gap:10px;}
 
-footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;border-top:1px solid rgba(255,255,255,0.06);margin-top:20px}
+.btn{
+  padding:8px 20px;border-radius:8px;font-weight:700;font-size:13px;cursor:pointer;border:none;display:flex;align-items:center;gap:6px;transition:opacity 0.2s;text-decoration:none;
+}
+.btn-primary{background:#e50914;color:#fff;}
+.btn-primary:hover{opacity:0.85}
+
+footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;border-top:1px solid rgba(229, 9, 20, 0.1);margin-top:20px}
 </style>
 </head>
 <body>
@@ -294,17 +284,8 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   </div>
 </nav>
 
-<!-- HERO BÖLÜMÜ -->
-<section class="hero" id="heroSection">
-  <div class="hero-content">
-    <h1 class="hero-title" id="heroTitle">FATBOK Platformu</h1>
-    <p class="hero-desc" id="heroDesc">En yeni diziler, filmler ve özel yapımlar tek bir platformda. İstediğin içeriği seç ve hemen izlemeye başla.</p>
-    <div class="hero-btns">
-      <a href="watch.html" class="btn btn-primary">▶ Oynat</a>
-      <button class="btn btn-secondary" onclick="openModal('FATBOK Platformu', 'En yeni diziler, filmler ve özel yapımlar tek bir platformda.')">ℹ Bilgi</button>
-    </div>
-  </div>
-</section>
+<!-- HERO BÖLÜMÜ (BOŞ VE ŞIK KIRMIZI LOŞ IŞIKLI) -->
+<section class="hero" id="heroSection"></section>
 
 <!-- KATEGORİ SATIRLARI (DİKEY KARTLAR) -->
 <div class="content-rows" id="contentRows">
