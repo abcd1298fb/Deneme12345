@@ -296,6 +296,12 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">🔥 Trendler</div>
     <div class="row-container">
+      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/w500/WGRQ8FpjkDTzivQJ43t94bOuY0.jpg');" onclick="openModal('Rick and Morty', 'Nihilist bir deli bilim insanı ile kaygılı torununun paramparça olmuş ev hayatı, boyutlar arası maceralarıyla daha da karmaşık bir hal alıyor.', 'https://wallpaperaccess.com/full/637645.jpg')">
+        <div class="card-content-inner">
+          <div class="card-title">Rick and Morty</div>
+          <div class="card-subtitle">Bilim Kurgu • Animasyon</div>
+        </div>
+      </div>
       <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onclick="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.', 'https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg')">
         <div class="card-content-inner">
           <div class="card-title">House of the Dragon</div>
@@ -309,6 +315,12 @@ footer{padding:30px 4%;color:var(--muted);text-align:center;font-size:12px;borde
   <div class="row-section">
     <div class="row-title">⚡ Son Eklenen Diziler</div>
     <div class="row-container">
+      <div class="card" style="background-image: url('https://image.tmdb.org/t/p/w500/WGRQ8FpjkDTzivQJ43t94bOuY0.jpg');" onclick="openModal('Rick and Morty', 'Nihilist bir deli bilim insanı ile kaygılı torununun paramparça olmuş ev hayatı, boyutlar arası maceralarıyla daha da karmaşık bir hal alıyor.', 'https://wallpaperaccess.com/full/637645.jpg')">
+        <div class="card-content-inner">
+          <div class="card-title">Rick and Morty</div>
+          <div class="card-subtitle">Bilim Kurgu • Animasyon</div>
+        </div>
+      </div>
       <div class="card" style="background-image: url('https://image.tmdb.org/t/p/original/7QMsOTMUswlwxJP0rTTZfmz2tX2.jpg');" onclick="openModal('House of the Dragon', 'Daenerys Targaryen\'in doğumundan 172 yıl önce, en güçlü döneminde Targaryen Hanedanı içinde yaşanan bir iç veraset savaşı.', 'https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg')">
         <div class="card-content-inner">
           <div class="card-title">House of the Dragon</div>
@@ -391,6 +403,8 @@ function openModal(title, desc, headerImg) {
   const watchBtn = document.getElementById('modalWatchBtn');
   if (title === 'House of the Dragon') {
     watchBtn.setAttribute('href', 'house-of-the-dragon.html');
+  } else if (title === 'Rick and Morty') {
+    watchBtn.setAttribute('href', 'rick-and-morty.html');
   } else {
     watchBtn.setAttribute('href', 'watch.html');
   }
