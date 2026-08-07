@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>House of the Dragon - Bölümler</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hls.js/1.4.12/hls.min.js"></script>
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -119,7 +120,7 @@
             box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
         }
 
-        /* SİTE İÇİ DİREKT OYNATICI (INLINE PLAYER) ALANI */
+        /* DİREKT VİDEO OYNATICI (INLINE PLAYER) ALANI */
         #activePlayerSection {
             display: none;
             margin-bottom: 30px;
@@ -137,11 +138,12 @@
             background: #000;
         }
 
-        .inline-player-box iframe {
+        .inline-player-box video {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            border: none;
+            object-fit: contain;
+            outline: none;
         }
 
         .inline-player-header {
@@ -317,7 +319,7 @@
             </div>
         </div>
 
-        <!-- SİTE İÇİ DİREKT OYNATICI (Tıklayınca burada açılacak) -->
+        <!-- DİREKT SİTE İÇİ VİDEO OYNATICI (Bölüme tıklandığında video burada oynar) -->
         <div id="activePlayerSection">
             <div class="inline-player-header">
                 <div class="inline-player-title">
@@ -327,7 +329,7 @@
                 <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
             <div class="inline-player-box">
-                <iframe id="inlineIframe" src="" allowfullscreen></iframe>
+                <video id="videoPlayer" controls autoplay></video>
             </div>
         </div>
 
@@ -342,7 +344,7 @@
                 Anasayfa
             </a>
             <a href="filmler.html" class="bottom-nav-item">
-                <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4H-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
                 Filmler
             </a>
             <a href="diziler.html" class="bottom-nav-item active">
@@ -353,38 +355,40 @@
     </div>
 
     <script>
+        let hls = null;
+
         const hotdData = {
             "1": [
-                { title: "The Heirs of the Dragon", link: "https://livepush.io/hlsplayer/index.html?src=https%3A%2F%2Fone.makesomthingup.click%2FmEILh8wEUeeK4UuU5kUipBvf%2Fmaster.m3u8" },
-                { title: "The Rogue Prince", link: "https://livepush.io/hlsplayer/index.html?src=https%3A%2F%2Fone.makesomthingup.click%2FPSnxBQOl0Ft0GoRnM_OXU7sI%2Fmaster.m3u8" },
-                { title: "Second of His Name", link: "" },
-                { title: "King of the Narrow Sea", link: "" },
-                { title: "We Light the Way", link: "" },
-                { title: "The Princess and the Queen", link: "" },
-                { title: "Driftmark", link: "" },
-                { title: "The Lord of the Tides", link: "" },
-                { title: "The Green Council", link: "" },
-                { title: "The Black Queen", link: "" }
+                { title: "The Heirs of the Dragon", stream: "https://one.makesomthingup.click/mEILh8wEUeeK4UuU5kUipBvf/master.m3u8" },
+                { title: "The Rogue Prince", stream: "https://one.makesomthingup.click/PSnxBQOl0Ft0GoRnM_OXU7sI/master.m3u8" },
+                { title: "Second of His Name", stream: "" },
+                { title: "King of the Narrow Sea", stream: "" },
+                { title: "We Light the Way", stream: "" },
+                { title: "The Princess and the Queen", stream: "" },
+                { title: "Driftmark", stream: "" },
+                { title: "The Lord of the Tides", stream: "" },
+                { title: "The Green Council", stream: "" },
+                { title: "The Black Queen", stream: "" }
             ],
             "2": [
-                { title: "A Son for a Son", link: "" },
-                { title: "Rhaenyra the Cruel", link: "" },
-                { title: "The Burning Mill", link: "" },
-                { title: "The Red Dragon and the Gold", link: "" },
-                { title: "Regent", link: "" },
-                { title: "Smallfolk", link: "" },
-                { title: "The Red Sowing", link: "" },
-                { title: "The Queen Who Ever Was", link: "" }
+                { title: "A Son for a Son", stream: "" },
+                { title: "Rhaenyra the Cruel", stream: "" },
+                { title: "The Burning Mill", stream: "" },
+                { title: "The Red Dragon and the Gold", stream: "" },
+                { title: "Regent", stream: "" },
+                { title: "Smallfolk", stream: "" },
+                { title: "The Red Sowing", stream: "" },
+                { title: "The Queen Who Ever Was", stream: "" }
             ],
             "3": [
-                { title: "Salt and Sea, Fire and Blood", link: "" },
-                { title: "Queen's Landing", link: "" },
-                { title: "Rhaenyra Triumphant", link: "" },
-                { title: "Tumbleton", link: "" },
-                { title: "Unbowed and Unbent", link: "" },
-                { title: "Faceless Men", link: "" },
-                { title: "The Dragon in Winter", link: "" },
-                { title: "Episode 8", link: "" }
+                { title: "Salt and Sea, Fire and Blood", stream: "" },
+                { title: "Queen's Landing", stream: "" },
+                { title: "Rhaenyra Triumphant", stream: "" },
+                { title: "Tumbleton", stream: "" },
+                { title: "Unbowed and Unbent", stream: "" },
+                { title: "Faceless Men", stream: "" },
+                { title: "The Dragon in Winter", stream: "" },
+                { title: "Episode 8", stream: "" }
             ]
         };
         const coverImage = "https://image.tmdb.org/t/p/original/2xGcSLyTAzConiHAByWqhfLiatT.jpg";
@@ -397,7 +401,7 @@
             hotdData[season].forEach((ep, index) => {
                 const subText = `${season}. Sezon ${index + 1}. Bölüm`;
                 container.innerHTML += `
-                    <div class="card" onclick="playEpisode('${ep.link}', '${ep.title}', '${subText}')">
+                    <div class="card" onclick="playEpisode('${ep.stream}', '${ep.title}', '${subText}')">
                         <img src="${coverImage}" alt="Episode Cover">
                         <div class="info">
                             <h3>${ep.title}</h3>
@@ -408,28 +412,52 @@
             });
         }
 
-        function playEpisode(link, title, subText) {
-            if (!link) {
+        function playEpisode(streamUrl, title, subText) {
+            if (!streamUrl) {
                 alert("Bu bölümün yayını henüz eklenmedi!");
                 return;
             }
+
             document.getElementById('activeTitle').innerText = title;
             document.getElementById('activeSub').innerText = subText;
-            document.getElementById('inlineIframe').src = link;
             
             const playerSection = document.getElementById('activePlayerSection');
             playerSection.style.display = 'block';
-            
-            // Oynatıcı açıldığında sayfayı yumuşakca yukarı kaydırarak direkt ekrana getir
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            const video = document.getElementById('videoPlayer');
+
+            // HLS.js entegrasyonu ile doğrudan .m3u8 yayını oynatılır
+            if (Hls.isSupported()) {
+                if (hls) {
+                    hls.destroy();
+                }
+                hls = new Hls();
+                hls.loadSource(streamUrl);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                // Safari ve yerleşik HLS destekleyen tarayıcılar için
+                video.src = streamUrl;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            }
         }
 
         function stopPlayer() {
+            const video = document.getElementById('videoPlayer');
+            video.pause();
+            video.src = "";
+            if (hls) {
+                hls.destroy();
+                hls = null;
+            }
             document.getElementById('activePlayerSection').style.display = 'none';
-            document.getElementById('inlineIframe').src = ''; // Kapatınca durdur
         }
         
-        // Sayfa açıldığında 1. sezonu yükle
         updateEpisodes();
     </script>
 </body>
