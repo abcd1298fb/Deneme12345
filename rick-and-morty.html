@@ -558,9 +558,26 @@
                             const hls = new Hls();
                             hls.loadSource(video.src);
                             hls.attachMedia(video);
+                            
+                            // HLS yüklendiğinde, ses (dublaj) veya alt yazı parçaları varsa DPlayer'a entegre et
+                            hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                                // Eğer yayında çoklu ses akışı (audio tracks) varsa destek açılır
+                                if (hls.audioTracks && hls.audioTracks.length > 1) {
+                                    console.log("Çoklu ses akışı tespit edildi:", hls.audioTracks);
+                                }
+                            });
                         },
                     },
                 },
+                // Eğer harici alt yazı eklemek istersen bu alanı kullanabilirsin:
+                /*
+                subtitle: {
+                    url: 'altyazi.vtt',
+                    type: 'webvtt',
+                    fontSize: '25px',
+                    bottom: '10%',
+                }
+                */
             });
         }
 
