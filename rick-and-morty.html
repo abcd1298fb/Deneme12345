@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rick and Morty - Bölümler</title>
-    <!-- Video.js Güncel CDN Stili -->
-    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+    <!-- Plyr Modern Oynatıcı CDN Stili -->
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -149,7 +149,11 @@
             box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
         }
 
-        /* OYNATICI ALANI */
+        /* OYNATICI ALANI (Plyr Renk Özelleştirmesi) */
+        :root {
+            --plyr-color-main: var(--accent);
+        }
+
         #activePlayerSection {
             display: none;
             margin-bottom: 30px;
@@ -163,19 +167,7 @@
         .inline-player-box {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Oran */
             background: #000;
-        }
-
-        .video-js {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100% !important;
-            height: 100% !important;
-            background-color: #000;
-        }
-        .vjs-play-progress {
-            background: var(--accent) !important;
         }
 
         .inline-player-header {
@@ -384,7 +376,7 @@
     <div class="container">
         <!-- Logo Alanı -->
         <div class="logo-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/500px-Rick_and_Morty.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/500px-Rick_and_Morty.svg.png" 
                  id="hotd-main-logo" class="hotd-logo logo-infinite" alt="Rick and Morty Logo">
         </div>
 
@@ -406,7 +398,7 @@
             </div>
         </div>
 
-        <!-- ÜST OYNATICI ALANI -->
+        <!-- ÜST OYNATICI ALANI (Plyr) -->
         <div id="activePlayerSection">
             <div class="inline-player-header">
                 <div class="inline-player-title">
@@ -416,9 +408,7 @@
                 <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
             <div class="inline-player-box">
-                <video id="hotd-player" class="video-js vjs-big-play-button-centered" controls preload="auto" data-setup='{}'>
-                    <p class="vjs-no-js">Tarayıcınız video oynatmayı desteklemiyor.</p>
-                </video>
+                <video id="player" playsinline controls data-poster=""></video>
             </div>
             <!-- Önceki / Sonraki Bölüm Butonları -->
             <div class="inline-player-controls">
@@ -448,44 +438,46 @@
         </div>
     </div>
 
-    <!-- Video.js Script -->
-    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
+    <!-- HLS (m3u8 desteği için) ve Plyr Scriptleri -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
     <script>
         let player = null;
         let currentSeason = "1";
         let currentIndex = 0;
+        let hls = null;
 
         const hotdData = {
             "1": [
-                { title: "Pilot", imdb: "8.0", stream: "https://s231.rapidrame.com/hls2/01/00019/2otg4wpmc3sj_,l,.urlset/master.m3u8?t=N71zl4g4r96IHkBEnK38awKTld5mjD3LUTEA_tauh3k&s=1786220710&e=14400&f=98845&srv=s429&i=0.0&sp=0&n=fk236amicaefjevo&p1=s231&p2=s231" },
+                { title: "Pilot", imdb: "8.0", stream: "https://s231.rapidrame.com/hls2/01/00019/2otg4wpmc3sj_,l,.urlset/master.m3u8" },
                 { title: "Lawnmower Dog", imdb: "8.1", stream: "https://vs14.photofunny.org/v/Rick.and.Morty.S01E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Anatomy Park", imdb: "8.1", stream: "https://vs13.pictureflix.org/v/Rick.and.Morty.S01E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "M. Night Shaym-Aliens!", imdb: "8.5", stream: "https://vs18.pictureflix.org/v/Rick.and.Morty.S01E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Meeseeks and Destroy", imdb: "8.8", stream: "https://vs19.photofunny.org/v/Rick.and.Morty.S01E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Rick Potion #9", imdb: "9.2", stream: "https://vs17.photomag.biz/v/Rick.and.Morty.S01E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Raising Gazorpazorp", imdb: "8.0", stream: "https://vs18.photofunny.org/v/Rick.and.Morty.S01E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Rixty Minutes", imdb: "9.0", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Something Ricked This Way Comes", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Close Rick-counters of the Rick Kind", imdb: "9.3", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Ricksy Business", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E11.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
+                { title: "Anatomy Park", imdb: "8.1", stream: "" },
+                { title: "M. Night Shaym-Aliens!", imdb: "8.5", stream: "" },
+                { title: "Meeseeks and Destroy", imdb: "8.8", stream: "" },
+                { title: "Rick Potion #9", imdb: "9.2", stream: "" },
+                { title: "Raising Gazorpazorp", imdb: "8.0", stream: "" },
+                { title: "Rixty Minutes", imdb: "9.0", stream: "" },
+                { title: "Something Ricked This Way Comes", imdb: "8.5", stream: "" },
+                { title: "Close Rick-counters of the Rick Kind", imdb: "9.3", stream: "" },
+                { title: "Ricksy Business", imdb: "8.5", stream: "" }
             ],
             "2": [
-                { title: "A Rickle in Time", imdb: "8.4", stream: "https://vs10.photoflick.org/v/Rick.and.Morty.S02E01.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Mortynight Run", imdb: "8.9", stream: "https://vs14.photoflix.org/v/Rick.and.Morty.S02E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Auto Erotic Assimilation", imdb: "8.9", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Total Rickall", imdb: "9.5", stream: "https://vs16.photofunny.org/v/Rick.and.Morty.S02E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Get Schwifty", imdb: "8.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "The Ricks Must Be Crazy", imdb: "9.1", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Big Trouble in Little Sanchez", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Interdimensional Cable 2: Tempting Fate", imdb: "7.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "Look Who's Purging Now", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-                { title: "The Wedding Squanchers", imdb: "9.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
+                { title: "A Rickle in Time", imdb: "8.4", stream: "" },
+                { title: "Mortynight Run", imdb: "8.9", stream: "" },
+                { title: "Auto Erotic Assimilation", imdb: "8.9", stream: "" },
+                { title: "Total Rickall", imdb: "9.5", stream: "" },
+                { title: "Get Schwifty", imdb: "8.3", stream: "" },
+                { title: "The Ricks Must Be Crazy", imdb: "9.1", stream: "" },
+                { title: "Big Trouble in Little Sanchez", imdb: "8.7", stream: "" },
+                { title: "Interdimensional Cable 2: Tempting Fate", imdb: "7.7", stream: "" },
+                { title: "Look Who's Purging Now", imdb: "8.7", stream: "" },
+                { title: "The Wedding Squanchers", imdb: "9.3", stream: "" }
             ],
             "3": [
                 { title: "The Rickshank Redemption", imdb: "9.7", stream: "" },
                 { title: "Rickmancing the Stone", imdb: "8.3", stream: "" },
                 { title: "Pickle Rick", imdb: "9.0", stream: "" },
-                { title: "Vindicators 3: The Return of Worldender", imdb: "7.9", stream: "" },
+                { title: "Vindicators 3", imdb: "7.9", stream: "" },
                 { title: "The Whirly Dirly Conspiracy", imdb: "8.4", stream: "" },
                 { title: "Rest and Ricklaxation", imdb: "8.6", stream: "" },
                 { title: "The Ricklantis Mixup", imdb: "9.7", stream: "" },
@@ -493,78 +485,12 @@
                 { title: "The ABCs of Beth", imdb: "8.1", stream: "" },
                 { title: "The Rickchurian Mortydate", imdb: "8.7", stream: "" }
             ],
-            "4": [
-                { title: "Edge of Tomorty: Rick Die Rickpeat", imdb: "8.5", stream: "" },
-                { title: "The Old Man and the Seat", imdb: "8.6", stream: "" },
-                { title: "One Crew over the Crewooey Cock-of-Amorty", imdb: "7.7", stream: "" },
-                { title: "Claw and Hoarder: Special Ricktim's Justice", imdb: "7.0", stream: "" },
-                { title: "Rattlestar Ricklactica", imdb: "8.8", stream: "" },
-                { title: "Never Ricking Morty", imdb: "9.1", stream: "" },
-                { title: "Promortyus", imdb: "8.1", stream: "" },
-                { title: "The Vat of Acid Episode", imdb: "9.6", stream: "" },
-                { title: "Childrick of Mort", imdb: "7.6", stream: "" },
-                { title: "Star Mort Rickturn of the Jerri", imdb: "8.8", stream: "" }
-            ],
-            "5": [
-                { title: "Mort Dinner Rick Andre", imdb: "8.6", stream: "" },
-                { title: "Mortyplicity", imdb: "8.4", stream: "" },
-                { title: "A Rickconvenient Mort", imdb: "7.5", stream: "" },
-                { title: "Rickdependence Spray", imdb: "5.1", stream: "" },
-                { title: "Amortycan Grickffiti", imdb: "7.4", stream: "" },
-                { title: "For a Few Mort Dollars More", imdb: "7.7", stream: "" },
-                { title: "Gotron Jerrysis Rickvangelion", imdb: "7.0", stream: "" },
-                { title: "Rickternal Friendshin_of the Spotless Mort", imdb: "8.9", stream: "" },
-                { title: "Forgetting Sarick Mortshall", imdb: "7.6", stream: "" },
-                { title: "Rickmurai Jack", imdb: "9.1", stream: "" }
-            ],
-            "6": [
-                { title: "Solaricks", imdb: "8.9", stream: "" },
-                { title: "Rick: A Mort Well Lived", imdb: "8.1", stream: "" },
-                { title: "Bethic Twinstinct", imdb: "8.0", stream: "" },
-                { title: "Night Family", imdb: "8.5", stream: "" },
-                { title: "Final Destination", imdb: "8.1", stream: "" },
-                { title: "JuRicksic Mort", imdb: "7.5", stream: "" },
-                { title: "Full Meta Jackrick", imdb: "8.2", stream: "" },
-                { title: "Analyze Piss", imdb: "9.1", stream: "" },
-                { title: "A Rick in King Arthur's Mort", imdb: "7.7", stream: "" },
-                { title: "Rickfending Your Mort", imdb: "8.2", stream: "" }
-            ],
-            "7": [
-                { title: "How Poopy Got His Poop Back", imdb: "7.0", stream: "" },
-                { title: "The Jerrick Trap", imdb: "8.5", stream: "" },
-                { title: "Air Force Wong", imdb: "8.3", stream: "" },
-                { title: "That's Amorte", imdb: "9.1", stream: "" },
-                { title: "Unmorticken", imdb: "9.6", stream: "" },
-                { title: "Rickfending Your Mort", imdb: "8.1", stream: "" },
-                { title: "Wet Kuat Amortican Summer", imdb: "7.3", stream: "" },
-                { title: "Rise of the Numbericons: The Movie", imdb: "4.7", stream: "" },
-                { title: "Mort: Ragnarick", imdb: "8.2", stream: "" },
-                { title: "Fear No Mort", imdb: "9.0", stream: "" }
-            ],
-            "8": [
-                { title: "Bölüm 1", imdb: "8.0", stream: "" },
-                { title: "Bölüm 2", imdb: "8.0", stream: "" },
-                { title: "Bölüm 3", imdb: "8.0", stream: "" },
-                { title: "Bölüm 4", imdb: "8.0", stream: "" },
-                { title: "Bölüm 5", imdb: "8.0", stream: "" },
-                { title: "Bölüm 6", imdb: "8.0", stream: "" },
-                { title: "Bölüm 7", imdb: "8.0", stream: "" },
-                { title: "Bölüm 8", imdb: "8.0", stream: "" },
-                { title: "Bölüm 9", imdb: "8.0", stream: "" },
-                { title: "Bölüm 10", imdb: "8.0", stream: "" }
-            ],
-            "9": [
-                { title: "Bölüm 1", imdb: "8.0", stream: "" },
-                { title: "Bölüm 2", imdb: "8.0", stream: "" },
-                { title: "Bölüm 3", imdb: "8.0", stream: "" },
-                { title: "Bölüm 4", imdb: "8.0", stream: "" },
-                { title: "Bölüm 5", imdb: "8.0", stream: "" },
-                { title: "Bölüm 6", imdb: "8.0", stream: "" },
-                { title: "Bölüm 7", imdb: "8.0", stream: "" },
-                { title: "Bölüm 8", imdb: "8.0", stream: "" },
-                { title: "Bölüm 9", imdb: "8.0", stream: "" },
-                { title: "Bölüm 10", imdb: "8.0", stream: "" }
-            ]
+            "4": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
+            "5": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
+            "6": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
+            "7": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
+            "8": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
+            "9": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""}))
         };
         const coverImage = "https://images8.alphacoders.com/114/thumb-1920-1148255.jpg";
 
@@ -594,11 +520,10 @@
                 return;
             }
 
-            // Logo animasyonunu tetikle (3 sn boyunca hızlı zoom-in/out)
+            // Logo animasyonunu tetikle
             const logo = document.getElementById('hotd-main-logo');
             logo.classList.remove('logo-infinite');
             logo.classList.add('logo-once');
-            
             setTimeout(() => {
                 logo.classList.remove('logo-once');
                 logo.classList.add('logo-infinite');
@@ -614,18 +539,32 @@
             playerSection.style.display = 'block';
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            if (!player) {
-                player = videojs('hotd-player');
+            const video = document.getElementById('player');
+
+            // Plyr ve HLS.js Entegrasyonu (.m3u8 oynatabilmek için)
+            if (Hls.isSupported()) {
+                if (hls) {
+                    hls.destroy();
+                }
+                hls = new Hls();
+                hls.loadSource(streamUrl);
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamUrl;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
             }
-            
-            player.src({
-                src: streamUrl,
-                type: 'application/x-mpegURL'
-            });
-            
-            player.ready(function() {
-                player.play();
-            });
+
+            if (!player) {
+                player = new Plyr(video, {
+                    controls: ['play-large', 'play', 'progress', 'current-time', 'duration', 'mute', 'volume', 'settings', 'fullscreen'],
+                    settings: ['quality', 'speed']
+                });
+            }
         }
 
         function changeEpisode(step) {
@@ -644,7 +583,9 @@
         function stopPlayer() {
             if (player) {
                 player.pause();
-                player.src("");
+            }
+            if (hls) {
+                hls.destroy();
             }
             document.getElementById('activePlayerSection').style.display = 'none';
         }
