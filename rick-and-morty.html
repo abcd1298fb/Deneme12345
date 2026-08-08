@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>House of the Dragon - Bölümler</title>
+    <title>Rick and Morty - Bölümler</title>
     <!-- Video.js Güncel CDN Stili -->
     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <style>
@@ -457,39 +457,113 @@
 
         const hotdData = {
             "1": [
-               { title: "Pilot", imdb: "8.0", stream: "https://s231.rapidrame.com/hls2/01/00019/2otg4wpmc3sj_,l,.urlset/master.m3u8?t=N71zl4g4r96IHkBEnK38awKTld5mjD3LUTEA_tauh3k&s=1786220710&e=14400&f=98845&srv=s429&i=0.0&sp=0&n=fk236amicaefjevo&p1=s231&p2=s231" },
-               { title: "Lawnmower Dog", imdb: "8.1", stream: "https://vs14.photofunny.org/v/Rick.and.Morty.S01E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Anatomy Park", imdb: "8.1", stream: "https://vs13.pictureflix.org/v/Rick.and.Morty.S01E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "M. Night Shaym-Aliens!", imdb: "8.5", stream: "https://vs18.pictureflix.org/v/Rick.and.Morty.S01E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Meeseeks and Destroy", imdb: "8.8", stream: "https://vs19.photofunny.org/v/Rick.and.Morty.S01E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Rick Potion #9", imdb: "9.2", stream: "https://vs17.photomag.biz/v/Rick.and.Morty.S01E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Raising Gazorpazorp", imdb: "8.0", stream: "https://vs18.photofunny.org/v/Rick.and.Morty.S01E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Rixty Minutes", imdb: "9.0", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Something Ricked This Way Comes", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Close Rick-counters of the Rick Kind", imdb: "9.3", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Ricksy Business", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E11.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
+                { title: "Pilot", imdb: "8.0", stream: "https://s231.rapidrame.com/hls2/01/00019/2otg4wpmc3sj_,l,.urlset/master.m3u8?t=N71zl4g4r96IHkBEnK38awKTld5mjD3LUTEA_tauh3k&s=1786220710&e=14400&f=98845&srv=s429&i=0.0&sp=0&n=fk236amicaefjevo&p1=s231&p2=s231" },
+                { title: "Lawnmower Dog", imdb: "8.1", stream: "https://vs14.photofunny.org/v/Rick.and.Morty.S01E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Anatomy Park", imdb: "8.1", stream: "https://vs13.pictureflix.org/v/Rick.and.Morty.S01E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "M. Night Shaym-Aliens!", imdb: "8.5", stream: "https://vs18.pictureflix.org/v/Rick.and.Morty.S01E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Meeseeks and Destroy", imdb: "8.8", stream: "https://vs19.photofunny.org/v/Rick.and.Morty.S01E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Rick Potion #9", imdb: "9.2", stream: "https://vs17.photomag.biz/v/Rick.and.Morty.S01E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Raising Gazorpazorp", imdb: "8.0", stream: "https://vs18.photofunny.org/v/Rick.and.Morty.S01E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Rixty Minutes", imdb: "9.0", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Something Ricked This Way Comes", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Close Rick-counters of the Rick Kind", imdb: "9.3", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Ricksy Business", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E11.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
             ],
             "2": [
-               { title: "A Rickle in Time", imdb: "8.4", stream: "https://vs10.photoflick.org/v/Rick.and.Morty.S02E01.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Mortynight Run", imdb: "8.9", stream: "https://vs14.photoflix.org/v/Rick.and.Morty.S02E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Auto Erotic Assimilation", imdb: "8.9", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Total Rickall", imdb: "9.5", stream: "https://vs16.photofunny.org/v/Rick.and.Morty.S02E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Get Schwifty", imdb: "8.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "The Ricks Must Be Crazy", imdb: "9.1", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Big Trouble in Little Sanchez", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Interdimensional Cable 2: Tempting Fate", imdb: "7.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Look Who's Purging Now", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "The Wedding Squanchers", imdb: "9.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
-           ],
-           "3": [
-                { title: "Salt and Sea, Fire and Blood", imdb: "9.2", stream: "" },
-                { title: "Queen's Landing", imdb: "9.3", stream: "" },
-                { title: "Rhaenyra Triumphant", imdb: "8.2", stream: "" },
-                { title: "Tumbleton", imdb: "7.5", stream: "" },
-                { title: "Unbowed and Unbent", imdb: "7.7", stream: "" },
-                { title: "Faceless Men", imdb: "7.7", stream: "" },
-                { title: "The Dragon in Winter", imdb: "8.3", stream: "" },
-                { title: "Episode 8", imdb: "8.0", stream: "" }
+                { title: "A Rickle in Time", imdb: "8.4", stream: "https://vs10.photoflick.org/v/Rick.and.Morty.S02E01.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Mortynight Run", imdb: "8.9", stream: "https://vs14.photoflix.org/v/Rick.and.Morty.S02E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Auto Erotic Assimilation", imdb: "8.9", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Total Rickall", imdb: "9.5", stream: "https://vs16.photofunny.org/v/Rick.and.Morty.S02E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Get Schwifty", imdb: "8.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "The Ricks Must Be Crazy", imdb: "9.1", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Big Trouble in Little Sanchez", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Interdimensional Cable 2: Tempting Fate", imdb: "7.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Look Who's Purging Now", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "The Wedding Squanchers", imdb: "9.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
+            ],
+            "3": [
+                { title: "The Rickshank Redemption", imdb: "9.7", stream: "" },
+                { title: "Rickmancing the Stone", imdb: "8.3", stream: "" },
+                { title: "Pickle Rick", imdb: "9.0", stream: "" },
+                { title: "Vindicators 3: The Return of Worldender", imdb: "7.9", stream: "" },
+                { title: "The Whirly Dirly Conspiracy", imdb: "8.4", stream: "" },
+                { title: "Rest and Ricklaxation", imdb: "8.6", stream: "" },
+                { title: "The Ricklantis Mixup", imdb: "9.7", stream: "" },
+                { title: "Morty's Mind Blowers", imdb: "8.5", stream: "" },
+                { title: "The ABCs of Beth", imdb: "8.1", stream: "" },
+                { title: "The Rickchurian Mortydate", imdb: "8.7", stream: "" }
+            ],
+            "4": [
+                { title: "Edge of Tomorty: Rick Die Rickpeat", imdb: "8.5", stream: "" },
+                { title: "The Old Man and the Seat", imdb: "8.6", stream: "" },
+                { title: "One Crew over the Crewooey Cock-of-Amorty", imdb: "7.7", stream: "" },
+                { title: "Claw and Hoarder: Special Ricktim's Justice", imdb: "7.0", stream: "" },
+                { title: "Rattlestar Ricklactica", imdb: "8.8", stream: "" },
+                { title: "Never Ricking Morty", imdb: "9.1", stream: "" },
+                { title: "Promortyus", imdb: "8.1", stream: "" },
+                { title: "The Vat of Acid Episode", imdb: "9.6", stream: "" },
+                { title: "Childrick of Mort", imdb: "7.6", stream: "" },
+                { title: "Star Mort Rickturn of the Jerri", imdb: "8.8", stream: "" }
+            ],
+            "5": [
+                { title: "Mort Dinner Rick Andre", imdb: "8.6", stream: "" },
+                { title: "Mortyplicity", imdb: "8.4", stream: "" },
+                { title: "A Rickconvenient Mort", imdb: "7.5", stream: "" },
+                { title: "Rickdependence Spray", imdb: "5.1", stream: "" },
+                { title: "Amortycan Grickffiti", imdb: "7.4", stream: "" },
+                { title: "For a Few Mort Dollars More", imdb: "7.7", stream: "" },
+                { title: "Gotron Jerrysis Rickvangelion", imdb: "7.0", stream: "" },
+                { title: "Rickternal Friendshin_of the Spotless Mort", imdb: "8.9", stream: "" },
+                { title: "Forgetting Sarick Mortshall", imdb: "7.6", stream: "" },
+                { title: "Rickmurai Jack", imdb: "9.1", stream: "" }
+            ],
+            "6": [
+                { title: "Solaricks", imdb: "8.9", stream: "" },
+                { title: "Rick: A Mort Well Lived", imdb: "8.1", stream: "" },
+                { title: "Bethic Twinstinct", imdb: "8.0", stream: "" },
+                { title: "Night Family", imdb: "8.5", stream: "" },
+                { title: "Final Destination", imdb: "8.1", stream: "" },
+                { title: "JuRicksic Mort", imdb: "7.5", stream: "" },
+                { title: "Full Meta Jackrick", imdb: "8.2", stream: "" },
+                { title: "Analyze Piss", imdb: "9.1", stream: "" },
+                { title: "A Rick in King Arthur's Mort", imdb: "7.7", stream: "" },
+                { title: "Rickfending Your Mort", imdb: "8.2", stream: "" }
+            ],
+            "7": [
+                { title: "How Poopy Got His Poop Back", imdb: "7.0", stream: "" },
+                { title: "The Jerrick Trap", imdb: "8.5", stream: "" },
+                { title: "Air Force Wong", imdb: "8.3", stream: "" },
+                { title: "That's Amorte", imdb: "9.1", stream: "" },
+                { title: "Unmorticken", imdb: "9.6", stream: "" },
+                { title: "Rickfending Your Mort", imdb: "8.1", stream: "" },
+                { title: "Wet Kuat Amortican Summer", imdb: "7.3", stream: "" },
+                { title: "Rise of the Numbericons: The Movie", imdb: "4.7", stream: "" },
+                { title: "Mort: Ragnarick", imdb: "8.2", stream: "" },
+                { title: "Fear No Mort", imdb: "9.0", stream: "" }
+            ],
+            "8": [
+                { title: "Bölüm 1", imdb: "8.0", stream: "" },
+                { title: "Bölüm 2", imdb: "8.0", stream: "" },
+                { title: "Bölüm 3", imdb: "8.0", stream: "" },
+                { title: "Bölüm 4", imdb: "8.0", stream: "" },
+                { title: "Bölüm 5", imdb: "8.0", stream: "" },
+                { title: "Bölüm 6", imdb: "8.0", stream: "" },
+                { title: "Bölüm 7", imdb: "8.0", stream: "" },
+                { title: "Bölüm 8", imdb: "8.0", stream: "" },
+                { title: "Bölüm 9", imdb: "8.0", stream: "" },
+                { title: "Bölüm 10", imdb: "8.0", stream: "" }
+            ],
+            "9": [
+                { title: "Bölüm 1", imdb: "8.0", stream: "" },
+                { title: "Bölüm 2", imdb: "8.0", stream: "" },
+                { title: "Bölüm 3", imdb: "8.0", stream: "" },
+                { title: "Bölüm 4", imdb: "8.0", stream: "" },
+                { title: "Bölüm 5", imdb: "8.0", stream: "" },
+                { title: "Bölüm 6", imdb: "8.0", stream: "" },
+                { title: "Bölüm 7", imdb: "8.0", stream: "" },
+                { title: "Bölüm 8", imdb: "8.0", stream: "" },
+                { title: "Bölüm 9", imdb: "8.0", stream: "" },
+                { title: "Bölüm 10", imdb: "8.0", stream: "" }
             ]
         };
         const coverImage = "https://images8.alphacoders.com/114/thumb-1920-1148255.jpg";
@@ -578,4 +652,4 @@
         updateEpisodes();
     </script>
 </body>
-  </html>
+</html>
