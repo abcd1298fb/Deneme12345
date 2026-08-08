@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>House of the Dragon - Bölümler</title>
-    <!-- DPlayer CDN Stili -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.css">
+    <!-- Fluid Player CDN Stili -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fluid-player@3/dist/fluidplayer.min.css" />
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
@@ -149,7 +149,7 @@
             box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
         }
 
-        /* OYNATICI ALANI (DPlayer) */
+        /* OYNATICI ALANI (Fluid Player) */
         #activePlayerSection {
             display: none;
             margin-bottom: 30px;
@@ -163,16 +163,7 @@
         .inline-player-box {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 Oran */
             background: #000;
-        }
-
-        #dplayer {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100% !important;
-            height: 100% !important;
-            background-color: #000;
         }
 
         .inline-player-header {
@@ -381,7 +372,7 @@
     <div class="container">
         <!-- Logo Alanı -->
         <div class="logo-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/500px-Rick_and_Morty.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" 
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/500px-Rick_and_Morty.svg.png" 
                  id="hotd-main-logo" class="hotd-logo logo-infinite" alt="Rick and Morty Logo">
         </div>
 
@@ -403,7 +394,7 @@
             </div>
         </div>
 
-        <!-- ÜST OYNATICI ALANI (DPlayer) -->
+        <!-- ÜST OYNATICI ALANI (Fluid Player) -->
         <div id="activePlayerSection">
             <div class="inline-player-header">
                 <div class="inline-player-title">
@@ -413,7 +404,7 @@
                 <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
             <div class="inline-player-box">
-                <div id="dplayer"></div>
+                <video id="video-player" controls style="width: 100%; height: auto;"></video>
             </div>
             <!-- Önceki / Sonraki Bölüm Butonları -->
             <div class="inline-player-controls">
@@ -443,11 +434,10 @@
         </div>
     </div>
 
-    <!-- HLS.js ve DPlayer Scriptleri -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dplayer/dist/DPlayer.min.js"></script>
+    <!-- Fluid Player Script -->
+    <script src="https://cdn.jsdelivr.net/npm/fluid-player@3/dist/fluidplayer.min.js"></script>
     <script>
-        let dp = null;
+        let myFluidPlayer = null;
         let currentSeason = "1";
         let currentIndex = 0;
 
@@ -522,11 +512,10 @@
                 return;
             }
 
-            // Logo animasyonunu tetikle (3 sn boyunca hızlı zoom-in/out)
+            // Logo animasyonunu tetikle
             const logo = document.getElementById('hotd-main-logo');
             logo.classList.remove('logo-infinite');
             logo.classList.add('logo-once');
-            
             setTimeout(() => {
                 logo.classList.remove('logo-once');
                 logo.classList.add('logo-infinite');
@@ -542,42 +531,22 @@
             playerSection.style.display = 'block';
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            if (dp) {
-                dp.destroy();
+            if (myFluidPlayer) {
+                myFluidPlayer.destroy();
             }
 
-            dp = new DPlayer({
-                container: document.getElementById('dplayer'),
-                autoplay: true,
-                theme: '#e50914',
-                video: {
-                    url: streamUrl,
-                    type: 'customHls',
-                    customType: {
-                        customHls: function (video, player) {
-                            const hls = new Hls();
-                            hls.loadSource(video.src);
-                            hls.attachMedia(video);
-                            
-                            // HLS yüklendiğinde, ses (dublaj) veya alt yazı parçaları varsa DPlayer'a entegre et
-                            hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                                // Eğer yayında çoklu ses akışı (audio tracks) varsa destek açılır
-                                if (hls.audioTracks && hls.audioTracks.length > 1) {
-                                    console.log("Çoklu ses akışı tespit edildi:", hls.audioTracks);
-                                }
-                            });
-                        },
-                    },
-                },
-                // Eğer harici alt yazı eklemek istersen bu alanı kullanabilirsin:
-                /*
-                subtitle: {
-                    url: 'altyazi.vtt',
-                    type: 'webvtt',
-                    fontSize: '25px',
-                    bottom: '10%',
+            // Video kaynağını ata ve Fluid Player'ı başlat
+            const videoElem = document.getElementById('video-player');
+            videoElem.src = streamUrl;
+
+            myFluidPlayer = fluidPlayer('video-player', {
+                layoutControls: {
+                    primaryColor: '#e50914',
+                    autoPlay: true,
+                    playButtonShowing: true,
+                    fillToContainer: true,
+                    posterImage: ''
                 }
-                */
             });
         }
 
@@ -595,9 +564,9 @@
         }
 
         function stopPlayer() {
-            if (dp) {
-                dp.destroy();
-                dp = null;
+            if (myFluidPlayer) {
+                myFluidPlayer.destroy();
+                myFluidPlayer = null;
             }
             document.getElementById('activePlayerSection').style.display = 'none';
         }
