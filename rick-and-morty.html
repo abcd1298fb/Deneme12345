@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rick and Morty - Netflix Tarzı</title>
-    <!-- ArtPlayer CDN Stili -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.css">
+    <title>House of the Dragon - Bölümler</title>
+    <!-- Video.js Güncel CDN Stili -->
+    <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --bg: #141414;
-            --surface: rgba(30, 30, 30, 0.6);
-            --surface-hover: rgba(50, 50, 50, 0.8);
-            --accent: #e50914; /* Netflix Kırmızısı */
+            --bg: #0a0505;
+            --surface: rgba(25, 10, 10, 0.45);
+            --surface-hover: rgba(45, 15, 15, 0.6);
+            --accent: #e50914;
             --text: #ffffff;
             --muted: #b3b3b3;
         }
@@ -20,49 +20,76 @@
         body {
             background: var(--bg);
             color: var(--text);
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-family: 'Manrope', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
             padding-bottom: 90px;
+            position: relative;
         }
 
-        /* Netflix Tarzı Üst Navbar */
+        /* Atmosfer / Kırmızı Loş Işık */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -150px; left: 50%;
+            transform: translateX(-50%);
+            width: 700px; height: 350px;
+            background: radial-gradient(ellipse, rgba(229, 9, 20, 0.22) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            bottom: -100px; right: -100px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(180, 0, 10, 0.12) 0%, transparent 70%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Navbar */
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             height: 65px;
-            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.5) 100%);
+            background: rgba(15, 5, 5, 0.65);
             display: flex; align-items: center;
             justify-content: space-between;
             padding: 0 4%;
-            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(229, 9, 20, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
         .nav-logo {
-            font-size: 26px; font-weight: 900; letter-spacing: 2px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 28px; font-weight: 900; letter-spacing: 2px;
             color: var(--accent);
             text-decoration: none;
-            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+            text-shadow: 0 0 15px rgba(229, 9, 20, 0.7);
         }
 
+        /* Ana İçerik Alanı */
         .container {
             padding: 95px 4% 30px 4%;
             max-width: 1400px;
             margin: 0 auto;
         }
 
+        /* Logo Alanı ve Animasyonlar */
         .logo-container {
             text-align: center;
             margin-bottom: 25px;
         }
-        .rm-logo {
-            max-width: 320px;
+        .hotd-logo {
+            max-width: 280px;
             width: 100%;
             height: auto;
             filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.4));
         }
-
         @keyframes zoomInOutInfinite {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.06); }
             100% { transform: scale(1); }
         }
         @keyframes zoomInOutOnce {
@@ -70,8 +97,12 @@
             50% { transform: scale(1.08); }
             100% { transform: scale(1); }
         }
-        .logo-infinite { animation: zoomInOutInfinite 3s infinite ease-in-out; }
-        .logo-once { animation: zoomInOutOnce 3s 1 ease-in-out; }
+        .logo-infinite {
+            animation: zoomInOutInfinite 3s infinite ease-in-out;
+        }
+        .logo-once {
+            animation: zoomInOutOnce 3s 1 ease-in-out;
+        }
 
         .header-section {
             display: flex;
@@ -81,8 +112,10 @@
         }
 
         h1 {
-            font-size: 28px;
-            font-weight: 700;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 1px;
             color: #fff;
         }
 
@@ -99,44 +132,50 @@
         }
 
         select {
-            background: rgba(30, 30, 30, 0.9);
+            background: rgba(25, 10, 10, 0.8);
             color: #fff;
             padding: 8px 16px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(229, 9, 20, 0.3);
             font-size: 14px;
             font-weight: 600;
             outline: none;
             cursor: pointer;
+            backdrop-filter: blur(10px);
             transition: all 0.3s;
         }
         select:hover, select:focus {
             border-color: var(--accent);
+            box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
         }
 
-        /* Netflix Tarzı Oynatıcı Alanı */
+        /* OYNATICI ALANI */
         #activePlayerSection {
             display: none;
             margin-bottom: 30px;
-            background: #000;
+            background: rgba(20, 8, 8, 0.85);
             border: 1px solid rgba(229, 9, 20, 0.4);
-            border-radius: 8px;
+            border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(229, 9, 20, 0.15);
         }
 
         .inline-player-box {
             position: relative;
             width: 100%;
-            padding-top: 56.25%; /* 16:9 */
+            padding-top: 56.25%; /* 16:9 Oran */
             background: #000;
         }
 
-        #artplayer-container {
+        .video-js {
             position: absolute;
             top: 0; left: 0;
             width: 100% !important;
             height: 100% !important;
+            background-color: #000;
+        }
+        .vjs-play-progress {
+            background: var(--accent) !important;
         }
 
         .inline-player-header {
@@ -144,12 +183,13 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: #181818;
-            border-bottom: 1px solid #333;
+            background: linear-gradient(180deg, rgba(30,10,10,0.8) 0%, rgba(15,5,5,0.95) 100%);
+            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
         }
 
         .inline-player-title h3 {
-            font-size: 18px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 22px;
             color: #fff;
         }
 
@@ -161,10 +201,10 @@
 
         .close-player-btn {
             background: rgba(229, 9, 20, 0.2);
-            border: 1px solid var(--accent);
+            border: 1px solid rgba(229, 9, 20, 0.4);
             color: #fff;
             padding: 6px 14px;
-            border-radius: 4px;
+            border-radius: 8px;
             font-size: 12px;
             font-weight: 700;
             cursor: pointer;
@@ -174,83 +214,94 @@
             background: var(--accent);
         }
 
+        /* Bölümler Arası Geçiş Butonları */
         .inline-player-controls {
             display: flex;
             justify-content: center;
             gap: 15px;
             padding: 15px;
-            background: #181818;
-            border-top: 1px solid #333;
+            background: rgba(10, 5, 5, 0.95);
+            border-top: 1px solid rgba(229, 9, 20, 0.2);
         }
         .inline-player-controls button {
-            background: #333;
-            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(229, 9, 20, 0.3);
             color: #fff;
-            padding: 8px 16px;
-            border-radius: 4px;
+            padding: 10px 20px;
+            border-radius: 8px;
             font-weight: 600;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.3s;
         }
         .inline-player-controls button:hover {
             background: var(--accent);
+            border-color: #fff;
         }
 
-        /* Grid / Kart Tasarımı */
+        /* Bölüm Grid Yapısı */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 20px;
         }
 
         .card {
-            background: #222;
-            border-radius: 6px;
+            background: var(--surface);
+            border-radius: 14px;
             overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
             position: relative;
         }
 
         .card:hover {
-            transform: scale(1.04);
-            box-shadow: 0 10px 25px rgba(229, 9, 20, 0.3);
+            transform: translateY(-6px) scale(1.02);
             border-color: rgba(229, 9, 20, 0.5);
-            z-index: 10;
+            background: var(--surface-hover);
+            box-shadow: 0 16px 45px rgba(229, 9, 20, 0.25);
         }
 
         .card img {
             width: 100%;
-            height: 140px;
+            height: 160px;
             object-fit: cover;
+            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
         }
 
+        /* IMDb Puan Rozeti */
         .imdb-badge {
             position: absolute;
             top: 10px; right: 10px;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(6px);
             border: 1px solid rgba(245, 197, 24, 0.4);
             color: #f5c518;
-            padding: 3px 6px;
-            border-radius: 4px;
-            font-size: 11px;
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 12px;
             font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
         .info {
-            padding: 12px;
-            background: #181818;
+            padding: 15px;
+            background: linear-gradient(180deg, transparent 0%, rgba(10,5,5,0.95) 100%);
         }
 
         h3 {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
             color: #fff;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -261,39 +312,80 @@
             color: var(--muted);
         }
 
-        /* Alt Navigasyon */
+        /* 3D Alt Navigasyon Barı */
         .bottom-nav-wrapper {
-            position: fixed; bottom: 15px; left: 0; right: 0;
-            display: flex; justify-content: center; z-index: 1500; pointer-events: none;
+            position: fixed;
+            bottom: 15px; left: 0; right: 0;
+            display: flex;
+            justify-content: center;
+            z-index: 1500;
+            padding: 0 16px;
+            pointer-events: none;
         }
+
         .bottom-nav {
-            pointer-events: auto; max-width: 400px; width: 100%; height: 60px;
-            background: rgba(20, 20, 20, 0.85); border: 1px solid rgba(255,255,255,0.15);
-            border-radius: 30px; display: flex; justify-content: space-around; align-items: center;
-            backdrop-filter: blur(15px); box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+            pointer-events: auto;
+            width: 100%;
+            max-width: 420px;
+            height: 64px;
+            background: rgba(20, 8, 8, 0.6);
+            border: 1px solid rgba(229, 9, 20, 0.25);
+            border-radius: 22px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(229, 9, 20, 0.15);
+            padding: 0 8px;
         }
+
         .bottom-nav-item {
-            color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 600;
-            display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 4px 12px; border-radius: 20px; transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 3px;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            transition: all 0.3s;
+            padding: 6px 14px;
+            border-radius: 14px;
         }
-        .bottom-nav-item svg { width: 18px; height: 18px; fill: currentColor; }
+
+        .bottom-nav-item svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
         .bottom-nav-item:hover { color: #fff; }
-        .bottom-nav-item.active { color: #fff; background: var(--accent); }
+
+        .bottom-nav-item.active {
+            color: #ffffff;
+            background: linear-gradient(180deg, #ff1e27 0%, #a00008 100%);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.7);
+        }
     </style>
 </head>
 <body>
 
     <!-- Navbar -->
     <nav>
-        <a class="nav-logo" href="#">NETFLIX</a>
+        <div class="nav-left">
+            <a class="nav-logo" href="index.html">FATBOK</a>
+        </div>
     </nav>
 
     <!-- İçerik -->
     <div class="container">
         <!-- Logo Alanı -->
         <div class="logo-container">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/500px-Rick_and_Morty.svg.png" 
-                 id="rm-main-logo" class="rm-logo logo-infinite" alt="Rick and Morty Logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Rick_and_Morty.svg/500px-Rick_and_Morty.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail" 
+                 id="hotd-main-logo" class="hotd-logo logo-infinite" alt="Rick and Morty Logo">
         </div>
 
         <div class="header-section">
@@ -314,7 +406,7 @@
             </div>
         </div>
 
-        <!-- OYNATICI ALANI -->
+        <!-- ÜST OYNATICI ALANI -->
         <div id="activePlayerSection">
             <div class="inline-player-header">
                 <div class="inline-player-title">
@@ -324,76 +416,81 @@
                 <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
             <div class="inline-player-box">
-                <div id="artplayer-container"></div>
+                <video id="hotd-player" class="video-js vjs-big-play-button-centered" controls preload="auto" data-setup='{}'>
+                    <p class="vjs-no-js">Tarayıcınız video oynatmayı desteklemiyor.</p>
+                </video>
             </div>
+            <!-- Önceki / Sonraki Bölüm Butonları -->
             <div class="inline-player-controls">
-                <button onclick="changeEpisode(-1)">◀ Önceki</button>
-                <button onclick="changeEpisode(1)">Sonraki ▶</button>
+                <button onclick="changeEpisode(-1)">◀ Önceki Bölüm</button>
+                <button onclick="changeEpisode(1)">Sonraki Bölüm ▶</button>
             </div>
         </div>
 
         <div id="episodes" class="grid"></div>
     </div>
 
-    <!-- Alt Navigasyon -->
+    <!-- Alt Navigasyon Barı -->
     <div class="bottom-nav-wrapper">
         <div class="bottom-nav">
-            <a href="#" class="bottom-nav-item">
+            <a href="index.html" class="bottom-nav-item">
                 <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                Ana Sayfa
+                Anasayfa
             </a>
-            <a href="#" class="bottom-nav-item">
+            <a href="filmler.html" class="bottom-nav-item">
                 <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
                 Filmler
             </a>
-            <a href="#" class="bottom-nav-item active">
+            <a href="diziler.html" class="bottom-nav-item active">
                 <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
                 Diziler
             </a>
         </div>
     </div>
 
-    <!-- HLS ve ArtPlayer Scriptleri -->
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <script src="https://cdn.jsdelivr.net/npm/artplayer/dist/artplayer.js"></script>
+    <!-- Video.js Script -->
+    <script src="https://vjs.zencdn.net/8.16.1/video.min.js"></script>
     <script>
-        let art = null;
+        let player = null;
         let currentSeason = "1";
         let currentIndex = 0;
 
-        const rmData = {
+        const hotdData = {
             "1": [
-               { title: "Pilot", imdb: "8.0", stream: "https://s231.rapidrame.com/hls2/01/00019/2otg4wpmc3sj_,l,.urlset/master.m3u8" },
+               { title: "Pilot", imdb: "8.0", stream: "https://s231.rapidrame.com/hls2/01/00019/2otg4wpmc3sj_,l,.urlset/master.m3u8?t=N71zl4g4r96IHkBEnK38awKTld5mjD3LUTEA_tauh3k&s=1786220710&e=14400&f=98845&srv=s429&i=0.0&sp=0&n=fk236amicaefjevo&p1=s231&p2=s231" },
                { title: "Lawnmower Dog", imdb: "8.1", stream: "https://vs14.photofunny.org/v/Rick.and.Morty.S01E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Anatomy Park", imdb: "8.1", stream: "" },
-               { title: "M. Night Shaym-Aliens!", imdb: "8.5", stream: "" },
-               { title: "Meeseeks and Destroy", imdb: "8.8", stream: "" },
-               { title: "Rick Potion #9", imdb: "9.2", stream: "" },
-               { title: "Raising Gazorpazorp", imdb: "8.0", stream: "" },
-               { title: "Rixty Minutes", imdb: "9.0", stream: "" },
-               { title: "Something Ricked This Way Comes", imdb: "8.5", stream: "" },
-               { title: "Close Rick-counters of the Rick Kind", imdb: "9.3", stream: "" },
-               { title: "Ricksy Business", imdb: "8.5", stream: "" }
+               { title: "Anatomy Park", imdb: "8.1", stream: "https://vs13.pictureflix.org/v/Rick.and.Morty.S01E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "M. Night Shaym-Aliens!", imdb: "8.5", stream: "https://vs18.pictureflix.org/v/Rick.and.Morty.S01E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Meeseeks and Destroy", imdb: "8.8", stream: "https://vs19.photofunny.org/v/Rick.and.Morty.S01E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Rick Potion #9", imdb: "9.2", stream: "https://vs17.photomag.biz/v/Rick.and.Morty.S01E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Raising Gazorpazorp", imdb: "8.0", stream: "https://vs18.photofunny.org/v/Rick.and.Morty.S01E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Rixty Minutes", imdb: "9.0", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Something Ricked This Way Comes", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Close Rick-counters of the Rick Kind", imdb: "9.3", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Ricksy Business", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E11.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
             ],
             "2": [
-               { title: "A Rickle in Time", imdb: "8.4", stream: "" },
-               { title: "Mortynight Run", imdb: "8.9", stream: "" },
-               { title: "Auto Erotic Assimilation", imdb: "8.9", stream: "" },
-               { title: "Total Rickall", imdb: "9.5", stream: "" },
-               { title: "Get Schwifty", imdb: "8.3", stream: "" },
-               { title: "The Ricks Must Be Crazy", imdb: "9.1", stream: "" },
-               { title: "Big Trouble in Little Sanchez", imdb: "8.7", stream: "" },
-               { title: "Interdimensional Cable 2", imdb: "7.7", stream: "" },
-               { title: "Look Who's Purging Now", imdb: "8.7", stream: "" },
-               { title: "The Wedding Squanchers", imdb: "9.3", stream: "" }
+               { title: "A Rickle in Time", imdb: "8.4", stream: "https://vs10.photoflick.org/v/Rick.and.Morty.S02E01.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Mortynight Run", imdb: "8.9", stream: "https://vs14.photoflix.org/v/Rick.and.Morty.S02E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Auto Erotic Assimilation", imdb: "8.9", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Total Rickall", imdb: "9.5", stream: "https://vs16.photofunny.org/v/Rick.and.Morty.S02E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Get Schwifty", imdb: "8.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "The Ricks Must Be Crazy", imdb: "9.1", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Big Trouble in Little Sanchez", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Interdimensional Cable 2: Tempting Fate", imdb: "7.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "Look Who's Purging Now", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+               { title: "The Wedding Squanchers", imdb: "9.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
            ],
-           "3": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.5", stream: ""})),
-           "4": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.2", stream: ""})),
-           "5": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "7.9", stream: ""})),
-           "6": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.3", stream: ""})),
-           "7": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
-           "8": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
-           "9": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""}))
+           "3": [
+                { title: "Salt and Sea, Fire and Blood", imdb: "9.2", stream: "" },
+                { title: "Queen's Landing", imdb: "9.3", stream: "" },
+                { title: "Rhaenyra Triumphant", imdb: "8.2", stream: "" },
+                { title: "Tumbleton", imdb: "7.5", stream: "" },
+                { title: "Unbowed and Unbent", imdb: "7.7", stream: "" },
+                { title: "Faceless Men", imdb: "7.7", stream: "" },
+                { title: "The Dragon in Winter", imdb: "8.3", stream: "" },
+                { title: "Episode 8", imdb: "8.0", stream: "" }
+            ]
         };
         const coverImage = "https://images8.alphacoders.com/114/thumb-1920-1148255.jpg";
 
@@ -402,12 +499,12 @@
             const container = document.getElementById('episodes');
             container.innerHTML = '';
             
-            rmData[season].forEach((ep, index) => {
+            hotdData[season].forEach((ep, index) => {
                 const subText = `${season}. Sezon ${index + 1}. Bölüm`;
                 container.innerHTML += `
                     <div class="card" onclick="playEpisode('${ep.stream}', '${ep.title}', '${subText}', '${season}', ${index})">
                         <div class="imdb-badge">★ ${ep.imdb}</div>
-                        <img src="${coverImage}" alt="Cover">
+                        <img src="${coverImage}" alt="Episode Cover">
                         <div class="info">
                             <h3>${ep.title}</h3>
                             <p>${subText}</p>
@@ -423,9 +520,11 @@
                 return;
             }
 
-            const logo = document.getElementById('rm-main-logo');
+            // Logo animasyonunu tetikle (3 sn boyunca hızlı zoom-in/out)
+            const logo = document.getElementById('hotd-main-logo');
             logo.classList.remove('logo-infinite');
             logo.classList.add('logo-once');
+            
             setTimeout(() => {
                 logo.classList.remove('logo-once');
                 logo.classList.add('logo-infinite');
@@ -441,38 +540,22 @@
             playerSection.style.display = 'block';
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            if (art) {
-                art.destroy(false);
+            if (!player) {
+                player = videojs('hotd-player');
             }
-
-            art = new Artplayer({
-                container: '#artplayer-container',
-                url: streamUrl,
-                volume: 0.8,
-                autoplay: true,
-                setting: true,
-                fullscreen: true,
-                miniProgressBar: true,
-                theme: '#e50914',
-                type: 'm3u8',
-                customType: {
-                    m3u8: function (video, url, art) {
-                        if (Hls.isSupported()) {
-                            const hls = new Hls();
-                            hls.loadSource(url);
-                            hls.attachMedia(video);
-                            art.hls = hls;
-                            art.on('destroy', () => hls.destroy());
-                        } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
-                            video.src = url;
-                        }
-                    },
-                },
+            
+            player.src({
+                src: streamUrl,
+                type: 'application/x-mpegURL'
+            });
+            
+            player.ready(function() {
+                player.play();
             });
         }
 
         function changeEpisode(step) {
-            const episodes = rmData[currentSeason];
+            const episodes = hotdData[currentSeason];
             let newIndex = currentIndex + step;
 
             if (newIndex >= 0 && newIndex < episodes.length) {
@@ -485,9 +568,9 @@
         }
 
         function stopPlayer() {
-            if (art) {
-                art.destroy(false);
-                art = null;
+            if (player) {
+                player.pause();
+                player.src("");
             }
             document.getElementById('activePlayerSection').style.display = 'none';
         }
@@ -495,4 +578,4 @@
         updateEpisodes();
     </script>
 </body>
-</html>
+                                             </html>
