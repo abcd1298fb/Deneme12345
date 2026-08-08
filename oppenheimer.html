@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oppenheimer - FATBOK</title>
+    <!-- Video.js CDN Stili -->
+    <link href="https://vjs.zencdn.net/8.10.0/video-js.css" rel="stylesheet" />
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --bg: #141414;
+            --surface: rgba(30, 30, 30, 0.6);
+            --surface-hover: rgba(50, 50, 50, 0.8);
+            --accent: #e50914; /* Netflix Kırmızısı */
+            --text: #ffffff;
+            --muted: #b3b3b3;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-bottom: 90px;
+        }
+
+        /* Netflix Tarzı Üst Navbar */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            height: 65px;
+            background: linear-gradient(180deg, rgba(0,0,0,0.9) 0%, rgba(20,20,20,0.5) 100%);
+            display: flex; align-items: center;
+            justify-content: space-between;
+            padding: 0 4%;
+            backdrop-filter: blur(10px);
+        }
+        .nav-logo {
+            font-size: 26px; font-weight: 900; letter-spacing: 2px;
+            color: var(--accent);
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(229, 9, 20, 0.5);
+        }
+
+        .container {
+            padding: 95px 4% 30px 4%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Logo Animasyon Alanı */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .opp-logo {
+            max-width: 320px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.4));
+        }
+
+        @keyframes zoomInOutInfinite {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .logo-infinite { animation: zoomInOutInfinite 3s infinite ease-in-out; }
+
+        .header-section {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* OYNATICI ALANI (Video.js) */
+        #activePlayerSection {
+            margin-bottom: 30px;
+            background: #000;
+            border: 1px solid rgba(229, 9, 20, 0.4);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+        }
+
+        .inline-player-box {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+            background: #000;
+        }
+
+        .video-js {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100% !important;
+            height: 100% !important;
+        }
+
+        /* Video.js Netflix Renk Uyarlaması */
+        .video-js .vjs-control-bar {
+            background: rgba(20, 20, 20, 0.9);
+        }
+        .video-js .vjs-play-progress {
+            background-color: var(--accent);
+        }
+
+        .inline-player-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #181818;
+            border-bottom: 1px solid #333;
+        }
+
+        .inline-player-title h3 {
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .inline-player-title p {
+            font-size: 12px;
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        /* Film Detay ve Bilgi Bölümü */
+        .info-section {
+            background: #181818;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .meta-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .imdb-badge {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(245, 197, 24, 0.4);
+            color: #f5c518;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .movie-plot {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--muted);
+            margin-bottom: 25px;
+        }
+
+        .cast-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 10px;
+            border-left: 3px solid var(--accent);
+            padding-left: 8px;
+        }
+
+        .cast-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .cast-tag {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        /* Alt Navigasyon */
+        .bottom-nav-wrapper {
+            position: fixed; bottom: 15px; left: 0; right: 0;
+            display: flex; justify-content: center; z-index: 1500; pointer-events: none;
+        }
+        .bottom-nav {
+            pointer-events: auto; max-width: 400px; width: 100%; height: 60px;
+            background: rgba(20, 20, 20, 0.85); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 30px; display: flex; justify-content: space-around; align-items: center;
+            backdrop-filter: blur(15px); box-shadow: 0 15px 30px rgba(0,0,0,0.8);
+        }
+        .bottom-nav-item {
+            color: var(--muted); text-decoration: none; font-size: 11px; font-weight: 600;
+            display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 4px 12px; border-radius: 20px; transition: 0.3s;
+        }
+        .bottom-nav-item svg { width: 18px; height: 18px; fill: currentColor; }
+        .bottom-nav-item:hover { color: #fff; }
+        .bottom-nav-item.active { color: #fff; background: var(--accent); }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <a class="nav-logo" href="index">FATBOK</a>
+    </nav>
+
+    <!-- İçerik -->
+    <div class="container">
+        <!-- Logo Alanı (Zoom In/Out Animasyonlu) -->
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/7/7c/Oppenheimer_Movie_Logo_2023.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original" 
+                 class="opp-logo logo-infinite" alt="Oppenheimer Logo">
+        </div>
+
+        <!-- OYNATICI ALANI (Video.js) -->
+        <div id="activePlayerSection">
+            <div class="inline-player-header">
+                <div class="inline-player-title">
+                    <h3>Oppenheimer</h3>
+                    <p>Film Oynatıcı</p>
+                </div>
+            </div>
+            <div class="inline-player-box">
+                <video-js id="my-video" class="vjs-big-play-centered" controls preload="auto" data-setup='{}'>
+                    <source src="https://s231.rapidrame.com/hls2/01/00018/rzkjymtky9wh_,l,.urlset/master.m3u8?t=wNDzMM2QT5GwAxin28m4xFR6Dv41la6qRuSc0uc6tRo&s=1786228200&e=14400&f=92052&srv=s429&i=0.0&sp=0&n=8qpgxw632uvwrl38&p1=s231&p2=s231" type="application/x-mpegURL">
+                </video-js>
+            </div>
+        </div>
+
+        <!-- Film Hikayesi, Puanı ve Oyuncu Kadrosu -->
+        <div class="info-section">
+            <div class="meta-row">
+                <div class="imdb-badge">★ 8.9 / 10</div>
+                <div style="font-size: 13px; color: var(--muted);">Biyografi • Dram • Tarih</div>
+            </div>
+            <p class="movie-plot">
+                Amerikalı fizikçi J. Robert Oppenheimer'ın hayatını konu alan film, Manhattan Projesi'ni ve ilk nükleer silahın geliştirilme sürecini anlatıyor. Oppenheimer ve ekibi, dünyayı kurtarmak için yok etme riski taşıyan bir silahı inşa etmek zorunda kaldıkları tarihi bir dönüm noktasını deneyimlerler.
+            </p>
+            
+            <div class="cast-title">Oyuncu Kadrosu</div>
+            <div class="cast-list">
+                <div class="cast-tag">Cillian Murphy</div>
+                <div class="cast-tag">Emily Blunt</div>
+                <div class="cast-tag">Matt Damon</div>
+                <div class="cast-tag">Robert Downey Jr.</div>
+                <div class="cast-tag">Florence Pugh</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Alt Navigasyon -->
+    <div class="bottom-nav-wrapper">
+        <div class="bottom-nav">
+            <a href="index" class="bottom-nav-item">
+                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                Ana Sayfa
+            </a>
+            <a href="filmler" class="bottom-nav-item active">
+                <svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg>
+                Filmler
+            </a>
+            <a href="diziler" class="bottom-nav-item">
+                <svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
+                Diziler
+            </a>
+        </div>
+    </div>
+
+    <!-- Video.js Script -->
+    <script src="https://vjs.zencdn.net/8.10.0/video.min.js"></script>
+</body>
+</html>
