@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>House of the Dragon - Bölümler</title>
-    <!-- Fluid Player CDN Stili -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fluid-player@3/dist/fluidplayer.min.css" />
+    <title>Rick and Morty - Bölümler</title>
+    <!-- Vidstack Modern Oyuncu Stilleri -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@vidstack/react@latest/dist/styles/base.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vidstack@next/dist/cdn/player.css" />
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
         :root {
-            --bg: #0a0505;
-            --surface: rgba(25, 10, 10, 0.45);
-            --surface-hover: rgba(45, 15, 15, 0.6);
-            --accent: #e50914;
+            --bg: #0b0e14;
+            --surface: rgba(20, 35, 20, 0.6);
+            --surface-hover: rgba(40, 70, 40, 0.8);
+            --accent: #97ce4c; /* Portal Yeşili */
             --text: #ffffff;
-            --muted: #b3b3b3;
+            --muted: #a0b0c0;
         }
         html { scroll-behavior: smooth; }
         body {
@@ -27,14 +28,14 @@
             position: relative;
         }
 
-        /* Atmosfer / Kırmızı Loş Işık */
+        /* Atmosfer / Portal Işığı */
         body::before {
             content: '';
             position: fixed;
             top: -150px; left: 50%;
             transform: translateX(-50%);
             width: 700px; height: 350px;
-            background: radial-gradient(ellipse, rgba(229, 9, 20, 0.22) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(151, 206, 76, 0.18) 0%, transparent 70%);
             z-index: -1;
             pointer-events: none;
         }
@@ -43,7 +44,7 @@
             position: fixed;
             bottom: -100px; right: -100px;
             width: 500px; height: 500px;
-            background: radial-gradient(circle, rgba(180, 0, 10, 0.12) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(100, 200, 50, 0.08) 0%, transparent 70%);
             z-index: -1;
             pointer-events: none;
         }
@@ -52,11 +53,11 @@
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
             height: 65px;
-            background: rgba(15, 5, 5, 0.65);
+            background: rgba(10, 15, 10, 0.8);
             display: flex; align-items: center;
             justify-content: space-between;
             padding: 0 4%;
-            border-bottom: 1px solid rgba(229, 9, 20, 0.15);
+            border-bottom: 1px solid rgba(151, 206, 76, 0.2);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
@@ -66,7 +67,7 @@
             font-size: 28px; font-weight: 900; letter-spacing: 2px;
             color: var(--accent);
             text-decoration: none;
-            text-shadow: 0 0 15px rgba(229, 9, 20, 0.7);
+            text-shadow: 0 0 15px rgba(151, 206, 76, 0.5);
         }
 
         /* Ana İçerik Alanı */
@@ -85,7 +86,7 @@
             max-width: 280px;
             width: 100%;
             height: auto;
-            filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.4));
+            filter: drop-shadow(0 0 20px rgba(151, 206, 76, 0.4));
         }
         @keyframes zoomInOutInfinite {
             0% { transform: scale(1); }
@@ -132,11 +133,11 @@
         }
 
         select {
-            background: rgba(25, 10, 10, 0.8);
+            background: rgba(20, 35, 20, 0.9);
             color: #fff;
             padding: 8px 16px;
             border-radius: 12px;
-            border: 1px solid rgba(229, 9, 20, 0.3);
+            border: 1px solid rgba(151, 206, 76, 0.4);
             font-size: 14px;
             font-weight: 600;
             outline: none;
@@ -146,18 +147,18 @@
         }
         select:hover, select:focus {
             border-color: var(--accent);
-            box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
+            box-shadow: 0 0 15px rgba(151, 206, 76, 0.3);
         }
 
-        /* OYNATICI ALANI (Fluid Player) */
+        /* OYNATICI ALANI (Vidstack) */
         #activePlayerSection {
             display: none;
             margin-bottom: 30px;
-            background: rgba(20, 8, 8, 0.85);
-            border: 1px solid rgba(229, 9, 20, 0.4);
+            background: rgba(10, 20, 10, 0.9);
+            border: 1px solid rgba(151, 206, 76, 0.4);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(229, 9, 20, 0.15);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(151, 206, 76, 0.15);
         }
 
         .inline-player-box {
@@ -171,8 +172,8 @@
             justify-content: space-between;
             align-items: center;
             padding: 15px 20px;
-            background: linear-gradient(180deg, rgba(30,10,10,0.8) 0%, rgba(15,5,5,0.95) 100%);
-            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+            background: linear-gradient(180deg, rgba(20,40,20,0.8) 0%, rgba(10,15,10,0.95) 100%);
+            border-bottom: 1px solid rgba(151, 206, 76, 0.2);
         }
 
         .inline-player-title h3 {
@@ -188,8 +189,8 @@
         }
 
         .close-player-btn {
-            background: rgba(229, 9, 20, 0.2);
-            border: 1px solid rgba(229, 9, 20, 0.4);
+            background: rgba(151, 206, 76, 0.2);
+            border: 1px solid rgba(151, 206, 76, 0.4);
             color: #fff;
             padding: 6px 14px;
             border-radius: 8px;
@@ -200,6 +201,7 @@
         }
         .close-player-btn:hover {
             background: var(--accent);
+            color: #000;
         }
 
         /* Bölümler Arası Geçiş Butonları */
@@ -208,12 +210,12 @@
             justify-content: center;
             gap: 15px;
             padding: 15px;
-            background: rgba(10, 5, 5, 0.95);
-            border-top: 1px solid rgba(229, 9, 20, 0.2);
+            background: rgba(10, 15, 10, 0.95);
+            border-top: 1px solid rgba(151, 206, 76, 0.2);
         }
         .inline-player-controls button {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(229, 9, 20, 0.3);
+            border: 1px solid rgba(151, 206, 76, 0.3);
             color: #fff;
             padding: 10px 20px;
             border-radius: 8px;
@@ -223,6 +225,7 @@
         }
         .inline-player-controls button:hover {
             background: var(--accent);
+            color: #000;
             border-color: #fff;
         }
 
@@ -237,7 +240,7 @@
             background: var(--surface);
             border-radius: 14px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.07);
+            border: 1px solid rgba(151, 206, 76, 0.15);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
@@ -250,16 +253,16 @@
 
         .card:hover {
             transform: translateY(-6px) scale(1.02);
-            border-color: rgba(229, 9, 20, 0.5);
+            border-color: rgba(151, 206, 76, 0.6);
             background: var(--surface-hover);
-            box-shadow: 0 16px 45px rgba(229, 9, 20, 0.25);
+            box-shadow: 0 16px 45px rgba(151, 206, 76, 0.2);
         }
 
         .card img {
             width: 100%;
             height: 160px;
             object-fit: cover;
-            border-bottom: 1px solid rgba(229, 9, 20, 0.2);
+            border-bottom: 1px solid rgba(151, 206, 76, 0.2);
         }
 
         /* IMDb Puan Rozeti */
@@ -282,7 +285,7 @@
 
         .info {
             padding: 15px;
-            background: linear-gradient(180deg, transparent 0%, rgba(10,5,5,0.95) 100%);
+            background: linear-gradient(180deg, transparent 0%, rgba(10,15,10,0.95) 100%);
         }
 
         h3 {
@@ -316,15 +319,15 @@
             width: 100%;
             max-width: 420px;
             height: 64px;
-            background: rgba(20, 8, 8, 0.6);
-            border: 1px solid rgba(229, 9, 20, 0.25);
+            background: rgba(15, 25, 15, 0.7);
+            border: 1px solid rgba(151, 206, 76, 0.3);
             border-radius: 22px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(229, 9, 20, 0.15);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 25px rgba(151, 206, 76, 0.15);
             padding: 0 8px;
         }
 
@@ -352,10 +355,10 @@
         .bottom-nav-item:hover { color: #fff; }
 
         .bottom-nav-item.active {
-            color: #ffffff;
-            background: linear-gradient(180deg, #ff1e27 0%, #a00008 100%);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.7);
+            color: #000;
+            background: linear-gradient(180deg, #b4ed63 0%, #7db833 100%);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 6px 20px rgba(151, 206, 76, 0.7);
         }
     </style>
 </head>
@@ -394,7 +397,7 @@
             </div>
         </div>
 
-        <!-- ÜST OYNATICI ALANI (Fluid Player) -->
+        <!-- ÜST OYNATICI ALANI (Vidstack / Media Element) -->
         <div id="activePlayerSection">
             <div class="inline-player-header">
                 <div class="inline-player-title">
@@ -404,7 +407,7 @@
                 <button class="close-player-btn" onclick="stopPlayer()">Kapat ✕</button>
             </div>
             <div class="inline-player-box">
-                <video id="video-player" controls style="width: 100%; height: auto;"></video>
+                <video id="vidstack-player" playsinline controls style="width: 100%; aspect-ratio: 16/9; background: #000;"></video>
             </div>
             <!-- Önceki / Sonraki Bölüm Butonları -->
             <div class="inline-player-controls">
@@ -434,48 +437,50 @@
         </div>
     </div>
 
-    <!-- Fluid Player Script -->
-    <script src="https://cdn.jsdelivr.net/npm/fluid-player@3/dist/fluidplayer.min.js"></script>
+    <!-- HLS.js Desteği -->
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
-        let myFluidPlayer = null;
+        let hlsInstance = null;
         let currentSeason = "1";
         let currentIndex = 0;
 
         const hotdData = {
             "1": [
-               { title: "Pilot", imdb: "8.0", stream: "https://s231.rapidrame.com/hls2/01/00019/2otg4wpmc3sj_,l,.urlset/master.m3u8?t=N71zl4g4r96IHkBEnK38awKTld5mjD3LUTEA_tauh3k&s=1786220710&e=14400&f=98845&srv=s429&i=0.0&sp=0&n=fk236amicaefjevo&p1=s231&p2=s231" },
-               { title: "Lawnmower Dog", imdb: "8.1", stream: "https://vs14.photofunny.org/v/Rick.and.Morty.S01E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Anatomy Park", imdb: "8.1", stream: "https://vs13.pictureflix.org/v/Rick.and.Morty.S01E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "M. Night Shaym-Aliens!", imdb: "8.5", stream: "https://vs18.pictureflix.org/v/Rick.and.Morty.S01E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Meeseeks and Destroy", imdb: "8.8", stream: "https://vs19.photofunny.org/v/Rick.and.Morty.S01E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Rick Potion #9", imdb: "9.2", stream: "https://vs17.photomag.biz/v/Rick.and.Morty.S01E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Raising Gazorpazorp", imdb: "8.0", stream: "https://vs18.photofunny.org/v/Rick.and.Morty.S01E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Rixty Minutes", imdb: "9.0", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Something Ricked This Way Comes", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Close Rick-counters of the Rick Kind", imdb: "9.3", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Ricksy Business", imdb: "8.5", stream: "https://vs10.pictureflix.org/v/Rick.and.Morty.S01E11.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
+                { title: "Pilot", imdb: "8.0", stream: "https://s231.rapidrame.com/hls2/01/00019/2otg4wpmc3sj_,l,.urlset/master.m3u8" },
+                { title: "Lawnmower Dog", imdb: "8.1", stream: "https://vs14.photofunny.org/v/Rick.and.Morty.S01E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
+                { title: "Anatomy Park", imdb: "8.1", stream: "" },
+                { title: "M. Night Shaym-Aliens!", imdb: "8.5", stream: "" },
+                { title: "Meeseeks and Destroy", imdb: "8.8", stream: "" },
+                { title: "Rick Potion #9", imdb: "9.2", stream: "" },
+                { title: "Raising Gazorpazorp", imdb: "8.0", stream: "" },
+                { title: "Rixty Minutes", imdb: "9.0", stream: "" },
+                { title: "Something Ricked This Way Comes", imdb: "8.5", stream: "" },
+                { title: "Close Rick-counters of the Rick Kind", imdb: "9.3", stream: "" },
+                { title: "Ricksy Business", imdb: "8.5", stream: "" }
             ],
             "2": [
-               { title: "A Rickle in Time", imdb: "8.4", stream: "https://vs10.photoflick.org/v/Rick.and.Morty.S02E01.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Mortynight Run", imdb: "8.9", stream: "https://vs14.photoflix.org/v/Rick.and.Morty.S02E02.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Auto Erotic Assimilation", imdb: "8.9", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E03.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Total Rickall", imdb: "9.5", stream: "https://vs16.photofunny.org/v/Rick.and.Morty.S02E04.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Get Schwifty", imdb: "8.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E05.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "The Ricks Must Be Crazy", imdb: "9.1", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E06.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Big Trouble in Little Sanchez", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E07.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Interdimensional Cable 2: Tempting Fate", imdb: "7.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E08.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "Look Who's Purging Now", imdb: "8.7", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E09.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" },
-               { title: "The Wedding Squanchers", imdb: "9.3", stream: "https://vs14.pictureflix.org/v/Rick.and.Morty.S02E10.WEB-DL.1080p.DUAL.H.264-HDM/master.m3u8" }
-           ],
-           "3": [
-                { title: "Salt and Sea, Fire and Blood", imdb: "9.2", stream: "" },
-                { title: "Queen's Landing", imdb: "9.3", stream: "" },
-                { title: "Rhaenyra Triumphant", imdb: "8.2", stream: "" },
-                { title: "Tumbleton", imdb: "7.5", stream: "" },
-                { title: "Unbowed and Unbent", imdb: "7.7", stream: "" },
-                { title: "Faceless Men", imdb: "7.7", stream: "" },
-                { title: "The Dragon in Winter", imdb: "8.3", stream: "" },
-                { title: "Episode 8", imdb: "8.0", stream: "" }
+                { title: "A Rickle in Time", imdb: "8.4", stream: "" },
+                { title: "Mortynight Run", imdb: "8.9", stream: "" },
+                { title: "Auto Erotic Assimilation", imdb: "8.9", stream: "" },
+                { title: "Total Rickall", imdb: "9.5", stream: "" },
+                { title: "Get Schwifty", imdb: "8.3", stream: "" },
+                { title: "The Ricks Must Be Crazy", imdb: "9.1", stream: "" },
+                { title: "Big Trouble in Little Sanchez", imdb: "8.7", stream: "" },
+                { title: "Interdimensional Cable 2: Tempting Fate", imdb: "7.7", stream: "" },
+                { title: "Look Who's Purging Now", imdb: "8.7", stream: "" },
+                { title: "The Wedding Squanchers", imdb: "9.3", stream: "" }
+            ],
+            "3": [
+                { title: "The Rickshank Redemption", imdb: "9.7", stream: "" },
+                { title: "Rickmancing the Stone", imdb: "8.3", stream: "" },
+                { title: "Pickle Rick", imdb: "9.0", stream: "" },
+                { title: "Vindicators 3", imdb: "7.9", stream: "" },
+                { title: "The Whirly Dirly Conspiracy", imdb: "8.4", stream: "" },
+                { title: "Rest and Ricklaxation", imdb: "8.6", stream: "" },
+                { title: "The Ricklantis Mixup", imdb: "9.7", stream: "" },
+                { title: "Morty's Mind Blowers", imdb: "8.5", stream: "" },
+                { title: "The ABCs of Beth", imdb: "8.1", stream: "" },
+                { title: "The Rickchurian Mortydate", imdb: "8.7", stream: "" }
             ],
             "4": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
             "5": Array.from({length: 10}, (_, i) => ({title: `Bölüm ${i+1}`, imdb: "8.0", stream: ""})),
@@ -531,23 +536,24 @@
             playerSection.style.display = 'block';
             playerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            if (myFluidPlayer) {
-                myFluidPlayer.destroy();
-            }
+            const video = document.getElementById('vidstack-player');
 
-            // Video kaynağını ata ve Fluid Player'ı başlat
-            const videoElem = document.getElementById('video-player');
-            videoElem.src = streamUrl;
-
-            myFluidPlayer = fluidPlayer('video-player', {
-                layoutControls: {
-                    primaryColor: '#e50914',
-                    autoPlay: true,
-                    playButtonShowing: true,
-                    fillToContainer: true,
-                    posterImage: ''
+            if (Hls.isSupported()) {
+                if (hlsInstance) {
+                    hlsInstance.destroy();
                 }
-            });
+                hlsInstance = new Hls();
+                hlsInstance.loadSource(streamUrl);
+                hlsInstance.attachMedia(video);
+                hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
+                    video.play();
+                });
+            } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+                video.src = streamUrl;
+                video.addEventListener('loadedmetadata', function() {
+                    video.play();
+                });
+            }
         }
 
         function changeEpisode(step) {
@@ -564,9 +570,12 @@
         }
 
         function stopPlayer() {
-            if (myFluidPlayer) {
-                myFluidPlayer.destroy();
-                myFluidPlayer = null;
+            const video = document.getElementById('vidstack-player');
+            video.pause();
+            video.src = "";
+            if (hlsInstance) {
+                hlsInstance.destroy();
+                hlsInstance = null;
             }
             document.getElementById('activePlayerSection').style.display = 'none';
         }
