@@ -76,6 +76,34 @@
             margin: 0 auto;
         }
 
+        /* Logo Alanı ve Animasyonlar */
+        .logo-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        .hotd-logo {
+            max-width: 280px;
+            width: 100%;
+            height: auto;
+            filter: drop-shadow(0 0 20px rgba(229, 9, 20, 0.4));
+        }
+        @keyframes zoomInOutInfinite {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
+        }
+        @keyframes zoomInOutOnce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        .logo-infinite {
+            animation: zoomInOutInfinite 3s infinite ease-in-out;
+        }
+        .logo-once {
+            animation: zoomInOutOnce 3s 1 ease-in-out;
+        }
+
         .header-section {
             display: flex;
             flex-direction: column;
@@ -354,6 +382,12 @@
 
     <!-- İçerik -->
     <div class="container">
+        <!-- Logo Alanı -->
+        <div class="logo-container">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/4b/House_of_the_dragon_logo.png" 
+                 id="hotd-main-logo" class="hotd-logo logo-infinite" alt="House of the Dragon Logo">
+        </div>
+
         <div class="header-section">
             <h1>House of the Dragon</h1>
             <div class="season-selector-wrapper">
@@ -476,6 +510,16 @@
                 alert("Bu bölümün yayını henüz eklenmedi!");
                 return;
             }
+
+            // Logo animasyonunu tetikle (3 sn boyunca hızlı zoom-in/out)
+            const logo = document.getElementById('hotd-main-logo');
+            logo.classList.remove('logo-infinite');
+            logo.classList.add('logo-once');
+            
+            setTimeout(() => {
+                logo.classList.remove('logo-once');
+                logo.classList.add('logo-infinite');
+            }, 3000);
 
             currentSeason = season;
             currentIndex = index;
