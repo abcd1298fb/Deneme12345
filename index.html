@@ -373,6 +373,12 @@ nav{
   border-radius: 8px;
   margin-bottom: 6px;
   gap: 8px;
+  cursor: pointer;
+  transition: background 0.18s, border-color 0.18s;
+}
+.match-card:hover {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--accent);
 }
 .match-team-side {
   display: flex;
@@ -748,7 +754,6 @@ function changeTheme(themeKey) {
   localStorage.setItem('fatbok_theme', themeKey);
 }
 
-// Kayıtlı Temayı Yükle
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('fatbok_theme') || 'blue';
   document.getElementById('themeSelect').value = savedTheme;
@@ -852,39 +857,38 @@ const channels = [
   {id:59, name:"ITV 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-351.php"},
   {id:60, name:"ITV 3", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-352.php"},
   {id:61, name:"ITV 4", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-353.php"},
-  {id:62, name:"SKY SPORTS FOOTBALL", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-35.php"},
+  {id:62, name:"SKY SPORTS FOOTBALL", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-35.php"},
   {id:63, name:"SKY SPORTS ACTION", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-37.php"},
   {id:64, name:"SKY SPORTS TENNIS", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-46.php"},
   {id:65, name:"SKY SPORTS F1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-60.php"},
   {id:66, name:"SKY SPORTS NEWS", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-366.php"},
   {id:67, name:"SKY SPORTS MIX", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-449.php"},
-  {id:68, name:"SKY SPORTS RACING", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-554.php"},
+  {id:68, name:"SKY SPORTS RACING", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpyg&s=10", stream:"https://dlhd.st/stream/stream-554.php"},
   {id:69, name:"TNT SPORTS 1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-31.php"},
   {id:70, name:"TNT SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-32.php"},
   {id:71, name:"TNT SPORTS 3", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-33.php"},
   {id:72, name:"TNT SPORTS 4", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-34.php"},
   {id:73, name:"VIAPLAY SPORTS 1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-451.php"},
-  {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
+  {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5ZZSHTxPHzRj7FAtkvPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
 ];
 
-// Her gün güncelleyebileceğin veya ekleyebileceğin günlük maçlar listesi
+// Günlük maç listesi: channelId vererek direkt o kanalın açılmasını sağlıyoruz
 const dailyMatches = [
   {
     time: "21.00",
     homeTeam: "Galatasaray",
-    homeLogo: "https://img.icons8.com/color/48/galatasaray-sk.png", // Buraya kendi png linkini koyabilirsin
+    homeLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
     awayTeam: "Fenerbahçe",
-    awayLogo: "https://img.icons8.com/color/48/fenerbahce.png"  // Buraya kendi png linkini koyabilirsin
+    awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
+    channelId: 1 // BeIN Sports 1'in id değeri
   }
-  // İstediğin kadar alt alta maç ekleyebilirsin:
-  // { time: "19.00", homeTeam: "Beşiktaş", homeLogo: "...", awayTeam: "Trabzonspor", awayLogo: "..." }
 ];
   
 const fallbackLogo = "https://img.icons8.com/fluency/48/television.png";
 
 let currentCategory = 'tr'; 
 let currentSearch = '';
-let activeTab = 'channels'; // 'channels' veya 'matches'
+let activeTab = 'channels'; 
 let activeId = null;
 let hlsInstance = null;
 let selectedChannelObj = null;
@@ -965,6 +969,18 @@ function renderMatchesList() {
         <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
       </div>
     `;
+    
+    // Maç kartına tıklandığında ilgili channelId'ye sahip kanal bulunur ve oynatılır
+    card.onclick = () => {
+      const targetChannel = channels.find(c => c.id === match.channelId);
+      if (targetChannel) {
+        // İsteğe bağlı olarak sekme otomatik kanallara dönebilir veya direkt oynatılabilir
+        selectChannel(targetChannel);
+      } else {
+        alert("Bu maç için yayın kanalı tanımlanmamış!");
+      }
+    };
+
     fragment.appendChild(card);
   });
   list.appendChild(fragment);
@@ -1008,7 +1024,7 @@ function renderList(){
 function selectChannel(c){
   activeId=c.id;
   selectedChannelObj = c; 
-  renderList();
+  if (activeTab === 'channels') renderList();
 
   const logoEl = document.getElementById('nowLogo');
   logoEl.style.display = 'flex';
