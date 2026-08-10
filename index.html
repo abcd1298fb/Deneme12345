@@ -152,7 +152,7 @@ nav{
   color: #fff;
 }
 
-/* ─── NETFLIX INTRO OVERLAY ─── */
+/* ─── NETFLIX INTRO OVERLAY (İLK GİRİŞ ANİMASYONU) ─── */
 .netflix-intro-overlay {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
@@ -289,29 +289,29 @@ nav{
 }
 .country-btn .flag-icon { font-size: 14px; }
 
-/* Tek Maçlar Butonu Alanı */
-.match-tabs-wrap {
-  padding: 8px;
-  background: rgba(0,0,0,0.2);
-  border-bottom: 1px solid var(--border);
+/* Sekmeler (Kanallar / Maçlar) */
+.main-tabs-wrap {
   display: flex;
-  gap: 6px;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 1px solid var(--border);
+  padding: 8px;
+  gap: 8px;
 }
-.match-tab {
+.main-tab-btn {
   flex: 1;
-  padding: 8px 12px;
-  font-size: 12px;
-  font-weight: 700;
+  padding: 8px;
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);
   border-radius: 6px;
   color: var(--muted2);
+  font-weight: 700;
+  font-size: 13px;
   cursor: pointer;
   text-align: center;
   transition: 0.2s;
 }
-.match-tab:hover { background: rgba(255,255,255,0.1); color: #fff; }
-.match-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+.main-tab-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.main-tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
 .ch-list{
   flex:1;overflow-y:auto;padding:8px;
@@ -362,20 +362,62 @@ nav{
 .ch-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ch-live-badge{ flex-shrink:0;width:7px;height:7px;background:#34c759;border-radius:50%; }
 
-/* Fikstür / Maç Kartları Tasarımı */
+/* Maç Kartı Tasarımı */
 .match-card {
-  padding: 10px 12px;
-  background: rgba(255,255,255,0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
   border-radius: 8px;
   margin-bottom: 6px;
+  gap: 8px;
+}
+.match-team-side {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+}
+.match-team-side.right {
+  justify-content: flex-end;
+  text-align: right;
+}
+.match-team-logo {
+  width: 28px; height: 28px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+.match-team-name {
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.match-center-info {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  align-items: center;
+  padding: 0 6px;
+  flex-shrink: 0;
 }
-.match-teams { font-size: 13px; font-weight: 700; display: flex; justify-content: space-between; align-items: center; }
-.match-score { background: rgba(0,0,0,0.4); padding: 2px 6px; border-radius: 4px; font-family: monospace; color: var(--accent); }
-.match-status { font-size: 10px; color: var(--muted2); display: flex; justify-content: space-between; }
+.match-time {
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--accent);
+  background: rgba(0, 122, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-bottom: 2px;
+}
+.match-vs {
+  font-size: 10px;
+  color: var(--muted2);
+  font-weight: 700;
+}
 
 /* REKLAM ALANI */
 .adv-panel{
@@ -454,6 +496,7 @@ nav{
 .btn-theater:hover { background: var(--accent); border-color: var(--accent); }
 .btn-theater.active { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
 
+/* Aspect Ratio Seçici CSS */
 .aspect-ratio-selector {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
@@ -607,16 +650,15 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 <div class="layout" id="mainLayout">
 
   <div class="ch-sidebar">
-    <div class="country-filter-wrap" id="countryFilters"></div>
-    
-    <!-- Sadece Kanallar ve Maçlar Butonları -->
-    <div class="match-tabs-wrap">
-      <button class="match-tab active" onclick="switchTab('channels', this)">📺 Kanallar</button>
-      <button class="match-tab" onclick="fetchFootballDataMatches(this)">⚽ Maçlar</button>
+    <!-- Ana Sekmeler (Kanallar / Maçlar) -->
+    <div class="main-tabs-wrap">
+      <button class="main-tab-btn active" id="tabChannelsBtn" onclick="switchMainTab('channels')">📺 Kanallar</button>
+      <button class="main-tab-btn" id="tabMatchesBtn" onclick="switchMainTab('matches')">⚽ Maçlar</button>
     </div>
 
+    <div class="country-filter-wrap" id="countryFilters"></div>
     <div class="ch-list" id="chList"></div>
-
+    
     <div class="adv-panel">
       <a href="mailto:fatbokproton@proton.me?subject=Reklam%20Basvurusu" class="adv-link">
         <div class="adv-box">
@@ -682,9 +724,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
 <script>
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
-const FOOTBALL_DATA_KEY = "7d182cb5b4794adc9ef1e853f3326f60";
-
-let activeTab = 'channels';
 
 // Tema Paleti Tanımları
 const colorThemes = {
@@ -709,6 +748,7 @@ function changeTheme(themeKey) {
   localStorage.setItem('fatbok_theme', themeKey);
 }
 
+// Kayıtlı Temayı Yükle
 window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('fatbok_theme') || 'blue';
   document.getElementById('themeSelect').value = savedTheme;
@@ -812,7 +852,7 @@ const channels = [
   {id:59, name:"ITV 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-351.php"},
   {id:60, name:"ITV 3", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-352.php"},
   {id:61, name:"ITV 4", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-353.php"},
-  {id:62, name:"SKY SPORTS FOOTBALL", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-35.php"},
+  {id:62, name:"SKY SPORTS FOOTBALL", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-35.php"},
   {id:63, name:"SKY SPORTS ACTION", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-37.php"},
   {id:64, name:"SKY SPORTS TENNIS", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-46.php"},
   {id:65, name:"SKY SPORTS F1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-60.php"},
@@ -826,11 +866,25 @@ const channels = [
   {id:73, name:"VIAPLAY SPORTS 1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-451.php"},
   {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
 ];
+
+// Her gün güncelleyebileceğin veya ekleyebileceğin günlük maçlar listesi
+const dailyMatches = [
+  {
+    time: "21.00",
+    homeTeam: "Galatasaray",
+    homeLogo: "https://img.icons8.com/color/48/galatasaray-sk.png", // Buraya kendi png linkini koyabilirsin
+    awayTeam: "Fenerbahçe",
+    awayLogo: "https://img.icons8.com/color/48/fenerbahce.png"  // Buraya kendi png linkini koyabilirsin
+  }
+  // İstediğin kadar alt alta maç ekleyebilirsin:
+  // { time: "19.00", homeTeam: "Beşiktaş", homeLogo: "...", awayTeam: "Trabzonspor", awayLogo: "..." }
+];
   
 const fallbackLogo = "https://img.icons8.com/fluency/48/television.png";
 
 let currentCategory = 'tr'; 
 let currentSearch = '';
+let activeTab = 'channels'; // 'channels' veya 'matches'
 let activeId = null;
 let hlsInstance = null;
 let selectedChannelObj = null;
@@ -842,6 +896,26 @@ function initPlyr() {
       controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
       tooltips: { controls: true, seek: true }
     });
+  }
+}
+
+function switchMainTab(tab) {
+  activeTab = tab;
+  document.getElementById('tabChannelsBtn').classList.toggle('active', tab === 'channels');
+  document.getElementById('tabMatchesBtn').classList.toggle('active', tab === 'matches');
+  
+  const countryFilters = document.getElementById('countryFilters');
+  const searchInput = document.getElementById('searchInput');
+
+  if (tab === 'matches') {
+    countryFilters.style.display = 'none';
+    if(searchInput) searchInput.parentElement.style.display = 'none';
+    renderMatchesList();
+  } else {
+    countryFilters.style.display = 'flex';
+    if(searchInput) searchInput.parentElement.style.display = 'flex';
+    renderCountryFilters();
+    renderList();
   }
 }
 
@@ -864,78 +938,36 @@ function renderCountryFilters() {
   container.appendChild(fragment);
 }
 
-function switchTab(tabName, btnElement) {
-  document.querySelectorAll('.match-tab').forEach(b => b.classList.remove('active'));
-  if(btnElement) btnElement.classList.add('active');
-
-  activeTab = tabName;
-  if (tabName === 'channels') {
-    document.getElementById('countryFilters').style.display = 'flex';
-    renderList();
-  }
-}
-
-async function fetchFootballDataMatches(btnElement) {
-  document.querySelectorAll('.match-tab').forEach(b => b.classList.remove('active'));
-  if(btnElement) btnElement.classList.add('active');
-
-  activeTab = 'matches';
-  document.getElementById('countryFilters').style.display = 'none';
-
+function renderMatchesList() {
   const list = document.getElementById('chList');
-  list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted);">Fikstür yükleniyor...</div>`;
+  list.innerHTML = '';
 
-  try {
-    const proxyUrl = "https://api.allorigins.win/raw?url=";
-    const targetUrl = encodeURIComponent("https://api.football-data.org/v4/matches");
-
-    const response = await fetch(proxyUrl + targetUrl, {
-      method: "GET",
-      headers: {
-        "X-Auth-Token": FOOTBALL_DATA_KEY
-      }
-    });
-    const data = await response.json();
-    
-    list.innerHTML = '';
-    if (data.message) {
-      list.innerHTML = `<div style="text-align:center; padding:20px; color:#ff3b30;">Hata: ${data.message}</div>`;
-      return;
-    }
-
-    if (!data.matches || data.matches.length === 0) {
-      list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted);">Güncel maç bulunamadı.</div>`;
-      return;
-    }
-
-    const fragment = document.createDocumentFragment();
-    data.matches.forEach(match => {
-      const homeTeam = match.homeTeam.name;
-      const awayTeam = match.awayTeam.name;
-      const homeScore = match.score.fullTime.home !== null ? match.score.fullTime.home : '-';
-      const awayScore = match.score.fullTime.away !== null ? match.score.fullTime.away : '-';
-      const status = match.status; 
-      const matchDate = new Date(match.utcDate).toLocaleString([], {month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit'});
-
-      const card = document.createElement('div');
-      card.className = 'match-card';
-      card.innerHTML = `
-        <div class="match-teams">
-          <span>${homeTeam} vs ${awayTeam}</span>
-          <span class="match-score">${status === 'SCHEDULED' ? 'VS' : homeScore + ' - ' + awayScore}</span>
-        </div>
-        <div class="match-status">
-          <span>Durum: ${status}</span>
-          <span>${matchDate}</span>
-        </div>
-      `;
-      fragment.appendChild(card);
-    });
-    list.appendChild(fragment);
-
-  } catch (err) {
-    list.innerHTML = `<div style="text-align:center; padding:20px; color:#ff3b30;">Bağlantı hatası oluştu!</div>`;
+  if (dailyMatches.length === 0) {
+    list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted2); font-size:13px;">Bugün için maç bulunmuyor.</div>`;
+    return;
   }
+
+  const fragment = document.createDocumentFragment();
+  dailyMatches.forEach(match => {
+    const card = document.createElement('div');
+    card.className = 'match-card';
+    card.innerHTML = `
+      <div class="match-team-side">
+        <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+        <span class="match-team-name">${match.homeTeam}</span>
+      </div>
+      <div class="match-center-info">
+        <span class="match-time">${match.time}</span>
+        <span class="match-vs">VS</span>
+      </div>
+      <div class="match-team-side right">
+        <span class="match-team-name">${match.awayTeam}</span>
+        <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+      </div>
+    `;
+    fragment.appendChild(card);
+  });
+  list.appendChild(fragment);
 }
 
 function renderList(){
