@@ -362,16 +362,33 @@ nav{
 .ch-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ch-live-badge{ flex-shrink:0;width:7px;height:7px;background:#34c759;border-radius:50%; }
 
-/* Maç Kartı Tasarımı (Alternatif Butonlu) */
+/* Tarih Grubu Başlığı */
+.date-group-header {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--accent);
+  background: rgba(0, 122, 255, 0.08);
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin: 10px 0 6px 0;
+  border-left: 3px solid var(--accent);
+}
+.date-group-header:first-child {
+  margin-top: 2px;
+}
+
+/* Maç Kartı Tasarımı */
 .match-card {
   display: flex;
   flex-direction: column;
-  padding: 12px;
+  padding: 10px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
   border-radius: 8px;
-  margin-bottom: 8px;
-  gap: 10px;
+  margin-bottom: 6px;
+  gap: 8px;
   transition: border-color 0.18s;
 }
 .match-card:hover {
@@ -395,7 +412,7 @@ nav{
   text-align: right;
 }
 .match-team-logo {
-  width: 28px; height: 28px;
+  width: 26px; height: 26px;
   object-fit: contain;
   flex-shrink: 0;
 }
@@ -410,20 +427,20 @@ nav{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0 6px;
+  padding: 0 4px;
   flex-shrink: 0;
 }
 .match-time {
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 800;
   color: var(--accent);
   background: rgba(0, 122, 255, 0.1);
-  padding: 2px 6px;
+  padding: 2px 5px;
   border-radius: 4px;
   margin-bottom: 2px;
 }
 .match-vs {
-  font-size: 10px;
+  font-size: 9px;
   color: var(--muted2);
   font-weight: 700;
 }
@@ -433,7 +450,7 @@ nav{
   display: flex;
   gap: 6px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 8px;
+  padding-top: 6px;
 }
 .alt-stream-btn {
   flex: 1;
@@ -443,7 +460,7 @@ nav{
   color: var(--text);
   font-size: 11px;
   font-weight: 700;
-  padding: 6px 4px;
+  padding: 5px 4px;
   cursor: pointer;
   text-align: center;
   transition: background 0.2s, border-color 0.2s, transform 0.1s;
@@ -903,15 +920,46 @@ const channels = [
   {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpyg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
 ];
 
-// Günlük maç listesi: channelIds dizisine Bein Sports 1'in 3 alternatif ID'sini (1, 2 ve 3) ekledik.
-const dailyMatches = [
+// Tarihlere göre gruplanmış maç listesi yapısı
+const dailyMatchesByDate = [
   {
-    time: "21.00",
-    homeTeam: "Galatasaray",
-    homeLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-    awayTeam: "Fenerbahçe",
-    awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
-    channelIds: [1, 2, 3] // BeIN Sports 1'in 3 alternatif kanalı (ID 1, ID 2, ID 3)
+    date: "14 Ağustos 2026",
+    matches: [
+      {
+        time: "21.00",
+        homeTeam: "Galatasaray",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        awayTeam: "Fenerbahçe",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
+        channelIds: [1, 2, 3]
+      }
+    ]
+  },
+  {
+    date: "15 Ağustos 2026",
+    matches: [
+      {
+        time: "19.00",
+        homeTeam: "Beşiktaş",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Besiktas_JK.svg",
+        awayTeam: "Trabzonspor",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/1/1b/Trabzonspor_Logosu.png",
+        channelIds: [1, 2, 3]
+      }
+    ]
+  },
+  {
+    date: "16 Ağustos 2026",
+    matches: [
+      {
+        time: "22.00",
+        homeTeam: "Real Madrid",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
+        awayTeam: "Barcelona",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg",
+        channelIds: [17, 18] // Örnek olarak S Sport alternatifleri
+      }
+    ]
   }
 ];
   
@@ -977,48 +1025,57 @@ function renderMatchesList() {
   const list = document.getElementById('chList');
   list.innerHTML = '';
 
-  if (dailyMatches.length === 0) {
-    list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted2); font-size:13px;">Bugün için maç bulunmuyor.</div>`;
+  if (dailyMatchesByDate.length === 0) {
+    list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted2); font-size:13px;">Maç programı bulunmuyor.</div>`;
     return;
   }
 
   const fragment = document.createDocumentFragment();
-  dailyMatches.forEach(match => {
-    const card = document.createElement('div');
-    card.className = 'match-card';
-    
-    // Maç üst kısmı (Takımlar ve Saat)
-    let cardHtml = `
-      <div class="match-main-row">
-        <div class="match-team-side">
-          <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
-          <span class="match-team-name">${match.homeTeam}</span>
-        </div>
-        <div class="match-center-info">
-          <span class="match-time">${match.time}</span>
-          <span class="match-vs">VS</span>
-        </div>
-        <div class="match-team-side right">
-          <span class="match-team-name">${match.awayTeam}</span>
-          <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
-        </div>
-      </div>
-    `;
+  
+  dailyMatchesByDate.forEach(group => {
+    // Tarih Başlığı Ekleniyor
+    const dateHeader = document.createElement('div');
+    dateHeader.className = 'date-group-header';
+    dateHeader.textContent = group.date;
+    fragment.appendChild(dateHeader);
 
-    // Eğer alternatif kanal id'leri tanımlandıysa alt alta butonları ekle
-    if (match.channelIds && match.channelIds.length > 0) {
-      cardHtml += `<div class="match-alternatives">`;
-      match.channelIds.forEach((chId, index) => {
-        const foundCh = channels.find(c => c.id === chId);
-        const btnLabel = foundCh ? foundCh.name : `Alternatif ${index + 1}`;
-        cardHtml += `<button class="alt-stream-btn" onclick="playMatchChannel(${chId})">▶ ${btnLabel}</button>`;
-      });
-      cardHtml += `</div>`;
-    }
+    // O tarihe ait maçlar listeleniyor
+    group.matches.forEach(match => {
+      const card = document.createElement('div');
+      card.className = 'match-card';
+      
+      let cardHtml = `
+        <div class="match-main-row">
+          <div class="match-team-side">
+            <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+            <span class="match-team-name">${match.homeTeam}</span>
+          </div>
+          <div class="match-center-info">
+            <span class="match-time">${match.time}</span>
+            <span class="match-vs">VS</span>
+          </div>
+          <div class="match-team-side right">
+            <span class="match-team-name">${match.awayTeam}</span>
+            <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+          </div>
+        </div>
+      `;
 
-    card.innerHTML = cardHtml;
-    fragment.appendChild(card);
+      if (match.channelIds && match.channelIds.length > 0) {
+        cardHtml += `<div class="match-alternatives">`;
+        match.channelIds.forEach((chId, index) => {
+          const foundCh = channels.find(c => c.id === chId);
+          const btnLabel = foundCh ? foundCh.name : `Alternatif ${index + 1}`;
+          cardHtml += `<button class="alt-stream-btn" onclick="playMatchChannel(${chId})">▶ ${btnLabel}</button>`;
+        });
+        cardHtml += `</div>`;
+      }
+
+      card.innerHTML = cardHtml;
+      fragment.appendChild(card);
+    });
   });
+
   list.appendChild(fragment);
 }
 
