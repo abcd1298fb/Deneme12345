@@ -875,7 +875,7 @@ function switchTab(tabName, btnElement) {
   }
 }
 
-// Football-Data.org API Maçları Çekme Fonksiyonu
+// CORS Proxy ile Football-Data.org Maçlarını Çekme Fonksiyonu
 async function fetchFootballDataMatches(btnElement) {
   document.querySelectorAll('.match-tab').forEach(b => b.classList.remove('active'));
   if(btnElement) btnElement.classList.add('active');
@@ -887,8 +887,10 @@ async function fetchFootballDataMatches(btnElement) {
   list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted);">Fikstür yükleniyor...</div>`;
 
   try {
-    // Premier League (PL) veya genel maçlar (matches endpoint'i)
-    const response = await fetch('https://api.football-data.org/v4/matches', {
+    const proxyUrl = "https://corsproxy.io/?";
+    const targetUrl = encodeURIComponent("https://api.football-data.org/v4/matches");
+
+    const response = await fetch(proxyUrl + targetUrl, {
       method: "GET",
       headers: {
         "X-Auth-Token": FOOTBALL_DATA_KEY
@@ -913,7 +915,7 @@ async function fetchFootballDataMatches(btnElement) {
       const awayTeam = match.awayTeam.name;
       const homeScore = match.score.fullTime.home !== null ? match.score.fullTime.home : '-';
       const awayScore = match.score.fullTime.away !== null ? match.score.fullTime.away : '-';
-      const status = match.status; // SCHEDULED, LIVE, IN_PLAY, FINISHED vb.
+      const status = match.status; 
       const matchDate = new Date(match.utcDate).toLocaleString([], {month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit'});
 
       const card = document.createElement('div');
