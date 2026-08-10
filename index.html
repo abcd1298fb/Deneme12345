@@ -875,7 +875,6 @@ function switchTab(tabName, btnElement) {
   }
 }
 
-// CORS Proxy ile Football-Data.org Maçlarını Çekme Fonksiyonu
 async function fetchFootballDataMatches(btnElement) {
   document.querySelectorAll('.match-tab').forEach(b => b.classList.remove('active'));
   if(btnElement) btnElement.classList.add('active');
@@ -887,7 +886,7 @@ async function fetchFootballDataMatches(btnElement) {
   list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted);">Fikstür yükleniyor...</div>`;
 
   try {
-    const proxyUrl = "https://corsproxy.io/?";
+    const proxyUrl = "https://api.allorigins.win/raw?url=";
     const targetUrl = encodeURIComponent("https://api.football-data.org/v4/matches");
 
     const response = await fetch(proxyUrl + targetUrl, {
