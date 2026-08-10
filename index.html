@@ -399,6 +399,7 @@ nav{
   align-items: center;
   justify-content: space-between;
   gap: 8px;
+  cursor: pointer;
 }
 .match-team-side {
   display: flex;
@@ -920,7 +921,7 @@ const channels = [
   {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpyg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
 ];
 
-/* 14 Ağustos 2026 Maç Listesi (Görseldeki ve Sporting - Guimaraes maçları dahil) */
+/* 14 Ağustos 2026 Maç Listesi */
 const dailyMatchesByDate = [
   {
     date: "14 Ağustos 2026",
@@ -1032,8 +1033,11 @@ function renderMatchesList() {
       const card = document.createElement('div');
       card.className = 'match-card';
       
+      // Maç kartının ana kısmına tıklayınca ilk kanalın açılması sağlandı
+      let firstChannelId = (match.channelIds && match.channelIds.length > 0) ? match.channelIds[0] : null;
+
       let cardHtml = `
-        <div class="match-main-row">
+        <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat">
           <div class="match-team-side">
             <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
             <span class="match-team-name">${match.homeTeam}</span>
