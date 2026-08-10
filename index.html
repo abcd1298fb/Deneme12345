@@ -192,7 +192,6 @@ nav{
   animation: zoomF 4.5s cubic-bezier(0.25, 1, 0.3, 1) forwards;
 }
 
-/* F Harfi (Sade Gradient) */
 .intro-f {
   position: relative;
   color: var(--accent);
@@ -290,7 +289,7 @@ nav{
 }
 .country-btn .flag-icon { font-size: 14px; }
 
-/* Maç Listesi Sekmeleri (Süper Lig & Ligler) */
+/* Tek Maçlar Sekmesi ve Lig Seçici */
 .match-tabs-wrap {
   padding: 8px;
   background: rgba(0,0,0,0.2);
@@ -362,7 +361,7 @@ nav{
 .ch-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ch-live-badge{ flex-shrink:0;width:7px;height:7px;background:#34c759;border-radius:50%; }
 
-/* Maç Kartları Tasarımı (API Verileri İçin) */
+/* Tek Maç Kartı Tasarımı */
 .match-card {
   padding: 10px 12px;
   background: rgba(255,255,255,0.03);
@@ -454,7 +453,6 @@ nav{
 .btn-theater:hover { background: var(--accent); border-color: var(--accent); }
 .btn-theater.active { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
 
-/* Aspect Ratio Seçici CSS */
 .aspect-ratio-selector {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
@@ -589,7 +587,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="nav-logo" onclick="replayIntro()">FATBOK</div>
   <div class="nav-search">
     <span class="search-icon">🔍</span>
-    <input type="text" placeholder="Kanal veya maç ara..." id="searchInput" oninput="filterChannels(this.value)"/>
+    <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="filterChannels(this.value)"/>
   </div>
   <div class="nav-spacer">
     <div class="theme-picker-wrap">
@@ -610,7 +608,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="ch-sidebar">
     <div class="country-filter-wrap" id="countryFilters"></div>
     
-    <!-- Maç Listesi Lig Sekmeleri -->
+    <!-- Tek Maçlar Menü Alanı (Türkiye En Solda, Diğer Büyük Ligler ve Avrupa) -->
     <div class="match-tabs-wrap">
       <button class="match-tab active" onclick="switchTab('channels', this)">📺 Kanallar</button>
       <button class="match-tab" onclick="fetchMatches(203, this)">🇹🇷 Süper Lig</button>
@@ -641,7 +639,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
     <div class="now-header">
       <div class="now-logo" id="nowLogo"></div>
       <div class="now-info">
-        <div class="now-ch-name" id="nowName">Canlı Yayın / Maç Merkezi</div>
+        <div class="now-ch-name" id="nowName">Canlı Yayın Platformu</div>
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
           <span>⛶</span><span class="btn-text"> Sinema Modu</span>
         </button>
@@ -693,7 +691,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
 const API_KEY = "13e24b89b2725bc3d0e6484ab4d519b0"; // API-Football Keyin
 
-let activeTab = 'channels'; // 'channels' veya 'matches'
+let activeTab = 'channels'; 
 
 // Tema Paleti Tanımları
 const colorThemes = {
@@ -874,7 +872,6 @@ function renderCountryFilters() {
 }
 
 function switchTab(tabName, btnElement) {
-  activeTab = tabName;
   document.querySelectorAll('.match-tab').forEach(b => b.classList.remove('active'));
   if(btnElement) btnElement.classList.add('active');
 
@@ -883,17 +880,16 @@ function switchTab(tabName, btnElement) {
   }
 }
 
-// API'den Maçları Çeken Fonksiyon
+// Gelecek ve Güncel Maçları Çeken Fonksiyon
 async function fetchMatches(leagueId, btnElement) {
-  activeTab = 'matches';
   document.querySelectorAll('.match-tab').forEach(b => b.classList.remove('active'));
   if(btnElement) btnElement.classList.add('active');
 
   const list = document.getElementById('chList');
-  list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted);">Maçlar yükleniyor...</div>`;
+  list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted);">Fikstür ve maçlar yükleniyor...</div>`;
 
   try {
-    // Mevcut yıl (2026 sezonu)
+    // Gelecek ve güncel maçları almak için doğrudan fixtures çekiyoruz
     const response = await fetch(`https://v3.football.api-sports.io/fixtures?league=${leagueId}&season=2026`, {
       method: "GET",
       headers: {
@@ -904,28 +900,30 @@ async function fetchMatches(leagueId, btnElement) {
     
     list.innerHTML = '';
     if (!data.response || data.response.length === 0) {
-      list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted);">Bu lig için güncel maç bulunamadı.</div>`;
+      list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted);">Bu lig için maç bulunamadı.</div>`;
       return;
     }
 
     const fragment = document.createDocumentFragment();
-    data.response.slice(0, 20).forEach(match => {
+    // Gelen tüm maçları (gelecek ve geçmiş/canlı) tek listede gösteriyoruz
+    data.response.forEach(match => {
       const homeTeam = match.teams.home.name;
       const awayTeam = match.teams.away.name;
       const homeScore = match.goals.home !== null ? match.goals.home : '-';
       const awayScore = match.goals.away !== null ? match.goals.away : '-';
-      const status = match.fixture.status.short; // NS, 1H, FT vb.
+      const status = match.fixture.status.short; // NS (Gelecek), 1H, FT vb.
+      const matchDate = new Date(match.fixture.date).toLocaleString([], {month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit'});
 
       const card = document.createElement('div');
       card.className = 'match-card';
       card.innerHTML = `
         <div class="match-teams">
           <span>${homeTeam} vs ${awayTeam}</span>
-          <span class="match-score">${homeScore} - ${awayScore}</span>
+          <span class="match-score">${status === 'NS' ? 'VS' : homeScore + ' - ' + awayScore}</span>
         </div>
         <div class="match-status">
           <span>Durum: ${status}</span>
-          <span>${new Date(match.fixture.date).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+          <span>${matchDate}</span>
         </div>
       `;
       fragment.appendChild(card);
@@ -933,13 +931,11 @@ async function fetchMatches(leagueId, btnElement) {
     list.appendChild(fragment);
 
   } catch (err) {
-    list.innerHTML = `<div style="text-align:center; padding:20px; color:#ff3b30;">Maçlar çekilemedi!</div>`;
+    list.innerHTML = `<div style="text-align:center; padding:20px; color:#ff3b30;">Maçlar yüklenirken hata oluştu!</div>`;
   }
 }
 
 function renderList(){
-  if (activeTab !== 'channels') return;
-  
   const list = document.getElementById('chList');
   let filtered = channels.filter(c=>{
     const matchesCategory = (c.cat === currentCategory);
