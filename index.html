@@ -362,23 +362,26 @@ nav{
 .ch-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ch-live-badge{ flex-shrink:0;width:7px;height:7px;background:#34c759;border-radius:50%; }
 
-/* Maç Kartı Tasarımı */
+/* Maç Kartı Tasarımı (Alternatif Butonlu) */
 .match-card {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
   padding: 12px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border);
   border-radius: 8px;
-  margin-bottom: 6px;
-  gap: 8px;
-  cursor: pointer;
-  transition: background 0.18s, border-color 0.18s;
+  margin-bottom: 8px;
+  gap: 10px;
+  transition: border-color 0.18s;
 }
 .match-card:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: var(--accent);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+.match-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 .match-team-side {
   display: flex;
@@ -423,6 +426,34 @@ nav{
   font-size: 10px;
   color: var(--muted2);
   font-weight: 700;
+}
+
+/* Maç Altı Alternatif Yayın Butonları */
+.match-alternatives {
+  display: flex;
+  gap: 6px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 8px;
+}
+.alt-stream-btn {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 6px 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+.alt-stream-btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.alt-stream-btn:active {
+  transform: scale(0.96);
 }
 
 /* REKLAM ALANI */
@@ -869,10 +900,10 @@ const channels = [
   {id:71, name:"TNT SPORTS 3", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-33.php"},
   {id:72, name:"TNT SPORTS 4", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-34.php"},
   {id:73, name:"VIAPLAY SPORTS 1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-451.php"},
-  {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5ZZSHTxPHzRj7FAtkvPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
+  {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpyg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
 ];
 
-// Günlük maç listesi: channelId vererek direkt o kanalın açılmasını sağlıyoruz
+// Günlük maç listesi: channelIds dizisine Bein Sports 1'in 3 alternatif ID'sini (1, 2 ve 3) ekledik.
 const dailyMatches = [
   {
     time: "21.00",
@@ -880,7 +911,7 @@ const dailyMatches = [
     homeLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
     awayTeam: "Fenerbahçe",
     awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
-    channelId: 1 // BeIN Sports 1'in id değeri
+    channelIds: [1, 2, 3] // BeIN Sports 1'in 3 alternatif kanalı (ID 1, ID 2, ID 3)
   }
 ];
   
@@ -955,35 +986,49 @@ function renderMatchesList() {
   dailyMatches.forEach(match => {
     const card = document.createElement('div');
     card.className = 'match-card';
-    card.innerHTML = `
-      <div class="match-team-side">
-        <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
-        <span class="match-team-name">${match.homeTeam}</span>
-      </div>
-      <div class="match-center-info">
-        <span class="match-time">${match.time}</span>
-        <span class="match-vs">VS</span>
-      </div>
-      <div class="match-team-side right">
-        <span class="match-team-name">${match.awayTeam}</span>
-        <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+    
+    // Maç üst kısmı (Takımlar ve Saat)
+    let cardHtml = `
+      <div class="match-main-row">
+        <div class="match-team-side">
+          <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+          <span class="match-team-name">${match.homeTeam}</span>
+        </div>
+        <div class="match-center-info">
+          <span class="match-time">${match.time}</span>
+          <span class="match-vs">VS</span>
+        </div>
+        <div class="match-team-side right">
+          <span class="match-team-name">${match.awayTeam}</span>
+          <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+        </div>
       </div>
     `;
-    
-    // Maç kartına tıklandığında ilgili channelId'ye sahip kanal bulunur ve oynatılır
-    card.onclick = () => {
-      const targetChannel = channels.find(c => c.id === match.channelId);
-      if (targetChannel) {
-        // İsteğe bağlı olarak sekme otomatik kanallara dönebilir veya direkt oynatılabilir
-        selectChannel(targetChannel);
-      } else {
-        alert("Bu maç için yayın kanalı tanımlanmamış!");
-      }
-    };
 
+    // Eğer alternatif kanal id'leri tanımlandıysa alt alta butonları ekle
+    if (match.channelIds && match.channelIds.length > 0) {
+      cardHtml += `<div class="match-alternatives">`;
+      match.channelIds.forEach((chId, index) => {
+        const foundCh = channels.find(c => c.id === chId);
+        const btnLabel = foundCh ? foundCh.name : `Alternatif ${index + 1}`;
+        cardHtml += `<button class="alt-stream-btn" onclick="playMatchChannel(${chId})">▶ ${btnLabel}</button>`;
+      });
+      cardHtml += `</div>`;
+    }
+
+    card.innerHTML = cardHtml;
     fragment.appendChild(card);
   });
   list.appendChild(fragment);
+}
+
+function playMatchChannel(chId) {
+  const targetChannel = channels.find(c => c.id === chId);
+  if (targetChannel) {
+    selectChannel(targetChannel);
+  } else {
+    alert("Kanal bulunamadı!");
+  }
 }
 
 function renderList(){
