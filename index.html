@@ -675,7 +675,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="intro-text-box">
     <div class="f-wrapper">
       <span class="intro-f">F</span>
-    </div><span class="intro-rest">ATBOK</span>
+    </div><span class="intro-rest">FATBOK</span>
   </div>
 </div>
 
@@ -920,44 +920,34 @@ const channels = [
   {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpyg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
 ];
 
-// Tarihlere göre gruplanmış maç listesi yapısı
+/* 14 Ağustos 2026 Maç Listesi (Görseldeki ve Sporting - Guimaraes maçları dahil) */
 const dailyMatchesByDate = [
   {
     date: "14 Ağustos 2026",
     matches: [
       {
-        time: "21.00",
+        time: "21:30",
         homeTeam: "Galatasaray",
         homeLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "Fenerbahçe",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
+        awayTeam: "Çorum FK",
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
         channelIds: [1, 2, 3]
-      }
-    ]
-  },
-  {
-    date: "15 Ağustos 2026",
-    matches: [
+      },
       {
-        time: "19.00",
-        homeTeam: "Beşiktaş",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/2/2a/Besiktas_JK.svg",
-        awayTeam: "Trabzonspor",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/1/1b/Trabzonspor_Logosu.png",
-        channelIds: [1, 2, 3]
-      }
-    ]
-  },
-  {
-    date: "16 Ağustos 2026",
-    matches: [
+        time: "21:30",
+        homeTeam: "Esenler Erok",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
+        awayTeam: "Sarıyer",
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
+        channelIds: [17, 18]
+      },
       {
-        time: "22.00",
-        homeTeam: "Real Madrid",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/en/5/56/Real_Madrid_CF.svg",
-        awayTeam: "Barcelona",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/en/4/47/FC_Barcelona_%28crest%29.svg",
-        channelIds: [17, 18] // Örnek olarak S Sport alternatifleri
+        time: "22:15",
+        homeTeam: "Sporting",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/en/3/3d/Sporting_CP.svg",
+        awayTeam: "Guimaraes",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/en/2/2f/Vit%C3%B3ria_S.C._logo.svg",
+        channelIds: [17, 19]
       }
     ]
   }
@@ -1033,13 +1023,11 @@ function renderMatchesList() {
   const fragment = document.createDocumentFragment();
   
   dailyMatchesByDate.forEach(group => {
-    // Tarih Başlığı Ekleniyor
     const dateHeader = document.createElement('div');
     dateHeader.className = 'date-group-header';
     dateHeader.textContent = group.date;
     fragment.appendChild(dateHeader);
 
-    // O tarihe ait maçlar listeleniyor
     group.matches.forEach(match => {
       const card = document.createElement('div');
       card.className = 'match-card';
