@@ -503,7 +503,7 @@ nav{
 /* ─── PLAYER & CHAT LAYOUT ─── */
 .player-area{
   display:flex;flex-direction:column;
-  overflow:hidden;
+  overflow-y:auto;
   background:transparent;
   position: relative;
   contain: layout style;
@@ -511,10 +511,11 @@ nav{
 
 .content-body-flex {
   display: flex;
+  flex-direction: row;
   flex: 1;
-  overflow: hidden;
   position: relative;
   z-index: 5;
+  min-height: 450px;
 }
 
 .video-main-container {
@@ -523,7 +524,7 @@ nav{
   flex-direction: column;
   position: relative;
   background: #000;
-  overflow: hidden;
+  min-height: 380px;
   transition: all 0.3s ease;
 }
 
@@ -534,15 +535,12 @@ nav{
   border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, width 0.3s ease;
+  transition: all 0.3s ease;
   z-index: 10;
   flex-shrink: 0;
 }
 .chat-sidebar-panel.hidden {
-  transform: translateX(280px);
-  width: 0px;
-  opacity: 0;
-  pointer-events: none;
+  display: none;
 }
 .chat-header {
   padding: 10px 14px;
@@ -555,7 +553,7 @@ nav{
 .chatango-embed-wrap {
   flex: 1;
   width: 100%;
-  height: 100%;
+  min-height: 350px;
   overflow: hidden;
   background: #000;
   display: flex;
@@ -639,7 +637,7 @@ nav{
 .badge{ padding:4px 10px;border-radius:6px; font-size:10px;font-weight:700;letter-spacing:1px; }
 .badge-live{background:var(--accent-glow);color:var(--accent);border:1px solid var(--border2);display:flex;align-items:center;gap:4px}
 
-.video-wrap{ flex:1;background:#000;position:relative;overflow:hidden; z-index:5; display:flex; align-items:center; justify-content:center; }
+.video-wrap{ flex:1;min-height:320px; background:#000;position:relative;overflow:hidden; z-index:5; display:flex; align-items:center; justify-content:center; }
 iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none; background:#000; transition: all 0.3s ease; }
 .vid-overlay{ position:absolute;inset:0; background: rgba(1, 3, 8, 0.95); z-index:10; }
 
@@ -724,8 +722,18 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .layout.theater-active { grid-template-columns: 1fr; grid-template-rows: calc(100vh - 58px) 0px; }
   .ch-sidebar{ max-height: 50vh; border-right:none; order:2; }
   .layout.theater-active .ch-sidebar { transform: translateY(100%); max-height: 0px; opacity: 0; padding: 0; }
-  .player-area{ order:1; height: 40vh; transition: height 0.4s cubic-bezier(0.25, 1, 0.5, 1); }
-  .layout.theater-active .player-area { height: calc(100vh - 58px); }
+  .player-area{ order:1; height: auto; overflow-y: auto; }
+  
+  /* Mobilde İçeriği Alt Alta Sırala */
+  .content-body-flex {
+    flex-direction: column;
+  }
+  .chat-sidebar-panel {
+    width: 100%;
+    border-left: none;
+    border-top: 1px solid var(--border);
+  }
+
   nav{padding:0 14px}
   .nav-logo{ width: auto; }
   .nav-search{ max-width: 160px; margin: 0 0 0 auto; }
@@ -734,9 +742,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .now-ch-name { font-size: 15px; max-width: 110px; }
   .btn-theater, .btn-chat-toggle { padding: 4px 6px; font-size: 11px; }
   .aspect-ratio-selector { padding: 4px 5px; font-size: 10px; }
-  
-  .chat-sidebar-panel { position: absolute; right: 0; top: 0; bottom: 0; width: 240px; }
-  .chat-sidebar-panel.hidden { transform: translateX(240px); width: 240px; }
 }
 </style>
 </head>
@@ -821,7 +826,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       </div>
     </div>
 
-    <!-- Video ve Sohbet Paneli Yan Yana -->
+    <!-- Video ve Sohbet Paneli Düzeni -->
     <div class="content-body-flex">
       <div class="video-main-container" id="videoWrap">
         <div class="vid-overlay" id="vidOverlay"></div>
