@@ -676,7 +676,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="intro-text-box">
     <div class="f-wrapper">
       <span class="intro-f">F</span>
-    </div><span class="intro-rest">ATBOK</span>
+    </div><span class="intro-rest">FATBOK</span>
   </div>
 </div>
 
@@ -737,7 +737,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         <select class="aspect-ratio-selector" id="aspectSelect" onchange="changeAspectRatio(this.value)" style="display:none;">
           <option value="16:9">📐 16:9</option>
           <option value="4:3">📐 4:3</option>
-          <option value="21:9">📐 21:9</option>        </select>
+          <option value="21:9">📐 21:9</option>
+          <option value="stretch">📐 Sığdır (Stretch)</option>
+        </select>
       </div>
       <div class="now-badges">
         <div class="badge badge-live"><div class="live-dot"></div>CANLI</div>
@@ -919,7 +921,7 @@ const channels = [
   {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpyg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
 ];
 
-/*  Maç Listesi */
+/* Maç Listesi (14 ve 15 Ağustos) */
 const dailyMatchesByDate = [
   {
     date: "14 Ağustos 2026",
@@ -947,6 +949,115 @@ const dailyMatchesByDate = [
         awayTeam: "Guimaraes",
         awayLogo: "https://assets.football-logos.cc/logos/portugal/1500x1500/vitoria-de-guimaraes.68114d60.png",
         channelIds: []
+      }
+    ]
+  },
+  {
+    date: "15 Ağustos 2026",
+    matches: [
+      {
+        time: "19:00",
+        homeTeam: "Kasımpaşa",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/6/68/Kasimpasa_2012.png",
+        awayTeam: "Trabzonspor",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/a/ab/TrabzonsporAmblemi.png",
+        channelIds: [1, 7]
+      },
+      {
+        time: "19:00",
+        homeTeam: "Konyaspor",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/4/41/20220809170232%21Konyaspor_1922.png",
+        awayTeam: "Ç. Rizespor",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/f/f6/%C3%87aykur_Rizespor_Logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        channelIds: [4, 9]
+      },
+      {
+        time: "21:30",
+        homeTeam: "Gaziantep FK",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/1/1a/GFK-Official-Logo.png",
+        awayTeam: "Alanyaspor",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/2/29/Alanyaspor_logo.png",
+        channelIds: [7]
+      },
+      {
+        time: "21:30",
+        homeTeam: "Gençlerbirliği",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/f/f7/Genclerbirligi.png",
+        awayTeam: "Fenerbahçe",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
+        channelIds: [1, 2, 3]
+      },
+      {
+        time: "19:00",
+        homeTeam: "İstanbulspor",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/e/ed/IstanbulsporAS.png",
+        awayTeam: "Bodrum FK",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/1/13/Bodrum_Belediyesi_Bodrumspor.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        channelIds: [35]
+      },
+      {
+        time: "19:00",
+        homeTeam: "Karagümrük",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/9/90/Fatihkaragumruk.png",
+        awayTeam: "Ümraniyespor",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/7/75/%C3%9Cmraniyespor_Logosu.png",
+        channelIds: [36]
+      },
+      {
+        time: "21:30",
+        homeTeam: "Bursaspor",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/5/5c/20130909123854%21Bursaspor-amblem.png",
+        awayTeam: "Iğdır FK",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/57/I%C4%9Fd%C4%B1r_FK_logo.png",
+        channelIds: [35]
+      },
+      {
+        time: "21:30",
+        homeTeam: "Manisa FK",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/d/dd/Manisa_FK.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        awayTeam: "Van Spor FK",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/55/Vanspor_FK.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        channelIds: [36]
+      },
+      {
+        time: "20:30",
+        homeTeam: "Alaves",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/thumb/2/2e/Deportivo_Alaves_logo.svg/3840px-Deportivo_Alaves_logo.svg.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+        awayTeam: "Getafe",
+        awayLogo: "https://1000logos.net/wp-content/uploads/2021/09/Getafe-logo.png",
+        channelIds: [17]
+      },
+      {
+        time: "22:30",
+        homeTeam: "Sevilla",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/e/ed/Sevillafc.png",
+        awayTeam: "Rayo Vallecano",
+        awayLogo: "https://www.vhv.rs/dpng/d/436-4369693_rayo-vallecano-logo-png-transparent-png.png",
+        channelIds: [17]
+      },
+      {
+        time: "17:30",
+        homeTeam: "Alverca FC",
+        homeLogo: "https://assets.football-logos.cc/logos/portugal/700x700/alverca.6c2ab36e.png",
+        awayTeam: "Estrela",
+        awayLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVdInUxO3c7qqiPKhsJjeJgqzDE7t3sQi9YFS0VP51jA&s=10",
+        channelIds: []
+      },
+      {
+        time: "20:00",
+        homeTeam: "Viseu",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/A.C._Viseu.svg/250px-A.C._Viseu.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+        awayTeam: "Santa Clara",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/en/3/37/C.D._Santa_Clara_logo.svg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+        channelIds: []
+      },
+      {
+        time: "22:30",
+        homeTeam: "Rio Ave",
+        homeLogo: "https://images.seeklogo.com/logo-png/48/1/rio-ave-f-c-logo-png_seeklogo-486181.png",
+        awayTeam: "Porto",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/52/FC.Porto.png",
+        channelIds: [17]
       }
     ]
   }
@@ -1031,7 +1142,6 @@ function renderMatchesList() {
       const card = document.createElement('div');
       card.className = 'match-card';
       
-      // Maç kartının ana kısmına tıklayınca ilk kanalın açılması sağlandı
       let firstChannelId = (match.channelIds && match.channelIds.length > 0) ? match.channelIds[0] : null;
 
       let cardHtml = `
