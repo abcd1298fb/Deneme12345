@@ -250,6 +250,7 @@ nav{
   box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s;
   contain: layout style;
+  height: 100%;
 }
 .layout.theater-active .ch-sidebar {
   transform: translateX(-320px);
@@ -770,7 +771,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 @media(max-width:768px){
   .layout{ grid-template-columns:1fr; grid-template-rows: auto 1fr; height: calc(100vh - 58px); }
   .layout.theater-active { grid-template-columns: 1fr; grid-template-rows: calc(100vh - 58px) 0px; }
-  .ch-sidebar{ max-height: 42vh; border-right:none; order:2; }
+  .ch-sidebar{ flex: 1; height: auto; max-height: none; border-right:none; order:2; }
   .layout.theater-active .ch-sidebar { transform: translateY(100%); max-height: 0px; opacity: 0; padding: 0; }
   .player-area{ order:1; height: auto; }
   nav{padding:0 14px}
@@ -849,7 +850,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       <div class="now-logo" id="nowLogo"></div>
       <div class="now-info">
         <div class="now-ch-name" id="nowName"></div>
-        <!-- Sinema Modu ve Sohbet Butonları Yan Yana -->
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
           <span>⛶</span><span class="btn-text">Sinema</span>
         </button>
