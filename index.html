@@ -502,7 +502,7 @@ nav{
   background: var(--accent-glow);
 }
 
-/* ─── PLAYER AREA & CHAT FLEX YAPISI ─── */
+/* ─── PLAYER AREA & CHAT FLEX YAPISI (KESİN YAN PANEL) ─── */
 .player-area{
   display:flex;flex-direction:column;
   overflow:hidden;
@@ -517,7 +517,6 @@ nav{
   flex: 1;
   position: relative;
   z-index: 5;
-  min-height: 450px;
   overflow: hidden;
 }
 
@@ -531,19 +530,20 @@ nav{
   transition: all 0.3s ease;
 }
 
-/* ─── ÖZEL CHAT PANELİ (YAN TARAFTA) ─── */
+/* ─── ÖZEL CHAT PANELİ (HER EKRANDA SAĞDAN AÇILAN YAN PANEL) ─── */
 .chat-sidebar-panel {
-  width: 300px;
+  width: 280px;
   background: rgba(6, 10, 22, 0.95);
   border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
   transition: transform 0.3s ease, width 0.3s ease, opacity 0.3s ease;
-  z-index: 10;
+  z-index: 20;
   flex-shrink: 0;
+  height: 100%;
 }
 .chat-sidebar-panel.hidden {
-  transform: translateX(300px);
+  transform: translateX(280px);
   width: 0px;
   opacity: 0;
   pointer-events: none;
@@ -794,13 +794,14 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .nav-spacer { width: auto; }
   .btn-theater { padding: 6px 10px; }
   .aspect-ratio-selector { padding: 4px 6px; font-size: 11px; }
-  
+
+  /* Mobilde sağ panel açıldığında üst üste binen şık bir çekmece (drawer) gibi sağdan gelsin */
   .chat-sidebar-panel {
-    position: absolute; right: 0; top: 0; bottom: 0; width: 240px;
+    position: absolute; right: 0; top: 0; bottom: 0; width: 250px;
   }
   .chat-sidebar-panel.hidden {
-    transform: translateX(240px);
-    width: 240px;
+    transform: translateX(250px);
+    width: 250px;
   }
 }
 </style>
@@ -915,7 +916,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         </div>
       </div>
 
-      <!-- Kendi Canlı Sohbet Panelimiz (Render Bağlantılı) -->
+      <!-- Kendi Canlı Sohbet Panelimiz (Sağ Yan Panel) -->
       <div class="chat-sidebar-panel hidden" id="chatPanel">
         <div class="chat-header">
           <span>💬 FATBOK Canlı Sohbet</span>
