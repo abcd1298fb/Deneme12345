@@ -528,19 +528,22 @@ nav{
   transition: all 0.3s ease;
 }
 
-/* ─── CHATANGO SOHBET ALANI ─── */
+/* ─── CHATANGO SOHBET ALANI (YANDA) ─── */
 .chat-sidebar-panel {
   width: 280px;
   background: rgba(6, 10, 22, 0.95);
   border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, width 0.3s ease, opacity 0.3s ease;
   z-index: 10;
   flex-shrink: 0;
 }
 .chat-sidebar-panel.hidden {
-  display: none;
+  transform: translateX(280px);
+  width: 0px;
+  opacity: 0;
+  pointer-events: none;
 }
 .chat-header {
   padding: 10px 14px;
@@ -553,7 +556,7 @@ nav{
 .chatango-embed-wrap {
   flex: 1;
   width: 100%;
-  min-height: 350px;
+  height: 100%;
   overflow: hidden;
   background: #000;
   display: flex;
@@ -561,10 +564,9 @@ nav{
   align-items: center;
 }
 .chatango-embed-wrap iframe {
-  width: 100% !important;
-  height: 100% !important;
+  width: 100%;
+  height: 100%;
   border: none;
-  display: block !important;
 }
 
 .btn-chat-toggle {
@@ -730,16 +732,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .layout.theater-active .ch-sidebar { transform: translateY(100%); max-height: 0px; opacity: 0; padding: 0; }
   .player-area{ order:1; height: auto; overflow-y: auto; }
   
-  /* Mobilde İçeriği Alt Alta Sırala */
-  .content-body-flex {
-    flex-direction: column;
-  }
-  .chat-sidebar-panel {
-    width: 100%;
-    border-left: none;
-    border-top: 1px solid var(--border);
-  }
-
   nav{padding:0 14px}
   .nav-logo{ width: auto; }
   .nav-search{ max-width: 160px; margin: 0 0 0 auto; }
@@ -748,6 +740,15 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .now-ch-name { font-size: 15px; max-width: 110px; }
   .btn-theater, .btn-chat-toggle { padding: 4px 6px; font-size: 11px; }
   .aspect-ratio-selector { padding: 4px 5px; font-size: 10px; }
+
+  /* Mobilde sağ panel açıldığında yan taraftan düzgün kayarak gelsin */
+  .chat-sidebar-panel {
+    position: absolute; right: 0; top: 0; bottom: 0; width: 240px;
+  }
+  .chat-sidebar-panel.hidden {
+    transform: translateX(240px);
+    width: 240px;
+  }
 }
 </style>
 </head>
@@ -862,7 +863,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         </div>
       </div>
 
-      <!-- Chatango Canlı Sohbet Paneli (İframe ile Doğrudan Bağlantı) -->
+      <!-- Chatango Canlı Sohbet Paneli (Yanda Açar) -->
       <div class="chat-sidebar-panel hidden" id="chatPanel">
         <div class="chat-header">
           <span>💬 Canlı Maç Sohbeti</span>
