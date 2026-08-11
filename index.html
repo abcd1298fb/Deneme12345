@@ -502,7 +502,7 @@ nav{
   background: var(--accent-glow);
 }
 
-/* ─── PLAYER AREA & CHAT FLEX YAPISI (KESİN YAN PANEL) ─── */
+/* ─── PLAYER AREA & CHAT FLEX YAPISI ─── */
 .player-area{
   display:flex;flex-direction:column;
   overflow:hidden;
@@ -530,7 +530,7 @@ nav{
   transition: all 0.3s ease;
 }
 
-/* ─── ÖZEL CHAT PANELİ (HER EKRANDA SAĞDAN AÇILAN YAN PANEL) ─── */
+/* ─── ÖZEL CHAT PANELİ ─── */
 .chat-sidebar-panel {
   width: 280px;
   background: rgba(6, 10, 22, 0.95);
@@ -682,22 +682,6 @@ nav{
 .btn-theater:hover { background: var(--accent); border-color: var(--accent); }
 .btn-theater.active { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
 
-/* Aspect Ratio Seçici CSS */
-.aspect-ratio-selector {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 6px 10px; border-radius: 6px;
-  font-size: 13px; font-weight: 600;
-  outline: none; cursor: pointer;
-  transition: background 0.2s, border-color 0.2s;
-}
-.aspect-ratio-selector option {
-  background: #060e20;
-  color: #fff;
-}
-.aspect-ratio-selector:hover { background: rgba(255, 255, 255, 0.12); border-color: var(--accent); }
-
 .now-badges{display:flex;gap:8px;margin-left:auto}
 .badge{ padding:5px 12px;border-radius:6px; font-size:11px;font-weight:700;letter-spacing:1px; }
 .badge-live{background:var(--accent-glow);color:var(--accent);border:1px solid var(--border2);display:flex;align-items:center;gap:5px}
@@ -708,7 +692,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
 .plyr { height: 100% !important; width: 100% !important; }
 .plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
-.plyr video { transition: transform 0.3s ease, object-fit 0.3s ease; }
+.plyr video { object-fit: contain; }
 
 /* ─── GLASSMORPHISM LOADING SKELETON ─── */
 .skeleton-loader {
@@ -793,9 +777,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .nav-search{ max-width: 160px; margin: 0 0 0 auto; }
   .nav-spacer { width: auto; }
   .btn-theater { padding: 6px 10px; }
-  .aspect-ratio-selector { padding: 4px 6px; font-size: 11px; }
 
-  /* Mobilde sağ panel açıldığında üst üste binen şık bir çekmece (drawer) gibi sağdan gelsin */
   .chat-sidebar-panel {
     position: absolute; right: 0; top: 0; bottom: 0; width: 250px;
   }
@@ -874,13 +856,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         <button class="btn-chat-toggle" id="chatToggleBtn" onclick="toggleChatPanel()" style="display:none;">
           💬 Sohbet
         </button>
-        <!-- Aspect Ratio Seçici Dropdown -->
-        <select class="aspect-ratio-selector" id="aspectSelect" onchange="changeAspectRatio(this.value)" style="display:none;">
-          <option value="16:9">📐 16:9</option>
-          <option value="4:3">📐 4:3</option>
-          <option value="21:9">📐 21:9</option>
-          <option value="stretch">📐 Sığdır (Stretch)</option>
-        </select>
       </div>
       <div class="now-badges">
         <div class="badge badge-live"><div class="live-dot"></div>CANLI</div>
@@ -1441,7 +1416,6 @@ function selectChannel(c){
   document.getElementById('nowName').textContent=c.name;
   document.getElementById('theaterBtn').style.display = 'flex';
   document.getElementById('chatToggleBtn').style.display = 'flex';
-  document.getElementById('aspectSelect').style.display = 'inline-block';
   document.getElementById('vidOverlay').style.display = 'none';
   
   const iframePlayer = document.getElementById('embedPlayer');
@@ -1548,36 +1522,6 @@ function startActualStream(c) {
     };
     setTimeout(() => { hideSkeleton(); }, 2500);
   }
-}
-
-function changeAspectRatio(ratio) {
-  const hlsVideo = document.querySelector('#hlsPlayer');
-  const iframePlayer = document.getElementById('embedPlayer');
-  const plyrWrapper = document.getElementById('plyrWrapper');
-
-  const elements = [hlsVideo, iframePlayer, plyrWrapper];
-
-  elements.forEach(el => {
-    if (!el) return;
-    switch (ratio) {
-      case '16:9':
-        el.style.objectFit = 'contain';
-        el.style.transform = 'scale(1)';
-        break;
-      case '4:3':
-        el.style.objectFit = 'contain';
-        el.style.transform = 'scaleX(0.75)';
-        break;
-      case '21:9':
-        el.style.objectFit = 'cover';
-        el.style.transform = 'scaleY(0.85)';
-        break;
-      case 'stretch':
-        el.style.objectFit = 'fill';
-        el.style.transform = 'scale(1)';
-        break;
-    }
-  });
 }
 
 function setAmbientColor(cat) {
