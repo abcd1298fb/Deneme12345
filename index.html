@@ -562,11 +562,6 @@ nav{
   justify-content: center;
   align-items: center;
 }
-.chatango-embed-wrap iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
 
 .btn-chat-toggle {
   background: rgba(255, 255, 255, 0.06);
@@ -860,14 +855,14 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         </div>
       </div>
 
-      <!-- Chatango Canlı Sohbet Yan Paneli (iframe olarak eklendi) -->
+      <!-- Chatango Canlı Sohbet Yan Paneli (JS Embed ile Kesin Çözüm) -->
       <div class="chat-sidebar-panel hidden" id="chatPanel">
         <div class="chat-header">
           <span>💬 Canlı Maç Sohbeti</span>
           <span style="font-size:11px; color:#34c759;">● Çevrimiçi</span>
         </div>
         <div class="chatango-embed-wrap">
-          <iframe src="https://fatbokchat.chatango.com/" allowtransparency="true"></iframe>
+          <script id="cid0020000388277259259" data-cfasync="false" async src="//st.chatango.com/js/gz/emb.js" style="width:100%;height:100%;">{"handle":"fatbokchat","arch":"js","styles":{"a":"02050f","b":100,"c":"FFFFFF","d":"FFFFFF","k":"007aff","l":"02050f","m":"02050f","p":"10","q":"02050f","r":100,"sps":1,"cvbg":0,"cnrs":0,"fwtick":1}}</script>
         </div>
       </div>
     </div>
