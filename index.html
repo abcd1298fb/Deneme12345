@@ -500,7 +500,7 @@ nav{
   background: var(--accent-glow);
 }
 
-/* ─── PLAYER AREA ─── */
+/* ─── PLAYER & CHAT LAYOUT ─── */
 .player-area{
   display:flex;flex-direction:column;
   overflow:hidden;
@@ -508,6 +508,119 @@ nav{
   position: relative;
   contain: layout style;
 }
+
+.content-body-flex {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  z-index: 5;
+}
+
+.video-main-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+/* ─── CANLI SOHBET (CHAT) ALANI ─── */
+.chat-sidebar-panel {
+  width: 300px;
+  background: rgba(6, 10, 22, 0.95);
+  border-left: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, width 0.3s ease;
+  z-index: 10;
+}
+.chat-sidebar-panel.hidden {
+  transform: translateX(300px);
+  width: 0px;
+  opacity: 0;
+  pointer-events: none;
+}
+.chat-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border);
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 16px; font-weight: 800; letter-spacing: 1px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(0,0,0,0.2);
+}
+.chat-messages {
+  flex: 1;
+  padding: 12px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
+
+.chat-msg {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.chat-msg-user {
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 2px;
+}
+.chat-msg-text {
+  color: var(--text);
+  word-break: break-word;
+}
+
+.chat-input-area {
+  padding: 10px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 6px;
+  background: rgba(0,0,0,0.3);
+}
+.chat-input {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  color: var(--text);
+  font-size: 12px;
+  font-family: 'Manrope', sans-serif;
+  outline: none;
+}
+.chat-input:focus { border-color: var(--accent); }
+.chat-send-btn {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  padding: 0 12px;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.chat-send-btn:hover { opacity: 0.9; }
+
+.btn-chat-toggle {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 6px 12px; border-radius: 6px;
+  cursor: pointer; font-size: 14px; font-weight: 600;
+  display: flex; align-items: center; gap: 6px;
+  transition: background 0.2s, border-color 0.2s;
+}
+.btn-chat-toggle:hover { background: var(--accent); border-color: var(--accent); }
 
 .ambient-glow {
   position: absolute;
@@ -666,6 +779,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .btn-theater { padding: 6px 10px; }
   .btn-theater text { display: none; }
   .aspect-ratio-selector { padding: 4px 6px; font-size: 11px; }
+  
+  .chat-sidebar-panel { position: absolute; right: 0; top: 0; bottom: 0; width: 260px; }
+  .chat-sidebar-panel.hidden { transform: translateX(260px); width: 260px; }
 }
 </style>
 </head>
@@ -676,7 +792,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="intro-text-box">
     <div class="f-wrapper">
       <span class="intro-f">F</span>
-    </div><span class="intro-rest">ATBOK</span>
+    </div><span class="intro-rest">FATBOK</span>
   </div>
 </div>
 
@@ -733,6 +849,10 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
           <span>⛶</span><span class="btn-text"> Sinema Modu</span>
         </button>
+        <!-- Sohbet Açma/Kapama Butonu -->
+        <button class="btn-chat-toggle" id="chatToggleBtn" onclick="toggleChatPanel()" style="display:none;">
+          💬 <span class="chat-btn-text">Sohbet</span>
+        </button>
         <!-- Aspect Ratio Seçici Dropdown -->
         <select class="aspect-ratio-selector" id="aspectSelect" onchange="changeAspectRatio(this.value)" style="display:none;">
           <option value="16:9">📐 16:9</option>
@@ -746,33 +866,63 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       </div>
     </div>
 
-    <div class="video-wrap" id="videoWrap">
-      <div class="vid-overlay" id="vidOverlay"></div>
-      
-      <!-- Glassmorphism Skeleton Overlay -->
-      <div class="skeleton-loader" id="skeletonLoader">
-        <div class="glass-card">
-          <div class="skeleton-box sk-logo"></div>
-          <div class="skeleton-box sk-title"></div>
-          <div class="skeleton-box sk-subtitle"></div>
-          <div class="skeleton-box sk-bar"></div>
+    <!-- Video ve Sohbet Paneli Yan Yana -->
+    <div class="content-body-flex">
+      <div class="video-main-container" id="videoWrap">
+        <div class="vid-overlay" id="vidOverlay"></div>
+        
+        <!-- Glassmorphism Skeleton Overlay -->
+        <div class="skeleton-loader" id="skeletonLoader">
+          <div class="glass-card">
+            <div class="skeleton-box sk-logo"></div>
+            <div class="skeleton-box sk-title"></div>
+            <div class="skeleton-box sk-subtitle"></div>
+            <div class="skeleton-box sk-bar"></div>
+          </div>
+        </div>
+
+        <div id="advInterstitial" class="adv-interstitial" style="display: none;">
+          <div class="adv-interstitial-card">
+            <h3>Yayın Hazırlanıyor</h3>
+            <p id="advText">Sadece 1 Reklam İzleyerek Yayına Bağlanabilirsiniz.</p>
+            <button id="advBtn" class="btn-adv-action" onclick="handleAdClick()">🔗 Reklamı Geç ve İzle</button>
+          </div>
+        </div>
+
+        <iframe id="embedPlayer" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+        
+        <div id="plyrWrapper" class="plyr-container-box">
+          <video id="hlsPlayer" controls autoplay playsinline></video>
         </div>
       </div>
 
-      <div id="advInterstitial" class="adv-interstitial" style="display: none;">
-        <div class="adv-interstitial-card">
-          <h3>Yayın Hazırlanıyor</h3>
-          <p id="advText">Sadece 1 Reklam İzleyerek Yayına Bağlanabilirsiniz.</p>
-          <button id="advBtn" class="btn-adv-action" onclick="handleAdClick()">🔗 Reklamı Geç ve İzle</button>
+      <!-- Canlı Sohbet Paneli -->
+      <div class="chat-sidebar-panel hidden" id="chatPanel">
+        <div class="chat-header">
+          <span>💬 Canlı Maç Sohbeti</span>
+          <span style="font-size:11px; color:#34c759;">● Çevrimiçi</span>
         </div>
-      </div>
-
-      <iframe id="embedPlayer" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-      
-      <div id="plyrWrapper" class="plyr-container-box">
-        <video id="hlsPlayer" controls autoplay playsinline></video>
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-msg">
+            <div class="chat-msg-user">Sistem Botu</div>
+            <div class="chat-msg-text">FATBOK Canlı Sohbetine hoş geldiniz! Saygılı olmayı unutmayalım. ⚽</div>
+          </div>
+          <div class="chat-msg">
+            <div class="chat-msg-user">Ahmet_1907</div>
+            <div class="chat-msg-text">Maç harika ilerliyor, yayın da donmuyor maşallah.</div>
+          </div>
+          <div class="chat-msg">
+            <div class="chat-msg-user">KeremTST</div>
+            <div class="chat-msg-text">Ses ve görüntü kalitesi efsane olmuş eline sağlık admin.</div>
+          </div>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Mesaj yaz..." onkeydown="handleChatKeyDown(event)"/>
+          <button class="chat-send-btn" onclick="sendChatMessage()">Gönder</button>
+        </div>
       </div>
     </div>
+
   </div>
 
 </div>
@@ -958,106 +1108,106 @@ const dailyMatchesByDate = [
       {
         time: "19:00",
         homeTeam: "Kasımpaşa",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/6/68/Kasimpasa_2012.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Trabzonspor",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/a/ab/TrabzonsporAmblemi.png",
-        channelIds: [1,2]
+        awayLogo: "https://royaltv33.com/img/beinsports1.png",
+        channelIds: [1, 7]
       },
       {
         time: "19:00",
         homeTeam: "Konyaspor",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/4/41/20220809170232%21Konyaspor_1922.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Ç. Rizespor",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/f/f6/%C3%87aykur_Rizespor_Logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [4,5,6]
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
+        channelIds: [4, 9]
       },
       {
         time: "21:30",
         homeTeam: "Gaziantep FK",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/1/1a/GFK-Official-Logo.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Alanyaspor",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/2/29/Alanyaspor_logo.png",
-        channelIds: [4,5,6]
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
+        channelIds: [7]
       },
       {
         time: "21:30",
         homeTeam: "Gençlerbirliği",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/f/f7/Genclerbirligi.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Fenerbahçe",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
+        awayLogo: "https://royaltv33.com/img/beinsports1.png",
         channelIds: [1, 2, 3]
       },
       {
         time: "19:00",
         homeTeam: "İstanbulspor",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/e/ed/IstanbulsporAS.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Bodrum FK",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/1/13/Bodrum_Belediyesi_Bodrumspor.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
         channelIds: [35]
       },
       {
         time: "19:00",
         homeTeam: "Karagümrük",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/9/90/Fatihkaragumruk.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Ümraniyespor",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/7/75/%C3%9Cmraniyespor_Logosu.png",
-        channelIds: [35]
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
+        channelIds: [36]
       },
       {
         time: "21:30",
         homeTeam: "Bursaspor",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/5/5c/20130909123854%21Bursaspor-amblem.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Iğdır FK",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/57/I%C4%9Fd%C4%B1r_FK_logo.png",
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
         channelIds: [35]
       },
       {
         time: "21:30",
         homeTeam: "Manisa FK",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/d/dd/Manisa_FK.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Van Spor FK",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/55/Vanspor_FK.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [35]
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
+        channelIds: [36]
       },
       {
         time: "20:30",
         homeTeam: "Alaves",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/thumb/2/2e/Deportivo_Alaves_logo.svg/3840px-Deportivo_Alaves_logo.svg.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Getafe",
-        awayLogo: "https://1000logos.net/wp-content/uploads/2021/09/Getafe-logo.png",
-        channelIds: [17,18]
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
+        channelIds: [17]
       },
       {
         time: "22:30",
         homeTeam: "Sevilla",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/e/ed/Sevillafc.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Rayo Vallecano",
-        awayLogo: "https://www.vhv.rs/dpng/d/436-4369693_rayo-vallecano-logo-png-transparent-png.png",
-        channelIds: [17,18]
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
+        channelIds: [17]
       },
       {
         time: "17:30",
         homeTeam: "Alverca FC",
-        homeLogo: "https://assets.football-logos.cc/logos/portugal/700x700/alverca.6c2ab36e.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Estrela",
-        awayLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVdInUxO3c7qqiPKhsJjeJgqzDE7t3sQi9YFS0VP51jA&s=10",
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
         channelIds: []
       },
       {
         time: "20:00",
         homeTeam: "Viseu",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/A.C._Viseu.svg/250px-A.C._Viseu.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Santa Clara",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/en/3/37/C.D._Santa_Clara_logo.svg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
         channelIds: []
       },
       {
         time: "22:30",
         homeTeam: "Rio Ave",
-        homeLogo: "https://images.seeklogo.com/logo-png/48/1/rio-ave-f-c-logo-png_seeklogo-486181.png",
+        homeLogo: "https://img.icons8.com/fluency/48/television.png",
         awayTeam: "Porto",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/52/FC.Porto.png",
-        channelIds: []
+        awayLogo: "https://img.icons8.com/fluency/48/television.png",
+        channelIds: [17]
       }
     ]
   }
@@ -1233,6 +1383,7 @@ function selectChannel(c){
   logoEl.innerHTML = `<img src="${c.logo}" alt="${c.name}" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>`;
   document.getElementById('nowName').textContent=c.name;
   document.getElementById('theaterBtn').style.display = 'flex';
+  document.getElementById('chatToggleBtn').style.display = 'flex';
   document.getElementById('aspectSelect').style.display = 'inline-block';
   document.getElementById('vidOverlay').style.display = 'none';
   
@@ -1390,6 +1541,36 @@ function toggleTheaterMode() {
     if(btnText) btnText.textContent = " Normal Mod";
   } else {
     if(btnText) btnText.textContent = " Sinema Modu";
+  }
+}
+
+function toggleChatPanel() {
+  const chatPanel = document.getElementById('chatPanel');
+  chatPanel.classList.toggle('hidden');
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+
+  const messagesContainer = document.getElementById('chatMessages');
+  const msgDiv = document.createElement('div');
+  msgDiv.className = 'chat-msg';
+  msgDiv.innerHTML = `
+    <div class="chat-msg-user">Ziyaretçi</div>
+    <div class="chat-msg-text"></div>
+  `;
+  msgDiv.querySelector('.chat-msg-text').textContent = text;
+  messagesContainer.appendChild(msgDiv);
+  
+  input.value = '';
+  messagesContainer.scrollTop = messagesContainer.scrollHeight;
+}
+
+function handleChatKeyDown(event) {
+  if (event.key === 'Enter') {
+    sendChatMessage();
   }
 }
 
