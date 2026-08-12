@@ -154,83 +154,6 @@ nav{
   color: #fff;
 }
 
-/* ─── İLK GİRİŞ ANİMASYONU ─── */
-.netflix-intro-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
-  background: #000000;
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.8s ease, visibility 0.8s ease;
-  overflow: hidden;
-}
-.netflix-intro-overlay.hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.intro-text-box {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(60px, 15vw, 180px);
-  font-weight: 900;
-  letter-spacing: 4px;
-}
-
-.f-wrapper {
-  position: relative;
-  display: inline-block;
-  line-height: 1;
-  transform-origin: center center;
-  z-index: 2;
-  animation: zoomF 4.5s cubic-bezier(0.25, 1, 0.3, 1) forwards;
-}
-
-.intro-f {
-  position: relative;
-  color: var(--accent);
-  display: inline-block;
-  background: linear-gradient(180deg, #ffffff 0%, #00d2ff 50%, var(--accent) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 25px var(--accent-glow));
-}
-
-.intro-rest {
-  color: #ffffff;
-  background: linear-gradient(180deg, #ffffff 30%, #a0a0a0 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  vertical-align: bottom;
-  transform-origin: left center;
-  animation: fadeOutRest 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-}
-
-@keyframes fadeOutRest {
-  0% { opacity: 1; max-width: 500px; }
-  40% { opacity: 0.7; }
-  100% { opacity: 0; max-width: 0px; }
-}
-
-@keyframes zoomF {
-  0% { transform: scale(1); }
-  30% { transform: scale(1.1); }
-  65% { transform: scale(3.5); opacity: 1; }
-  90% { opacity: 0.8; }
-  100% { transform: scale(65); opacity: 0; }
-}
-
 /* ─── LAYOUT ─── */
 .layout{
   display:grid;
@@ -829,19 +752,10 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 </head>
 <body>
 
-<!-- İLK GİRİŞ ANİMASYONU OVERLAY -->
-<div class="netflix-intro-overlay" id="netflixIntro">
-  <div class="intro-text-box">
-    <div class="f-wrapper">
-      <span class="intro-f">F</span>
-    </div><span class="intro-rest">FATBOK</span>
-  </div>
-</div>
-
 <div class="liquid-bg"></div>
 
 <nav>
-  <div class="nav-logo" onclick="replayIntro()">FATBOK</div>
+  <div class="nav-logo">FATBOK</div>
   <div class="nav-search">
     <span class="search-icon">🔍</span>
     <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="filterChannels(this.value)"/>
@@ -957,10 +871,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 // Render Canlı Sohbet Sunucu Bağlantısı
 const socket = io('https://fatbokchat.onrender.com');
 
-// Admin Şifresi (İstediğin gibi değiştirebilirsin)
+// Admin Şifresi (Buradan değiştirebilirsin)
 const ADMIN_SECRET_PASS = "fatbok2026"; 
 
-// renk üreteç kodu
 function stringToColor(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -990,7 +903,7 @@ function sendChatMessage(e) {
 
   let isAdmin = false;
 
-  // Şifreli admin komutu kontrolü: /admin <sifre> <mesaj>
+  // Şifreli admin komutu: /admin şifre mesaj
   if (message.startsWith('/admin ')) {
     const parts = message.split(' ');
     const providedPass = parts[1];
@@ -1004,7 +917,6 @@ function sendChatMessage(e) {
       return;
     }
   } else {
-    // Daha önceden şifreyi girip doğruladıysa tarayıcı hafızasından hatırla
     if (localStorage.getItem('fatbok_is_admin') === 'true' && username.toLowerCase() === 'fatbok') {
       isAdmin = true;
     }
@@ -1014,7 +926,6 @@ function sendChatMessage(e) {
     localStorage.setItem('fatbok_is_admin', 'true');
   }
 
-  // Kullanıcı adını tarayıcı hafızasında sakla
   localStorage.setItem('fatbok_chat_user', username);
 
   socket.emit('chatMessage', { username, message, isAdmin });
@@ -1024,8 +935,6 @@ function sendChatMessage(e) {
 
 function appendMessage(user, text, time, isAdminFlag) {
   const container = document.getElementById('chatMessages');
-  
-  // Akıllı kaydırma kontrolü 
   const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
 
   const userColor = stringToColor(user);
@@ -1059,17 +968,18 @@ function toggleChatPanel() {
   document.getElementById('chatPanel').classList.toggle('hidden');
 }
 
-// Otomatik Kullanıcı kodu
 window.addEventListener('DOMContentLoaded', () => {
   const savedUser = localStorage.getItem('fatbok_chat_user');
   if (savedUser) {
     document.getElementById('chatUsername').value = savedUser;
   }
+  const savedTheme = localStorage.getItem('fatbok_theme') || 'blue';
+  document.getElementById('themeSelect').value = savedTheme;
+  changeTheme(savedTheme);
 });
 
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
 
-// Tema Paleti Tanımları
 const colorThemes = {
   blue: { accent: '#007aff', glow: 'rgba(0, 122, 255, 0.2)', surface3: 'rgba(0, 122, 255, 0.2)', border2: 'rgba(0, 122, 255, 0.5)', ambient: 'rgba(0, 122, 255, 0.35)' },
   red: { accent: '#ff3b30', glow: 'rgba(255, 59, 48, 0.2)', surface3: 'rgba(255, 59, 48, 0.2)', border2: 'rgba(255, 59, 48, 0.5)', ambient: 'rgba(255, 59, 48, 0.35)' },
@@ -1090,34 +1000,6 @@ function changeTheme(themeKey) {
   root.style.setProperty('--plyr-color-main', t.accent);
   
   localStorage.setItem('fatbok_theme', themeKey);
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  const savedTheme = localStorage.getItem('fatbok_theme') || 'blue';
-  document.getElementById('themeSelect').value = savedTheme;
-  changeTheme(savedTheme);
-
-  setTimeout(() => {
-    document.getElementById('netflixIntro').classList.add('hidden');
-  }, 4200);
-});
-
-function replayIntro() {
-  const overlay = document.getElementById('netflixIntro');
-  overlay.classList.remove('hidden');
-  
-  const fWrap = overlay.querySelector('.f-wrapper');
-  const restText = overlay.querySelector('.intro-rest');
-  
-  fWrap.style.animation = 'none';
-  restText.style.animation = 'none';
-  void fWrap.offsetWidth;
-  fWrap.style.animation = 'zoomF 4.5s cubic-bezier(0.25, 1, 0.3, 1) forwards';
-  restText.style.animation = 'fadeOutRest 2.8s cubic-bezier(0.4, 0, 0.2, 1) forwards';
-
-  setTimeout(() => {
-    overlay.classList.add('hidden');
-  }, 4200);
 }
 
 const countries = [
@@ -1589,113 +1471,6 @@ function filterChannels(q){
   currentSearch=q;
   renderList();
 }
-
-// Render Canlı Sohbet Sunucu Bağlantısı
-const socket = io('https://fatbokchat.onrender.com');
-
-// Admin Şifresi (Buradan değiştirebilirsin)
-const ADMIN_SECRET_PASS = "fatbok2026"; 
-
-function stringToColor(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = '#';
-  for (let i = 0; i < 3; i++) {
-    let value = (hash >> (i * 8)) & 0xFF;
-    color += ('00' + value.toString(16)).substr(-2);
-  }
-  return color;
-}
-
-socket.on('chatMessage', (data) => {
-  appendMessage(data.username, data.message, data.time, data.isAdmin);
-});
-
-function sendChatMessage(e) {
-  e.preventDefault();
-  const usernameInput = document.getElementById('chatUsername');
-  const messageInput = document.getElementById('chatMessageInput');
-  
-  let username = usernameInput.value.trim();
-  let message = messageInput.value.trim();
-  
-  if (!username || !message) return;
-
-  let isAdmin = false;
-
-  // Şifreli admin komutu: /admin şifre mesaj
-  if (message.startsWith('/admin ')) {
-    const parts = message.split(' ');
-    const providedPass = parts[1];
-    const actualMsg = parts.slice(2).join(' ');
-
-    if (providedPass === ADMIN_SECRET_PASS) {
-      isAdmin = true;
-      message = actualMsg;
-    } else {
-      alert("Hatalı admin şifresi!");
-      return;
-    }
-  } else {
-    if (localStorage.getItem('fatbok_is_admin') === 'true' && username.toLowerCase() === 'fatbok') {
-      isAdmin = true;
-    }
-  }
-
-  if (isAdmin) {
-    localStorage.setItem('fatbok_is_admin', 'true');
-  }
-
-  localStorage.setItem('fatbok_chat_user', username);
-
-  socket.emit('chatMessage', { username, message, isAdmin });
-  messageInput.value = '';
-  messageInput.focus();
-}
-
-function appendMessage(user, text, time, isAdminFlag) {
-  const container = document.getElementById('chatMessages');
-  const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
-
-  const userColor = stringToColor(user);
-  const isAdmin = isAdminFlag || (user.toLowerCase() === 'fatbok' && localStorage.getItem('fatbok_is_admin') === 'true');
-  
-  const div = document.createElement('div');
-  div.className = 'chat-msg-item' + (isAdmin ? ' admin-msg' : '');
-  
-  div.innerHTML = `
-    <div class="chat-msg-header">
-      <span class="chat-msg-user ${isAdmin ? 'admin-rgb-name' : ''}" style="color: ${isAdmin ? '' : userColor};">
-        ${escapeHtml(user)}
-        ${isAdmin ? '<span class="admin-badge">👑 ADMIN</span>' : ''}
-      </span>
-      <span class="chat-msg-time">${time || 'Şimdi'}</span>
-    </div>
-    <div class="chat-msg-text">${escapeHtml(text)}</div>
-  `;
-  container.appendChild(div);
-
-  if (isAtBottom) {
-    container.scrollTop = container.scrollHeight;
-  }
-}
-
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function toggleChatPanel() {
-  document.getElementById('chatPanel').classList.toggle('hidden');
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  const savedUser = localStorage.getItem('fatbok_chat_user');
-  if (savedUser) {
-    document.getElementById('chatUsername').value = savedUser;
-  }
-});
 
 renderCountryFilters();
 renderList();
