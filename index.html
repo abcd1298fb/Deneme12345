@@ -481,7 +481,7 @@ nav{
   background: rgba(0,0,0,0.2);
 }
 
-/* Sabitlenmiş Mesaj Alanı */
+/* Sabitlenmiş Mesaj Banner */
 .pinned-message-banner {
   background: rgba(255, 149, 0, 0.12);
   border-bottom: 1px solid rgba(255, 149, 0, 0.3);
@@ -556,7 +556,14 @@ nav{
   line-height: 1.4;
 }
 
-/* Mesaj İçi Sabitleme Butonu (Sadece Admin Görecek) */
+/* Butonlar Grubu */
+.msg-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Sabitleme Butonu (Admin) */
 .pin-msg-btn {
   background: rgba(255, 149, 0, 0.2);
   border: 1px solid rgba(255, 149, 0, 0.4);
@@ -566,11 +573,25 @@ nav{
   padding: 1px 5px;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 6px;
-  display: none; /* Varsayılan gizli, JS ile sadece admine açılacak */
+  display: none;
   transition: background 0.2s;
 }
 .pin-msg-btn:hover { background: rgba(255, 149, 0, 0.4); }
+
+/* Mesaj Silme Butonu (Admin) */
+.delete-msg-btn {
+  background: rgba(255, 59, 48, 0.2);
+  border: 1px solid rgba(255, 59, 48, 0.4);
+  color: #ff3b30;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 1px 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  display: none;
+  transition: background 0.2s;
+}
+.delete-msg-btn:hover { background: rgba(255, 59, 48, 0.4); }
 
 /* RGB Animasyonlu Admin Stilleri */
 @keyframes rgbGlow {
@@ -954,8 +975,8 @@ function checkUsernameAdmin(inputEl) {
     
     if (enteredPass === ADMIN_SECRET_PASS) {
       localStorage.setItem('fatbok_is_admin', 'true');
-      alert("Şifre doğru! Admin yetkisi ve sabitleme yetkisi aktif.");
-      location.reload(); // Yetki gelince butonları aktif etmek için sayfayı yenile
+      alert("Şifre doğru! Admin, sabitleme ve mesaj silme yetkisi aktif.");
+      location.reload(); 
     } else {
       alert("Hatalı şifre!");
       localStorage.removeItem('fatbok_is_admin');
@@ -967,7 +988,15 @@ function checkUsernameAdmin(inputEl) {
 }
 
 socket.on('chatMessage', (data) => {
-  appendMessage(data.username, data.message, data.time, data.isAdmin);
+  appendMessage(data.id, data.username, data.message, data.time, data.isAdmin);
+});
+
+// Sunucudan mesaj silme sinyali gelirse ekrandan kaldır
+socket.on('deleteMessage', (msgId) => {
+  const msgEl = document.getElementById(`msg-${msgId}`);
+  if (msgEl) {
+    msgEl.remove();
+  }
 });
 
 // Sunucudan sabitlenen mesaj gelirse
@@ -979,7 +1008,6 @@ socket.on('pinnedMessage', (text) => {
   if (text) {
     textEl.textContent = text;
     banner.classList.add('active');
-    // Eğer giren kişi adminse bannerdaki "Kaldır" butonunu göster
     if (localStorage.getItem('fatbok_is_admin') === 'true') {
       unpinBtn.style.display = 'inline-block';
     }
@@ -1007,17 +1035,26 @@ function sendChatMessage(e) {
 
   localStorage.setItem('fatbok_chat_user', username);
 
-  socket.emit('chatMessage', { username, message, isAdmin });
+  // Benzersiz mesaj ID üretimi
+  const msgId = 'm_' + Math.random().toString(36.substring(2, 9));
+
+  socket.emit('chatMessage', { id: msgId, username, message, isAdmin });
   messageInput.value = '';
   messageInput.focus();
 }
 
-// Mesajı Sabitleme Fonksiyonu (Sadece Admin Tetikleyebilir)
-function pinMessage(text) {
+// Mesajı Herkes İçin Silme (Sadece Admin Tetikleyebilir)
+function deleteMessage(msgId) {
   if (localStorage.getItem('fatbok_is_admin') !== 'true') {
     alert("Bu işlem için yetkiniz yok!");
     return;
   }
+  socket.emit('deleteMessage', msgId);
+}
+
+// Mesajı Sabitleme
+function pinMessage(text) {
+  if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
   socket.emit('pinMessage', text);
 }
 
@@ -1027,7 +1064,7 @@ function unpinMessage() {
   socket.emit('pinMessage', "");
 }
 
-function appendMessage(user, text, time, isAdminFlag) {
+function appendMessage(msgId, user, text, time, isAdminFlag) {
   const container = document.getElementById('chatMessages');
   const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
 
@@ -1037,6 +1074,9 @@ function appendMessage(user, text, time, isAdminFlag) {
   
   const div = document.createElement('div');
   div.className = 'chat-msg-item' + (isAdmin ? ' admin-msg' : '');
+  if (msgId) {
+    div.id = `msg-${msgId}`;
+  }
   
   div.innerHTML = `
     <div class="chat-msg-header">
@@ -1046,18 +1086,21 @@ function appendMessage(user, text, time, isAdminFlag) {
           ${isAdmin ? '<span class="admin-badge">👑 ADMIN</span>' : ''}
         </span>
       </div>
-      <div style="display:flex; align-items:center;">
+      <div class="msg-actions">
         <span class="chat-msg-time">${time || 'Şimdi'}</span>
         ${isUserAdmin ? `<button class="pin-msg-btn" onclick="pinMessage('${escapeHtml(text).replace(/'/g, "\\'")}')">📌 Sabitle</button>` : ''}
+        ${isUserAdmin ? `<button class="delete-msg-btn" onclick="deleteMessage('${msgId}')">🗑️ Sil</button>` : ''}
       </div>
     </div>
     <div class="chat-msg-text">${escapeHtml(text)}</div>
   `;
   container.appendChild(div);
 
-  // Eğer adminse mesajın içindeki sabitle butonunu görünür yap
   if (isUserAdmin) {
-    div.querySelector('.pin-msg-btn').style.display = 'inline-block';
+    const pinBtn = div.querySelector('.pin-msg-btn');
+    const delBtn = div.querySelector('.delete-msg-btn');
+    if(pinBtn) pinBtn.style.display = 'inline-block';
+    if(delBtn) delBtn.style.display = 'inline-block';
   }
 
   if (isAtBottom) {
@@ -1082,7 +1125,6 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('themeSelect').value = savedTheme;
   changeTheme(savedTheme);
 
-  // Sayfa açıldığında daha önceden sabitlenmiş mesaj varsa göster
   socket.emit('getPinnedMessage');
 });
 
