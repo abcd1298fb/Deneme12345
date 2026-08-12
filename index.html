@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>FATBOK</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&family=VT323&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <!-- Socket.io Kütüphanesi -->
 <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
@@ -32,60 +32,6 @@
   --plyr-color-main: var(--accent);
   --plyr-video-background: #000000;
 }
-
-/* ── RETRO MOD DEĞİŞKENLERİ (XP / 2000s) ── */
-body.retro-mode {
-  background: #005555 !important;
-  font-family: 'VT323', monospace !important;
-  color: #00ff00 !important;
-}
-body.retro-mode .liquid-bg, body.retro-mode .ambient-glow { display: none !important; }
-body.retro-mode nav {
-  background: #000080 !important;
-  border-bottom: 3px solid #ffffff !important;
-  box-shadow: inset 1px 1px #dfdfdf, inset -1px -1px #000000 !important;
-}
-body.retro-mode .nav-logo {
-  font-family: 'VT323', monospace !important;
-  font-size: 28px !important;
-  -webkit-text-fill-color: #ffff00 !important;
-  text-shadow: 2px 2px #000000;
-}
-body.retro-mode .ch-sidebar, body.retro-mode .chat-sidebar-panel, body.retro-mode .now-header, body.retro-mode .custom-chat-form {
-  background: #c0c0c0 !important;
-  border: 2px solid !important;
-  border-color: #ffffff #808080 #808080 #ffffff !important;
-  color: #000000 !important;
-}
-body.retro-mode .ch-card, body.retro-mode .match-card, body.retro-mode .chat-msg-item {
-  background: #ffffff !important;
-  border: 1px solid #808080 !important;
-  color: #000000 !important;
-}
-body.retro-mode .ch-name, body.retro-mode .match-team-name, body.retro-mode .chat-msg-text, body.retro-mode .now-ch-name {
-  color: #000000 !important;
-  font-family: 'VT323', monospace !important;
-  font-size: 16px !important;
-}
-body.retro-mode .country-btn, body.retro-mode .main-tab-btn, body.retro-mode .alt-stream-btn, body.retro-mode .chat-send-btn, body.retro-mode .btn-theater, body.retro-mode .btn-chat-toggle {
-  background: #c0c0c0 !important;
-  border: 2px solid !important;
-  border-color: #ffffff #808080 #808080 #ffffff !important;
-  color: #000000 !important;
-  font-family: 'VT323', monospace !important;
-  font-size: 16px !important;
-}
-body.retro-mode .country-btn.active, body.retro-mode .main-tab-btn.active {
-  background: #000080 !important;
-  color: #ffffff !important;
-}
-body.retro-mode .chat-input-name, body.retro-mode .chat-input-msg, body.retro-mode .nav-search input {
-  background: #ffffff !important;
-  border: 2px solid #808080 !important;
-  color: #000000 !important;
-  font-family: 'VT323', monospace !important;
-}
-
 html{scroll-behavior:smooth}
 body{
   background:var(--bg);
@@ -173,22 +119,8 @@ nav{
 }
 .nav-search input::placeholder{color:var(--muted)}
 .search-icon{color:var(--muted);font-size:14px;flex-shrink:0}
-.nav-spacer { width: 220px; flex-shrink: 0; display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
+.nav-spacer { width: 150px; flex-shrink: 0; display: flex; justify-content: flex-end; align-items: center; }
 .live-dot{width:7px;height:7px;background:#34c759;border-radius:50%;opacity:0.9;}
-
-/* Retro Mod Butonu */
-.retro-btn {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
-  padding: 5px 10px;
-  border-radius: 8px;
-  color: var(--text);
-  font-size: 12px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: 0.2s;
-}
-.retro-btn:hover { border-color: var(--accent); background: rgba(255,255,255,0.12); }
 
 /* Renk Tema Seçici CSS */
 .theme-picker-wrap {
@@ -571,7 +503,7 @@ nav{
   background: var(--accent-glow);
 }
 
-/* ─── PLAYER AREA & CHAT FLEX YAPISI ─── */
+/* ─── PLAYER AREA & CHAT YAPISI ─── */
 .player-area{
   display:flex;flex-direction:column;
   overflow:hidden;
@@ -599,7 +531,7 @@ nav{
   transition: all 0.3s ease;
 }
 
-/* ─── ÖZEL CHAT PANELİ ─── */
+/* ─── CHAT PANELİ ─── */
 .chat-sidebar-panel {
   width: 280px;
   background: rgba(6, 10, 22, 0.95);
@@ -870,7 +802,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   <div class="intro-text-box">
     <div class="f-wrapper">
       <span class="intro-f">F</span>
-    </div><span class="intro-rest">FATBOK</span>
+    </div><span class="intro-rest">ATBOK</span>
   </div>
 </div>
 
@@ -883,7 +815,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
     <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="filterChannels(this.value)"/>
   </div>
   <div class="nav-spacer">
-    <button class="retro-btn" id="retroBtn" onclick="toggleRetroMode()">⏳ Retro</button>
     <div class="theme-picker-wrap">
       <span class="theme-icon">🎨</span>
       <select class="theme-select" id="themeSelect" onchange="changeTheme(this.value)">
@@ -966,7 +897,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         </div>
       </div>
 
-      <!-- Kendi Canlı Sohbet Panelimiz (Sağ Yan Panel) -->
+      <!-- Canlı Sohbet Paneli -->
       <div class="chat-sidebar-panel hidden" id="chatPanel">
         <div class="chat-header">
           <span>💬 FATBOK Canlı Sohbet</span>
@@ -994,7 +925,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 // Render Canlı Sohbet Sunucu Bağlantısı
 const socket = io('https://fatbokchat.onrender.com');
 
-// Kullanıcı adından benzersiz sabit renk üreteç fonksiyonu
+// renk üreteç kodu
 function stringToColor(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -1033,7 +964,7 @@ function sendChatMessage(e) {
 function appendMessage(user, text, time) {
   const container = document.getElementById('chatMessages');
   
-  // Akıllı kaydırma kontrolü (Kullanıcı yukarıda geçmişi okuyorsa aşağı kaydırma)
+  // Akıllı kaydırma kontrolü 
   const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
 
   const userColor = stringToColor(user);
@@ -1062,25 +993,11 @@ function toggleChatPanel() {
   document.getElementById('chatPanel').classList.toggle('hidden');
 }
 
-// Retro Mod Açma/Kapatma Fonksiyonu
-function toggleRetroMode() {
-  const isRetro = document.body.classList.toggle('retro-mode');
-  localStorage.setItem('fatbok_retro', isRetro ? 'true' : 'false');
-  const btn = document.getElementById('retroBtn');
-  btn.textContent = isRetro ? '💻 Modern' : '⏳ Retro';
-}
-
-// Sayfa açıldığında kayıtlı tema ve retro tercihini yükle
+// Otomatik Kullanıcı kodu
 window.addEventListener('DOMContentLoaded', () => {
   const savedUser = localStorage.getItem('fatbok_chat_user');
   if (savedUser) {
     document.getElementById('chatUsername').value = savedUser;
-  }
-
-  const isRetroSaved = localStorage.getItem('fatbok_retro') === 'true';
-  if (isRetroSaved) {
-    document.body.classList.add('retro-mode');
-    document.getElementById('retroBtn').textContent = '💻 Modern';
   }
 });
 
@@ -1138,9 +1055,7 @@ function replayIntro() {
 }
 
 const countries = [
-  { code: "tr", name: "Türkiye", flag: "🇹🇷" },
-  { code: "us", name: "USA", flag: "🇺🇸" },
-  { code: "gb", name: "İngiltere", flag: "🇬🇧" }
+  { code: "tr", name: "Türkiye", flag: "🇹🇷" }
 ];
 
 const channels = [
@@ -1184,47 +1099,7 @@ const channels = [
   {id:37, name:"TRT 1",          cat:"tr", logo:"https://royaltv33.com/img/trt1.png", stream:"https://zbahistv63.com/channel.html?id=trt1"},
   {id:38, name:"ATV",            cat:"tr", logo:"https://royaltv33.com/img/atv.png", stream:"https://zbahistv63.com/channel.html?id=atv"},
   {id:39, name:"TV 8",    cat:"tr", logo:"https://royaltv33.com/img/tv8.png", stream:"https://zbahistv63.com/channel.html?id=tv8"},
-  {id:40, name:"TV 8,5",         cat:"tr", logo:"https://royaltv33.com/img/tv85.png", stream:"https://zbahistv63.com/channel.html?id=tv85"},
-  
-  {id:41, name:"ABC",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-51.php"},
-  {id:42, name:"BEIN SPORTS USA",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-425.php"},
-  {id:43, name:"BEIN SPORTS XTRA ESPANOL",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dc1644a9jazgj.cloudfront.net/beIN_Sports_Xtra_Espanol1080.m3u8"},
-  {id:44, name:"BET",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-306.php"},
-  {id:45, name:"CNBC",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-309.php"},
-  {id:46, name:"CINEMAX",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-374.php"},
-  {id:47, name:"ESPN",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-44.php"},
-  {id:48, name:"ESPN 2",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-45.php"},
-  {id:49, name:"ESPN U",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-316.php"},
-  {id:50, name:"FOX SPORTS 1",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-39.php"},
-  {id:51, name:"FOX SPORTS 2",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-758.php"},
-  {id:52, name:"FOX DEPORTES",         cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-643.php"},
-  {id:100, name:"HBO", cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-321.php"},
-  {id:101, name:"HBO 2", cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-689.php"},
-  {id:102, name:"NBA TV", cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-404.php"},
-  {id:103, name:"SHOWTIME", cat:"us", logo:"https://play-lh.googleusercontent.com/1QA0O3wticfZUcSkXpj7GkmgMvSBcBSxgxlutUKbaphT-kNdgtnycNCK1z65iaz06A", stream:"https://dlhd.st/stream/stream-333.php"},
-  
-  {id:53, name:"BBC ONE", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-356.php"},
-  {id:54, name:"BBC TWO", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-357.php"},
-  {id:55, name:"BBC THREE", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-358.php"},
-  {id:56, name:"BBC FOUR", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-359.php"},
-  {id:57, name:"DAZN 1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/plus/stream-230.php"},
-  {id:58, name:"ITV 1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-350.php"},
-  {id:59, name:"ITV 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-351.php"},
-  {id:60, name:"ITV 3", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-352.php"},
-  {id:61, name:"ITV 4", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-353.php"},
-  {id:62, name:"SKY SPORTS FOOTBALL", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-35.php"},
-  {id:63, name:"SKY SPORTS ACTION", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-37.php"},
-  {id:64, name:"SKY SPORTS TENNIS", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-46.php"},
-  {id:65, name:"SKY SPORTS F1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-60.php"},
-  {id:66, name:"SKY SPORTS NEWS", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-366.php"},
-  {id:67, name:"SKY SPORTS MIX", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-449.php"},
-  {id:68, name:"SKY SPORTS RACING", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpyg&s=10", stream:"https://dlhd.st/stream/stream-554.php"},
-  {id:69, name:"TNT SPORTS 1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-31.php"},
-  {id:70, name:"TNT SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-32.php"},
-  {id:71, name:"TNT SPORTS 3", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-33.php"},
-  {id:72, name:"TNT SPORTS 4", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-34.php"},
-  {id:73, name:"VIAPLAY SPORTS 1", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpg&s=10", stream:"https://dlhd.st/stream/stream-451.php"},
-  {id:74, name:"VIAPLAY SPORTS 2", cat:"gb", logo:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWliuUCTlNnBS6Sxd_ate5ZZSHTxPHzRj7FAtkx5WWx0uPqICyZKGgKpyg&s=10", stream:"https://dlhd.st/stream/stream-550.php"}
+  {id:40, name:"TV 8,5",         cat:"tr", logo:"https://royaltv33.com/img/tv85.png", stream:"https://zbahistv63.com/channel.html?id=tv85"}
 ];
 
 /* Maç Listesi (14 ve 15 Ağustos) */
@@ -1247,14 +1122,6 @@ const dailyMatchesByDate = [
         awayTeam: "Sarıyer",
         awayLogo: "https://upload.wikimedia.org/wikipedia/tr/a/a8/Sar%C4%B1yerspor.png",
         channelIds: [35]
-      },
-      {
-        time: "22:15",
-        homeTeam: "Sporting",
-        homeLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRHCgQMmLeg-whBMXRDFYF_euuUKJnC0ETSiiVugd66Lw&s=10",
-        awayTeam: "Guimaraes",
-        awayLogo: "https://assets.football-logos.cc/logos/portugal/1500x1500/vitoria-de-guimaraes.68114d60.png",
-        channelIds: []
       }
     ]
   },
@@ -1324,46 +1191,6 @@ const dailyMatchesByDate = [
         awayTeam: "Van Spor FK",
         awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/55/Vanspor_FK.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
         channelIds: [35]
-      },
-      {
-        time: "20:30",
-        homeTeam: "Alaves",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/thumb/2/2e/Deportivo_Alaves_logo.svg/3840px-Deportivo_Alaves_logo.svg.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
-        awayTeam: "Getafe",
-        awayLogo: "https://1000logos.net/wp-content/uploads/2021/09/Getafe-logo.png",
-        channelIds: [17,18]
-      },
-      {
-        time: "22:30",
-        homeTeam: "Sevilla",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/e/ed/Sevillafc.png",
-        awayTeam: "Rayo Vallecano",
-        awayLogo: "https://www.vhv.rs/dpng/d/436-4369693_rayo-vallecano-logo-png-transparent-png.png",
-        channelIds: [17,18]
-      },
-      {
-        time: "17:30",
-        homeTeam: "Alverca FC",
-        homeLogo: "https://assets.football-logos.cc/logos/portugal/700x700/alverca.6c2ab36e.png",
-        awayTeam: "Estrela",
-        awayLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVdInUxO3c7qqiPKhsJjeJgqzDE7t3sQi9YFS0VP51jA&s=10",
-        channelIds: []
-      },
-      {
-        time: "20:00",
-        homeTeam: "Viseu",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/A.C._Viseu.svg/250px-A.C._Viseu.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
-        awayTeam: "Santa Clara",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/en/3/37/C.D._Santa_Clara_logo.svg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: []
-      },
-      {
-        time: "22:30",
-        homeTeam: "Rio Ave",
-        homeLogo: "https://images.seeklogo.com/logo-png/48/1/rio-ave-f-c-logo-png_seeklogo-486181.png",
-        awayTeam: "Porto",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/52/FC.Porto.png",
-        channelIds: []
       }
     ]
   }
