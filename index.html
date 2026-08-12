@@ -1036,7 +1036,7 @@ function sendChatMessage(e) {
   localStorage.setItem('fatbok_chat_user', username);
 
   // Benzersiz mesaj ID üretimi
-  const msgId = 'm_' + Math.random().toString(36.substring(2, 9));
+  const msgId = 'm_' + Math.random().toString(36).substring(2, 9);
 
   socket.emit('chatMessage', { id: msgId, username, message, isAdmin });
   messageInput.value = '';
