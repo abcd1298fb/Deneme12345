@@ -856,7 +856,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
           </div>
         </div>
         <form class="custom-chat-form" id="chatForm" onsubmit="sendChatMessage(event)">
-          <input type="text" id="chatUsername" class="chat-input-name" placeholder="Kullanıcı Adınız" required maxlength="20"/>
+          <input type="text" id="chatUsername" class="chat-input-name" placeholder="Kullanıcı Adınız" required maxlength="20" onchange="checkUsernameAdmin(this)"/>
           <input type="text" id="chatMessageInput" class="chat-input-msg" placeholder="Mesaj yazın..." required maxlength="250" autocomplete="off"/>
           <button type="submit" class="chat-send-btn">Gönder</button>
         </form>
@@ -871,7 +871,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 // Render Canlı Sohbet Sunucu Bağlantısı
 const socket = io('https://fatbokchat.onrender.com');
 
-// Admin Şifresi (Buradan değiştirebilirsin)
+// Admin Şifresi (İstediğin gibi değiştirebilirsin)
 const ADMIN_SECRET_PASS = "fatbok2026"; 
 
 function stringToColor(str) {
@@ -885,6 +885,28 @@ function stringToColor(str) {
     color += ('00' + value.toString(16)).substr(-2);
   }
   return color;
+}
+
+// Kullanıcı adı "Admin" yapıldığında otomatik şifre ekranı çıkarma fonksiyonu
+function checkUsernameAdmin(inputEl) {
+  let name = inputEl.value.trim();
+  
+  // Eğer kullanıcı adı "Admin" (büyük/küçük harf duyarsız) girildiyse ve daha önce doğrulanmadıysa
+  if (name.toLowerCase() === 'admin' && localStorage.getItem('fatbok_is_admin') !== 'true') {
+    let enteredPass = prompt("👑 Yönetici Paneli: Lütfen Admin Şifresini Girin:");
+    
+    if (enteredPass === ADMIN_SECRET_PASS) {
+      localStorage.setItem('fatbok_is_admin', 'true');
+      alert("Şifre doğru! Admin yetkisi aktif.");
+    } else {
+      alert("Hatalı şifre!");
+      localStorage.removeItem('fatbok_is_admin');
+      inputEl.value = ""; // Kutuyu temizle
+    }
+  } else if (name.toLowerCase() !== 'admin') {
+    // Eğer başka isim yazılırsa adminliği kaldır
+    localStorage.removeItem('fatbok_is_admin');
+  }
 }
 
 socket.on('chatMessage', (data) => {
@@ -901,29 +923,10 @@ function sendChatMessage(e) {
   
   if (!username || !message) return;
 
+  // Admin kontrolü (Kullanıcı adı Admin ise ve tarayıcısında yetki onaylıysa)
   let isAdmin = false;
-
-  // Şifreli admin komutu: /admin şifre mesaj
-  if (message.startsWith('/admin ')) {
-    const parts = message.split(' ');
-    const providedPass = parts[1];
-    const actualMsg = parts.slice(2).join(' ');
-
-    if (providedPass === ADMIN_SECRET_PASS) {
-      isAdmin = true;
-      message = actualMsg;
-    } else {
-      alert("Hatalı admin şifresi!");
-      return;
-    }
-  } else {
-    if (localStorage.getItem('fatbok_is_admin') === 'true' && username.toLowerCase() === 'fatbok') {
-      isAdmin = true;
-    }
-  }
-
-  if (isAdmin) {
-    localStorage.setItem('fatbok_is_admin', 'true');
+  if (username.toLowerCase() === 'admin' && localStorage.getItem('fatbok_is_admin') === 'true') {
+    isAdmin = true;
   }
 
   localStorage.setItem('fatbok_chat_user', username);
@@ -938,7 +941,7 @@ function appendMessage(user, text, time, isAdminFlag) {
   const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
 
   const userColor = stringToColor(user);
-  const isAdmin = isAdminFlag || (user.toLowerCase() === 'fatbok' && localStorage.getItem('fatbok_is_admin') === 'true');
+  const isAdmin = isAdminFlag || (user.toLowerCase() === 'admin' && localStorage.getItem('fatbok_is_admin') === 'true');
   
   const div = document.createElement('div');
   div.className = 'chat-msg-item' + (isAdmin ? ' admin-msg' : '');
