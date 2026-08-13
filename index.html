@@ -916,7 +916,10 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       <div class="chat-sidebar-panel hidden" id="chatPanel">
         <div class="chat-header">
           <span>💬 FATBOK Canlı Sohbet</span>
-          <span style="font-size:11px; color:#34c759;">● Çevrimiçi</span>
+          <div style="display: flex; align-items: center; gap: 6px;">
+            <button id="slowModeAdminBtn" onclick="toggleSlowModeAdmin()" style="display:none; background:rgba(255,255,255,0.1); border:1px solid var(--border); color:#fff; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; cursor:pointer;">🐢 Yavaş Mod: Kapalı</button>
+            <span style="font-size:11px; color:#34c759;">● Çevrimiçi</span>
+          </div>
         </div>
 
         <!-- Sabitlenmiş Mesaj Banner -->
@@ -953,6 +956,10 @@ const socket = io('https://fatbokchat.onrender.com');
 // Admin Şifresi
 const ADMIN_SECRET_PASS = "fatbok2026"; 
 
+let slowModeActive = false;
+let lastMessageTime = 0;
+const SLOW_MODE_LIMIT = 3000; // 3 Saniye Bekleme Süresi
+
 function stringToColor(str) {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
@@ -975,7 +982,7 @@ function checkUsernameAdmin(inputEl) {
     
     if (enteredPass === ADMIN_SECRET_PASS) {
       localStorage.setItem('fatbok_is_admin', 'true');
-      alert("Şifre doğru! Admin, sabitleme ve mesaj silme yetkisi aktif.");
+      alert("Şifre doğru! Admin, sabitleme, silme ve yavaş mod yetkisi aktif.");
       location.reload(); 
     } else {
       alert("Hatalı şifre!");
@@ -999,6 +1006,23 @@ socket.on('deleteMessage', (msgId) => {
   }
 });
 
+// Yavaş mod durumunu sunucudan al
+socket.on('slowModeStatus', (isActive) => {
+  slowModeActive = isActive;
+  const adminBtn = document.getElementById('slowModeAdminBtn');
+  if (adminBtn && localStorage.getItem('fatbok_is_admin') === 'true') {
+    adminBtn.textContent = isActive ? "🐢 Yavaş Mod: Açık" : "🐢 Yavaş Mod: Kapalı";
+    adminBtn.style.background = isActive ? "rgba(52, 199, 89, 0.3)" : "rgba(255,255,255,0.1)";
+  }
+});
+
+// Admin Yavaş Modu Açıp Kapatma
+function toggleSlowModeAdmin() {
+  if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
+  let newState = !slowModeActive;
+  socket.emit('toggleSlowMode', newState);
+}
+
 // Sunucudan sabitlenen mesaj gelirse
 socket.on('pinnedMessage', (text) => {
   const banner = document.getElementById('pinnedBanner');
@@ -1020,6 +1044,19 @@ socket.on('pinnedMessage', (text) => {
 
 function sendChatMessage(e) {
   e.preventDefault();
+  
+  const isAdmin = localStorage.getItem('fatbok_is_admin') === 'true';
+  
+  // Normal kullanıcılar için 3 saniye yavaş mod kontrolü
+  if (slowModeActive && !isAdmin) {
+    const currentTime = Date.now();
+    const timeLeft = SLOW_MODE_LIMIT - (currentTime - lastMessageTime);
+    if (timeLeft > 0) {
+      alert(`Yavaş mod aktif! Yeni mesaj göndermek için lütfen ${(timeLeft / 1000).toFixed(1)} saniye bekleyin.`);
+      return;
+    }
+  }
+
   const usernameInput = document.getElementById('chatUsername');
   const messageInput = document.getElementById('chatMessageInput');
   
@@ -1028,9 +1065,9 @@ function sendChatMessage(e) {
   
   if (!username || !message) return;
 
-  let isAdmin = false;
-  if (username.toLowerCase() === 'admin' && localStorage.getItem('fatbok_is_admin') === 'true') {
-    isAdmin = true;
+  let userIsAdminFlag = false;
+  if (username.toLowerCase() === 'admin' && isAdmin) {
+    userIsAdminFlag = true;
   }
 
   localStorage.setItem('fatbok_chat_user', username);
@@ -1038,7 +1075,9 @@ function sendChatMessage(e) {
   // Benzersiz mesaj ID üretimi
   const msgId = 'm_' + Math.random().toString(36).substring(2, 9);
 
-  socket.emit('chatMessage', { id: msgId, username, message, isAdmin });
+  socket.emit('chatMessage', { id: msgId, username, message, isAdmin: userIsAdminFlag });
+  
+  lastMessageTime = Date.now();
   messageInput.value = '';
   messageInput.focus();
 }
@@ -1124,6 +1163,12 @@ window.addEventListener('DOMContentLoaded', () => {
   const savedTheme = localStorage.getItem('fatbok_theme') || 'blue';
   document.getElementById('themeSelect').value = savedTheme;
   changeTheme(savedTheme);
+
+  // Adminse yavaş mod butonunu göster
+  if (localStorage.getItem('fatbok_is_admin') === 'true') {
+    const adminBtn = document.getElementById('slowModeAdminBtn');
+    if (adminBtn) adminBtn.style.display = 'inline-block';
+  }
 
   socket.emit('getPinnedMessage');
 });
