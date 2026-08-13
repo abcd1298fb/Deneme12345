@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FATBOK</title>
+<title>FATBOK - Dashboard Özellikli</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -216,23 +216,23 @@ nav{
 }
 .country-btn .flag-icon { font-size: 14px; }
 
-/* Sekmeler (Kanallar / Maçlar) */
+/* Sekmeler (Dashboard / Kanallar / Maçlar) */
 .main-tabs-wrap {
   display: flex;
   background: rgba(0,0,0,0.3);
   border-bottom: 1px solid var(--border);
   padding: 8px;
-  gap: 8px;
+  gap: 6px;
 }
 .main-tab-btn {
   flex: 1;
-  padding: 8px;
+  padding: 6px 4px;
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);
   border-radius: 6px;
   color: var(--muted2);
   font-weight: 700;
-  font-size: 13px;
+  font-size: 11px;
   cursor: pointer;
   text-align: center;
   transition: 0.2s;
@@ -247,6 +247,40 @@ nav{
 }
 .ch-list::-webkit-scrollbar{width:4px}
 .ch-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px}
+
+/* Dashboard İçeriği Stili */
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 4px;
+}
+.dashboard-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.dashboard-card-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.dashboard-card-value {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text);
+}
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
 
 .ch-card{
   display:flex;align-items:center;gap:12px;
@@ -455,7 +489,7 @@ nav{
   transition: all 0.3s ease;
 }
 
-/* ─── CHAT PANELİ (Masaüstü / Tablet Varsayılan: Sağda) ─── */
+/* ─── CHAT PANELİ ─── */
 .chat-sidebar-panel {
   width: 280px;
   background: rgba(6, 10, 22, 0.95);
@@ -557,14 +591,12 @@ nav{
   line-height: 1.4;
 }
 
-/* Butonlar Grubu */
 .msg-actions {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-/* Sabitleme Butonu (Admin) */
 .pin-msg-btn {
   background: rgba(255, 149, 0, 0.2);
   border: 1px solid rgba(255, 149, 0, 0.4);
@@ -579,7 +611,6 @@ nav{
 }
 .pin-msg-btn:hover { background: rgba(255, 149, 0, 0.4); }
 
-/* Mesaj Silme Butonu (Admin) */
 .delete-msg-btn {
   background: rgba(255, 59, 48, 0.2);
   border: 1px solid rgba(255, 59, 48, 0.4);
@@ -594,7 +625,6 @@ nav{
 }
 .delete-msg-btn:hover { background: rgba(255, 59, 48, 0.4); }
 
-/* RGB Animasyonlu Admin Stilleri */
 @keyframes rgbGlow {
   0% { color: #ff0055; text-shadow: 0 0 8px rgba(255,0,85,0.6); }
   33% { color: #00ff55; text-shadow: 0 0 8px rgba(0,255,85,0.6); }
@@ -799,7 +829,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 .btn-adv-action.secondary { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--border); margin-top: 10px; }
 .btn-adv-action.secondary:hover { background: rgba(255, 255, 255, 0.15); }
 
-/* ─── MOBİL UYUMLULUK VE KANALLAR ÜSTÜNE AÇILAN CHAT ─── */
+/* ─── MOBİL UYUMLULUK ─── */
 @media(max-width:768px){
   .layout{ grid-template-columns:1fr; grid-template-rows: auto 1fr; height: calc(100vh - 58px); }
   .layout.theater-active { grid-template-columns: 1fr; grid-template-rows: calc(100vh - 58px) 0px; }
@@ -811,7 +841,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .nav-search{ max-width: 140px; margin: 0 0 0 auto; }
   .nav-spacer { width: auto; }
 
-  /* Mobilde Chat: Sol kanallar panelinde reklam alanının yukarısını kaplar */
   .ch-sidebar .chat-sidebar-panel {
     position: absolute;
     top: 0;
@@ -862,8 +891,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 <div class="layout" id="mainLayout">
 
   <div class="ch-sidebar">
-    <!-- Ana Sekmeler (Kanallar / Maçlar) -->
+    <!-- Ana Sekmeler (Dashboard / Kanallar / Maçlar) -->
     <div class="main-tabs-wrap">
+      <button class="main-tab-btn" id="tabDashboardBtn" onclick="switchMainTab('dashboard')">📊 Dashboard</button>
       <button class="main-tab-btn active" id="tabChannelsBtn" onclick="switchMainTab('channels')">📺 Kanallar</button>
       <button class="main-tab-btn" id="tabMatchesBtn" onclick="switchMainTab('matches')">⚽ Maçlar</button>
     </div>
@@ -928,7 +958,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         </div>
       </div>
 
-      <!-- Canlı Sohbet Paneli (Masaüstü/Tablet: Sağda standart akışta) -->
+      <!-- Canlı Sohbet Paneli -->
       <div class="chat-sidebar-panel hidden" id="chatPanel">
         <div class="chat-header">
           <span>💬 FATBOK Canlı Sohbet</span>
@@ -966,15 +996,12 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 </div>
 
 <script>
-// Render Canlı Sohbet Sunucu Bağlantısı
 const socket = io('https://fatbokchat.onrender.com');
 
-// Dinamik Admin Şifresi Yönetimi (Varsayılan şifre: fatbok2026, localStorage'dan alınır)
 function getAdminPassword() {
   return localStorage.getItem('fatbok_admin_pass') || "fatbok2026";
 }
 
-// Yeni şifre güncelleme fonksiyonu
 function updateAdminPassword() {
   if (localStorage.getItem('fatbok_is_admin') !== 'true') {
     alert("Bu işlem için yetkiniz yok!");
@@ -996,7 +1023,7 @@ function updateAdminPassword() {
 
 let slowModeActive = false;
 let lastMessageTime = 0;
-const SLOW_MODE_LIMIT = 3000; // 3 Saniye Bekleme Süresi
+const SLOW_MODE_LIMIT = 3000;
 
 function stringToColor(str) {
   let hash = 0;
@@ -1011,7 +1038,6 @@ function stringToColor(str) {
   return color;
 }
 
-// Kullanıcı adı "Admin" yapıldığında şifre sorma
 function checkUsernameAdmin(inputEl) {
   let name = inputEl.value.trim();
   
@@ -1036,7 +1062,6 @@ socket.on('chatMessage', (data) => {
   appendMessage(data.id, data.username, data.message, data.time, data.isAdmin);
 });
 
-// Sunucudan mesaj silme sinyali gelirse ekrandan kaldır
 socket.on('deleteMessage', (msgId) => {
   const msgEl = document.getElementById(`msg-${msgId}`);
   if (msgEl) {
@@ -1044,7 +1069,6 @@ socket.on('deleteMessage', (msgId) => {
   }
 });
 
-// Yavaş mod durumunu sunucudan al
 socket.on('slowModeStatus', (isActive) => {
   slowModeActive = isActive;
   const adminBtn = document.getElementById('slowModeAdminBtn');
@@ -1054,14 +1078,12 @@ socket.on('slowModeStatus', (isActive) => {
   }
 });
 
-// Admin Yavaş Modu Açıp Kapatma
 function toggleSlowModeAdmin() {
   if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
   let newState = !slowModeActive;
   socket.emit('toggleSlowMode', newState);
 }
 
-// Sunucudan sabitlenen mesaj gelirse
 socket.on('pinnedMessage', (text) => {
   const banner = document.getElementById('pinnedBanner');
   const textEl = document.getElementById('pinnedText');
@@ -1082,10 +1104,8 @@ socket.on('pinnedMessage', (text) => {
 
 function sendChatMessage(e) {
   e.preventDefault();
-  
   const isAdmin = localStorage.getItem('fatbok_is_admin') === 'true';
   
-  // Normal kullanıcılar için 3 saniye yavaş mod kontrolü
   if (slowModeActive && !isAdmin) {
     const currentTime = Date.now();
     const timeLeft = SLOW_MODE_LIMIT - (currentTime - lastMessageTime);
@@ -1109,8 +1129,6 @@ function sendChatMessage(e) {
   }
 
   localStorage.setItem('fatbok_chat_user', username);
-
-  // Benzersiz mesaj ID üretimi
   const msgId = 'm_' + Math.random().toString(36).substring(2, 9);
 
   socket.emit('chatMessage', { id: msgId, username, message, isAdmin: userIsAdminFlag });
@@ -1120,7 +1138,6 @@ function sendChatMessage(e) {
   messageInput.focus();
 }
 
-// Mesajı Herkes İçin Silme (Sadece Admin Tetikleyebilir)
 function deleteMessage(msgId) {
   if (localStorage.getItem('fatbok_is_admin') !== 'true') {
     alert("Bu işlem için yetkiniz yok!");
@@ -1129,13 +1146,11 @@ function deleteMessage(msgId) {
   socket.emit('deleteMessage', msgId);
 }
 
-// Mesajı Sabitleme
 function pinMessage(text) {
   if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
   socket.emit('pinMessage', text);
 }
 
-// Sabitlenen Mesajı Kaldırma
 function unpinMessage() {
   if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
   socket.emit('pinMessage', "");
@@ -1151,9 +1166,7 @@ function appendMessage(msgId, user, text, time, isAdminFlag) {
   
   const div = document.createElement('div');
   div.className = 'chat-msg-item' + (isAdmin ? ' admin-msg' : '');
-  if (msgId) {
-    div.id = `msg-${msgId}`;
-  }
+  if (msgId) div.id = `msg-${msgId}`;
   
   div.innerHTML = `
     <div class="chat-msg-header">
@@ -1205,7 +1218,6 @@ function toggleChatPanel() {
   chatPanel.classList.toggle('hidden');
 }
 
-// Sayfa yüklendiğinde ekrana göre chat panelini doğru yere konumlandır
 window.addEventListener('DOMContentLoaded', () => {
   const savedUser = localStorage.getItem('fatbok_chat_user');
   if (savedUser) {
@@ -1215,7 +1227,6 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('themeSelect').value = savedTheme;
   changeTheme(savedTheme);
 
-  // Adminse yavaş mod butonunu ve şifre değiştirme butonunu göster
   if (localStorage.getItem('fatbok_is_admin') === 'true') {
     const adminBtn = document.getElementById('slowModeAdminBtn');
     if (adminBtn) adminBtn.style.display = 'inline-block';
@@ -1307,11 +1318,10 @@ const channels = [
   {id:44, name:"A Spor",         cat:"tr", logo:"https://royaltv33.com/img/aspornew.png", stream:"https://zbahistv65.com/channel.html?id=as"},
   {id:45, name:"TRT 1",          cat:"tr", logo:"https://royaltv33.com/img/trt1.png", stream:"https://tv-trt1.medya.trt.com.tr/master.m3u8"},
   {id:46, name:"ATV",            cat:"tr", logo:"https://royaltv33.com/img/atv.png", stream:"https://zbahistv65.com/channel.html?id=atv"},
-  {id:47, name:"TV 8",    cat:"tr", logo:"https://royaltv33.com/img/tv8.png", stream:"https://zbahistv65.com/channel.html?id=tv8"},
+  {id:47, name:"TV 8",           cat:"tr", logo:"https://royaltv33.com/img/tv8.png", stream:"https://zbahistv65.com/channel.html?id=tv8"},
   {id:48, name:"TV 8,5",         cat:"tr", logo:"https://royaltv33.com/img/tv85.png", stream:"https://zbahistv65.com/channel.html?id=tv85"}
 ];
 
-/* Maç Listesi */
 const dailyMatchesByDate = [
   {
     date: "14 Ağustos 2026",
@@ -1352,70 +1362,6 @@ const dailyMatchesByDate = [
         awayTeam: "Ç. Rizespor",
         awayLogo: "https://upload.wikimedia.org/wikipedia/tr/f/f6/%C3%87aykur_Rizespor_Logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
         channelIds: [4,5,6]
-      },
-      {
-        time: "21:30",
-        homeTeam: "Gaziantep FK",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/1/1a/GFK-Official-Logo.png",
-        awayTeam: "Alanyaspor",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/2/29/Alanyaspor_logo.png",
-        channelIds: [4,5,6]
-      },
-      {
-        time: "21:30",
-        homeTeam: "Gençlerbirliği",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/f/f7/Genclerbirligi.png",
-        awayTeam: "Fenerbahçe",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
-        channelIds: [1, 2, 3]
-      },
-      {
-        time: "19:00",
-        homeTeam: "İstanbulspor",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/e/ed/IstanbulsporAS.png",
-        awayTeam: "Bodrum FK",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/1/13/Bodrum_Belediyesi_Bodrumspor.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [43]
-      },
-      {
-        time: "19:00",
-        homeTeam: "Karagümrük",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/9/90/Fatihkaragumruk.png",
-        awayTeam: "Ümraniyespor",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/7/75/%C3%9Cmraniyespor_Logosu.png",
-        channelIds: [43]
-      },
-      {
-        time: "21:30",
-        homeTeam: "Bursaspor",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/5/5c/20130909123854%21Bursaspor-amblem.png",
-        awayTeam: "Iğdır FK",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/57/I%C4%9Fd%C4%B1r_FK_logo.png",
-        channelIds: [43]
-      },
-      {
-        time: "20:30",
-        homeTeam: "Alaves",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/thumb/2/2e/Deportivo_Alaves_logo.svg/3840px-Deportivo_Alaves_logo.svg.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
-        awayTeam: "Getafe",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Getafe_CF_Logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [17,18]
-      },
-      {
-        time: "22:30",
-        homeTeam: "Sevilla",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/e/ed/20230224114130%21Sevillafc.png",
-        awayTeam: "Rayo Vallecano",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/d/db/Rayovallecano.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [17,18]
-      },
-      {
-        time: "21:30",
-        homeTeam: "Manisa FK",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/d/dd/Manisa_FK.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "Van Spor FK",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/5/55/Vanspor_FK.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [43]
       }
     ]
   }
@@ -1429,7 +1375,7 @@ let activeTab = 'channels';
 let activeId = null;
 let hlsInstance = null;
 let selectedChannelObj = null;
-let plyrInstance = null;
+letplyrInstance = null;
 
 function initPlyr() {
   if (!plyrInstance) {
@@ -1442,13 +1388,18 @@ function initPlyr() {
 
 function switchMainTab(tab) {
   activeTab = tab;
+  document.getElementById('tabDashboardBtn').classList.toggle('active', tab === 'dashboard');
   document.getElementById('tabChannelsBtn').classList.toggle('active', tab === 'channels');
   document.getElementById('tabMatchesBtn').classList.toggle('active', tab === 'matches');
   
   const countryFilters = document.getElementById('countryFilters');
   const searchInput = document.getElementById('searchInput');
 
-  if (tab === 'matches') {
+  if (tab === 'dashboard') {
+    countryFilters.style.display = 'none';
+    if(searchInput) searchInput.parentElement.style.display = 'none';
+    renderDashboardView();
+  } else if (tab === 'matches') {
     countryFilters.style.display = 'none';
     if(searchInput) searchInput.parentElement.style.display = 'none';
     renderMatchesList();
@@ -1458,6 +1409,36 @@ function switchMainTab(tab) {
     renderCountryFilters();
     renderList();
   }
+}
+
+/* Dashboard Görünümü Render Fonksiyonu */
+function renderDashboardView() {
+  const list = document.getElementById('chList');
+  list.innerHTML = `
+    <div class="dashboard-container">
+      <div class="date-group-header">Genel Durum</div>
+      <div class="dashboard-grid">
+        <div class="dashboard-card">
+          <span class="dashboard-card-title">Toplam Kanal</span>
+          <span class="dashboard-card-value">${channels.length}</span>
+        </div>
+        <div class="dashboard-card">
+          <span class="dashboard-card-title">Aktif Maçlar</span>
+          <span class="dashboard-card-value">${dailyMatchesByDate.reduce((acc, curr) => acc + curr.matches.length, 0)}</span>
+        </div>
+      </div>
+      <div class="dashboard-card">
+        <span class="dashboard-card-title">Sistem Durumu</span>
+        <span class="dashboard-card-value" style="font-size: 14px; color: #34c759;">🟢 Tüm Yayın Sunucuları Aktif</span>
+      </div>
+      <div class="date-group-header">Hızlı İşlemler</div>
+      <div class="dashboard-card" style="gap:10px;">
+        <span class="dashboard-card-title">Yönetim Kısayolları</span>
+        <button class="alt-stream-btn" onclick="toggleChatPanel()">💬 Sohbet Panelini Aç/Kapat</button>
+        <button class="alt-stream-btn" onclick="updateAdminPassword()">🔑 Yönetim Şifresini Değiştir</button>
+      </div>
+    </div>
+  `;
 }
 
 function renderCountryFilters() {
