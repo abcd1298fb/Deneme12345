@@ -119,7 +119,7 @@ nav{
 }
 .nav-search input::placeholder{color:var(--muted)}
 .search-icon{color:var(--muted);font-size:14px;flex-shrink:0}
-.nav-spacer { width: 150px; flex-shrink: 0; display: flex; justify-content: flex-end; align-items: center; }
+.nav-spacer { width: 150px; flex-shrink: 0; display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
 .live-dot{width:7px;height:7px;background:#34c759;border-radius:50%;opacity:0.9;}
 
 /* Renk Tema Seçici CSS */
@@ -845,6 +845,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
     <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="filterChannels(this.value)"/>
   </div>
   <div class="nav-spacer">
+    <button id="changePassBtn" onclick="updateAdminPassword()" style="display:none; background:rgba(255,149,0,0.2); border:1px solid rgba(255,149,0,0.4); color:#ff9500; font-size:11px; font-weight:700; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Admin Şifresini Değiştir">🔑 Şifre Değiştir</button>
     <div class="theme-picker-wrap">
       <span class="theme-icon">🎨</span>
       <select class="theme-select" id="themeSelect" onchange="changeTheme(this.value)">
@@ -916,7 +917,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
           <div class="adv-interstitial-card">
             <h3>Yayın Hazırlanıyor</h3>
             <p id="advText">Sadece 1 Reklam İzleyerek Yayına Bağlanabilirsiniz.</p>
-            <button id="advBtn" class="btn-adv-action" onclick="handleAdClick()">🔗 Reklamı Geç ve İzle</button>
+            <button id="advBtn" class="btn-adv-action" onclick="handleAdClick()">🔗 Reklamı Geç dan İzle</button>
           </div>
         </div>
 
@@ -968,8 +969,30 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 // Render Canlı Sohbet Sunucu Bağlantısı
 const socket = io('https://fatbokchat.onrender.com');
 
-// Admin Şifresi
-const ADMIN_SECRET_PASS = "fatbok2026"; 
+// Dinamik Admin Şifresi Yönetimi (Varsayılan şifre: fatbok2026, localStorage'dan alınır)
+function getAdminPassword() {
+  return localStorage.getItem('fatbok_admin_pass') || "fatbok2026";
+}
+
+// Yeni şifre güncelleme fonksiyonu
+function updateAdminPassword() {
+  if (localStorage.getItem('fatbok_is_admin') !== 'true') {
+    alert("Bu işlem için yetkiniz yok!");
+    return;
+  }
+  let currentPassCheck = prompt("Mevcut admin şifresini girin:");
+  if (currentPassCheck !== getAdminPassword()) {
+    alert("Mevcut şifre hatalı!");
+    return;
+  }
+  let newPass = prompt("Yeni admin şifresini girin:");
+  if (newPass && newPass.trim() !== "") {
+    localStorage.setItem('fatbok_admin_pass', newPass.trim());
+    alert("Admin şifresi başarıyla güncellendi!");
+  } else {
+    alert("Şifre boş olamaz!");
+  }
+}
 
 let slowModeActive = false;
 let lastMessageTime = 0;
@@ -995,9 +1018,9 @@ function checkUsernameAdmin(inputEl) {
   if (name.toLowerCase() === 'admin' && localStorage.getItem('fatbok_is_admin') !== 'true') {
     let enteredPass = prompt("👑 Yönetici Paneli: Lütfen Admin Şifresini Girin:");
     
-    if (enteredPass === ADMIN_SECRET_PASS) {
+    if (enteredPass === getAdminPassword()) {
       localStorage.setItem('fatbok_is_admin', 'true');
-      alert("Şifre doğru! Admin, sabitleme, silme ve yavaş mod yetkisi aktif.");
+      alert("Şifre doğru! Admin, sabitleme, silme, yavaş mod ve şifre değiştirme yetkisi aktif.");
       location.reload(); 
     } else {
       alert("Hatalı şifre!");
@@ -1168,7 +1191,6 @@ function escapeHtml(str) {
 
 function toggleChatPanel() {
   const chatPanel = document.getElementById('chatPanel');
-  // Mobilde ise ch-sidebar içerisinden taşı veya mobildeki davranışa göre yönet
   if (window.innerWidth <= 768) {
     const chSidebar = document.querySelector('.ch-sidebar');
     if (chatPanel.parentElement !== chSidebar) {
@@ -1193,10 +1215,13 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('themeSelect').value = savedTheme;
   changeTheme(savedTheme);
 
-  // Adminse yavaş mod butonunu göster
+  // Adminse yavaş mod butonunu ve şifre değiştirme butonunu göster
   if (localStorage.getItem('fatbok_is_admin') === 'true') {
     const adminBtn = document.getElementById('slowModeAdminBtn');
     if (adminBtn) adminBtn.style.display = 'inline-block';
+    
+    const changePassBtn = document.getElementById('changePassBtn');
+    if (changePassBtn) changePassBtn.style.display = 'inline-block';
   }
 
   const chatPanel = document.getElementById('chatPanel');
