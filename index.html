@@ -174,11 +174,7 @@ nav{
   transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s;
   contain: layout style;
   height: 100%;
-}
-.layout.theater-active .ch-sidebar {
-  transform: translateX(-320px);
-  opacity: 0;
-  pointer-events: none;
+  position: relative; /* Mobilde chat'i konumlandırmak için */
 }
 
 .country-filter-wrap{
@@ -798,11 +794,11 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 .btn-adv-action.secondary { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--border); margin-top: 10px; }
 .btn-adv-action.secondary:hover { background: rgba(255, 255, 255, 0.15); }
 
-/* ─── MOBİL UYUMLULUK VE ALT ÇEKMECE CHAT ─── */
+/* ─── MOBİL UYUMLULUK VE KANALLAR ÜSTÜNE AÇILAN CHAT ─── */
 @media(max-width:768px){
   .layout{ grid-template-columns:1fr; grid-template-rows: auto 1fr; height: calc(100vh - 58px); }
   .layout.theater-active { grid-template-columns: 1fr; grid-template-rows: calc(100vh - 58px) 0px; }
-  .ch-sidebar{ flex: 1; height: auto; max-height: none; border-right:none; order:2; }
+  .ch-sidebar{ flex: 1; height: auto; max-height: none; border-right:none; order:2; position: relative; }
   .layout.theater-active .ch-sidebar { transform: translateY(100%); max-height: 0px; opacity: 0; padding: 0; }
   .player-area{ order:1; height: auto; }
   nav{padding:0 14px}
@@ -810,29 +806,23 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .nav-search{ max-width: 140px; margin: 0 0 0 auto; }
   .nav-spacer { width: auto; }
 
-  .content-body-flex { position: relative; }
-  
-  /* Mobilde Chat: Aşağıdan yukarıya doğru açılan alt çekmece (Bottom Sheet) */
+  /* Mobilde Chat: Doğrudan kanallar sidebar'ının içine, reklam panelinin hemen üstüne yerleşir */
   .chat-sidebar-panel {
     position: absolute;
+    top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0; /* Reklam alanına kadar olan tüm kanallar/maçlar listesini kaplar */
     width: 100% !important;
-    height: 65vh;
-    max-height: 450px;
+    height: 100% !important;
+    z-index: 50;
+    background: rgba(6, 10, 22, 0.98);
     border-left: none;
-    border-top: 1px solid var(--border);
-    border-radius: 16px 16px 0 0;
-    box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
-    z-index: 100;
-    transform: translateY(0);
-    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
   
   .chat-sidebar-panel.hidden {
-    transform: translateY(100%) !important;
-    width: 100% !important;
+    transform: translateY(-20px);
     opacity: 0;
     pointer-events: none;
   }
@@ -874,6 +864,38 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
     <div class="country-filter-wrap" id="countryFilters"></div>
     <div class="ch-list" id="chList"></div>
+
+    <!-- Canlı Sohbet Paneli (Mobilde kanallar alanını tam kaplar) -->
+    <div class="chat-sidebar-panel hidden" id="chatPanel">
+      <div class="chat-header">
+        <span>💬 FATBOK Canlı Sohbet</span>
+        <div style="display: flex; align-items: center; gap: 6px;">
+          <button id="slowModeAdminBtn" onclick="toggleSlowModeAdmin()" style="display:none; background:rgba(255,255,255,0.1); border:1px solid var(--border); color:#fff; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; cursor:pointer;">🐢 Yavaş Mod: Kapalı</button>
+          <span style="font-size:11px; color:#34c759;">● Çevrimiçi</span>
+        </div>
+      </div>
+
+      <!-- Sabitlenmiş Mesaj Banner -->
+      <div class="pinned-message-banner" id="pinnedBanner">
+        <div class="pinned-banner-header">
+          <span>📌 Sabitlenen Mesaj</span>
+          <button class="unpin-btn" id="unpinBtn" onclick="unpinMessage()" style="display:none;">Kaldır</button>
+        </div>
+        <div class="pinned-banner-text" id="pinnedText">Yok</div>
+      </div>
+
+      <div class="custom-chat-messages" id="chatMessages">
+        <div class="chat-msg-item">
+          <div class="chat-msg-header"><span class="chat-msg-user" style="color:var(--accent);">Sistem</span><span class="chat-msg-time">Şimdi</span></div>
+          <div class="chat-msg-text">Sohbete hoş geldiniz!</div>
+        </div>
+      </div>
+      <form class="custom-chat-form" id="chatForm" onsubmit="sendChatMessage(event)">
+        <input type="text" id="chatUsername" class="chat-input-name" placeholder="Kullanıcı Adınız" required maxlength="20" onchange="checkUsernameAdmin(this)"/>
+        <input type="text" id="chatMessageInput" class="chat-input-msg" placeholder="Mesaj yazın..." required maxlength="250" autocomplete="off"/>
+        <button type="submit" class="chat-send-btn">Gönder</button>
+      </form>
+    </div>
     
     <div class="adv-panel">
       <a href="mailto:fatbokproton@proton.me?subject=Reklam%20Basvurusu" class="adv-link">
@@ -930,38 +952,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         <div id="plyrWrapper" class="plyr-container-box">
           <video id="hlsPlayer" controls autoplay playsinline></video>
         </div>
-      </div>
-
-      <!-- Canlı Sohbet Paneli -->
-      <div class="chat-sidebar-panel hidden" id="chatPanel">
-        <div class="chat-header">
-          <span>💬 FATBOK Canlı Sohbet</span>
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <button id="slowModeAdminBtn" onclick="toggleSlowModeAdmin()" style="display:none; background:rgba(255,255,255,0.1); border:1px solid var(--border); color:#fff; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; cursor:pointer;">🐢 Yavaş Mod: Kapalı</button>
-            <span style="font-size:11px; color:#34c759;">● Çevrimiçi</span>
-          </div>
-        </div>
-
-        <!-- Sabitlenmiş Mesaj Banner -->
-        <div class="pinned-message-banner" id="pinnedBanner">
-          <div class="pinned-banner-header">
-            <span>📌 Sabitlenen Mesaj</span>
-            <button class="unpin-btn" id="unpinBtn" onclick="unpinMessage()" style="display:none;">Kaldır</button>
-          </div>
-          <div class="pinned-banner-text" id="pinnedText">Yok</div>
-        </div>
-
-        <div class="custom-chat-messages" id="chatMessages">
-          <div class="chat-msg-item">
-            <div class="chat-msg-header"><span class="chat-msg-user" style="color:var(--accent);">Sistem</span><span class="chat-msg-time">Şimdi</span></div>
-            <div class="chat-msg-text">Sohbete hoş geldiniz!</div>
-          </div>
-        </div>
-        <form class="custom-chat-form" id="chatForm" onsubmit="sendChatMessage(event)">
-          <input type="text" id="chatUsername" class="chat-input-name" placeholder="Kullanıcı Adınız" required maxlength="20" onchange="checkUsernameAdmin(this)"/>
-          <input type="text" id="chatMessageInput" class="chat-input-msg" placeholder="Mesaj yazın..." required maxlength="250" autocomplete="off"/>
-          <button type="submit" class="chat-send-btn">Gönder</button>
-        </form>
       </div>
     </div>
 
