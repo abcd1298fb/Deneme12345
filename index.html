@@ -454,7 +454,7 @@ nav{
   transition: all 0.3s ease;
 }
 
-/* ─── CHAT PANELİ ─── */
+/* ─── CHAT PANELİ (Masaüstü Varsayılan) ─── */
 .chat-sidebar-panel {
   width: 280px;
   background: rgba(6, 10, 22, 0.95);
@@ -798,6 +798,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 .btn-adv-action.secondary { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--border); margin-top: 10px; }
 .btn-adv-action.secondary:hover { background: rgba(255, 255, 255, 0.15); }
 
+/* ─── MOBİL UYUMLULUK VE ALT ÇEKMECE CHAT ─── */
 @media(max-width:768px){
   .layout{ grid-template-columns:1fr; grid-template-rows: auto 1fr; height: calc(100vh - 58px); }
   .layout.theater-active { grid-template-columns: 1fr; grid-template-rows: calc(100vh - 58px) 0px; }
@@ -809,12 +810,31 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .nav-search{ max-width: 140px; margin: 0 0 0 auto; }
   .nav-spacer { width: auto; }
 
+  .content-body-flex { position: relative; }
+  
+  /* Mobilde Chat: Aşağıdan yukarıya doğru açılan alt çekmece (Bottom Sheet) */
   .chat-sidebar-panel {
-    position: absolute; right: 0; top: 0; bottom: 0; width: 230px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100% !important;
+    height: 65vh;
+    max-height: 450px;
+    border-left: none;
+    border-top: 1px solid var(--border);
+    border-radius: 16px 16px 0 0;
+    box-shadow: 0 -10px 30px rgba(0,0,0,0.8);
+    z-index: 100;
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s ease;
   }
+  
   .chat-sidebar-panel.hidden {
-    transform: translateX(230px);
-    width: 230px;
+    transform: translateY(100%) !important;
+    width: 100% !important;
+    opacity: 0;
+    pointer-events: none;
   }
 }
 </style>
