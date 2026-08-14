@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FATBOK - Dashboard Özellikli</title>
+<title>FATBOK</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
@@ -16,7 +16,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --bg:#02050f;
-  --surface: rgba(10, 15, 30, 0.85);
+  --surface: rgba(10, 15, 30, 0.95);
   --surface2: rgba(255, 255, 255, 0.03);
   --surface3: rgba(0, 122, 255, 0.2);
   --border: rgba(255, 255, 255, 0.14);
@@ -27,7 +27,6 @@
   --text:#ffffff;
   --muted:#7ba1d5;
   --muted2:#94a3b8;
-  --ambient-glow-color: rgba(0, 122, 255, 0.35);
   
   --plyr-color-main: var(--accent);
   --plyr-video-background: #000000;
@@ -42,53 +41,24 @@ body{
   position: relative;
 }
 
-/* ─── ARKA PLAN ─── */
+/* ─── ARKA PLAN (Optimize Edildi) ─── */
 .liquid-bg {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: -1;
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 50%, #030a1e 0%, #010307 100%);
-  contain: strict;
-}
-.liquid-bg::before, .liquid-bg::after {
-  content: '';
-  position: absolute;
-  width: 600px; height: 600px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #002266, #0055ff);
-  filter: blur(80px);
-  opacity: 0.35;
-  will-change: transform;
-  transform: translateZ(0);
-  animation: liquidFloat 25s infinite ease-in-out;
-}
-.liquid-bg::after {
-  background: linear-gradient(135deg, #001133, #007aff);
-  right: -50px; top: -50px;
-  width: 500px; height: 500px;
-  opacity: 0.2;
-  animation: liquidFloat 30s infinite ease-in-out reverse;
-  animation-delay: -5s;
-}
-
-@keyframes liquidFloat {
-  0% { transform: translate3d(-20px, -20px, 0) scale(1); }
-  50% { transform: translate3d(30px, 20px, 0) scale(1.08); }
-  100% { transform: translate3d(-20px, -20px, 0) scale(1); }
+  background: #02050f;
 }
 
 /* ─── NAV ─── */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:300;
   height:58px;
-  background: rgba(2, 6, 18, 0.92);
+  background: rgba(2, 6, 18, 0.98);
   border-bottom:1px solid var(--border);
   display:flex;align-items:center;
   justify-content: space-between;
   padding:0 24px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  contain: layout style;
 }
 .nav-logo{
   font-family:'Barlow Condensed',sans-serif;
@@ -99,9 +69,7 @@ nav{
   width: 150px;
   cursor: pointer;
   user-select: none;
-  transition: transform 0.2s;
 }
-.nav-logo:active { transform: scale(0.95); }
 .nav-search{
   flex:1;
   max-width:320px;
@@ -109,7 +77,6 @@ nav{
   background: rgba(255, 255, 255, 0.06);
   border:1px solid var(--border);
   border-radius:8px;padding:0 14px;height:36px;
-  box-shadow: inset 0 1px 4px rgba(0,0,0,0.3);
   margin: 0 auto;
 }
 .nav-search input{
@@ -122,45 +89,12 @@ nav{
 .nav-spacer { width: 150px; flex-shrink: 0; display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
 .live-dot{width:7px;height:7px;background:#34c759;border-radius:50%;opacity:0.9;}
 
-/* Renk Tema Seçici CSS */
-.theme-picker-wrap {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
-  padding: 4px 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 0.2s, background 0.2s;
-}
-.theme-picker-wrap:hover {
-  border-color: var(--accent);
-  background: rgba(255, 255, 255, 0.12);
-}
-.theme-icon { font-size: 14px; }
-.theme-select {
-  background: transparent;
-  border: none;
-  color: var(--text);
-  font-size: 12px;
-  font-weight: 700;
-  outline: none;
-  cursor: pointer;
-  font-family: 'Manrope', sans-serif;
-}
-.theme-select option {
-  background: #060e20;
-  color: #fff;
-}
-
 /* ─── LAYOUT ─── */
 .layout{
   display:grid;
   grid-template-columns:320px 1fr;
   margin-top:58px;
   height:calc(100vh - 58px);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .layout.theater-active { grid-template-columns: 0px 1fr; }
 
@@ -170,9 +104,6 @@ nav{
   border-right:1px solid var(--border);
   display:flex;flex-direction:column;
   overflow:hidden;
-  box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
-  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.3s;
-  contain: layout style;
   height: 100%;
   position: relative;
 }
@@ -204,11 +135,6 @@ nav{
   color: var(--text);
   font-size: 12px; font-weight: 600;
   cursor: pointer; white-space: nowrap;
-  transition: background 0.2s;
-}
-.country-btn:hover{
-  background: rgba(255, 255, 255, 0.1);
-  border-color: rgba(255, 255, 255, 0.3);
 }
 .country-btn.active{
   background: var(--accent);
@@ -216,82 +142,44 @@ nav{
 }
 .country-btn .flag-icon { font-size: 14px; }
 
-/* Sekmeler (Dashboard / Kanallar / Maçlar) */
+/* Sekmeler (Kanallar / Maçlar) */
 .main-tabs-wrap {
   display: flex;
   background: rgba(0,0,0,0.3);
   border-bottom: 1px solid var(--border);
   padding: 8px;
-  gap: 6px;
+  gap: 8px;
 }
 .main-tab-btn {
   flex: 1;
-  padding: 6px 4px;
+  padding: 8px;
   background: rgba(255,255,255,0.05);
   border: 1px solid var(--border);
   border-radius: 6px;
   color: var(--muted2);
   font-weight: 700;
-  font-size: 11px;
+  font-size: 13px;
   cursor: pointer;
   text-align: center;
-  transition: 0.2s;
 }
-.main-tab-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
 .main-tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
 .ch-list{
   flex:1;overflow-y:auto;padding:8px;
   position: relative;
-  will-change: scroll-position;
 }
 .ch-list::-webkit-scrollbar{width:4px}
 .ch-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px}
 
-/* Dashboard İçeriği Stili */
-.dashboard-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 4px;
-}
-.dashboard-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.dashboard-card-title {
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-.dashboard-card-value {
-  font-size: 20px;
-  font-weight: 800;
-  color: var(--text);
-}
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 8px;
-}
-
 .ch-card{
   display:flex;align-items:center;gap:12px;
   padding:12px;border-radius:8px;
-  cursor:pointer;transition:background .18s, border-color .18s;
+  cursor:pointer;
   border:1px solid transparent;
   margin-bottom:4px;
   background: rgba(255, 255, 255, 0.02);
   position: relative;
   overflow: hidden;
-  contain: content;
 }
 .ch-card:hover{
   background: rgba(255, 255, 255, 0.09);
@@ -350,7 +238,6 @@ nav{
   border-radius: 8px;
   margin-bottom: 6px;
   gap: 8px;
-  transition: border-color 0.18s;
 }
 .match-card:hover {
   border-color: rgba(255, 255, 255, 0.25);
@@ -425,14 +312,34 @@ nav{
   padding: 5px 4px;
   cursor: pointer;
   text-align: center;
-  transition: background 0.2s, border-color 0.2s, transform 0.1s;
 }
 .alt-stream-btn:hover {
   background: var(--accent);
   border-color: var(--accent);
 }
-.alt-stream-btn:active {
-  transform: scale(0.96);
+
+/* DOMAIN ALERT (YENİ EKLENEN) */
+.domain-alert {
+  padding: 12px;
+  background: rgba(255, 59, 48, 0.08);
+  border-top: 1px solid rgba(255, 59, 48, 0.2);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.domain-alert-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.domain-icon { font-size: 16px; }
+.domain-link {
+  color: #ff3b30;
+  font-weight: 800;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 /* REKLAM ALANI */
@@ -453,12 +360,6 @@ nav{
   color:var(--muted2);
   font-size:12px; font-weight:600; letter-spacing:0.5px;
   text-align:center; cursor:pointer;
-  transition:border-color 0.2s, background 0.2s;
-}
-.adv-box:hover{
-  border-color:var(--accent);
-  color:var(--text);
-  background: var(--accent-glow);
 }
 
 /* ─── PLAYER AREA & CHAT YAPISI ─── */
@@ -467,7 +368,6 @@ nav{
   overflow:hidden;
   background:transparent;
   position: relative;
-  contain: layout style;
 }
 
 .content-body-flex {
@@ -486,17 +386,15 @@ nav{
   position: relative;
   background: #000;
   min-height: 250px;
-  transition: all 0.3s ease;
 }
 
 /* ─── CHAT PANELİ ─── */
 .chat-sidebar-panel {
   width: 280px;
-  background: rgba(6, 10, 22, 0.95);
+  background: rgba(6, 10, 22, 0.98);
   border-left: 1px solid var(--border);
   display: flex;
   flex-direction: column;
-  transition: transform 0.3s ease, width 0.3s ease, opacity 0.3s ease;
   z-index: 20;
   flex-shrink: 0;
   height: 100%;
@@ -516,7 +414,6 @@ nav{
   background: rgba(0,0,0,0.2);
 }
 
-/* Sabitlenmiş Mesaj Banner */
 .pinned-message-banner {
   background: rgba(255, 149, 0, 0.12);
   border-bottom: 1px solid rgba(255, 149, 0, 0.3);
@@ -564,13 +461,7 @@ nav{
   border-radius: 6px;
   font-size: 12px;
   word-break: break-word;
-  animation: fadeIn 0.25s ease;
   position: relative;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
 }
 
 .chat-msg-header {
@@ -607,9 +498,7 @@ nav{
   border-radius: 4px;
   cursor: pointer;
   display: none;
-  transition: background 0.2s;
 }
-.pin-msg-btn:hover { background: rgba(255, 149, 0, 0.4); }
 
 .delete-msg-btn {
   background: rgba(255, 59, 48, 0.2);
@@ -621,23 +510,11 @@ nav{
   border-radius: 4px;
   cursor: pointer;
   display: none;
-  transition: background 0.2s;
 }
-.delete-msg-btn:hover { background: rgba(255, 59, 48, 0.4); }
 
-@keyframes rgbGlow {
-  0% { color: #ff0055; text-shadow: 0 0 8px rgba(255,0,85,0.6); }
-  33% { color: #00ff55; text-shadow: 0 0 8px rgba(0,255,85,0.6); }
-  66% { color: #0055ff; text-shadow: 0 0 8px rgba(0,85,255,0.6); }
-  100% { color: #ff0055; text-shadow: 0 0 8px rgba(255,0,85,0.6); }
-}
 .chat-msg-item.admin-msg {
   background: rgba(0, 122, 255, 0.1) !important;
   border-left: 3px solid #00ff55 !important;
-}
-.admin-rgb-name {
-  animation: rgbGlow 4s infinite linear;
-  font-weight: 900 !important;
 }
 .admin-badge {
   background: linear-gradient(135deg, #ff9500, #ff3b30);
@@ -652,7 +529,6 @@ nav{
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  box-shadow: 0 0 8px rgba(255, 149, 0, 0.4);
   vertical-align: middle;
 }
 
@@ -674,9 +550,6 @@ nav{
   font-family: 'Manrope', sans-serif;
   outline: none;
 }
-.chat-input-name:focus, .chat-input-msg:focus {
-  border-color: var(--accent);
-}
 .chat-send-btn {
   background: var(--accent);
   color: #fff;
@@ -686,11 +559,9 @@ nav{
   font-weight: 700;
   font-size: 12px;
   cursor: pointer;
-  transition: opacity 0.2s;
 }
-.chat-send-btn:hover { opacity: 0.9; }
 
-.btn-chat-toggle {
+.btn-chat-toggle, .btn-theater {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
   color: var(--text);
@@ -698,25 +569,11 @@ nav{
   cursor: pointer; font-size: 12px; font-weight: 600;
   display: flex; align-items: center; gap: 5px;
   white-space: nowrap;
-  transition: background 0.2s, border-color 0.2s;
-}
-.btn-chat-toggle:hover { background: var(--accent); border-color: var(--accent); }
-
-.ambient-glow {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  width: 100%; height: 100%;
-  background: var(--ambient-glow-color);
-  filter: blur(80px);
-  opacity: 0.4;
-  z-index: 1;
-  pointer-events: none;
 }
 
 .now-header{
   padding:10px 16px;
-  background: rgba(2, 6, 18, 0.85);
+  background: rgba(2, 6, 18, 0.95);
   border-bottom:1px solid var(--border);
   display:flex;align-items:center;gap:10px;
   flex-shrink:0; min-height:60px; z-index:5;
@@ -732,42 +589,27 @@ nav{
 .now-info{flex:1; display:flex; align-items:center; gap:8px; flex-wrap: nowrap; overflow:hidden;}
 .now-ch-name{ font-family:'Barlow Condensed',sans-serif; font-size:18px;font-weight:800;letter-spacing:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 
-.btn-theater {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 6px 10px; border-radius: 6px;
-  cursor: pointer; font-size: 12px; font-weight: 600;
-  display: flex; align-items: center; gap: 5px;
-  white-space: nowrap;
-  transition: background 0.2s, border-color 0.2s;
-}
-.btn-theater:hover { background: var(--accent); border-color: var(--accent); }
-.btn-theater.active { background: rgba(255, 255, 255, 0.2); border-color: rgba(255, 255, 255, 0.4); }
-
 .now-badges{display:flex;gap:8px;margin-left:auto}
 .badge{ padding:4px 8px;border-radius:6px; font-size:10px;font-weight:700;letter-spacing:1px; }
 .badge-live{background:var(--accent-glow);color:var(--accent);border:1px solid var(--border2);display:flex;align-items:center;gap:4px}
 
 .video-wrap{ flex:1;background:#000;position:relative;overflow:hidden; z-index:5; display:flex; align-items:center; justify-content:center; }
-iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none; background:#000; transition: all 0.3s ease; }
+iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none; background:#000; }
 .vid-overlay{ position:absolute;inset:0; background: rgba(1, 3, 8, 0.95); z-index:10; }
 
 .plyr { height: 100% !important; width: 100% !important; }
 .plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
 .plyr video { object-fit: contain; }
 
-/* ─── GLASSMORPHISM LOADING SKELETON ─── */
+/* Sabit Yüklenme Ekranı (Blur Kaldırıldı) */
 .skeleton-loader {
   position: absolute; inset: 0;
-  background: rgba(6, 12, 28, 0.7);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: rgba(6, 12, 28, 0.95);
   z-index: 15;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center; gap: 20px;
   opacity: 0; pointer-events: none;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.2s ease;
 }
 .skeleton-loader.active { opacity: 1; pointer-events: auto; }
 
@@ -777,28 +619,13 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 16px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   display: flex; flex-direction: column; gap: 16px; align-items: center;
-  position: relative; overflow: hidden;
 }
 
 .skeleton-box {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  position: relative;
-  overflow: hidden;
 }
-.skeleton-box::after {
-  content: "";
-  position: absolute; top: 0; right: 0; bottom: 0; left: 0;
-  transform: translateX(-100%);
-  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
-  animation: shimmer 1.5s infinite;
-}
-@keyframes shimmer {
-  100% { transform: translateX(100%); }
-}
-
 .sk-logo { width: 64px; height: 64px; border-radius: 12px; }
 .sk-title { width: 60%; height: 20px; }
 .sk-subtitle { width: 40%; height: 12px; }
@@ -806,7 +633,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
 .adv-interstitial {
   position: absolute; inset: 0;
-  background: rgba(2, 5, 15, 0.95);
+  background: rgba(2, 5, 15, 0.98);
   z-index: 20;
   display: flex; flex-direction: column; align-items: center; justify-content: center;
   padding: 24px; text-align: center;
@@ -816,18 +643,15 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   border: 1px solid var(--border);
   padding: 32px; border-radius: 16px;
   max-width: 420px; width: 100%;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.6);
 }
-.adv-interstitial h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; letter-spacing: 0.5px; }
+.adv-interstitial h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
 .adv-interstitial p { color: var(--muted2); font-size: 13px; line-height: 1.6; margin-bottom: 24px; }
 .btn-adv-action {
   background: var(--accent); color: #fff; border: none;
   padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 14px;
-  cursor: pointer; transition: background 0.2s; width: 100%;
+  cursor: pointer; width: 100%;
 }
-.btn-adv-action:hover { opacity: 0.9; }
 .btn-adv-action.secondary { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--border); margin-top: 10px; }
-.btn-adv-action.secondary:hover { background: rgba(255, 255, 255, 0.15); }
 
 /* ─── MOBİL UYUMLULUK ─── */
 @media(max-width:768px){
@@ -843,18 +667,13 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
   .ch-sidebar .chat-sidebar-panel {
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 0; left: 0; right: 0; bottom: 0;
     width: 100% !important;
     height: 100% !important;
     z-index: 50;
     background: rgba(6, 10, 22, 0.98);
     border-left: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
   }
-  
   .ch-sidebar .chat-sidebar-panel.hidden {
     transform: translateY(-20px);
     opacity: 0;
@@ -875,31 +694,30 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   </div>
   <div class="nav-spacer">
     <button id="changePassBtn" onclick="updateAdminPassword()" style="display:none; background:rgba(255,149,0,0.2); border:1px solid rgba(255,149,0,0.4); color:#ff9500; font-size:11px; font-weight:700; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Admin Şifresini Değiştir">🔑 Şifre Değiştir</button>
-    <div class="theme-picker-wrap">
-      <span class="theme-icon">🎨</span>
-      <select class="theme-select" id="themeSelect" onchange="changeTheme(this.value)">
-        <option value="blue">Mavi</option>
-        <option value="red">Kırmızı</option>
-        <option value="green">Yeşil</option>
-        <option value="purple">Mor</option>
-        <option value="yellow">Sarı</option>
-      </select>
-    </div>
   </div> 
 </nav>
 
 <div class="layout" id="mainLayout">
 
   <div class="ch-sidebar">
-    <!-- Ana Sekmeler (Dashboard / Kanallar / Maçlar) -->
     <div class="main-tabs-wrap">
-      <button class="main-tab-btn" id="tabDashboardBtn" onclick="switchMainTab('dashboard')">📊 Dashboard</button>
       <button class="main-tab-btn active" id="tabChannelsBtn" onclick="switchMainTab('channels')">📺 Kanallar</button>
       <button class="main-tab-btn" id="tabMatchesBtn" onclick="switchMainTab('matches')">⚽ Maçlar</button>
     </div>
 
     <div class="country-filter-wrap" id="countryFilters"></div>
     <div class="ch-list" id="chList"></div>
+    
+    <!-- YENİ EKLENEN ALAN ADI DUYURU ALANI -->
+    <div class="domain-alert">
+      <div class="domain-alert-text">
+        <span class="domain-icon">⚠️</span>
+        <div>
+          <strong>Erişim Sorunu mu Yaşıyorsun?</strong><br>
+          Yeni adresimiz: <span class="domain-link">fatbok1.vercel.app</span>
+        </div>
+      </div>
+    </div>
     
     <div class="adv-panel">
       <a href="mailto:fatbokproton@proton.me?subject=Reklam%20Basvurusu" class="adv-link">
@@ -911,8 +729,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   </div>
 
   <div class="player-area">
-    <div class="ambient-glow" id="ambientGlow"></div>
-
     <div class="now-header">
       <div class="now-logo" id="nowLogo"></div>
       <div class="now-info">
@@ -933,7 +749,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       <div class="video-main-container" id="videoWrap">
         <div class="vid-overlay" id="vidOverlay"></div>
         
-        <!-- Glassmorphism Skeleton Overlay -->
         <div class="skeleton-loader" id="skeletonLoader">
           <div class="glass-card">
             <div class="skeleton-box sk-logo"></div>
@@ -958,7 +773,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         </div>
       </div>
 
-      <!-- Canlı Sohbet Paneli -->
       <div class="chat-sidebar-panel hidden" id="chatPanel">
         <div class="chat-header">
           <span>💬 FATBOK Canlı Sohbet</span>
@@ -968,7 +782,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
           </div>
         </div>
 
-        <!-- Sabitlenmiş Mesaj Banner -->
         <div class="pinned-message-banner" id="pinnedBanner">
           <div class="pinned-banner-header">
             <span>📌 Sabitlenen Mesaj</span>
@@ -1040,13 +853,11 @@ function stringToColor(str) {
 
 function checkUsernameAdmin(inputEl) {
   let name = inputEl.value.trim();
-  
   if (name.toLowerCase() === 'admin' && localStorage.getItem('fatbok_is_admin') !== 'true') {
     let enteredPass = prompt("👑 Yönetici Paneli: Lütfen Admin Şifresini Girin:");
-    
     if (enteredPass === getAdminPassword()) {
       localStorage.setItem('fatbok_is_admin', 'true');
-      alert("Şifre doğru! Admin, sabitleme, silme, yavaş mod ve şifre değiştirme yetkisi aktif.");
+      alert("Şifre doğru! Admin yetkileri aktif.");
       location.reload(); 
     } else {
       alert("Hatalı şifre!");
@@ -1064,9 +875,7 @@ socket.on('chatMessage', (data) => {
 
 socket.on('deleteMessage', (msgId) => {
   const msgEl = document.getElementById(`msg-${msgId}`);
-  if (msgEl) {
-    msgEl.remove();
-  }
+  if (msgEl) msgEl.remove();
 });
 
 socket.on('slowModeStatus', (isActive) => {
@@ -1074,27 +883,22 @@ socket.on('slowModeStatus', (isActive) => {
   const adminBtn = document.getElementById('slowModeAdminBtn');
   if (adminBtn && localStorage.getItem('fatbok_is_admin') === 'true') {
     adminBtn.textContent = isActive ? "🐢 Yavaş Mod: Açık" : "🐢 Yavaş Mod: Kapalı";
-    adminBtn.style.background = isActive ? "rgba(52, 199, 89, 0.3)" : "rgba(255,255,255,0.1)";
   }
 });
 
 function toggleSlowModeAdmin() {
   if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
-  let newState = !slowModeActive;
-  socket.emit('toggleSlowMode', newState);
+  socket.emit('toggleSlowMode', !slowModeActive);
 }
 
 socket.on('pinnedMessage', (text) => {
   const banner = document.getElementById('pinnedBanner');
   const textEl = document.getElementById('pinnedText');
   const unpinBtn = document.getElementById('unpinBtn');
-  
   if (text) {
     textEl.textContent = text;
     banner.classList.add('active');
-    if (localStorage.getItem('fatbok_is_admin') === 'true') {
-      unpinBtn.style.display = 'inline-block';
-    }
+    if (localStorage.getItem('fatbok_is_admin') === 'true') unpinBtn.style.display = 'inline-block';
   } else {
     banner.classList.remove('active');
     textEl.textContent = "";
@@ -1105,44 +909,32 @@ socket.on('pinnedMessage', (text) => {
 function sendChatMessage(e) {
   e.preventDefault();
   const isAdmin = localStorage.getItem('fatbok_is_admin') === 'true';
-  
   if (slowModeActive && !isAdmin) {
-    const currentTime = Date.now();
-    const timeLeft = SLOW_MODE_LIMIT - (currentTime - lastMessageTime);
+    const timeLeft = SLOW_MODE_LIMIT - (Date.now() - lastMessageTime);
     if (timeLeft > 0) {
-      alert(`Yavaş mod aktif! Yeni mesaj göndermek için lütfen ${(timeLeft / 1000).toFixed(1)} saniye bekleyin.`);
+      alert(`Yavaş mod aktif! Lütfen ${(timeLeft / 1000).toFixed(1)} saniye bekleyin.`);
       return;
     }
   }
 
   const usernameInput = document.getElementById('chatUsername');
   const messageInput = document.getElementById('chatMessageInput');
-  
   let username = usernameInput.value.trim();
   let message = messageInput.value.trim();
-  
   if (!username || !message) return;
 
-  let userIsAdminFlag = false;
-  if (username.toLowerCase() === 'admin' && isAdmin) {
-    userIsAdminFlag = true;
-  }
-
+  let userIsAdminFlag = (username.toLowerCase() === 'admin' && isAdmin);
   localStorage.setItem('fatbok_chat_user', username);
   const msgId = 'm_' + Math.random().toString(36).substring(2, 9);
 
   socket.emit('chatMessage', { id: msgId, username, message, isAdmin: userIsAdminFlag });
-  
   lastMessageTime = Date.now();
   messageInput.value = '';
   messageInput.focus();
 }
 
 function deleteMessage(msgId) {
-  if (localStorage.getItem('fatbok_is_admin') !== 'true') {
-    alert("Bu işlem için yetkiniz yok!");
-    return;
-  }
+  if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
   socket.emit('deleteMessage', msgId);
 }
 
@@ -1171,7 +963,7 @@ function appendMessage(msgId, user, text, time, isAdminFlag) {
   div.innerHTML = `
     <div class="chat-msg-header">
       <div>
-        <span class="chat-msg-user ${isAdmin ? 'admin-rgb-name' : ''}" style="color: ${isAdmin ? '' : userColor};">
+        <span class="chat-msg-user" style="color: ${isAdmin ? '#00ff55' : userColor};">
           ${escapeHtml(user)}
           ${isAdmin ? '<span class="admin-badge">👑 ADMIN</span>' : ''}
         </span>
@@ -1193,9 +985,7 @@ function appendMessage(msgId, user, text, time, isAdminFlag) {
     if(delBtn) delBtn.style.display = 'inline-block';
   }
 
-  if (isAtBottom) {
-    container.scrollTop = container.scrollHeight;
-  }
+  if (isAtBottom) container.scrollTop = container.scrollHeight;
 }
 
 function escapeHtml(str) {
@@ -1220,17 +1010,11 @@ function toggleChatPanel() {
 
 window.addEventListener('DOMContentLoaded', () => {
   const savedUser = localStorage.getItem('fatbok_chat_user');
-  if (savedUser) {
-    document.getElementById('chatUsername').value = savedUser;
-  }
-  const savedTheme = localStorage.getItem('fatbok_theme') || 'blue';
-  document.getElementById('themeSelect').value = savedTheme;
-  changeTheme(savedTheme);
+  if (savedUser) document.getElementById('chatUsername').value = savedUser;
 
   if (localStorage.getItem('fatbok_is_admin') === 'true') {
     const adminBtn = document.getElementById('slowModeAdminBtn');
     if (adminBtn) adminBtn.style.display = 'inline-block';
-    
     const changePassBtn = document.getElementById('changePassBtn');
     if (changePassBtn) changePassBtn.style.display = 'inline-block';
   }
@@ -1245,31 +1029,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
 
-const colorThemes = {
-  blue: { accent: '#007aff', glow: 'rgba(0, 122, 255, 0.2)', surface3: 'rgba(0, 122, 255, 0.2)', border2: 'rgba(0, 122, 255, 0.5)', ambient: 'rgba(0, 122, 255, 0.35)' },
-  red: { accent: '#ff3b30', glow: 'rgba(255, 59, 48, 0.2)', surface3: 'rgba(255, 59, 48, 0.2)', border2: 'rgba(255, 59, 48, 0.5)', ambient: 'rgba(255, 59, 48, 0.35)' },
-  green: { accent: '#34c759', glow: 'rgba(52, 199, 89, 0.2)', surface3: 'rgba(52, 199, 89, 0.2)', border2: 'rgba(52, 199, 89, 0.5)', ambient: 'rgba(52, 199, 89, 0.35)' },
-  purple: { accent: '#af52de', glow: 'rgba(175, 82, 222, 0.2)', surface3: 'rgba(175, 82, 222, 0.2)', border2: 'rgba(175, 82, 222, 0.5)', ambient: 'rgba(175, 82, 222, 0.35)' },
-  yellow: { accent: '#ffcc00', glow: 'rgba(255, 204, 0, 0.2)', surface3: 'rgba(255, 204, 0, 0.2)', border2: 'rgba(255, 204, 0, 0.5)', ambient: 'rgba(255, 204, 0, 0.35)' }
-};
-
-function changeTheme(themeKey) {
-  const t = colorThemes[themeKey] || colorThemes.blue;
-  const root = document.documentElement;
-  
-  root.style.setProperty('--accent', t.accent);
-  root.style.setProperty('--accent-glow', t.glow);
-  root.style.setProperty('--surface3', t.surface3);
-  root.style.setProperty('--border2', t.border2);
-  root.style.setProperty('--ambient-glow-color', t.ambient);
-  root.style.setProperty('--plyr-color-main', t.accent);
-  
-  localStorage.setItem('fatbok_theme', themeKey);
-}
-
-const countries = [
-  { code: "tr", name: "Türkiye", flag: "🇹🇷" }
-];
+const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
 
 const channels = [
   {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv33.com/img/beinsports1.png", stream: "https://hlsforever.forgetmoenszo.workers.dev/https://corestream.siteyaptim.live//bein1/tracks-v1a1/mono.m3u8"},
@@ -1304,7 +1064,7 @@ const channels = [
   {id:30, name:"Smartspor B",      cat:"tr", logo:"https://royaltv33.com/img/smartspor.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivesm1.m3u8"},
   {id:31, name:"Smartspor 2",    cat:"tr", logo:"https://royaltv33.com/img/smartspor2.png", stream:"https://zbahistv65.com/channel.html?id=sms2"},
   {id:32, name:"Smartspor 2 B",    cat:"tr", logo:"https://royaltv33.com/img/smartspor2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivesm2.m3u8"},
-  {id:33, name:"TV100",          cat:"tr", logo:"https://upload.wikimedia.org/wikipedia/tr/0/0f/TV100_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original", stream:"https://zbahistv65.com/channel?id=ex1"},
+  {id:33, name:"TV100",          cat:"tr", logo:"https://upload.wikimedia.org/wikipedia/tr/0/0f/TV100_logo.png", stream:"https://zbahistv65.com/channel?id=ex1"},
   {id:34, name:"Tabii Spor",     cat:"tr", logo:"https://royaltv33.com/img/tabii.png", stream:"https://kL9mR2vXw7nQ5pY1sH4tJ3gB6.medya.trt.com.tr/master.m3u8"},
   {id:35, name:"Tabii Spor 1",   cat:"tr", logo:"https://royaltv33.com/img/tabii.png", stream:"https://Pz4qT7nW1mR9sH2vL5xK8jG3y.medya.trt.com.tr/master.m3u8"},
   {id:36, name:"Tabii Spor 2",   cat:"tr", logo:"https://royaltv33.com/img/tabii.png", stream:"https://mR8bV4kL1nQ7sH9tW2xP5zJ6g.medya.trt.com.tr/master.m3u8"},
@@ -1329,7 +1089,7 @@ const dailyMatchesByDate = [
       {
         time: "21:30",
         homeTeam: "Galatasaray",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png",
         awayTeam: "Çorum FK",
         awayLogo: "https://assets.football-logos.cc/logos/turkey/1500x1500/corum.6565bf1b.png",
         channelIds: [1, 2, 3]
@@ -1356,12 +1116,12 @@ const dailyMatchesByDate = [
         channelIds: [1,2]
       },
       {
-        time: "19:00",
-        homeTeam: "Konyaspor",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/4/41/20220809170232%21Konyaspor_1922.png",
-        awayTeam: "Ç. Rizespor",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/f/f6/%C3%87aykur_Rizespor_Logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [4,5,6]
+        time: "21:30",
+        homeTeam: "Gençlerbirliği",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/f/f7/Genclerbirligi.png",
+        awayTeam: "Fenerbahçe",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
+        channelIds: [1, 2, 3]
       }
     ]
   }
@@ -1375,7 +1135,7 @@ let activeTab = 'channels';
 let activeId = null;
 let hlsInstance = null;
 let selectedChannelObj = null;
-letplyrInstance = null;
+let plyrInstance = null;
 
 function initPlyr() {
   if (!plyrInstance) {
@@ -1388,18 +1148,13 @@ function initPlyr() {
 
 function switchMainTab(tab) {
   activeTab = tab;
-  document.getElementById('tabDashboardBtn').classList.toggle('active', tab === 'dashboard');
   document.getElementById('tabChannelsBtn').classList.toggle('active', tab === 'channels');
   document.getElementById('tabMatchesBtn').classList.toggle('active', tab === 'matches');
   
   const countryFilters = document.getElementById('countryFilters');
   const searchInput = document.getElementById('searchInput');
 
-  if (tab === 'dashboard') {
-    countryFilters.style.display = 'none';
-    if(searchInput) searchInput.parentElement.style.display = 'none';
-    renderDashboardView();
-  } else if (tab === 'matches') {
+  if (tab === 'matches') {
     countryFilters.style.display = 'none';
     if(searchInput) searchInput.parentElement.style.display = 'none';
     renderMatchesList();
@@ -1411,40 +1166,9 @@ function switchMainTab(tab) {
   }
 }
 
-/* Dashboard Görünümü Render Fonksiyonu */
-function renderDashboardView() {
-  const list = document.getElementById('chList');
-  list.innerHTML = `
-    <div class="dashboard-container">
-      <div class="date-group-header">Genel Durum</div>
-      <div class="dashboard-grid">
-        <div class="dashboard-card">
-          <span class="dashboard-card-title">Toplam Kanal</span>
-          <span class="dashboard-card-value">${channels.length}</span>
-        </div>
-        <div class="dashboard-card">
-          <span class="dashboard-card-title">Aktif Maçlar</span>
-          <span class="dashboard-card-value">${dailyMatchesByDate.reduce((acc, curr) => acc + curr.matches.length, 0)}</span>
-        </div>
-      </div>
-      <div class="dashboard-card">
-        <span class="dashboard-card-title">Sistem Durumu</span>
-        <span class="dashboard-card-value" style="font-size: 14px; color: #34c759;">🟢 Tüm Yayın Sunucuları Aktif</span>
-      </div>
-      <div class="date-group-header">Hızlı İşlemler</div>
-      <div class="dashboard-card" style="gap:10px;">
-        <span class="dashboard-card-title">Yönetim Kısayolları</span>
-        <button class="alt-stream-btn" onclick="toggleChatPanel()">💬 Sohbet Panelini Aç/Kapat</button>
-        <button class="alt-stream-btn" onclick="updateAdminPassword()">🔑 Yönetim Şifresini Değiştir</button>
-      </div>
-    </div>
-  `;
-}
-
 function renderCountryFilters() {
   const container = document.getElementById('countryFilters');
   container.innerHTML = '';
-  
   const fragment = document.createDocumentFragment();
   countries.forEach(country => {
     const btn = document.createElement('button');
@@ -1463,12 +1187,6 @@ function renderCountryFilters() {
 function renderMatchesList() {
   const list = document.getElementById('chList');
   list.innerHTML = '';
-
-  if (dailyMatchesByDate.length === 0) {
-    list.innerHTML = `<div style="text-align:center; padding:20px; color:var(--muted2); font-size:13px;">Maç programı bulunmuyor.</div>`;
-    return;
-  }
-
   const fragment = document.createDocumentFragment();
   
   dailyMatchesByDate.forEach(group => {
@@ -1480,7 +1198,6 @@ function renderMatchesList() {
     group.matches.forEach(match => {
       const card = document.createElement('div');
       card.className = 'match-card';
-      
       let firstChannelId = (match.channelIds && match.channelIds.length > 0) ? match.channelIds[0] : null;
 
       let cardHtml = `
@@ -1509,44 +1226,33 @@ function renderMatchesList() {
         });
         cardHtml += `</div>`;
       }
-
       card.innerHTML = cardHtml;
       fragment.appendChild(card);
     });
   });
-
   list.appendChild(fragment);
 }
 
 function playMatchChannel(chId) {
   const targetChannel = channels.find(c => c.id === chId);
-  if (targetChannel) {
-    selectChannel(targetChannel);
-  } else {
-    alert("Kanal bulunamadı!");
-  }
+  if (targetChannel) selectChannel(targetChannel);
 }
 
 function renderList(){
   if (activeTab !== 'channels') return;
-
   const list = document.getElementById('chList');
-  let filtered = channels.filter(c=>{
-    const matchesCategory = (c.cat === currentCategory);
-    const matchesSearch = (!currentSearch || c.name.toLowerCase().includes(currentSearch.toLowerCase()));
-    return matchesCategory && matchesSearch;
-  });
+  let filtered = channels.filter(c => c.cat === currentCategory && (!currentSearch || c.name.toLowerCase().includes(currentSearch.toLowerCase())));
 
   list.innerHTML='';
   const fragment = document.createDocumentFragment();
   
-  filtered.forEach(c=>{
+  filtered.forEach(c => {
     const countryObj = countries.find(item => item.code === c.cat);
     const flagSymbol = countryObj ? countryObj.flag : "🌐";
 
-    const card=document.createElement('div');
-    card.className='ch-card'+(activeId===c.id?' active':'');
-    card.innerHTML=`
+    const card = document.createElement('div');
+    card.className = 'ch-card' + (activeId === c.id ? ' active' : '');
+    card.innerHTML = `
       <div class="ch-card-flag">${flagSymbol}</div>
       <div class="ch-logo">
         <img src="${c.logo}" alt="${c.name}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>
@@ -1556,21 +1262,21 @@ function renderList(){
       </div>
       <div class="ch-live-badge"></div>
     `;
-    card.onclick=()=>selectChannel(c);
+    card.onclick = () => selectChannel(c);
     fragment.appendChild(card);
   });
   list.appendChild(fragment);
 }
 
 function selectChannel(c){
-  activeId=c.id;
+  activeId = c.id;
   selectedChannelObj = c; 
   if (activeTab === 'channels') renderList();
 
   const logoEl = document.getElementById('nowLogo');
   logoEl.style.display = 'flex';
   logoEl.innerHTML = `<img src="${c.logo}" alt="${c.name}" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>`;
-  document.getElementById('nowName').textContent=c.name;
+  document.getElementById('nowName').textContent = c.name;
   document.getElementById('theaterBtn').style.display = 'flex';
   document.getElementById('chatToggleBtn').style.display = 'flex';
   document.getElementById('vidOverlay').style.display = 'none';
@@ -1592,21 +1298,17 @@ function selectChannel(c){
   iframePlayer.src = "";
 
   const tokenExpire = localStorage.getItem('fatbok_premium_token');
-  
   if (tokenExpire && parseInt(tokenExpire) > Date.now()) {
     interstitial.style.display = "none";
     startActualStream(c);
   } else {
     interstitial.style.display = "flex";
     document.getElementById('advText').textContent = "SADECE 1 REKLAM İZLEYEREK REKLAMSIZ İZLEYEBİLİRSİNİZ.";
-    
     const advBtn = document.getElementById('advBtn');
     advBtn.className = "btn-adv-action";
     advBtn.textContent = "🔗 Reklamı Geç ve İzle";
     advBtn.setAttribute('onclick', 'handleAdClick()');
   }
-
-  setAmbientColor(c.cat);
 }
 
 function handleAdClick() {
@@ -1615,8 +1317,7 @@ function handleAdClick() {
   window.open(targetAdLink, '_blank');
 
   const advBtn = document.getElementById('advBtn');
-  document.getElementById('advText').textContent = "Reklamı yan sekmede açtık. Reklamı geçtikten sonra aşağıdaki butona tıklayarak yayını başlatabilirsiniz.";
-  
+  document.getElementById('advText').textContent = "Reklamı yan sekmede açtık. Ardından aşağıdaki butona tıklayarak yayını başlatabilirsiniz.";
   advBtn.textContent = "▶ Yayını Başlat";
   advBtn.className = "btn-adv-action secondary";
   advBtn.setAttribute('onclick', 'handleStreamStart()');
@@ -1626,24 +1327,15 @@ function handleStreamStart() {
   if (!selectedChannelObj) return;
   const expireTime = Date.now() + (24 * 60 * 60 * 1000);
   localStorage.setItem('fatbok_premium_token', expireTime.toString());
-
   document.getElementById('advInterstitial').style.display = "none";
   startActualStream(selectedChannelObj);
 }
 
-function showSkeleton() {
-  const sk = document.getElementById('skeletonLoader');
-  sk.classList.add('active');
-}
-
-function hideSkeleton() {
-  const sk = document.getElementById('skeletonLoader');
-  sk.classList.remove('active');
-}
+function showSkeleton() { document.getElementById('skeletonLoader').classList.add('active'); }
+function hideSkeleton() { document.getElementById('skeletonLoader').classList.remove('active'); }
 
 function startActualStream(c) {
   showSkeleton();
-
   const iframePlayer = document.getElementById('embedPlayer');
   const plyrWrapper = document.getElementById('plyrWrapper');
   const hlsPlayer = document.getElementById('hlsPlayer');
@@ -1661,9 +1353,7 @@ function startActualStream(c) {
         hlsPlayer.play().catch(() => {});
         hideSkeleton();
       });
-      hlsInstance.on(Hls.Events.ERROR, function() {
-        hideSkeleton();
-      });
+      hlsInstance.on(Hls.Events.ERROR, function() { hideSkeleton(); });
     } else if (hlsPlayer.canPlayType('application/vnd.apple.mpegurl')) {
       hlsPlayer.src = c.stream;
       hlsPlayer.play().catch(() => {});
@@ -1673,18 +1363,9 @@ function startActualStream(c) {
     iframePlayer.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
     iframePlayer.style.display = "block";
     iframePlayer.src = c.stream; 
-    
-    iframePlayer.onload = function() {
-      hideSkeleton();
-    };
+    iframePlayer.onload = function() { hideSkeleton(); };
     setTimeout(() => { hideSkeleton(); }, 2500);
   }
-}
-
-function setAmbientColor(cat) {
-  const glowEl = document.getElementById('ambientGlow');
-  const currentAccentGlow = getComputedStyle(document.documentElement).getPropertyValue('--ambient-glow-color').trim();
-  glowEl.style.setProperty('--ambient-glow-color', currentAccentGlow);
 }
 
 function toggleTheaterMode() {
@@ -1703,7 +1384,7 @@ function toggleTheaterMode() {
 }
 
 function filterChannels(q){
-  currentSearch=q;
+  currentSearch = q;
   renderList();
 }
 
