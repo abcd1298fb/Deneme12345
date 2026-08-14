@@ -41,7 +41,7 @@ body{
   position: relative;
 }
 
-/* ─── ARKA PLAN (Optimize Edildi) ─── */
+/* ─── ARKA PLAN ─── */
 .liquid-bg {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -111,6 +111,29 @@ nav{
   transform: translateX(-320px);
   opacity: 0;
   pointer-events: none;
+}
+
+/* DOMAIN ALERT (YENİ YERİ: ÜST KISIM) */
+.domain-alert {
+  padding: 10px 12px;
+  background: rgba(0, 122, 255, 0.08);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.domain-alert-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 11px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.domain-icon { font-size: 14px; }
+.domain-link {
+  color: var(--accent);
+  font-weight: 800;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .country-filter-wrap{
@@ -316,30 +339,6 @@ nav{
 .alt-stream-btn:hover {
   background: var(--accent);
   border-color: var(--accent);
-}
-
-/* DOMAIN ALERT (YENİ EKLENEN) */
-.domain-alert {
-  padding: 12px;
-  background: rgba(255, 59, 48, 0.08);
-  border-top: 1px solid rgba(255, 59, 48, 0.2);
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.domain-alert-text {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11px;
-  color: var(--text);
-  line-height: 1.4;
-}
-.domain-icon { font-size: 16px; }
-.domain-link {
-  color: #ff3b30;
-  font-weight: 800;
-  text-decoration: underline;
-  cursor: pointer;
 }
 
 /* REKLAM ALANI */
@@ -601,7 +600,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 .plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
 .plyr video { object-fit: contain; }
 
-/* Sabit Yüklenme Ekranı (Blur Kaldırıldı) */
+/* Sabit Yüklenme Ekranı */
 .skeleton-loader {
   position: absolute; inset: 0;
   background: rgba(6, 12, 28, 0.95);
@@ -700,6 +699,16 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 <div class="layout" id="mainLayout">
 
   <div class="ch-sidebar">
+    <!-- YENİ EKLENEN ALAN ADI DUYURU ALANI (ÜST KISIMDA) -->
+    <div class="domain-alert">
+      <div class="domain-alert-text">
+        <span class="domain-icon">📢</span>
+        <div>
+          Bir sonraki alan adımız <span class="domain-link" onclick="window.open('https://fatbok1.vercel.app', '_blank')">fatbok1.vercel.app</span> olacaktır.
+        </div>
+      </div>
+    </div>
+
     <div class="main-tabs-wrap">
       <button class="main-tab-btn active" id="tabChannelsBtn" onclick="switchMainTab('channels')">📺 Kanallar</button>
       <button class="main-tab-btn" id="tabMatchesBtn" onclick="switchMainTab('matches')">⚽ Maçlar</button>
@@ -707,17 +716,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
     <div class="country-filter-wrap" id="countryFilters"></div>
     <div class="ch-list" id="chList"></div>
-    
-    <!-- YENİ EKLENEN ALAN ADI DUYURU ALANI -->
-    <div class="domain-alert">
-      <div class="domain-alert-text">
-        <span class="domain-icon">⚠️</span>
-        <div>
-          <strong>Erişim Sorunu mu Yaşıyorsun?</strong><br>
-          Yeni adresimiz: <span class="domain-link">fatbok1.vercel.app</span>
-        </div>
-      </div>
-    </div>
     
     <div class="adv-panel">
       <a href="mailto:fatbokproton@proton.me?subject=Reklam%20Basvurusu" class="adv-link">
