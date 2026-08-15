@@ -630,28 +630,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 .sk-subtitle { width: 40%; height: 12px; }
 .sk-bar { width: 100%; height: 6px; border-radius: 3px; margin-top: 10px; }
 
-.adv-interstitial {
-  position: absolute; inset: 0;
-  background: rgba(2, 5, 15, 0.98);
-  z-index: 20;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  padding: 24px; text-align: center;
-}
-.adv-interstitial-card {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
-  padding: 32px; border-radius: 16px;
-  max-width: 420px; width: 100%;
-}
-.adv-interstitial h3 { font-size: 20px; font-weight: 800; margin-bottom: 8px; }
-.adv-interstitial p { color: var(--muted2); font-size: 13px; line-height: 1.6; margin-bottom: 24px; }
-.btn-adv-action {
-  background: var(--accent); color: #fff; border: none;
-  padding: 12px 24px; border-radius: 8px; font-weight: 700; font-size: 14px;
-  cursor: pointer; width: 100%;
-}
-.btn-adv-action.secondary { background: rgba(255, 255, 255, 0.1); border: 1px solid var(--border); margin-top: 10px; }
-
 /* ─── MOBİL UYUMLULUK ─── */
 @media(max-width:768px){
   .layout{ grid-template-columns:1fr; grid-template-rows: auto 1fr; height: calc(100vh - 58px); }
@@ -699,7 +677,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 <div class="layout" id="mainLayout">
 
   <div class="ch-sidebar">
-    <!-- YENİ EKLENEN ALAN ADI DUYURU ALANI (ÜST KISIMDA) -->
     <div class="domain-alert">
       <div class="domain-alert-text">
         <span class="domain-icon">📢</span>
@@ -753,14 +730,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
             <div class="skeleton-box sk-title"></div>
             <div class="skeleton-box sk-subtitle"></div>
             <div class="skeleton-box sk-bar"></div>
-          </div>
-        </div>
-
-        <div id="advInterstitial" class="adv-interstitial" style="display: none;">
-          <div class="adv-interstitial-card">
-            <h3>Yayın Hazırlanıyor</h3>
-            <p id="advText">Sadece 1 Reklam İzleyerek Yayına Bağlanabilirsiniz.</p>
-            <button id="advBtn" class="btn-adv-action" onclick="handleAdClick()">🔗 Reklamı Geç dan İzle</button>
           </div>
         </div>
 
@@ -879,7 +848,7 @@ socket.on('deleteMessage', (msgId) => {
 socket.on('slowModeStatus', (isActive) => {
   slowModeActive = isActive;
   const adminBtn = document.getElementById('slowModeAdminBtn');
-  if (adminBtn && localStorage.getItem('fatbok_is_admin') === 'true') {
+  if (adminBtn && localStorage.getItem('fatbok_is_admin'] === 'true') {
     adminBtn.textContent = isActive ? "🐢 Yavaş Mod: Açık" : "🐢 Yavaş Mod: Kapalı";
   }
 });
@@ -1025,8 +994,6 @@ window.addEventListener('DOMContentLoaded', () => {
   socket.emit('getPinnedMessage');
 });
 
-const DEFAULT_AD_LINK = "https://ay.live/s7Z7FV";
-
 const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
 
 const channels = [
@@ -1132,7 +1099,6 @@ let currentSearch = '';
 let activeTab = 'channels'; 
 let activeId = null;
 let hlsInstance = null;
-let selectedChannelObj = null;
 let plyrInstance = null;
 
 function initPlyr() {
@@ -1268,7 +1234,6 @@ function renderList(){
 
 function selectChannel(c){
   activeId = c.id;
-  selectedChannelObj = c; 
   if (activeTab === 'channels') renderList();
 
   const logoEl = document.getElementById('nowLogo');
@@ -1282,7 +1247,6 @@ function selectChannel(c){
   const iframePlayer = document.getElementById('embedPlayer');
   const plyrWrapper = document.getElementById('plyrWrapper');
   const hlsPlayer = document.getElementById('hlsPlayer');
-  const interstitial = document.getElementById('advInterstitial');
 
   if (hlsInstance) {
     hlsInstance.destroy();
@@ -1295,38 +1259,7 @@ function selectChannel(c){
   iframePlayer.style.display = "none";
   iframePlayer.src = "";
 
-  const tokenExpire = localStorage.getItem('fatbok_premium_token');
-  if (tokenExpire && parseInt(tokenExpire) > Date.now()) {
-    interstitial.style.display = "none";
-    startActualStream(c);
-  } else {
-    interstitial.style.display = "flex";
-    document.getElementById('advText').textContent = "SADECE 1 REKLAM İZLEYEREK REKLAMSIZ İZLEYEBİLİRSİNİZ.";
-    const advBtn = document.getElementById('advBtn');
-    advBtn.className = "btn-adv-action";
-    advBtn.textContent = "🔗 Reklamı Geç ve İzle";
-    advBtn.setAttribute('onclick', 'handleAdClick()');
-  }
-}
-
-function handleAdClick() {
-  if (!selectedChannelObj) return;
-  const targetAdLink = selectedChannelObj.adLink ? selectedChannelObj.adLink : DEFAULT_AD_LINK;
-  window.open(targetAdLink, '_blank');
-
-  const advBtn = document.getElementById('advBtn');
-  document.getElementById('advText').textContent = "Reklamı yan sekmede açtık. Ardından aşağıdaki butona tıklayarak yayını başlatabilirsiniz.";
-  advBtn.textContent = "▶ Yayını Başlat";
-  advBtn.className = "btn-adv-action secondary";
-  advBtn.setAttribute('onclick', 'handleStreamStart()');
-}
-
-function handleStreamStart() {
-  if (!selectedChannelObj) return;
-  const expireTime = Date.now() + (24 * 60 * 60 * 1000);
-  localStorage.setItem('fatbok_premium_token', expireTime.toString());
-  document.getElementById('advInterstitial').style.display = "none";
-  startActualStream(selectedChannelObj);
+  startActualStream(c);
 }
 
 function showSkeleton() { document.getElementById('skeletonLoader').classList.add('active'); }
