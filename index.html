@@ -677,6 +677,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 <div class="layout" id="mainLayout">
 
   <div class="ch-sidebar">
+    <!-- YENİ EKLENEN ALAN ADI DUYURU ALANI (ÜST KISIMDA) -->
     <div class="domain-alert">
       <div class="domain-alert-text">
         <span class="domain-icon">📢</span>
@@ -848,7 +849,7 @@ socket.on('deleteMessage', (msgId) => {
 socket.on('slowModeStatus', (isActive) => {
   slowModeActive = isActive;
   const adminBtn = document.getElementById('slowModeAdminBtn');
-  if (adminBtn && localStorage.getItem('fatbok_is_admin'] === 'true') {
+  if (adminBtn && localStorage.getItem('fatbok_is_admin') === 'true') {
     adminBtn.textContent = isActive ? "🐢 Yavaş Mod: Açık" : "🐢 Yavaş Mod: Kapalı";
   }
 });
@@ -999,7 +1000,7 @@ const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
 const channels = [
   {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv33.com/img/beinsports1.png", stream: "https://hlsforever.forgetmoenszo.workers.dev/https://corestream.siteyaptim.live//bein1/tracks-v1a1/mono.m3u8"},
   {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv33.com/img/beinsports1.png", stream:"https://zbahistv65.com/channel.html?id=zirve"},
-  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv33.com/img/beinsports1.png", stream:"https://e-aga-m.3289439f1645c102498296d74fc626b9.online/bc2b05d321cb80050c5d035a9daeb26d/-/5021/playlist.m3u8"},
+  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv33.com/img/beinsports1.png", stream:"https://jsistem36r.online/beinsport/main.m3u8?"},
   {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv33.com/img/beinsports2.png", stream:"https://zbahistv65.com/channel.html?id=b2"},
   {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv33.com/img/beinsports2.png", stream:"https://zbahistv65.com/channel.html?id=b2"},
   {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv33.com/img/beinsports2.png", stream:"https://dlhd.st/hub/stream-62.php"},
@@ -1099,6 +1100,7 @@ let currentSearch = '';
 let activeTab = 'channels'; 
 let activeId = null;
 let hlsInstance = null;
+let selectedChannelObj = null;
 let plyrInstance = null;
 
 function initPlyr() {
@@ -1234,6 +1236,7 @@ function renderList(){
 
 function selectChannel(c){
   activeId = c.id;
+  selectedChannelObj = c; 
   if (activeTab === 'channels') renderList();
 
   const logoEl = document.getElementById('nowLogo');
