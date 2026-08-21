@@ -662,6 +662,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
 <div class="liquid-bg"></div>
 
+<!-- ARKA PLAN MÜZİĞİ (src kısmına çalmasını istediğin müzik dosyasının linkini ekleyebilirsin) -->
+<audio id="bgMusic" src="" loop preload="auto"></audio>
+
 <nav>
   <div class="nav-logo">FATBOK</div>
   <div class="nav-search">
@@ -1022,12 +1025,12 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
 
-// BeIN Sports 1, 2, 3 ve diğer kanallar YouTube linki ile güncellendi
+// BeIN Sports 1, 2, 3 kanalları YouTube yayını ile güncellendi
 const channels = [
-  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://zbahistv65.com/channel?id=zirve"},
   {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
   {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
-  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
   {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
   {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
   {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
@@ -1290,6 +1293,11 @@ function selectChannel(c){
   plyrWrapper.style.display = "none";
   iframePlayer.style.display = "none";
   iframePlayer.src = "";
+
+  // 🎵 MÜZİK KONTROLÜ: Herhangi bir kanal seçilip yayın açıldığında arkada müzik çalmaya başlar
+  const bgMusic = document.getElementById('bgMusic');
+  // bgMusic.volume = 0.2; // İstersen ses seviyesini buradan 0.0 ile 1.0 arasında ayarlayabilirsin
+  bgMusic.play().catch(() => {});
 
   startActualStream(c);
 }
