@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8"/>
@@ -661,9 +662,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
 <div class="liquid-bg"></div>
 
-<!-- Gizli Arka Plan Ses Elementi -->
-<audio id="bgAudio" style="display:none;"></audio>
-
 <nav>
   <div class="nav-logo">FATBOK</div>
   <div class="nav-search">
@@ -837,10 +835,9 @@ function checkUsernameAdmin(inputEl) {
   }
 }
 
-// Socket Güncellemesi: Sayfa yüklendiğinde geçmiş mesajları, pin durumunu ve yavaş modu otomatik al
 socket.on('initChat', (data) => {
   const container = document.getElementById('chatMessages');
-  container.innerHTML = ''; // Temizle
+  container.innerHTML = '';
   
   if (data.messages && data.messages.length > 0) {
     data.messages.forEach(msg => {
@@ -848,7 +845,6 @@ socket.on('initChat', (data) => {
     });
   }
 
-  // Pinli mesajı ayarla
   const banner = document.getElementById('pinnedBanner');
   const textEl = document.getElementById('pinnedText');
   const unpinBtn = document.getElementById('unpinBtn');
@@ -861,7 +857,6 @@ socket.on('initChat', (data) => {
     banner.classList.remove('active');
   }
 
-  // Yavaş modu ayarla
   slowModeActive = data.slowMode;
   const adminBtn = document.getElementById('slowModeAdminBtn');
   if (adminBtn && localStorage.getItem('fatbok_is_admin') === 'true') {
@@ -1027,19 +1022,20 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
 
+// BeIN Sports 1, 2, 3 ve diğer kanallar YouTube linki ile güncellendi
 const channels = [
-  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://hlsforever.forgetmoenszo.workers.dev/https://corestream.siteyaptim.live//bein1/tracks-v1a1/mono.m3u8"},
-  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://zbahistv65.com/channel.html?id=zirve"},
-  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://ff.8b9035807842a4e4dbe009f3f1478127.biz/hls/701.m3u8"},
-  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://zbahistv65.com/channel.html?id=b2"},
-  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://corestream.siteyaptim.live//bein2/tracks-v1a1/mono.m3u8"},
-  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://dlhd.st/hub/stream-62.php"},
-  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://zbahistv65.com/channel.html?id=b3"},
-  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs3.m3u8"},
-  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream:"https://zbahistv65.com/channel.html?id=b4"},
-  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs4.m3u8"},
-  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://zbahistv65.com/channel.html?id=b5"},
-  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs5.m3u8"},
+  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
+  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream: "https://zbahistv65.com/channel.html?id=b4"},
+  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream: "https://andro.evrenesoglu57.click/checklist/androstreamlivebs4.m3u8"},
+  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream: "https://zbahistv65.com/channel.html?id=b5"},
+  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream: "https://andro.evrenesoglu57.click/checklist/androstreamlivebs5.m3u8"},
   {id:13, name:"BeIN Max 1",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://zbahistv65.com/channel.html?id=bm1"},
   {id:14, name:"BeIN Max 1 B",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebsm1.m3u8"},
   {id:15, name:"BeIN Max 2",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax2.png", stream:"https://zbahistv65.com/channel.html?id=bm2"},
@@ -1295,18 +1291,6 @@ function selectChannel(c){
   iframePlayer.style.display = "none";
   iframePlayer.src = "";
 
-  // Arka plan ses kontrolü (BeIN Sports 1, 2 ve 3 için)
-  const bgAudio = document.getElementById('bgAudio');
-  bgAudio.pause();
-  bgAudio.src = "";
-
-  // Eğer BeIN Sports 1, BeIN Sports 2 veya BeIN Sports 3 seçildiyse arkada ses çal
-  if (c.name === "BeIN Sports 1" || c.name === "BeIN Sports 2" || c.name === "BeIN Sports 3") {
-    bgAudio.src = "https://youtu.be/vbu6TB670p8";
-    bgAudio.loop = true;
-    bgAudio.play().catch(e => console.log("Otomatik oynatma tarayıcı tarafından engellendi:", e));
-  }
-
   startActualStream(c);
 }
 
@@ -1371,4 +1355,4 @@ renderCountryFilters();
 renderList();
 </script>
 </body>
-  </html>
+</html>
