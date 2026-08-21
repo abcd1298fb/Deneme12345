@@ -662,6 +662,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
 <div class="liquid-bg"></div>
 
+<!-- Gizli Arka Plan Ses Elementi -->
+<audio id="bgAudio" style="display:none;"></audio>
+
 <nav>
   <div class="nav-logo">FATBOK</div>
   <div class="nav-search">
@@ -1078,31 +1081,47 @@ const channels = [
 
 const dailyMatchesByDate = [
   {
-    date: "18 Ağustos 2026",
+    date: "21 Ağustos 2026",
     matches: [
       {
-        time: "22:00",
-        homeTeam: "Fenerbahçe",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
-        awayTeam: "Lyon",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/88/20241203235336%21Olyon.png",
-        channelIds: [45]
+        time: "21:30",
+        homeTeam: "Erzurumspor",
+        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/F445.png",
+        awayTeam: "Galatasaray",
+        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F2311.png",
+        channelIds: [1,2,3]
+      },
+      {
+        time: "21:30",
+        homeTeam: "Karagümrük",
+        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/62.png",
+        awayTeam: "Bursaspor",
+        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/42_1.png",
+        channelIds: [4,5,43]
       },
       {
         time: "22:00",
-        homeTeam: "Dinamo Zagrep",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/5/56/Logo_GNK_Dinamo_Zagreb_%282019%29.svg?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "Viking",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/e/e8/Viking_Stavanger.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [35]
+        homeTeam: "Arsenal",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/9/92/Arsenal_Football_Club.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        awayTeam: "Coventry",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/thumb/3/39/Coventry_City_FC.png/250px-Coventry_City_FC.png?utm_source=tr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        channelIds: [7,8]
       },
       {
         time: "22:00",
-        homeTeam: "Levski Sofia",
-        homeLogo:  "https://upload.wikimedia.org/wikipedia/commons/e/ef/Official_logo_of_PFC_Levski_Sofia%2C_a_professional_football_club_based_in_Sofia%2C_Bulgaria.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "AEK Athens",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/0/04/AEK_Athens_FC_logo.svg/250px-AEK_Athens_FC_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
-        channelIds: [34]
+        homeTeam: "Real Betis",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/8/80/Betis.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        awayTeam: "Real Sociedad",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/3/33/Real_Sociedad.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        channelIds: [17,18]
+      },
+      {
+        time: "21:45",
+        homeTeam: "Marsilya",
+        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Olympique_Marseille_logo.svg/250px-Olympique_Marseille_logo.svg.png?utm_source=tr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+        awayTeam: "Strasbourg",
+        awayLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Racing_Club_de_Strasbourg_logo.svg/1280px-Racing_Club_de_Strasbourg_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+        channelIds: [11,12]
       }
     ]
   }
@@ -1276,6 +1295,18 @@ function selectChannel(c){
   plyrWrapper.style.display = "none";
   iframePlayer.style.display = "none";
   iframePlayer.src = "";
+
+  // Arka plan ses kontrolü (BeIN Sports 1, 2 ve 3 için)
+  const bgAudio = document.getElementById('bgAudio');
+  bgAudio.pause();
+  bgAudio.src = "";
+
+  // Eğer BeIN Sports 1, BeIN Sports 2 veya BeIN Sports 3 seçildiyse arkada ses çal
+  if (c.name === "BeIN Sports 1" || c.name === "BeIN Sports 2" || c.name === "BeIN Sports 3") {
+    bgAudio.src = "BURAYA_CALMASINI_ISTEDIGIN_SES_DOSYASININ_URLINI_YAZ";
+    bgAudio.loop = true;
+    bgAudio.play().catch(e => console.log("Otomatik oynatma tarayıcı tarafından engellendi:", e));
+  }
 
   startActualStream(c);
 }
