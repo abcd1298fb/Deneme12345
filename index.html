@@ -662,9 +662,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 
 <div class="liquid-bg"></div>
 
-<!-- ARKA PLAN MÜZİĞİ (src kısmına çalmasını istediğin müzik dosyasının linkini ekleyebilirsin) -->
-<audio id="bgMusic" src="" loop preload="auto"></audio>
-
 <nav>
   <div class="nav-logo">FATBOK</div>
   <div class="nav-search">
@@ -838,9 +835,10 @@ function checkUsernameAdmin(inputEl) {
   }
 }
 
+// Socket Güncellemesi: Sayfa yüklendiğinde geçmiş mesajları, pin durumunu ve yavaş modu otomatik al
 socket.on('initChat', (data) => {
   const container = document.getElementById('chatMessages');
-  container.innerHTML = '';
+  container.innerHTML = ''; // Temizle
   
   if (data.messages && data.messages.length > 0) {
     data.messages.forEach(msg => {
@@ -848,6 +846,7 @@ socket.on('initChat', (data) => {
     });
   }
 
+  // Pinli mesajı ayarla
   const banner = document.getElementById('pinnedBanner');
   const textEl = document.getElementById('pinnedText');
   const unpinBtn = document.getElementById('unpinBtn');
@@ -860,6 +859,7 @@ socket.on('initChat', (data) => {
     banner.classList.remove('active');
   }
 
+  // Yavaş modu ayarla
   slowModeActive = data.slowMode;
   const adminBtn = document.getElementById('slowModeAdminBtn');
   if (adminBtn && localStorage.getItem('fatbok_is_admin') === 'true') {
@@ -1025,20 +1025,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
 const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
 
-// BeIN Sports 1, 2, 3 kanalları YouTube yayını ile güncellendi
 const channels = [
-  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://zbahistv65.com/channel?id=zirve"},
-  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
-  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
-  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
-  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
-  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
-  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
-  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream: "https://www.youtube.com/embed/vbu6TB670p8"},
-  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream: "https://zbahistv65.com/channel.html?id=b4"},
-  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream: "https://andro.evrenesoglu57.click/checklist/androstreamlivebs4.m3u8"},
-  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream: "https://zbahistv65.com/channel.html?id=b5"},
-  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream: "https://andro.evrenesoglu57.click/checklist/androstreamlivebs5.m3u8"},
+  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://hlsforever.forgetmoenszo.workers.dev/https://corestream.siteyaptim.live//bein1/tracks-v1a1/mono.m3u8"},
+  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://zbahistv65.com/channel.html?id=zirve"},
+  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://ff.8b9035807842a4e4dbe009f3f1478127.biz/hls/701.m3u8"},
+  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://zbahistv65.com/channel.html?id=b2"},
+  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://corestream.siteyaptim.live//bein2/tracks-v1a1/mono.m3u8"},
+  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://dlhd.st/hub/stream-62.php"},
+  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://zbahistv65.com/channel.html?id=b3"},
+  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs3.m3u8"},
+  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream:"https://zbahistv65.com/channel.html?id=b4"},
+  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs4.m3u8"},
+  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://zbahistv65.com/channel.html?id=b5"},
+  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs5.m3u8"},
   {id:13, name:"BeIN Max 1",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://zbahistv65.com/channel.html?id=bm1"},
   {id:14, name:"BeIN Max 1 B",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebsm1.m3u8"},
   {id:15, name:"BeIN Max 2",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax2.png", stream:"https://zbahistv65.com/channel.html?id=bm2"},
@@ -1082,12 +1081,10 @@ const dailyMatchesByDate = [
     date: "21 Ağustos 2026",
     matches: [
       {
-        time: "21:30",
-        homeTeam: "Erzurumspor",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/F445.png",
-        awayTeam: "Galatasaray",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F2311.png",
-        channelIds: [1,2,3]
+        time: "17:00",
+        homeTeam: "FORMULA 1 SIRALAMA TURLARI",
+        homeLogo: "https://media02.tr.beinsports.com/img/templates/f1logo.png",
+        channelIds: [9,10]
       },
       {
         time: "21:30",
@@ -1198,22 +1195,37 @@ function renderMatchesList() {
       card.className = 'match-card';
       let firstChannelId = (match.channelIds && match.channelIds.length > 0) ? match.channelIds[0] : null;
 
-      let cardHtml = `
-        <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat">
-          <div class="match-team-side">
-            <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
-            <span class="match-team-name">${match.homeTeam}</span>
+      let cardHtml = '';
+      if (match.awayTeam) {
+        // Normal Maç Görünümü (İki Takım / İki Logo)
+        cardHtml = `
+          <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat">
+            <div class="match-team-side">
+              <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+              <span class="match-team-name">${match.homeTeam}</span>
+            </div>
+            <div class="match-center-info">
+              <span class="match-time">${match.time}</span>
+              <span class="match-vs">VS</span>
+            </div>
+            <div class="match-team-side right">
+              <span class="match-team-name">${match.awayTeam}</span>
+              <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+            </div>
           </div>
-          <div class="match-center-info">
-            <span class="match-time">${match.time}</span>
-            <span class="match-vs">VS</span>
+        `;
+      } else {
+        // Tek Logo / Formula 1 Tarzı Görünüm
+        cardHtml = `
+          <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat" style="justify-content: center; gap: 12px;">
+            <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" style="width: 32px; height: 32px;" onerror="this.src='${fallbackLogo}'"/>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <span class="match-time" style="margin-bottom: 2px;">${match.time}</span>
+              <span class="match-team-name" style="font-size: 13px;">${match.homeTeam}</span>
+            </div>
           </div>
-          <div class="match-team-side right">
-            <span class="match-team-name">${match.awayTeam}</span>
-            <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
-          </div>
-        </div>
-      `;
+        `;
+      }
 
       if (match.channelIds && match.channelIds.length > 0) {
         cardHtml += `<div class="match-alternatives">`;
@@ -1293,11 +1305,6 @@ function selectChannel(c){
   plyrWrapper.style.display = "none";
   iframePlayer.style.display = "none";
   iframePlayer.src = "";
-
-  // 🎵 MÜZİK KONTROLÜ: Herhangi bir kanal seçilip yayın açıldığında arkada müzik çalmaya başlar
-  const bgMusic = document.getElementById('bgMusic');
-  // bgMusic.volume = 0.2; // İstersen ses seviyesini buradan 0.0 ile 1.0 arasında ayarlayabilirsin
-  bgMusic.play().catch(() => {});
 
   startActualStream(c);
 }
