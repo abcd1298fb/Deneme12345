@@ -7,7 +7,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
 <!-- Plyr Player CSS JS-->
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
@@ -233,6 +232,23 @@ nav{
 .ch-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ch-live-badge{ flex-shrink:0;width:7px;height:7px;background:#34c759;border-radius:50%; }
 
+/* Lig / Kategori Başlığı */
+.league-group-header {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.06);
+  padding: 5px 10px;
+  border-radius: 4px;
+  margin: 12px 0 6px 0;
+  border-left: 3px solid var(--accent);
+}
+.league-group-header:first-child {
+  margin-top: 2px;
+}
+
 /* Tarih Grubu Başlığı */
 .date-group-header {
   font-family: 'Barlow Condensed', sans-serif;
@@ -282,17 +298,18 @@ nav{
   justify-content: flex-end;
   text-align: right;
 }
-.match-team-logo {
-  width: 26px; height: 26px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
 .match-team-name {
   font-size: 12px;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.match-team-logo {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
 }
 .match-center-info {
   display: flex;
@@ -360,7 +377,7 @@ nav{
   text-align:center; cursor:pointer;
 }
 
-/* ─── PLAYER AREA & CHAT YAPISI ─── */
+/* ─── PLAYER AREA YAPISI ─── */
 .player-area{
   display:flex;flex-direction:column;
   overflow:hidden;
@@ -384,182 +401,10 @@ nav{
   position: relative;
   background: #000;
   min-height: 250px;
+  width: 100%;
 }
 
-/* ─── CHAT PANELİ ─── */
-.chat-sidebar-panel {
-  width: 280px;
-  background: rgba(6, 10, 22, 0.98);
-  border-left: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  z-index: 20;
-  flex-shrink: 0;
-  height: 100%;
-}
-.chat-sidebar-panel.hidden {
-  transform: translateX(280px);
-  width: 0px;
-  opacity: 0;
-  pointer-events: none;
-}
-.chat-header {
-  padding: 10px 14px;
-  border-bottom: 1px solid var(--border);
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 15px; font-weight: 800; letter-spacing: 1px;
-  display: flex; align-items: center; justify-content: space-between;
-  background: rgba(0,0,0,0.2);
-}
-
-.pinned-message-banner {
-  background: rgba(255, 149, 0, 0.12);
-  border-bottom: 1px solid rgba(255, 149, 0, 0.3);
-  padding: 8px 12px;
-  font-size: 11px;
-  display: none;
-  flex-direction: column;
-  gap: 2px;
-  position: relative;
-}
-.pinned-message-banner.active { display: flex; }
-.pinned-banner-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: 700;
-  color: #ff9500;
-}
-.pinned-banner-text {
-  color: var(--text);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.unpin-btn {
-  background: none; border: none; color: #ff3b30; cursor: pointer; font-size: 10px; font-weight: 700;
-}
-
-.custom-chat-messages {
-  flex: 1;
-  overflow-y: auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  background: rgba(0,0,0,0.2);
-}
-.custom-chat-messages::-webkit-scrollbar { width: 4px; }
-.custom-chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 2px; }
-
-.chat-msg-item {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
-  padding: 6px 10px;
-  border-radius: 6px;
-  font-size: 12px;
-  word-break: break-word;
-  position: relative;
-}
-
-.chat-msg-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2px;
-  align-items: center;
-}
-.chat-msg-user {
-  font-weight: 700;
-}
-.chat-msg-time {
-  font-size: 10px;
-  color: var(--muted2);
-}
-.chat-msg-text {
-  color: var(--text);
-  line-height: 1.4;
-}
-
-.msg-actions {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.pin-msg-btn {
-  background: rgba(255, 149, 0, 0.2);
-  border: 1px solid rgba(255, 149, 0, 0.4);
-  color: #ff9500;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 1px 5px;
-  border-radius: 4px;
-  cursor: pointer;
-  display: none;
-}
-
-.delete-msg-btn {
-  background: rgba(255, 59, 48, 0.2);
-  border: 1px solid rgba(255, 59, 48, 0.4);
-  color: #ff3b30;
-  font-size: 9px;
-  font-weight: 700;
-  padding: 1px 5px;
-  border-radius: 4px;
-  cursor: pointer;
-  display: none;
-}
-
-.chat-msg-item.admin-msg {
-  background: rgba(0, 122, 255, 0.1) !important;
-  border-left: 3px solid #00ff55 !important;
-}
-.admin-badge {
-  background: linear-gradient(135deg, #ff9500, #ff3b30);
-  color: #fff;
-  font-size: 9px;
-  font-weight: 800;
-  padding: 1px 5px;
-  border-radius: 4px;
-  margin-left: 6px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-  vertical-align: middle;
-}
-
-.custom-chat-form {
-  padding: 10px;
-  border-top: 1px solid var(--border);
-  background: rgba(0,0,0,0.4);
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-.chat-input-name, .chat-input-msg {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 6px 10px;
-  color: var(--text);
-  font-size: 12px;
-  font-family: 'Manrope', sans-serif;
-  outline: none;
-}
-.chat-send-btn {
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 7px;
-  font-weight: 700;
-  font-size: 12px;
-  cursor: pointer;
-}
-
-.btn-chat-toggle, .btn-theater {
+.btn-theater {
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid var(--border);
   color: var(--text);
@@ -640,21 +485,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
   .nav-logo{ width: auto; }
   .nav-search{ max-width: 140px; margin: 0 0 0 auto; }
   .nav-spacer { width: auto; }
-
-  .ch-sidebar .chat-sidebar-panel {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    width: 100% !important;
-    height: 100% !important;
-    z-index: 50;
-    background: rgba(6, 10, 22, 0.98);
-    border-left: none;
-  }
-  .ch-sidebar .chat-sidebar-panel.hidden {
-    transform: translateY(-20px);
-    opacity: 0;
-    pointer-events: none;
-  }
 }
 </style>
 </head>
@@ -668,9 +498,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
     <span class="search-icon">🔍</span>
     <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="filterChannels(this.value)"/>
   </div>
-  <div class="nav-spacer">
-    <button id="changePassBtn" onclick="updateAdminPassword()" style="display:none; background:rgba(255,149,0,0.2); border:1px solid rgba(255,149,0,0.4); color:#ff9500; font-size:11px; font-weight:700; padding:4px 8px; border-radius:6px; cursor:pointer;" title="Admin Şifresini Değiştir">🔑 Şifre Değiştir</button>
-  </div> 
+  <div class="nav-spacer"></div> 
 </nav>
 
 <div class="layout" id="mainLayout">
@@ -710,9 +538,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
           <span>⛶</span><span class="btn-text">Sinema</span>
         </button>
-        <button class="btn-chat-toggle" id="chatToggleBtn" onclick="toggleChatPanel()" style="display:none;">
-          💬 Sohbet
-        </button>
       </div>
       <div class="now-badges">
         <div class="badge badge-live"><div class="live-dot"></div>CANLI</div>
@@ -738,36 +563,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
           <video id="hlsPlayer" controls autoplay playsinline></video>
         </div>
       </div>
-
-      <div class="chat-sidebar-panel hidden" id="chatPanel">
-        <div class="chat-header">
-          <span>💬 FATBOK Canlı Sohbet</span>
-          <div style="display: flex; align-items: center; gap: 6px;">
-            <button id="slowModeAdminBtn" onclick="toggleSlowModeAdmin()" style="display:none; background:rgba(255,255,255,0.1); border:1px solid var(--border); color:#fff; font-size:10px; font-weight:700; padding:2px 6px; border-radius:4px; cursor:pointer;">🐢 Yavaş Mod: Kapalı</button>
-            <span style="font-size:11px; color:#34c759;">● Çevrimiçi</span>
-          </div>
-        </div>
-
-        <div class="pinned-message-banner" id="pinnedBanner">
-          <div class="pinned-banner-header">
-            <span>📌 Sabitlenen Mesaj</span>
-            <button class="unpin-btn" id="unpinBtn" onclick="unpinMessage()" style="display:none;">Kaldır</button>
-          </div>
-          <div class="pinned-banner-text" id="pinnedText">Yok</div>
-        </div>
-
-        <div class="custom-chat-messages" id="chatMessages">
-          <div class="chat-msg-item">
-            <div class="chat-msg-header"><span class="chat-msg-user" style="color:var(--accent);">Sistem</span><span class="chat-msg-time">Şimdi</span></div>
-            <div class="chat-msg-text">Sohbete hoş geldiniz!</div>
-          </div>
-        </div>
-        <form class="custom-chat-form" id="chatForm" onsubmit="sendChatMessage(event)">
-          <input type="text" id="chatUsername" class="chat-input-name" placeholder="Kullanıcı Adınız" required maxlength="20" onchange="checkUsernameAdmin(this)"/>
-          <input type="text" id="chatMessageInput" class="chat-input-msg" placeholder="Mesaj yazın..." required maxlength="250" autocomplete="off"/>
-          <button type="submit" class="chat-send-btn">Gönder</button>
-        </form>
-      </div>
     </div>
 
   </div>
@@ -775,359 +570,6 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 </div>
 
 <script>
-const socket = io('https://fatbokchat1.onrender.com/');
-
-function getAdminPassword() {
-  return localStorage.getItem('fatbok_admin_pass') || "fatbok2026";
-}
-
-function updateAdminPassword() {
-  if (localStorage.getItem('fatbok_is_admin') !== 'true') {
-    alert("Bu işlem için yetkiniz yok!");
-    return;
-  }
-  let currentPassCheck = prompt("Mevcut admin şifresini girin:");
-  if (currentPassCheck !== getAdminPassword()) {
-    alert("Mevcut şifre hatalı!");
-    return;
-  }
-  let newPass = prompt("Yeni admin şifresini girin:");
-  if (newPass && newPass.trim() !== "") {
-    localStorage.setItem('fatbok_admin_pass', newPass.trim());
-    alert("Admin şifresi başarıyla güncellendi!");
-  } else {
-    alert("Şifre boş olamaz!");
-  }
-}
-
-let slowModeActive = false;
-let lastMessageTime = 0;
-const SLOW_MODE_LIMIT = 3000;
-
-function stringToColor(str) {
-  let hash = 0;
-  for (let i = 0; i < str.length; i++) {
-    hash = str.charCodeAt(i) + ((hash << 5) - hash);
-  }
-  let color = '#';
-  for (let i = 0; i < 3; i++) {
-    let value = (hash >> (i * 8)) & 0xFF;
-    color += ('00' + value.toString(16)).substr(-2);
-  }
-  return color;
-}
-
-function checkUsernameAdmin(inputEl) {
-  let name = inputEl.value.trim();
-  if (name.toLowerCase() === 'admin' && localStorage.getItem('fatbok_is_admin') !== 'true') {
-    let enteredPass = prompt("👑 Yönetici Paneli: Lütfen Admin Şifresini Girin:");
-    if (enteredPass === getAdminPassword()) {
-      localStorage.setItem('fatbok_is_admin', 'true');
-      alert("Şifre doğru! Admin yetkileri aktif.");
-      location.reload(); 
-    } else {
-      alert("Hatalı şifre!");
-      localStorage.removeItem('fatbok_is_admin');
-      inputEl.value = "";
-    }
-  } else if (name.toLowerCase() !== 'admin') {
-    localStorage.removeItem('fatbok_is_admin');
-  }
-}
-
-// Socket Güncellemesi: Sayfa yüklendiğinde geçmiş mesajları, pin durumunu ve yavaş modu otomatik al
-socket.on('initChat', (data) => {
-  const container = document.getElementById('chatMessages');
-  container.innerHTML = ''; // Temizle
-  
-  if (data.messages && data.messages.length > 0) {
-    data.messages.forEach(msg => {
-      appendMessage(msg.id, msg.username, msg.message, msg.time, msg.isAdmin);
-    });
-  }
-
-  // Pinli mesajı ayarla
-  const banner = document.getElementById('pinnedBanner');
-  const textEl = document.getElementById('pinnedText');
-  const unpinBtn = document.getElementById('unpinBtn');
-  
-  if (data.pinned) {
-    textEl.textContent = data.pinned;
-    banner.classList.add('active');
-    if (localStorage.getItem('fatbok_is_admin') === 'true') unpinBtn.style.display = 'inline-block';
-  } else {
-    banner.classList.remove('active');
-  }
-
-  // Yavaş modu ayarla
-  slowModeActive = data.slowMode;
-  const adminBtn = document.getElementById('slowModeAdminBtn');
-  if (adminBtn && localStorage.getItem('fatbok_is_admin') === 'true') {
-    adminBtn.textContent = data.slowMode ? "🐢 Yavaş Mod: Açık" : "🐢 Yavaş Mod: Kapalı";
-  }
-});
-
-socket.on('chatMessage', (data) => {
-  appendMessage(data.id, data.username, data.message, data.time, data.isAdmin);
-});
-
-socket.on('deleteMessage', (msgId) => {
-  const msgEl = document.getElementById(`msg-${msgId}`);
-  if (msgEl) msgEl.remove();
-});
-
-socket.on('slowModeStatus', (isActive) => {
-  slowModeActive = isActive;
-  const adminBtn = document.getElementById('slowModeAdminBtn');
-  if (adminBtn && localStorage.getItem('fatbok_is_admin') === 'true') {
-    adminBtn.textContent = isActive ? "🐢 Yavaş Mod: Açık" : "🐢 Yavaş Mod: Kapalı";
-  }
-});
-
-function toggleSlowModeAdmin() {
-  if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
-  socket.emit('toggleSlowMode', !slowModeActive);
-}
-
-socket.on('pinnedMessage', (text) => {
-  const banner = document.getElementById('pinnedBanner');
-  const textEl = document.getElementById('pinnedText');
-  const unpinBtn = document.getElementById('unpinBtn');
-  if (text) {
-    textEl.textContent = text;
-    banner.classList.add('active');
-    if (localStorage.getItem('fatbok_is_admin') === 'true') unpinBtn.style.display = 'inline-block';
-  } else {
-    banner.classList.remove('active');
-    textEl.textContent = "";
-    unpinBtn.style.display = 'none';
-  }
-});
-
-function sendChatMessage(e) {
-  e.preventDefault();
-  const isAdmin = localStorage.getItem('fatbok_is_admin') === 'true';
-  if (slowModeActive && !isAdmin) {
-    const timeLeft = SLOW_MODE_LIMIT - (Date.now() - lastMessageTime);
-    if (timeLeft > 0) {
-      alert(`Yavaş mod aktif! Lütfen ${(timeLeft / 1000).toFixed(1)} saniye bekleyin.`);
-      return;
-    }
-  }
-
-  const usernameInput = document.getElementById('chatUsername');
-  const messageInput = document.getElementById('chatMessageInput');
-  let username = usernameInput.value.trim();
-  let message = messageInput.value.trim();
-  if (!username || !message) return;
-
-  let userIsAdminFlag = (username.toLowerCase() === 'admin' && isAdmin);
-  localStorage.setItem('fatbok_chat_user', username);
-  const msgId = 'm_' + Math.random().toString(36).substring(2, 9);
-
-  socket.emit('chatMessage', { id: msgId, username, message, isAdmin: userIsAdminFlag });
-  lastMessageTime = Date.now();
-  messageInput.value = '';
-  messageInput.focus();
-}
-
-function deleteMessage(msgId) {
-  if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
-  socket.emit('deleteMessage', msgId);
-}
-
-function pinMessage(text) {
-  if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
-  socket.emit('pinMessage', text);
-}
-
-function unpinMessage() {
-  if (localStorage.getItem('fatbok_is_admin') !== 'true') return;
-  socket.emit('pinMessage', "");
-}
-
-function appendMessage(msgId, user, text, time, isAdminFlag) {
-  const container = document.getElementById('chatMessages');
-  const isAtBottom = container.scrollHeight - container.scrollTop <= container.clientHeight + 50;
-
-  const userColor = stringToColor(user);
-  const isAdmin = isAdminFlag || (user.toLowerCase() === 'admin' && localStorage.getItem('fatbok_is_admin') === 'true');
-  const isUserAdmin = localStorage.getItem('fatbok_is_admin') === 'true';
-  
-  const div = document.createElement('div');
-  div.className = 'chat-msg-item' + (isAdmin ? ' admin-msg' : '');
-  if (msgId) div.id = `msg-${msgId}`;
-  
-  div.innerHTML = `
-    <div class="chat-msg-header">
-      <div>
-        <span class="chat-msg-user" style="color: ${isAdmin ? '#00ff55' : userColor};">
-          ${escapeHtml(user)}
-          ${isAdmin ? '<span class="admin-badge">👑 ADMIN</span>' : ''}
-        </span>
-      </div>
-      <div class="msg-actions">
-        <span class="chat-msg-time">${time || 'Şimdi'}</span>
-        ${isUserAdmin ? `<button class="pin-msg-btn" onclick="pinMessage('${escapeHtml(text).replace(/'/g, "\\'")}')">📌 Sabitle</button>` : ''}
-        ${isUserAdmin ? `<button class="delete-msg-btn" onclick="deleteMessage('${msgId}')">🗑️ Sil</button>` : ''}
-      </div>
-    </div>
-    <div class="chat-msg-text">${escapeHtml(text)}</div>
-  `;
-  container.appendChild(div);
-
-  if (isUserAdmin) {
-    const pinBtn = div.querySelector('.pin-msg-btn');
-    const delBtn = div.querySelector('.delete-msg-btn');
-    if(pinBtn) pinBtn.style.display = 'inline-block';
-    if(delBtn) delBtn.style.display = 'inline-block';
-  }
-
-  if (isAtBottom) container.scrollTop = container.scrollHeight;
-}
-
-function escapeHtml(str) {
-  return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-}
-
-function toggleChatPanel() {
-  const chatPanel = document.getElementById('chatPanel');
-  if (window.innerWidth <= 768) {
-    const chSidebar = document.querySelector('.ch-sidebar');
-    if (chatPanel.parentElement !== chSidebar) {
-      chSidebar.insertBefore(chatPanel, chSidebar.querySelector('.adv-panel'));
-    }
-  } else {
-    const videoWrap = document.querySelector('.content-body-flex');
-    if (chatPanel.parentElement !== videoWrap) {
-      videoWrap.appendChild(chatPanel);
-    }
-  }
-  chatPanel.classList.toggle('hidden');
-}
-
-window.addEventListener('DOMContentLoaded', () => {
-  const savedUser = localStorage.getItem('fatbok_chat_user');
-  if (savedUser) document.getElementById('chatUsername').value = savedUser;
-
-  if (localStorage.getItem('fatbok_is_admin') === 'true') {
-    const adminBtn = document.getElementById('slowModeAdminBtn');
-    if (adminBtn) adminBtn.style.display = 'inline-block';
-    const changePassBtn = document.getElementById('changePassBtn');
-    if (changePassBtn) changePassBtn.style.display = 'inline-block';
-  }
-
-  const chatPanel = document.getElementById('chatPanel');
-  if (window.innerWidth <= 768) {
-    document.querySelector('.ch-sidebar').insertBefore(chatPanel, document.querySelector('.ch-sidebar').querySelector('.adv-panel'));
-  }
-});
-
-const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
-
-const channels = [
-  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://hlsforever.forgetmoenszo.workers.dev/https://corestream.siteyaptim.live//bein1/tracks-v1a1/mono.m3u8"},
-  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://zbahistv65.com/channel.html?id=zirve"},
-  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://ff.8b9035807842a4e4dbe009f3f1478127.biz/hls/701.m3u8"},
-  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://zbahistv65.com/channel.html?id=b2"},
-  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://corestream.siteyaptim.live//bein2/tracks-v1a1/mono.m3u8"},
-  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://dlhd.st/hub/stream-62.php"},
-  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://zbahistv65.com/channel.html?id=b3"},
-  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs3.m3u8"},
-  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream:"https://zbahistv65.com/channel.html?id=b4"},
-  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs4.m3u8"},
-  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://zbahistv65.com/channel.html?id=b5"},
-  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs5.m3u8"},
-  {id:13, name:"BeIN Max 1",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://zbahistv65.com/channel.html?id=bm1"},
-  {id:14, name:"BeIN Max 1 B",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebsm1.m3u8"},
-  {id:15, name:"BeIN Max 2",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax2.png", stream:"https://zbahistv65.com/channel.html?id=bm2"},
-  {id:16, name:"BeIN Max 2 B",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebsm2.m3u8"},
-  {id:17, name:"S Sport 1",      cat:"tr", logo:"https://royaltv34.com/img/ssport1.png", stream:"https://zbahistv65.com/channel.html?id=ss"},
-  {id:18, name:"S Sport 1 B", cat:"tr", logo:"https://royaltv34.com/img/ssport1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivess1.m3u8"},
-  {id:19, name:"S Sport 2",      cat:"tr", logo:"https://royaltv34.com/img/ssport2.png", stream:"https://zbahistv65.com/channel.html?id=ss2"},
-  {id:20, name:"S Sport 2 B",      cat:"tr", logo:"https://royaltv34.com/img/ssport2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivess2.m3u8"},
-  {id:21, name:"Tivibu 1",       cat:"tr", logo:"https://royaltv34.com/img/tivibu1.png", stream:"https://zbahistv65.com/channel.html?id=t1"},
-  {id:22, name:"Tivibu 1 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets1.m3u8"},
-  {id:23, name:"Tivibu 2",       cat:"tr", logo:"https://royaltv34.com/img/tivibu2.png", stream:"https://zbahistv65.com/channel.html?id=t2"},
-  {id:24, name:"Tivibu 2 B ",       cat:"tr", logo:"https://royaltv34.com/img/tivibu2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets2.m3u8"},
-  {id:25, name:"Tivibu 3",       cat:"tr", logo:"https://royaltv34.com/img/tivibu3.png", stream:"https://zbahistv65.com/channel.html?id=t3"},
-  {id:26, name:"Tivibu 3 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu3.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets3.m3u8"},
-  {id:27, name:"Tivibu 4",       cat:"tr", logo:"https://royaltv34.com/img/tivibu4.png", stream:"https://zbahistv65.com/channel.html?id=t4"},
-  {id:28, name:"Tivibu 4 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu4.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets4.m3u8"},
-  {id:29, name:"Smartspor",      cat:"tr", logo:"https://royaltv34.com/img/smartspor.png", stream:"https://zbahistv65.com/channel.html?id=smarts"},
-  {id:30, name:"Smartspor B",      cat:"tr", logo:"https://royaltv34.com/img/smartspor.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivesm1.m3u8"},
-  {id:31, name:"Smartspor 2",    cat:"tr", logo:"https://royaltv34.com/img/smartspor2.png", stream:"https://zbahistv65.com/channel.html?id=sms2"},
-  {id:32, name:"Smartspor 2 B",    cat:"tr", logo:"https://royaltv34.com/img/smartspor2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivesm2.m3u8"},
-  {id:33, name:"TV100",          cat:"tr", logo:"https://upload.wikimedia.org/wikipedia/tr/0/0f/TV100_logo.png", stream:"https://zbahistv65.com/channel?id=ex1"},
-  {id:34, name:"Tabii Spor",     cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://kL9mR2vXw7nQ5pY1sH4tJ3gB6.medya.trt.com.tr/master.m3u8"},
-  {id:35, name:"Tabii Spor 1",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://Pz4qT7nW1mR9sH2vL5xK8jG3y.medya.trt.com.tr/master.m3u8"},
-  {id:36, name:"Tabii Spor 2",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://mR8bV4kL1nQ7sH9tW2xP5zJ6g.medya.trt.com.tr/master.m3u8"},
-  {id:37, name:"Tabii Spor 3",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://mR4vL7nQ2sH9tW5pP1zK3gJ8b.medya.trt.com.tr/master.m3u8"},
-  {id:38, name:"Tabii Spor 4",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://sH7tQ2nW5mR1vL9xP4zK3gJ8k.medya.trt.com.tr/master.m3u8"},
-  {id:39, name:"Tabii Spor 5",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://vL2nQ8sH4tW1mR7xP5zK9gJ3y.medya.trt.com.tr/master.m3u8"},
-  {id:40, name:"Tabii Spor 6",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://nW5mR1vL9xP4zK2sH7tQ3gJ6b.medya.trt.com.tr/master.m3u8"},
-  {id:41, name:"Tabii Spor 7",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://Pz2rT7nW1mR9sH4vL6xK3gJ5b.medya.trt.com.tr/master.m3u8"},
-  {id:42, name:"Tabii Spor 8",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://vL9nQ2sH5tW1mR7xP4zK8gJ3k.medya.trt.com.tr/master.m3u8"},
-  {id:43, name:"TRT Spor",       cat:"tr", logo:"https://royaltv34.com/img/trtspornew.png", stream:"https://tv-trtspor1.medya.trt.com.tr/master.m3u8"},
-  {id:44, name:"A Spor",         cat:"tr", logo:"https://royaltv34.com/img/aspornew.png", stream:"https://zbahistv65.com/channel.html?id=as"},
-  {id:45, name:"TRT 1",          cat:"tr", logo:"https://royaltv34.com/img/trt1.png", stream:"https://tv-trt1.medya.trt.com.tr/master.m3u8"},
-  {id:46, name:"ATV",            cat:"tr", logo:"https://royaltv34.com/img/atv.png", stream:"https://zbahistv65.com/channel.html?id=atv"},
-  {id:47, name:"TV 8",           cat:"tr", logo:"https://royaltv34.com/img/tv8.png", stream:"https://zbahistv65.com/channel.html?id=tv8"},
-  {id:48, name:"TV 8,5",         cat:"tr", logo:"https://royaltv34.com/img/tv85.png", stream:"https://zbahistv65.com/channel.html?id=tv85"}
-];
-
-const dailyMatchesByDate = [
-  {
-    date: "21 Ağustos 2026",
-    matches: [
-      {
-        time: "17:00",
-        homeTeam: "FORMULA 1 SIRALAMA TURLARI",
-        homeLogo: "https://media02.tr.beinsports.com/img/templates/f1logo.png",
-        channelIds: [9,10]
-      },
-      {
-        time: "21:30",
-        homeTeam: "Karagümrük",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/62.png",
-        awayTeam: "Bursaspor",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/42_1.png",
-        channelIds: [4,5,43]
-      },
-      {
-        time: "22:00",
-        homeTeam: "Arsenal",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/9/92/Arsenal_Football_Club.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "Coventry",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/thumb/3/39/Coventry_City_FC.png/250px-Coventry_City_FC.png?utm_source=tr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
-        channelIds: [7,8]
-      },
-      {
-        time: "22:00",
-        homeTeam: "Real Betis",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/8/80/Betis.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "Real Sociedad",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/3/33/Real_Sociedad.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [17,18]
-      },
-      {
-        time: "21:45",
-        homeTeam: "Marsilya",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Olympique_Marseille_logo.svg/250px-Olympique_Marseille_logo.svg.png?utm_source=tr.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
-        awayTeam: "Strasbourg",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/8/80/Racing_Club_de_Strasbourg_logo.svg/1280px-Racing_Club_de_Strasbourg_logo.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
-        channelIds: [11,12]
-      }
-    ]
-  }
-];
-  
-const fallbackLogo = "https://img.icons8.com/fluency/48/television.png";
-
-let currentCategory = 'tr'; 
-let currentSearch = '';
-let activeTab = 'channels'; 
-let activeId = null;
 let hlsInstance = null;
 let selectedChannelObj = null;
 let plyrInstance = null;
@@ -1191,17 +633,23 @@ function renderMatchesList() {
     fragment.appendChild(dateHeader);
 
     group.matches.forEach(match => {
+      if (match.league) {
+        const leagueHeader = document.createElement('div');
+        leagueHeader.className = 'league-group-header';
+        leagueHeader.textContent = match.league;
+        fragment.appendChild(leagueHeader);
+      }
+
       const card = document.createElement('div');
       card.className = 'match-card';
       let firstChannelId = (match.channelIds && match.channelIds.length > 0) ? match.channelIds[0] : null;
 
       let cardHtml = '';
       if (match.awayTeam) {
-        // Normal Maç Görünümü (İki Takım / İki Logo)
         cardHtml = `
           <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat">
             <div class="match-team-side">
-              <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+              ${match.homeLogo ? `<img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>` : ''}
               <span class="match-team-name">${match.homeTeam}</span>
             </div>
             <div class="match-center-info">
@@ -1210,15 +658,14 @@ function renderMatchesList() {
             </div>
             <div class="match-team-side right">
               <span class="match-team-name">${match.awayTeam}</span>
-              <img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>
+              ${match.awayLogo ? `<img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>` : ''}
             </div>
           </div>
         `;
       } else {
-        // Tek Logo / Formula 1 Tarzı Görünüm
         cardHtml = `
           <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat" style="justify-content: center; gap: 12px;">
-            <img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" style="width: 32px; height: 32px;" onerror="this.src='${fallbackLogo}'"/>
+            ${match.homeLogo ? `<img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" style="width: 24px; height: 24px;" onerror="this.src='${fallbackLogo}'"/>` : ''}
             <div style="display: flex; flex-direction: column; align-items: center;">
               <span class="match-time" style="margin-bottom: 2px;">${match.time}</span>
               <span class="match-team-name" style="font-size: 13px;">${match.homeTeam}</span>
@@ -1288,7 +735,6 @@ function selectChannel(c){
   logoEl.innerHTML = `<img src="${c.logo}" alt="${c.name}" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>`;
   document.getElementById('nowName').textContent = c.name;
   document.getElementById('theaterBtn').style.display = 'flex';
-  document.getElementById('chatToggleBtn').style.display = 'flex';
   document.getElementById('vidOverlay').style.display = 'none';
   
   const iframePlayer = document.getElementById('embedPlayer');
@@ -1365,6 +811,236 @@ function filterChannels(q){
   currentSearch = q;
   renderList();
 }
+
+const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
+
+const channels = [
+  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://taraftarium1080.xyz/channel.html?id=zirve"},
+  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://corestream.siteyaptim.live//bein1/tracks-v1a1/mono.m3u8"},
+  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://andro.evrenesoglu99.click/checklist/androstreamlivekral.m3u8"},
+  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://corestream.siteyaptim.live//bein2/tracks-v1a1/mono.m3u8"},
+  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://taraftarium1080.xyz/channel.html?id=b2"},
+  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://taraftarium1080.xyz/channel.html?id=b2"},
+  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://corestream.siteyaptim.live//bein3/tracks-v1a1/mono.m3u8"},
+  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://taraftarium1080.xyz/channel.html?id=b3"},
+  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream: "https://corestream.siteyaptim.live//bein4/tracks-v1a1/mono.m3u8"},
+  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs4.m3u8"},
+  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://corestream.siteyaptim.live//bein5/tracks-v1a1/mono.m3u8"},
+  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs5.m3u8"},
+  {id:13, name:"BeIN Max 1",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://taraftarium1080.xyz/channel.html?id=bm1"},
+  {id:14, name:"BeIN Max 1 B",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebsm1.m3u8"},
+  {id:15, name:"BeIN Max 2",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax2.png", stream:"https://taraftarium1080.xyz/channel.html?id=bm2"},
+  {id:16, name:"BeIN Max 2 B",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebsm2.m3u8"},
+  {id:17, name:"S Sport 1",      cat:"tr", logo:"https://royaltv34.com/img/ssport1.png", stream:"https://taraftarium1080.xyz/channel.html?id=ss"},
+  {id:18, name:"S Sport 1 B", cat:"tr", logo:"https://royaltv34.com/img/ssport1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivess1.m3u8"},
+  {id:19, name:"S Sport 2",      cat:"tr", logo:"https://royaltv34.com/img/ssport2.png", stream:"https://taraftarium1080.xyz/channel.html?id=ss2"},
+  {id:20, name:"S Sport 2 B",      cat:"tr", logo:"https://royaltv34.com/img/ssport2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivess2.m3u8"},
+  {id:21, name:"Tivibu 1",       cat:"tr", logo:"https://royaltv34.com/img/tivibu1.png", stream:"https://taraftarium1080.xyz/channel.html?id=t1"},
+  {id:22, name:"Tivibu 1 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets1.m3u8"},
+  {id:23, name:"Tivibu 2",       cat:"tr", logo:"https://royaltv34.com/img/tivibu2.png", stream:"https://taraftarium1080.xyz/channel.html?id=t2"},
+  {id:24, name:"Tivibu 2 B ",       cat:"tr", logo:"https://royaltv34.com/img/tivibu2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets2.m3u8"},
+  {id:25, name:"Tivibu 3",       cat:"tr", logo:"https://royaltv34.com/img/tivibu3.png", stream:"https://taraftarium1080.xyz/channel.html?id=t3"},
+  {id:26, name:"Tivibu 3 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu3.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets3.m3u8"},
+  {id:27, name:"Tivibu 4",       cat:"tr", logo:"https://royaltv34.com/img/tivibu4.png", stream:"https://taraftarium1080.xyz/channel.html?id=t4"},
+  {id:28, name:"Tivibu 4 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu4.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets4.m3u8"},
+  {id:29, name:"Smartspor",      cat:"tr", logo:"https://royaltv34.com/img/smartspor.png", stream:"https://taraftarium1080.xyz/channel.html?id=smarts"},
+  {id:30, name:"Smartspor B",      cat:"tr", logo:"https://royaltv34.com/img/smartspor.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivesm1.m3u8"},
+  {id:31, name:"Smartspor 2",    cat:"tr", logo:"https://royaltv34.com/img/smartspor2.png", stream:"https://taraftarium1080.xyz/channel.html?id=smarts"},
+  {id:32, name:"Smartspor 2 B",    cat:"tr", logo:"https://royaltv34.com/img/smartspor2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivesm2.m3u8"},
+  {id:33, name:"TV100",          cat:"tr", logo:"https://upload.wikimedia.org/wikipedia/tr/0/0f/TV100_logo.png", stream:"https://taraftarium1080.xyz/channel.html?id=ex1"},
+  {id:34, name:"Tabii Spor",     cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://kL9mR2vXw7nQ5pY1sH4tJ3gB6.medya.trt.com.tr/master.m3u8"},
+  {id:35, name:"Tabii Spor 1",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://Pz4qT7nW1mR9sH2vL5xK8jG3y.medya.trt.com.tr/master.m3u8"},
+  {id:36, name:"Tabii Spor 2",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://mR8bV4kL1nQ7sH9tW2xP5zJ6g.medya.trt.com.tr/master.m3u8"},
+  {id:37, name:"Tabii Spor 3",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://mR4vL7nQ2sH9tW5pP1zK3gJ8b.medya.trt.com.tr/master.m3u8"},
+  {id:38, name:"Tabii Spor 4",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://sH7tQ2nW5mR1vL9xP4zK3gJ8k.medya.trt.com.tr/master.m3u8"},
+  {id:39, name:"Tabii Spor 5",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://vL2nQ8sH4tW1mR7xP5zK9gJ3y.medya.trt.com.tr/master.m3u8"},
+  {id:40, name:"Tabii Spor 6",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://nW5mR1vL9xP4zK2sH7tQ3gJ6b.medya.trt.com.tr/master.m3u8"},
+  {id:41, name:"Tabii Spor 7",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://Pz2rT7nW1mR9sH4vL6xK3gJ5b.medya.trt.com.tr/master.m3u8"},
+  {id:42, name:"Tabii Spor 8",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://vL9nQ2sH5tW1mR7xP4zK8gJ3k.medya.trt.com.tr/master.m3u8"},
+  {id:43, name:"TRT Spor",       cat:"tr", logo:"https://royaltv34.com/img/trtspornew.png", stream:"https://tv-trtspor1.medya.trt.com.tr/master.m3u8"},
+  {id:44, name:"A Spor",         cat:"tr", logo:"https://royaltv34.com/img/aspornew.png", stream:"https://taraftarium1080.xyz/channel.html?id=as"},
+  {id:45, name:"TRT 1",          cat:"tr", logo:"https://royaltv34.com/img/trt1.png", stream:"https://tv-trt1.medya.trt.com.tr/master.m3u8"},
+  {id:46, name:"ATV",            cat:"tr", logo:"https://royaltv34.com/img/atv.png", stream:"https://taraftarium1080.xyz/channel.html?id=atv"},
+  {id:47, name:"TV 8",           cat:"tr", logo:"https://royaltv34.com/img/tv8.png", stream:"https://taraftarium1080.xyz/channel.html?id=tv8"},
+  {id:48, name:"TV 8,5",         cat:"tr", logo:"https://royaltv34.com/img/tv85.png", stream:"https://taraftarium1080.xyz/channel.html?id=tv85"}
+];
+
+const dailyMatchesByDate = [
+  {
+    date: "23 Ağustos 2026",
+    matches: [
+      {
+        league: "TÜRKİYE • Süper Lig",
+        time: "19:00",
+        homeTeam: "Eyüpspor",
+        homeLogo: "",
+        awayTeam: "Gaziantep FK",
+        awayLogo: "",
+        channelIds: [1, 2]
+      },
+      {
+        league: "TÜRKİYE • Süper Lig",
+        time: "19:00",
+        homeTeam: "Trabzonspor",
+        homeLogo: "",
+        awayTeam: "Başakşehir",
+        awayLogo: "",
+        channelIds: [4, 5]
+      },
+      {
+        league: "TÜRKİYE • Süper Lig",
+        time: "21:30",
+        homeTeam: "Alanyaspor",
+        homeLogo: "",
+        awayTeam: "Beşiktaş",
+        awayLogo: "",
+        channelIds: [1, 3]
+      },
+      {
+        league: "TÜRKİYE • Süper Lig",
+        time: "21:30",
+        homeTeam: "Göztepe",
+        homeLogo: "",
+        awayTeam: "Gençlerbirliği",
+        awayLogo: "",
+        channelIds: [7, 8]
+      },
+      {
+        league: "TÜRKİYE • 1. Lig",
+        time: "17:00",
+        homeTeam: "Bandırmaspor",
+        homeLogo: "",
+        awayTeam: "Keçiörengücü",
+        awayLogo: "",
+        channelIds: [13, 14]
+      },
+      {
+        league: "TÜRKİYE • 1. Lig",
+        time: "19:00",
+        homeTeam: "Boluspor",
+        homeLogo: "",
+        awayTeam: "Mardin 1969",
+        awayLogo: "",
+        channelIds: [15, 16]
+      },
+      {
+        league: "TÜRKİYE • 1. Lig",
+        time: "21:30",
+        homeTeam: "Sarıyer",
+        homeLogo: "",
+        awayTeam: "Batman Petrol",
+        awayLogo: "",
+        channelIds: [43, 44]
+      },
+      {
+        league: "TÜRKİYE • 1. Lig",
+        time: "21:30",
+        homeTeam: "Van Spor FK",
+        homeLogo: "",
+        awayTeam: "İstanbulspor",
+        awayLogo: "",
+        channelIds: [43]
+      },
+      {
+        league: "İNGİLTERE • Premier League",
+        time: "16:00",
+        homeTeam: "Brighton",
+        homeLogo: "",
+        awayTeam: "Aston Villa",
+        awayLogo: "",
+        channelIds: [17, 18]
+      },
+      {
+        league: "İNGİLTERE • Premier League",
+        time: "16:00",
+        homeTeam: "Man. City",
+        homeLogo: "",
+        awayTeam: "Bournemouth",
+        awayLogo: "",
+        channelIds: [17, 19]
+      },
+      {
+        league: "İNGİLTERE • Premier League",
+        time: "18:30",
+        homeTeam: "Newcastle",
+        homeLogo: "",
+        awayTeam: "Liverpool",
+        awayLogo: "",
+        channelIds: [17, 18]
+      },
+      {
+        league: "İSPANYA • LALIGA",
+        time: "18:00",
+        homeTeam: "Atl. Madrid",
+        homeLogo: "",
+        awayTeam: "Villarreal",
+        awayLogo: "",
+        channelIds: [19, 20]
+      },
+      {
+        league: "İSPANYA • LALIGA",
+        time: "20:30",
+        homeTeam: "Getafe",
+        homeLogo: "",
+        awayTeam: "Santander",
+        awayLogo: "",
+        channelIds: [19, 20]
+      },
+      {
+        league: "İSPANYA • LALIGA",
+        time: "22:30",
+        homeTeam: "Elche",
+        homeLogo: "",
+        awayTeam: "Barcelona",
+        awayLogo: "",
+        channelIds: [19, 20]
+      },
+      {
+        league: "İTALYA • Serie A",
+        time: "19:30",
+        homeTeam: "Frosinone",
+        homeLogo: "",
+        awayTeam: "Juventus",
+        awayLogo: "",
+        channelIds: [29, 30]
+      },
+      {
+        league: "İTALYA • Serie A",
+        time: "19:30",
+        homeTeam: "Venezia",
+        homeLogo: "",
+        awayTeam: "Lecce",
+        awayLogo: "",
+        channelIds: [31, 32]
+      },
+      {
+        league: "İTALYA • Serie A",
+        time: "21:45",
+        homeTeam: "Atalanta",
+        homeLogo: "",
+        awayTeam: "Sassuolo",
+        awayLogo: "",
+        channelIds: [29, 30]
+      },
+      {
+        league: "İTALYA • Serie A",
+        time: "21:45",
+        homeTeam: "Torino",
+        homeLogo: "",
+        awayTeam: "Milan",
+        awayLogo: "",
+        channelIds: [29, 31]
+      }
+    ]
+  }
+];
+  
+const fallbackLogo = "https://img.icons8.com/fluency/48/television.png";
+
+let currentCategory = 'tr'; 
+let currentSearch = '';
+let activeTab = 'channels'; 
+let activeId = null;
 
 renderCountryFilters();
 renderList();
