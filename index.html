@@ -290,29 +290,88 @@ nav{
   border-color: rgba(255, 255, 255, 0.25);
 }
 
-/* 3D Kura Çekimi Kartı Özel Stili */
+/* 3D Şampiyonlar Ligi Kura Kartı & Güneş Sistemi Animasyonu */
 .match-card.ucl-3d-card {
-  background: linear-gradient(135deg, rgba(0, 32, 96, 0.6) 0%, rgba(10, 15, 30, 0.9) 100%);
+  background: linear-gradient(135deg, rgba(0, 20, 60, 0.8) 0%, rgba(5, 10, 25, 0.95) 100%);
   border: 1px solid rgba(0, 122, 255, 0.6);
-  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.25), inset 0 0 15px rgba(0, 122, 255, 0.15);
-  transform: perspective(800px) rotateX(2deg);
+  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3), inset 0 0 20px rgba(0, 122, 255, 0.2);
+  transform: perspective(800px) rotateX(3deg);
   transition: all 0.3s ease;
 }
 .match-card.ucl-3d-card:hover {
   transform: perspective(800px) rotateX(0deg) scale(1.01);
-  box-shadow: 0 12px 30px rgba(0, 122, 255, 0.4);
+  box-shadow: 0 12px 35px rgba(0, 122, 255, 0.5);
 }
 
-/* Sürekli Kendi Etrafında Dönen Logolar İçin Animasyon */
-@keyframes spin3d {
-  0% { transform: perspective(300px) rotateY(0deg); }
-  100% { transform: perspective(300px) rotateY(360deg); }
+/* Güneş Sistemi Yörünge Alanı */
+.solar-system-container {
+  position: relative;
+  width: 100%;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 600px;
+  margin: 4px 0;
 }
 
-.spinning-logo {
-  animation: spin3d 4s linear infinite;
-  transform-style: preserve-style;
-  filter: drop-shadow(0 0 8px rgba(0, 122, 255, 0.6));
+/* Güneş (Şampiyonlar Ligi Logosu - Merkezde Sabit ve Parlar) */
+.sun-center {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 0 12px rgba(0, 122, 255, 0.9));
+  animation: sunPulse 3s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.8)); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 18px rgba(0, 160, 255, 1)); }
+}
+
+/* Yörünge Çizgisi */
+.orbit-path {
+  position: absolute;
+  width: 150px;
+  height: 55px;
+  border: 1px dashed rgba(0, 122, 255, 0.4);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(55deg);
+  pointer-events: none;
+}
+
+/* Gezegenler (GS ve FB Logoları) İçin Dönüş Animasyonu */
+@keyframes orbitRevolution {
+  0% { transform: translate(-50%, -50%) rotate(0deg) translateX(75px) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg) translateX(75px) rotate(-360deg); }
+}
+
+@keyframes orbitRevolutionReverse {
+  0% { transform: translate(-50%, -50%) rotate(180deg) translateX(75px) rotate(-180deg); }
+  100% { transform: translate(-50%, -50%) rotate(540deg) translateX(75px) rotate(-540deg); }
+}
+
+.planet-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
+  z-index: 3;
+}
+
+.planet-gs {
+  animation: orbitRevolution 6s linear infinite;
+}
+
+.planet-fb {
+  animation: orbitRevolutionReverse 6s linear infinite;
 }
 
 .match-main-row {
@@ -679,7 +738,7 @@ function renderMatchesList() {
 
       const card = document.createElement('div');
       
-      // Eğer Kura Çekimi ise 3D kart sınıfını ve özel tasarımı ekle
+      // Eğer Kura Çekimi ise özel 3D ve Güneş Sistemi sınıfını verelim
       if (match.isUclDraw) {
         card.className = 'match-card ucl-3d-card';
       } else {
@@ -689,18 +748,19 @@ function renderMatchesList() {
       let firstChannelId = (match.channelIds && match.channelIds.length > 0) ? match.channelIds[0] : null;
 
       let cardHtml = '';
-      if (match.isUclDraw && match.logos && match.logos.length > 0) {
-        // Şampiyonlar Ligi Kura Çekimi için 3'lü dönebilen logo yapısı
+      if (match.isUclDraw) {
+        // Güneş Sistemi (Şampiyonlar Ligi Güneş, GS ve FB Gezegenler)
         cardHtml = `
-          <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat" style="justify-content: center; gap: 15px; padding: 6px 0;">
-            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%;">
-              <img src="${match.logos[0]}" class="match-team-logo spinning-logo" style="width: 32px; height: 32px;" onerror="this.src='${fallbackLogo}'"/>
-              <img src="${match.logos[1]}" class="match-team-logo spinning-logo" style="width: 32px; height: 32px;" onerror="this.src='${fallbackLogo}'"/>
-              <img src="${match.logos[2]}" class="match-team-logo spinning-logo" style="width: 32px; height: 32px;" onerror="this.src='${fallbackLogo}'"/>
+          <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat" style="flex-direction: column; align-items: center; padding: 2px 0;">
+            <div class="solar-system-container">
+              <div class="orbit-path"></div>
+              <img src="${match.homeLogo}" class="sun-center" onerror="this.src='${fallbackLogo}'"/>
+              <img src="${match.gsLogo}" class="planet-logo planet-gs" onerror="this.src='${fallbackLogo}'"/>
+              <img src="${match.fbLogo}" class="planet-logo planet-fb" onerror="this.src='${fallbackLogo}'"/>
             </div>
-          </div>
-          <div style="text-align: center; margin-bottom: 2px;">
-            <span class="match-time">${match.time}</span>
+            <div style="text-align: center; margin-top: 2px;">
+              <span class="match-time">${match.time}</span>
+            </div>
           </div>
         `;
       } else if (match.awayTeam) {
@@ -932,66 +992,28 @@ const dailyMatchesByDate = [
         time: "19:00",
         homeTeam: "Şampiyonlar Ligi Kura Çekimi",
         isUclDraw: true,
-        logos: [
-          "https://upload.wikimedia.org/wikipedia/commons/b/b7/UEFA_Champions_League_logo_%282021%29.svg",
-          "https://assets.offsidescores.com/team/pics/964c7974-f92c-4b56-bc90-d086cf7a2afc638629770339931240.png", // Fenerbahçe Logo
-          "https://assets.offsidescores.com/team/pics/69d1b6ee-5c4d-44aa-9892-d698e6eeeb57638629770146059635.png"  // Galatasaray Logo (veya uygun bir GS logo URLsi)
-        ],
+        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/e/e2/UEFA_Champions_League_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        gsLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
+        fbLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
         channelIds: [43]
       },
       {
         league: "UEFA Avrupa Ligi, Play-off Turu",
         time: "20:00",
         homeTeam: "Kauno Zalgiris",
-        homeLogo: "https://assets.offsidescores.com/teams/pics/fa5041a8-cfa0-45fa-b648-52219e5d16a8638623432777174670.png",
+        homeLogo: "https://assets.offsidescores.com/team/pics/42396d01-e2c9-4098-95e9-a014241db616639214821862652575.png",
         awayTeam: "Beşiktaş",
-        awayLogo: "https://assets.offsidescores.com/team/pics/69d1b6ee-5c4d-44aa-9892-d698e6eeeb57638629770146059635.png",
-        channelIds: [29]
+        awayLogo: "https://assets.offsidescores.com/team/pics/d745aea6-9531-4680-bb2a-7347a98e64e8638629771654583172.png",
+        channelIds: [17,33]
       },
       {
         league: "UEFA Avrupa Ligi, Play-off Turu",
         time: "21:30",
         homeTeam: "Ferencvaros",
-        homeLogo: "https://assets.offsidescores.com/teams/pics/e17e3f4e-37f9-44fb-9311-bdc1157f4955638623431697334758.png",
+        homeLogo: "https://assets.offsidescores.com/teams/pics/a2a2c9a6-2e9c-4527-a6f9-f56815b3b014638623428861719671.png",
         awayTeam: "Trabzonspor",
-        awayLogo: "https://assets.offsidescores.com/teams/pics/41f87aa5-6d0d-45bc-9ea7-6db2c733f37b638629770535352660.png",
-        channelIds: [17]
-      },
-      {
-        league: "Şampiyonlar Ligi, Play-off Turu",
-        time: "22:00",
-        homeTeam: "Lyon",
-        homeLogo: "https://assets.offsidescores.com/teams/pics/4549cb28-f31e-4b91-a8c1-63dd3865cb82638623438628438759.png",
-        awayTeam: "Fenerbahçe",
-        awayLogo: "https://assets.offsidescores.com/team/pics/964c7974-f92c-4b56-bc90-d086cf7a2afc638629770339931240.png",
-        channelIds: [45]
-      },
-      {
-        league: "Şampiyonlar Ligi, Play-off Turu",
-        time: "22:00",
-        homeTeam: "AEK Athens",
-        homeLogo: "https://assets.offsidescores.com/teams/pics/aee5175f-ecec-4794-bca4-b9f12b2ee015638623427581168125.png",
-        awayTeam: "Levski Sofia",
-        awayLogo: "https://assets.offsidescores.com/teams/pics/85e657f4-70a2-4c05-b949-0e7f33b02780638623431729307509.png",
-        channelIds: [34]
-      },
-      {
-        league: "",
-        time: "22:00",
-        homeTeam: "Celje",
-        homeLogo: "https://assets.offsidescores.com/teams/pics/94813c76-d093-4fdf-9a4d-1fb030b4fc6e638623430284765974.png",
-        awayTeam: "S. Bratislava",
-        awayLogo: "https://assets.offsidescores.com/teams/pics/775b0122-d385-4815-bff0-cd4c36ecd800638623433244177335.png",
-        channelIds: [36]
-      },
-      {
-        league: "",
-        time: "22:00",
-        homeTeam: "Viking",
-        homeLogo: "https://assets.offsidescores.com/teams/pics/5b6cade7-05cb-4766-9c5d-fe2d168e618b638623436271340910.png",
-        awayTeam: "Dinamo Zagreb",
-        awayLogo: "https://assets.offsidescores.com/teams/pics/1c7ae986-ffe7-4477-ab9d-6b25f5f0ed7c638623443064832792.png",
-        channelIds: [35]
+        awayLogo: "https://assets.offsidescores.com/team/pics/4b96c631-18ab-4551-9bd3-4bcbaefae014638694449400070062.png",
+        channelIds: [46]
       }
     ]
   }
