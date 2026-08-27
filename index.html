@@ -3,13 +3,18 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FATBOK</title>
+<title>CREX</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet"/>
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <!-- Plyr Player CSS JS-->
 <link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
 <script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
+<!-- Vercel Analytics -->
+<script>
+  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+</script>
+<script defer src="/_vercel/insights/script.js"></script>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -59,14 +64,18 @@ nav{
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 .nav-logo{
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:24px;font-weight:800;letter-spacing:3px;
-  background:linear-gradient(135deg,#ffffff 30%,var(--accent));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  white-space:nowrap;flex-shrink:0;
+  display: flex;
+  align-items: center;
   width: 150px;
+  height: 36px;
   cursor: pointer;
   user-select: none;
+  flex-shrink: 0;
+}
+.nav-logo img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
 }
 .nav-search{
   flex:1;
@@ -280,6 +289,32 @@ nav{
 .match-card:hover {
   border-color: rgba(255, 255, 255, 0.25);
 }
+
+/* 3D Kura Çekimi Kartı Özel Stili */
+.match-card.ucl-3d-card {
+  background: linear-gradient(135deg, rgba(0, 32, 96, 0.6) 0%, rgba(10, 15, 30, 0.9) 100%);
+  border: 1px solid rgba(0, 122, 255, 0.6);
+  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.25), inset 0 0 15px rgba(0, 122, 255, 0.15);
+  transform: perspective(800px) rotateX(2deg);
+  transition: all 0.3s ease;
+}
+.match-card.ucl-3d-card:hover {
+  transform: perspective(800px) rotateX(0deg) scale(1.01);
+  box-shadow: 0 12px 30px rgba(0, 122, 255, 0.4);
+}
+
+/* Sürekli Kendi Etrafında Dönen Logolar İçin Animasyon */
+@keyframes spin3d {
+  0% { transform: perspective(300px) rotateY(0deg); }
+  100% { transform: perspective(300px) rotateY(360deg); }
+}
+
+.spinning-logo {
+  animation: spin3d 4s linear infinite;
+  transform-style: preserve-style;
+  filter: drop-shadow(0 0 8px rgba(0, 122, 255, 0.6));
+}
+
 .match-main-row {
   display: flex;
   align-items: center;
@@ -438,7 +473,7 @@ nav{
 
 .video-wrap{ flex:1;background:#000;position:relative;overflow:hidden; z-index:5; display:flex; align-items:center; justify-content:center; }
 iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none; background:#000; }
-.vid-overlay{ position:absolute;inset:0; background: rgba(1, 3, 8, 0.95); z-index:10; display: none; }
+.vid-overlay{ position:absolute;inset:0; background: rgba(1, 3, 8, 0.95); z-index:10; }
 
 .plyr { height: 100% !important; width: 100% !important; }
 .plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
@@ -493,7 +528,9 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
 <div class="liquid-bg"></div>
 
 <nav>
-  <div class="nav-logo">FATBOK</div>
+  <div class="nav-logo">
+    <img src="https://resmim.net/cdn/2026/08/26/Ex1rvD.png" alt="CREX Logo" />
+  </div>
   <div class="nav-search">
     <span class="search-icon">🔍</span>
     <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="filterChannels(this.value)"/>
@@ -508,7 +545,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       <div class="domain-alert-text">
         <span class="domain-icon">📢</span>
         <div>
-          Bir sonraki alan adımız <span class="domain-link" onclick="window.open('https://fatbok1.vercel.app', '_blank')">fatbok1.vercel.app</span> olacaktır.
+          Bir sonraki alan adımız <span class="domain-link" onclick="window.open('https:crex2.vercel.app', '_blank')">crex2.vercel.app</span> olacaktır.
         </div>
       </div>
     </div>
@@ -522,7 +559,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
     <div class="ch-list" id="chList"></div>
     
     <div class="adv-panel">
-      <a href="mailto:fatbokproton@proton.me?subject=Reklam%20Basvurusu" class="adv-link">
+      <a href="mailto:crexproton@proton.me?subject=Reklam%20Basvurusu" class="adv-link">
         <div class="adv-box">
           Buraya Reklam Verebilirsiniz
         </div>
@@ -536,7 +573,7 @@ iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none;
       <div class="now-info">
         <div class="now-ch-name" id="nowName"></div>
         <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
-          <span>⛶</span><span class="btn-text">Sinema</span>
+          <span>⛶</span><span class="btn-text">Tam Ekran</span>
         </button>
       </div>
       <div class="now-badges">
@@ -641,11 +678,32 @@ function renderMatchesList() {
       }
 
       const card = document.createElement('div');
-      card.className = 'match-card';
+      
+      // Eğer Kura Çekimi ise 3D kart sınıfını ve özel tasarımı ekle
+      if (match.isUclDraw) {
+        card.className = 'match-card ucl-3d-card';
+      } else {
+        card.className = 'match-card';
+      }
+
       let firstChannelId = (match.channelIds && match.channelIds.length > 0) ? match.channelIds[0] : null;
 
       let cardHtml = '';
-      if (match.awayTeam) {
+      if (match.isUclDraw && match.logos && match.logos.length > 0) {
+        // Şampiyonlar Ligi Kura Çekimi için 3'lü dönebilen logo yapısı
+        cardHtml = `
+          <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat" style="justify-content: center; gap: 15px; padding: 6px 0;">
+            <div style="display: flex; align-items: center; justify-content: center; gap: 12px; width: 100%;">
+              <img src="${match.logos[0]}" class="match-team-logo spinning-logo" style="width: 32px; height: 32px;" onerror="this.src='${fallbackLogo}'"/>
+              <img src="${match.logos[1]}" class="match-team-logo spinning-logo" style="width: 32px; height: 32px;" onerror="this.src='${fallbackLogo}'"/>
+              <img src="${match.logos[2]}" class="match-team-logo spinning-logo" style="width: 32px; height: 32px;" onerror="this.src='${fallbackLogo}'"/>
+            </div>
+          </div>
+          <div style="text-align: center; margin-bottom: 2px;">
+            <span class="match-time">${match.time}</span>
+          </div>
+        `;
+      } else if (match.awayTeam) {
         cardHtml = `
           <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat">
             <div class="match-team-side">
@@ -815,230 +873,125 @@ function filterChannels(q){
 const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
 
 const channels = [
-  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream: "https://ff.8b9035807842a4e4dbe009f3f1478127.biz/hls/701.m3u8"},
-  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://corestream.siteyaptim.live//bein1/tracks-v1a1/mono.m3u8"},
-  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports1.png", stream:"https://andro.evrenesoglu99.click/checklist/androstreamlivekral.m3u8"},
-  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://corestream.siteyaptim.live//bein2/tracks-v1a1/mono.m3u8"},
-  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://taraftarium1080.xyz/channel.html?id=b2"},
-  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv34.com/img/beinsports2.png", stream:"https://taraftarium1080.xyz/channel.html?id=b2"},
-  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://corestream.siteyaptim.live//bein3/tracks-v1a1/mono.m3u8"},
-  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports3.png", stream:"https://taraftarium1080.xyz/channel.html?id=b3"},
-  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream: "https://corestream.siteyaptim.live//bein4/tracks-v1a1/mono.m3u8"},
-  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports4.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs4.m3u8"},
-  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://corestream.siteyaptim.live//bein5/tracks-v1a1/mono.m3u8"},
-  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv34.com/img/beinsports5.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebs5.m3u8"},
-  {id:13, name:"BeIN Max 1",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://taraftarium1080.xyz/channel.html?id=bm1"},
-  {id:14, name:"BeIN Max 1 B",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebsm1.m3u8"},
-  {id:15, name:"BeIN Max 2",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax2.png", stream:"https://taraftarium1080.xyz/channel.html?id=bm2"},
-  {id:16, name:"BeIN Max 2 B",     cat:"tr", logo:"https://royaltv34.com/img/beinsportsmax2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivebsm2.m3u8"},
-  {id:17, name:"S Sport 1",      cat:"tr", logo:"https://royaltv34.com/img/ssport1.png", stream:"https://taraftarium1080.xyz/channel.html?id=ss"},
-  {id:18, name:"S Sport 1 B", cat:"tr", logo:"https://royaltv34.com/img/ssport1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivess1.m3u8"},
-  {id:19, name:"S Sport 2",      cat:"tr", logo:"https://royaltv34.com/img/ssport2.png", stream:"https://taraftarium1080.xyz/channel.html?id=ss2"},
-  {id:20, name:"S Sport 2 B",      cat:"tr", logo:"https://royaltv34.com/img/ssport2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivess2.m3u8"},
-  {id:21, name:"Tivibu 1",       cat:"tr", logo:"https://royaltv34.com/img/tivibu1.png", stream:"https://taraftarium1080.xyz/channel.html?id=t1"},
-  {id:22, name:"Tivibu 1 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu1.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets1.m3u8"},
-  {id:23, name:"Tivibu 2",       cat:"tr", logo:"https://royaltv34.com/img/tivibu2.png", stream:"https://taraftarium1080.xyz/channel.html?id=t2"},
-  {id:24, name:"Tivibu 2 B ",       cat:"tr", logo:"https://royaltv34.com/img/tivibu2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets2.m3u8"},
-  {id:25, name:"Tivibu 3",       cat:"tr", logo:"https://royaltv34.com/img/tivibu3.png", stream:"https://taraftarium1080.xyz/channel.html?id=t3"},
-  {id:26, name:"Tivibu 3 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu3.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets3.m3u8"},
-  {id:27, name:"Tivibu 4",       cat:"tr", logo:"https://royaltv34.com/img/tivibu4.png", stream:"https://taraftarium1080.xyz/channel.html?id=t4"},
-  {id:28, name:"Tivibu 4 B",       cat:"tr", logo:"https://royaltv34.com/img/tivibu4.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivets4.m3u8"},
-  {id:29, name:"Smartspor",      cat:"tr", logo:"https://royaltv34.com/img/smartspor.png", stream:"https://taraftarium1080.xyz/channel.html?id=smarts"},
-  {id:30, name:"Smartspor B",      cat:"tr", logo:"https://royaltv34.com/img/smartspor.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivesm1.m3u8"},
-  {id:31, name:"Smartspor 2",    cat:"tr", logo:"https://royaltv34.com/img/smartspor2.png", stream:"https://taraftarium1080.xyz/channel.html?id=smarts"},
-  {id:32, name:"Smartspor 2 B",    cat:"tr", logo:"https://royaltv34.com/img/smartspor2.png", stream:"https://andro.evrenesoglu57.click/checklist/androstreamlivesm2.m3u8"},
-  {id:33, name:"TV100",          cat:"tr", logo:"https://upload.wikimedia.org/wikipedia/tr/0/0f/TV100_logo.png", stream:"https://taraftarium1080.xyz/channel.html?id=ex1"},
-  {id:34, name:"Tabii Spor",     cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://kL9mR2vXw7nQ5pY1sH4tJ3gB6.medya.trt.com.tr/master.m3u8"},
-  {id:35, name:"Tabii Spor 1",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://Pz4qT7nW1mR9sH2vL5xK8jG3y.medya.trt.com.tr/master.m3u8"},
-  {id:36, name:"Tabii Spor 2",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://mR8bV4kL1nQ7sH9tW2xP5zJ6g.medya.trt.com.tr/master.m3u8"},
-  {id:37, name:"Tabii Spor 3",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://mR4vL7nQ2sH9tW5pP1zK3gJ8b.medya.trt.com.tr/master.m3u8"},
-  {id:38, name:"Tabii Spor 4",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://sH7tQ2nW5mR1vL9xP4zK3gJ8k.medya.trt.com.tr/master.m3u8"},
-  {id:39, name:"Tabii Spor 5",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://vL2nQ8sH4tW1mR7xP5zK9gJ3y.medya.trt.com.tr/master.m3u8"},
-  {id:40, name:"Tabii Spor 6",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://nW5mR1vL9xP4zK2sH7tQ3gJ6b.medya.trt.com.tr/master.m3u8"},
-  {id:41, name:"Tabii Spor 7",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://Pz2rT7nW1mR9sH4vL6xK3gJ5b.medya.trt.com.tr/master.m3u8"},
-  {id:42, name:"Tabii Spor 8",   cat:"tr", logo:"https://royaltv34.com/img/tabii.png", stream:"https://vL9nQ2sH5tW1mR7xP4zK8gJ3k.medya.trt.com.tr/master.m3u8"},
-  {id:43, name:"TRT Spor",       cat:"tr", logo:"https://royaltv34.com/img/trtspornew.png", stream:"https://tv-trtspor1.medya.trt.com.tr/master.m3u8"},
-  {id:44, name:"A Spor",         cat:"tr", logo:"https://royaltv34.com/img/aspornew.png", stream:"https://taraftarium1080.xyz/channel.html?id=as"},
-  {id:45, name:"TRT 1",          cat:"tr", logo:"https://royaltv34.com/img/trt1.png", stream:"https://tv-trt1.medya.trt.com.tr/master.m3u8"},
-  {id:46, name:"ATV",            cat:"tr", logo:"https://royaltv34.com/img/atv.png", stream:"https://taraftarium1080.xyz/channel.html?id=atv"},
-  {id:47, name:"TV 8",           cat:"tr", logo:"https://royaltv34.com/img/tv8.png", stream:"https://taraftarium1080.xyz/channel.html?id=tv8"},
-  {id:48, name:"TV 8,5",         cat:"tr", logo:"https://royaltv34.com/img/tv85.png", stream:"https://taraftarium1080.xyz/channel.html?id=tv85"}
+  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv35.com/img/beinsports1.png", stream: "https://royaltv35.com/channel?id=zirve"},
+  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports1.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports1b"},
+  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv35.com/img/beinsports1.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports1c"},
+  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv35.com/img/beinsports2.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports2"},
+  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports2.png", stream:"https://royaltv35.com/channel?id=b2"},
+  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv35.com/img/beinsports2.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports2"},
+  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv35.com/img/beinsports3.png", stream:"https://royaltv35.com/channel?id=b3"},
+  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports3.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports3"},
+  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv35.com/img/beinsports4.png", stream: "https://playersystem1.vercel.app/?kanal=beinsports4"},
+  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports4.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports4b"},
+  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv35.com/img/beinsports5.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports5"},
+  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports5.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports5b"},
+  {id:13, name:"BeIN Max 1",     cat:"tr", logo:"https://royaltv35.com/img/beinsportsmax1.png", stream:"https://royaltv35.com/channel?id=bm1"},
+  {id:14, name:"BeIN Max 1 B",     cat:"tr", logo:"https://royaltv35.com/img/beinsportsmax1.png", stream:"https://playersystem1.vercel.app/?kanal=beinmax1b"},
+  {id:15, name:"BeIN Max 2",     cat:"tr", logo:"https://royaltv35.com/img/beinsportsmax2.png", stream:"https://royaltv35.com/channel?id=bm2"},
+  {id:16, name:"BeIN Max 2 B",     cat:"tr", logo:"https://royaltv35.com/img/beinsportsmax2.png", stream:"https://playersystem1.vercel.app/?kanal=beinmax2b"},
+  {id:17, name:"S Sport 1",      cat:"tr", logo:"https://royaltv35.com/img/ssport1.png", stream:"https://royaltv35.com/channel?id=ss"},
+  {id:18, name:"S Sport 1 B", cat:"tr", logo:"https://royaltv35.com/img/ssport1.png", stream:"https://playersystem1.vercel.app/?kanal=ssport1b"},
+  {id:19, name:"S Sport 2",      cat:"tr", logo:"https://royaltv35.com/img/ssport2.png", stream:"https://royaltv35.com/channel?id=ss2"},
+  {id:20, name:"S Sport 2 B",      cat:"tr", logo:"https://royaltv35.com/img/ssport2.png", stream:"https://playersystem1.vercel.app/?kanal=ssport2b"},
+  {id:21, name:"Tivibu 1",       cat:"tr", logo:"https://royaltv35.com/img/tivibu1.png", stream:"https://royaltv35.com/channel?id=t1"},
+  {id:22, name:"Tivibu 1 B",       cat:"tr", logo:"https://royaltv35.com/img/tivibu1.png", stream:"https://playersystem1.vercel.app/?kanal=tivibu1b"},
+  {id:23, name:"Tivibu 2",       cat:"tr", logo:"https://royaltv35.com/img/tivibu2.png", stream:"https://royaltv35.com/channel?id=t2"},
+  {id:24, name:"Tivibu 2 B ",       cat:"tr", logo:"https://royaltv35.com/img/tivibu2.png", stream:"https://playersystem1.vercel.app/?kanal=tivibu2b"},
+  {id:25, name:"Tivibu 3",       cat:"tr", logo:"https://royaltv35.com/img/tivibu3.png", stream:"https://royaltv35.com/channel?id=t3"},
+  {id:26, name:"Tivibu 3 B",       cat:"tr", logo:"https://royaltv35.com/img/tivibu3.png", stream:"https://playersystem1.vercel.app/?kanal=tivibu3b"},
+  {id:27, name:"Tivibu 4",       cat:"tr", logo:"https://royaltv35.com/img/tivibu4.png", stream:"https://royaltv35.com/channel?id=t4"},
+  {id:28, name:"Tivibu 4 B",       cat:"tr", logo:"https://royaltv35.com/img/tivibu4.png", stream:"https://playersystem1.vercel.app/?kanal=tivibu4b"},
+  {id:29, name:"Smartspor",      cat:"tr", logo:"https://royaltv35.com/img/smartspor.png", stream:"https://royaltv35.com/channel?id=smarts"},
+  {id:30, name:"Smartspor B",      cat:"tr", logo:"https://royaltv35.com/img/smartspor.png", stream:"https://playersystem1.vercel.app/?kanal=smartsporb"},
+  {id:31, name:"Smartspor 2",    cat:"tr", logo:"https://royaltv35.com/img/smartspor2.png", stream:"https://royaltv35.com/channel?id=sms2"},
+  {id:32, name:"Smartspor 2 B",    cat:"tr", logo:"https://royaltv35.com/img/smartspor2.png", stream:"https://playersystem1.vercel.app/?kanal=smartspor2b"},
+  {id:33, name:"TV100",          cat:"tr", logo:"https://upload.wikimedia.org/wikipedia/tr/0/0f/TV100_logo.png", stream:"https://royaltv35.com/channel?id=ex1"},
+  {id:34, name:"Tabii Spor",     cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor"},
+  {id:35, name:"Tabii Spor 1",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor1"},
+  {id:36, name:"Tabii Spor 2",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor2"},
+  {id:37, name:"Tabii Spor 3",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor3"},
+  {id:38, name:"Tabii Spor 4",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor4"},
+  {id:39, name:"Tabii Spor 5",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor5"},
+  {id:40, name:"Tabii Spor 6",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor6"},
+  {id:41, name:"Tabii Spor 7",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor7"},
+  {id:42, name:"Tabii Spor 8",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor8"},
+  {id:43, name:"TRT Spor",       cat:"tr", logo:"https://royaltv35.com/img/trtspornew.png", stream:"https://playersystem1.vercel.app/?kanal=trtspor"},
+  {id:44, name:"A Spor",         cat:"tr", logo:"https://royaltv35.com/img/aspornew.png", stream:"https://royaltv35.com/channel?id=as"},
+  {id:45, name:"TRT 1",          cat:"tr", logo:"https://royaltv35.com/img/trt1.png", stream:"https://playersystem1.vercel.app/?kanal=trt1"},
+  {id:46, name:"ATV",            cat:"tr", logo:"https://royaltv35.com/img/atv.png", stream:"https://royaltv35.com/channel?id=atv"},
+  {id:47, name:"TV 8",           cat:"tr", logo:"https://royaltv35.com/img/tv8.png", stream:"https://royaltv35.com/channel?id=tv8"},
+  {id:48, name:"TV 8,5",         cat:"tr", logo:"https://royaltv35.com/img/tv85.png", stream:"https://royaltv35.com/channel?id=tv85"}
 ];
 
 const dailyMatchesByDate = [
   {
-    date: "23 Ağustos 2026",
+    date: "26 Ağustos 2026",
     matches: [
       {
-        league: "FORMULA 1 • Hollanda GP",
-        time: "16:00",
-        homeTeam: "F1 Hollanda Grand Prix",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/f/f2/New_era_F1_logo.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "",
-        awayLogo: "",
-        channelIds:[9,10]
-      },
-      {
-        league: "TÜRKİYE • Süper Lig",
+        league: "UEFA Şampiyonlar Ligi Kura Çekimi",
         time: "19:00",
-        homeTeam: "Eyüpspor",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/F1552.png",
-        awayTeam: "Gaziantep FK",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F2561.png",
-        channelIds: [4,5,6]
+        homeTeam: "Şampiyonlar Ligi Kura Çekimi",
+        isUclDraw: true,
+        logos: [
+          "https://upload.wikimedia.org/wikipedia/commons/b/b7/UEFA_Champions_League_logo_%282021%29.svg",
+          "https://assets.offsidescores.com/team/pics/964c7974-f92c-4b56-bc90-d086cf7a2afc638629770339931240.png", // Fenerbahçe Logo
+          "https://assets.offsidescores.com/team/pics/69d1b6ee-5c4d-44aa-9892-d698e6eeeb57638629770146059635.png"  // Galatasaray Logo (veya uygun bir GS logo URLsi)
+        ],
+        channelIds: [43]
       },
       {
-        league: "TÜRKİYE • Süper Lig",
-        time: "19:00",
-        homeTeam: "Trabzonspor",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/F4633.png",
-        awayTeam: "Başakşehir",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F2223.png",
-        channelIds: [1,2,3]
-      },
-      {
-        league: "TÜRKİYE • Süper Lig",
-        time: "21:30",
-        homeTeam: "Alanyaspor",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/13_2.png",
+        league: "UEFA Avrupa Ligi, Play-off Turu",
+        time: "20:00",
+        homeTeam: "Kauno Zalgiris",
+        homeLogo: "https://assets.offsidescores.com/teams/pics/fa5041a8-cfa0-45fa-b648-52219e5d16a8638623432777174670.png",
         awayTeam: "Beşiktaş",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F439.png",
-        channelIds: [1,2,3]
+        awayLogo: "https://assets.offsidescores.com/team/pics/69d1b6ee-5c4d-44aa-9892-d698e6eeeb57638629770146059635.png",
+        channelIds: [29]
       },
       {
-        league: "TÜRKİYE • Süper Lig",
+        league: "UEFA Avrupa Ligi, Play-off Turu",
         time: "21:30",
-        homeTeam: "Göztepe",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/74.png",
-        awayTeam: "Gençlerbirliği",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F1554.png",
-        channelIds: [2,3,4]
+        homeTeam: "Ferencvaros",
+        homeLogo: "https://assets.offsidescores.com/teams/pics/e17e3f4e-37f9-44fb-9311-bdc1157f4955638623431697334758.png",
+        awayTeam: "Trabzonspor",
+        awayLogo: "https://assets.offsidescores.com/teams/pics/41f87aa5-6d0d-45bc-9ea7-6db2c733f37b638629770535352660.png",
+        channelIds: [17]
       },
       {
-        league: "TÜRKİYE • 1. Lig",
-        time: "17:00",
-        homeTeam: "Bandırmaspor",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/F1505.png",
-        awayTeam: "Keçiörengücü",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/95.png",
-        channelIds: [43,15,16]
+        league: "Şampiyonlar Ligi, Play-off Turu",
+        time: "22:00",
+        homeTeam: "Lyon",
+        homeLogo: "https://assets.offsidescores.com/teams/pics/4549cb28-f31e-4b91-a8c1-63dd3865cb82638623438628438759.png",
+        awayTeam: "Fenerbahçe",
+        awayLogo: "https://assets.offsidescores.com/team/pics/964c7974-f92c-4b56-bc90-d086cf7a2afc638629770339931240.png",
+        channelIds: [45]
       },
       {
-        league: "TÜRKİYE • 1. Lig",
-        time: "19:00",
-        homeTeam: "Boluspor",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/36_1.png",
-        awayTeam: "Mardin 1969",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F10791.png",
-        channelIds: [43,13,14]
+        league: "Şampiyonlar Ligi, Play-off Turu",
+        time: "22:00",
+        homeTeam: "AEK Athens",
+        homeLogo: "https://assets.offsidescores.com/teams/pics/aee5175f-ecec-4794-bca4-b9f12b2ee015638623427581168125.png",
+        awayTeam: "Levski Sofia",
+        awayLogo: "https://assets.offsidescores.com/teams/pics/85e657f4-70a2-4c05-b949-0e7f33b02780638623431729307509.png",
+        channelIds: [34]
       },
       {
-        league: "TÜRKİYE • 1. Lig",
-        time: "21:30",
-        homeTeam: "Sarıyer",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/127.png",
-        awayTeam: "Batman Petrol",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F1518.png",
-        channelIds: [43,13,14]
+        league: "",
+        time: "22:00",
+        homeTeam: "Celje",
+        homeLogo: "https://assets.offsidescores.com/teams/pics/94813c76-d093-4fdf-9a4d-1fb030b4fc6e638623430284765974.png",
+        awayTeam: "S. Bratislava",
+        awayLogo: "https://assets.offsidescores.com/teams/pics/775b0122-d385-4815-bff0-cd4c36ecd800638623433244177335.png",
+        channelIds: [36]
       },
       {
-        league: "TÜRKİYE • 1. Lig",
-        time: "21:30",
-        homeTeam: "Van Spor FK",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/F1544.png",
-        awayTeam: "İstanbulspor",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/83.png",
-        channelIds: [40,15,16]
-      },
-      {
-        league: "İNGİLTERE • Premier League",
-        time: "16:00",
-        homeTeam: "Brighton",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/182.png",
-        awayTeam: "Aston Villa",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F2364.png",
-        channelIds: [11,12]
-      },
-      {
-        league: "İNGİLTERE • Premier League",
-        time: "16:00",
-        homeTeam: "Man. City",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/269_8.png",
-        awayTeam: "Bournemouth",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/176_1.png",
-        channelIds: [7,8]
-      },
-      {
-        league: "İNGİLTERE • Premier League",
-        time: "18:30",
-        homeTeam: "Newcastle",
-        homeLogo: "https://media03.tr.beinsports.com/img/teams/1/277.png",
-        awayTeam: "Liverpool",
-        awayLogo: "https://media03.tr.beinsports.com/img/teams/1/F2338.png",
-        channelIds: [8,9]
-      },
-      {
-        league: "İSPANYA • LALIGA",
-        time: "18:00",
-        homeTeam: "Atl. Madrid",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/tr/1/1a/Atl%C3%A9tico_Madrid_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "Villarreal",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/f/fc/Villarreal_CF_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [17,18]
-      },
-      {
-        league: "İSPANYA • LALIGA",
-        time: "20:30",
-        homeTeam: "Getafe",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Getafe_CF_Logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "Santander",
-        awayLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfv6HguWZj6pPhEenMhzvPuIbEK-maiuNKjZx20KTfmQ&s",
-        channelIds: [17,18]
-      },
-      {
-        league: "İSPANYA • LALIGA",
-        time: "22:30",
-        homeTeam: "Elche",
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/c/cb/Escudo_Elche_CF.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
-        awayTeam: "Barcelona",
-        awayLogo: "https://upload.wikimedia.org/wikipedia/tr/4/47/FC_Barcelona.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        channelIds: [17,18]
-      },
-      {
-        league: "İTALYA • Serie A",
-        time: "19:30",
-        homeTeam: "Frosinone",
-        homeLogo: "https://file.mackolikfeeds.com/teams/5khizzei8z0qbb7exz622wxw3",
-        awayTeam: "Juventus",
-        awayLogo: "https://file.mackolikfeeds.com/teams/bqbbqm98ud8obe45ds9ohgyrd",
-        channelIds: [19,20]
-      },
-      {
-        league: "İTALYA • Serie A",
-        time: "19:30",
-        homeTeam: "Venezia",
-        homeLogo: "https://file.mackolikfeeds.com/teams/565sm63rjm2y7xeae0dcdbtnu",
-        awayTeam: "Lecce",
-        awayLogo: "https://file.mackolikfeeds.com/teams/bi1fxjrncd0ram0oi7ja1jyuo",
-        channelIds: []
-      },
-      {
-        league: "İTALYA • Serie A",
-        time: "21:45",
-        homeTeam: "Atalanta",
-        homeLogo: "https://file.mackolikfeeds.com/teams/e75syeuawg3ql8nwpi3vr2btz",
-        awayTeam: "Sassuolo",
-        awayLogo: "https://file.mackolikfeeds.com/teams/6tuibxq39fdryu8ou06wcm0q3",
-        channelIds: []
-      },
-      {
-        league: "İTALYA • Serie A",
-        time: "21:45",
-        homeTeam: "Torino",
-        homeLogo: "https://file.mackolikfeeds.com/teams/7gnly6999wao1xarwct4p8fe9",
-        awayTeam: "Milan",
-        awayLogo: "https://file.mackolikfeeds.com/teams/9dntj5dioj5ex52yrgwzxrq9l",
-        channelIds: [19,20]
+        league: "",
+        time: "22:00",
+        homeTeam: "Viking",
+        homeLogo: "https://assets.offsidescores.com/teams/pics/5b6cade7-05cb-4766-9c5d-fe2d168e618b638623436271340910.png",
+        awayTeam: "Dinamo Zagreb",
+        awayLogo: "https://assets.offsidescores.com/teams/pics/1c7ae986-ffe7-4477-ab9d-6b25f5f0ed7c638623443064832792.png",
+        channelIds: [35]
       }
     ]
   }
@@ -1053,11 +1006,6 @@ let activeId = null;
 
 renderCountryFilters();
 renderList();
-
-// Sayfa açıldığında ilk kanalı (BeIN Sports 1) otomatik oynat
-if (channels.length > 0) {
-  selectChannel(channels[0]);
-}
 </script>
 </body>
 </html>
