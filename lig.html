@@ -1,0 +1,3227 @@
+<!DOCTYPE html><html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CREX — Lig</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+:root{
+    --bg:#03060b;
+    --panel:#080e16;
+    --panel2:#0c141e;
+
+    --blue:#1595ff;
+    --blue2:#62c0ff;
+
+    --league:#168cff;
+
+    --white:#f7fbff;
+    --text:#d7e0ea;
+    --muted:#708096;
+
+    --line:rgba(255,255,255,.075);
+
+    --ease:cubic-bezier(.16,1,.3,1);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+
+    color:var(--text);
+
+    font-family:"Manrope",sans-serif;
+
+    background:
+        radial-gradient(
+            800px 500px at 0% -10%,
+            color-mix(
+                in srgb,
+                var(--league) 13%,
+                transparent
+            ),
+            transparent 65%
+        ),
+        radial-gradient(
+            700px 500px at 100% 20%,
+            rgba(21,149,255,.08),
+            transparent 65%
+        ),
+        linear-gradient(
+            180deg,
+            #02050a,
+            #050a12 48%,
+            #02050a
+        );
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+body::before{
+    content:"";
+
+    position:fixed;
+    inset:0;
+
+    z-index:-10;
+
+    pointer-events:none;
+
+    opacity:.16;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size:70px 70px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 82%
+        );
+}
+
+
+.ambient{
+    position:fixed;
+
+    width:520px;
+    height:520px;
+
+    left:-250px;
+    top:12%;
+
+    border-radius:50%;
+
+    background:var(--league);
+
+    filter:blur(150px);
+
+    opacity:.07;
+
+    z-index:-8;
+
+    pointer-events:none;
+
+    animation:
+        ambientMove
+        13s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.ambient2{
+    position:fixed;
+
+    width:480px;
+    height:480px;
+
+    right:-260px;
+    bottom:5%;
+
+    border-radius:50%;
+
+    background:#315dff;
+
+    filter:blur(150px);
+
+    opacity:.06;
+
+    z-index:-8;
+
+    pointer-events:none;
+
+    animation:
+        ambientMove2
+        16s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+@keyframes ambientMove{
+
+    to{
+        transform:
+            translate(170px,-70px)
+            scale(1.25);
+    }
+
+}
+
+
+@keyframes ambientMove2{
+
+    to{
+        transform:
+            translate(-150px,80px)
+            scale(1.2);
+    }
+
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    height:74px;
+
+    background:
+        rgba(2,6,11,.78);
+
+    border-bottom:
+        1px solid var(--line);
+
+    backdrop-filter:
+        blur(25px)
+        saturate(150%);
+
+    -webkit-backdrop-filter:
+        blur(25px)
+        saturate(150%);
+}
+
+
+.header-inner{
+    width:min(
+        1480px,
+        calc(100% - 40px)
+    );
+
+    height:100%;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:30px;
+}
+
+
+.logo{
+    position:relative;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:40px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+
+.logo span{
+    color:var(--blue);
+}
+
+
+.logo::after{
+    content:"";
+
+    position:absolute;
+
+    left:1px;
+
+    bottom:-6px;
+
+    width:30px;
+
+    height:2px;
+
+    border-radius:10px;
+
+    background:var(--blue);
+
+    box-shadow:
+        0 0 15px var(--blue);
+}
+
+
+.main-nav{
+    display:flex;
+
+    align-items:center;
+
+    gap:4px;
+
+    flex:1;
+}
+
+
+.main-nav a{
+    position:relative;
+
+    color:#718096;
+
+    text-decoration:none;
+
+    padding:11px 14px;
+
+    border-radius:10px;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    transition:
+        .3s
+        var(--ease);
+}
+
+
+.main-nav a:hover,
+.main-nav a.active{
+    color:#fff;
+
+    background:
+        rgba(255,255,255,.04);
+}
+
+
+.main-nav a.active::after{
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:3px;
+
+    width:18px;
+
+    height:2px;
+
+    transform:translateX(-50%);
+
+    border-radius:5px;
+
+    background:var(--blue);
+
+    box-shadow:
+        0 0 10px var(--blue);
+}
+
+
+.search{
+    width:245px;
+    height:42px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 14px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    transition:
+        .35s
+        var(--ease);
+}
+
+
+.search:focus-within{
+    border-color:
+        rgba(21,149,255,.4);
+
+    box-shadow:
+        0 0 30px
+        rgba(21,149,255,.08);
+}
+
+
+.search svg{
+    width:16px;
+
+    color:#68788d;
+
+    flex:none;
+}
+
+
+.search input{
+    width:100%;
+
+    border:0;
+
+    outline:0;
+
+    color:#fff;
+
+    background:transparent;
+
+    font-family:inherit;
+
+    font-size:10px;
+}
+
+
+.search input::placeholder{
+    color:#59687b;
+}
+
+
+/* =========================================================
+   TOP LEAGUE BAR
+========================================================= */
+
+.league-nav{
+    position:sticky;
+
+    top:74px;
+
+    z-index:900;
+
+    background:
+        rgba(4,8,14,.68);
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.055);
+
+    backdrop-filter:
+        blur(22px);
+}
+
+
+.league-scroll{
+    width:min(
+        1480px,
+        calc(100% - 40px)
+    );
+
+    margin:auto;
+
+    display:flex;
+
+    gap:9px;
+
+    overflow-x:auto;
+
+    padding:9px 0;
+
+    scrollbar-width:none;
+
+    cursor:grab;
+}
+
+
+.league-scroll::-webkit-scrollbar{
+    display:none;
+}
+
+
+.league-scroll.dragging{
+    cursor:grabbing;
+}
+
+
+.league-link{
+    position:relative;
+
+    flex:none;
+
+    height:49px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 16px;
+
+    overflow:hidden;
+
+    color:#748398;
+
+    text-decoration:none;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:15px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.045),
+            rgba(255,255,255,.012)
+        );
+
+    transition:
+        .4s
+        var(--ease);
+}
+
+
+.league-link:hover,
+.league-link.active{
+    color:#fff;
+
+    transform:
+        translateY(-2px);
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--lc,#168cff)
+            40%,
+            transparent
+        );
+
+    background:
+        linear-gradient(
+            145deg,
+            color-mix(
+                in srgb,
+                var(--lc,#168cff)
+                13%,
+                transparent
+            ),
+            rgba(255,255,255,.02)
+        );
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.3);
+}
+
+
+.league-link::before{
+    content:"";
+
+    position:absolute;
+
+    width:100px;
+    height:100px;
+
+    top:-70px;
+    right:-40px;
+
+    border-radius:50%;
+
+    background:
+        var(--lc,#168cff);
+
+    filter:blur(35px);
+
+    opacity:.15;
+
+    transition:.5s;
+}
+
+
+.league-link:hover::before{
+    opacity:.35;
+}
+
+
+.league-mini-logo{
+    position:relative;
+
+    z-index:2;
+
+    width:31px;
+    height:31px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 5px 6px
+            rgba(0,0,0,.55)
+        );
+
+    transition:
+        .4s
+        var(--ease);
+}
+
+
+.league-link:hover
+.league-mini-logo{
+    transform:
+        scale(1.13)
+        rotate(-4deg);
+}
+
+
+.league-link span{
+    position:relative;
+
+    z-index:2;
+
+    font-size:10px;
+
+    font-weight:900;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    width:min(
+        1480px,
+        calc(100% - 40px)
+    );
+
+    margin:
+        45px
+        auto
+        0;
+}
+
+
+/* =========================================================
+   LEAGUE HERO
+========================================================= */
+
+.league-hero{
+    position:relative;
+
+    min-height:330px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.08);
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.012)
+        );
+
+    box-shadow:
+        0 30px 80px
+        rgba(0,0,0,.35);
+}
+
+
+.hero-bg{
+    position:absolute;
+
+    inset:0;
+
+    overflow:hidden;
+
+    pointer-events:none;
+}
+
+
+.hero-bg::before{
+    content:"";
+
+    position:absolute;
+
+    width:550px;
+    height:550px;
+
+    right:-170px;
+    top:-230px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            var(--league),
+            transparent 68%
+        );
+
+    opacity:.23;
+
+    filter:blur(8px);
+
+    animation:
+        heroGlow
+        7s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+
+.hero-bg::after{
+    content:"";
+
+    position:absolute;
+
+    width:140%;
+
+    height:160px;
+
+    left:-20%;
+
+    top:105px;
+
+    transform:
+        rotate(-9deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            color-mix(
+                in srgb,
+                var(--league)
+                12%,
+                transparent
+            ),
+            transparent
+        );
+
+    border-top:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--league)
+            18%,
+            transparent
+        );
+
+    border-bottom:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--league)
+            10%,
+            transparent
+        );
+}
+
+
+@keyframes heroGlow{
+
+    to{
+        transform:
+            scale(1.2)
+            translate(-30px,30px);
+
+        opacity:.34;
+    }
+
+}
+
+
+.hero-grid{
+    position:absolute;
+
+    inset:0;
+
+    opacity:.3;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.025)
+            1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.025)
+            1px,
+            transparent 1px
+        );
+
+    background-size:
+        45px 45px;
+
+    mask-image:
+        linear-gradient(
+            90deg,
+            black,
+            transparent
+        );
+}
+
+
+.hero-content{
+    position:relative;
+
+    z-index:5;
+
+    min-height:330px;
+
+    padding:38px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        230px;
+
+    align-items:center;
+
+    gap:40px;
+}
+
+
+.hero-kicker{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:12px;
+
+    color:#77879b;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+}
+
+
+.hero-kicker i{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--league);
+
+    box-shadow:
+        0 0 14px
+        var(--league);
+
+    animation:
+        heroPulse
+        1.6s
+        infinite;
+}
+
+
+@keyframes heroPulse{
+
+    50%{
+        transform:scale(1.5);
+
+        opacity:.5;
+    }
+
+}
+
+
+.hero-title{
+    color:#fff;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            55px,
+            7vw,
+            95px
+        );
+
+    line-height:.78;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    letter-spacing:-1px;
+}
+
+
+.hero-title span{
+    color:var(--league);
+
+    text-shadow:
+        0 0 35px
+        color-mix(
+            in srgb,
+            var(--league)
+            35%,
+            transparent
+        );
+}
+
+
+.hero-description{
+    max-width:600px;
+
+    margin-top:17px;
+
+    color:#718096;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+
+.hero-meta{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:9px;
+
+    margin-top:20px;
+}
+
+
+.hero-pill{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        8px
+        11px;
+
+    color:#8492a4;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:9px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-size:8px;
+
+    font-weight:900;
+}
+
+
+.hero-pill b{
+    color:#fff;
+}
+
+
+.hero-logo-wrap{
+    width:205px;
+    height:205px;
+
+    display:grid;
+
+    place-items:center;
+
+    justify-self:center;
+
+    position:relative;
+
+    transform:
+        translateZ(50px);
+
+    animation:
+        floatingLogo
+        5s
+        ease-in-out
+        infinite;
+}
+
+
+.hero-logo-wrap::before{
+    content:"";
+
+    position:absolute;
+
+    inset:15px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            color-mix(
+                in srgb,
+                var(--league)
+                25%,
+                transparent
+            ),
+            transparent 67%
+        );
+
+    filter:blur(20px);
+}
+
+
+.hero-logo{
+    position:relative;
+
+    z-index:2;
+
+    width:165px;
+    height:165px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 30px 30px
+            rgba(0,0,0,.55)
+        )
+        drop-shadow(
+            0 0 30px
+            color-mix(
+                in srgb,
+                var(--league)
+                20%,
+                transparent
+            )
+        );
+
+    transition:
+        .5s
+        var(--ease);
+}
+
+
+.hero-logo-wrap:hover
+.hero-logo{
+    transform:
+        scale(1.1)
+        rotate(3deg);
+}
+
+
+@keyframes floatingLogo{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            translateZ(50px);
+    }
+
+    50%{
+        transform:
+            translateY(-10px)
+            translateZ(70px);
+    }
+
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+    margin-top:55px;
+}
+
+
+.section-head{
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+}
+
+
+.section-kicker{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:8px;
+
+    color:#637286;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    letter-spacing:1.8px;
+
+    text-transform:uppercase;
+}
+
+
+.section-kicker i{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--league);
+
+    box-shadow:
+        0 0 13px
+        var(--league);
+}
+
+
+.section-title{
+    color:#fff;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:45px;
+
+    line-height:.82;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+}
+
+
+.section-title span{
+    color:var(--league);
+}
+
+
+.section-desc{
+    margin-top:10px;
+
+    color:#5f6e81;
+
+    font-size:10px;
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+.filters{
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:18px;
+
+    overflow-x:auto;
+
+    scrollbar-width:none;
+}
+
+
+.filters::-webkit-scrollbar{
+    display:none;
+}
+
+
+.filter{
+    flex:none;
+
+    padding:
+        9px
+        13px;
+
+    color:#69788b;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:9px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    transition:
+        .3s
+        var(--ease);
+}
+
+
+.filter:hover,
+.filter.active{
+    color:#fff;
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--league)
+            40%,
+            transparent
+        );
+
+    background:
+        color-mix(
+            in srgb,
+            var(--league)
+            10%,
+            transparent
+        );
+}
+
+
+/* =========================================================
+   MATCH GRID
+========================================================= */
+
+.matches{
+    display:grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            minmax(0,1fr)
+        );
+
+    gap:17px;
+}
+
+
+/* =========================================================
+   MATCH CARD
+========================================================= */
+
+.match-card{
+    position:relative;
+
+    min-height:300px;
+
+    overflow:hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.075);
+
+    border-radius:24px;
+
+    background:#080e16;
+
+    transition:
+        transform .45s var(--ease),
+        border-color .35s,
+        box-shadow .45s;
+
+    transform-style:preserve-3d;
+}
+
+
+.match-card:hover{
+    transform:
+        translateY(-10px);
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--league)
+            35%,
+            transparent
+        );
+
+    box-shadow:
+        0 35px 70px
+        rgba(0,0,0,.5),
+
+        0 0 35px
+        color-mix(
+            in srgb,
+            var(--league)
+            8%,
+            transparent
+        );
+}
+
+
+.card-glow{
+    position:absolute;
+
+    top:0;
+    left:0;
+    right:0;
+
+    height:4px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--league),
+            transparent
+        );
+
+    transform:
+        scaleX(.2);
+
+    transition:
+        .6s
+        var(--ease);
+}
+
+
+.match-card:hover
+.card-glow{
+    transform:
+        scaleX(1);
+}
+
+
+.match-number{
+    position:absolute;
+
+    right:-4px;
+    top:35px;
+
+    color:
+        rgba(255,255,255,.025);
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:150px;
+
+    line-height:.7;
+
+    font-weight:900;
+
+    pointer-events:none;
+}
+
+
+.match-content{
+    position:relative;
+
+    z-index:3;
+
+    height:300px;
+
+    padding:19px;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+
+.match-top{
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+}
+
+
+.match-league-tag{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        7px
+        9px;
+
+    color:#91a0b2;
+
+    border:
+        1px solid
+        rgba(255,255,255,.065);
+
+    border-radius:8px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-size:8px;
+
+    font-weight:900;
+}
+
+
+.league-dot{
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:var(--league);
+
+    box-shadow:
+        0 0 9px
+        var(--league);
+}
+
+
+.match-status{
+    color:
+        color-mix(
+            in srgb,
+            var(--league)
+            70%,
+            white
+        );
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1px;
+}
+
+
+/* =========================================================
+   TEAMS
+========================================================= */
+
+.teams{
+    flex:1;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        auto
+        1fr;
+
+    align-items:center;
+
+    gap:10px;
+}
+
+
+.team{
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:11px;
+}
+
+
+.team-logo{
+    width:72px;
+    height:72px;
+
+    display:grid;
+
+    place-items:center;
+
+    color:#fff;
+
+    border:
+        1px solid
+        rgba(255,255,255,.09);
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #182534,
+            #080d14
+        );
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    box-shadow:
+        0 17px 30px
+        rgba(0,0,0,.4),
+
+        inset 0 1px 1px
+        rgba(255,255,255,.1);
+
+    transition:
+        .5s
+        var(--ease);
+}
+
+
+.match-card:hover
+.team-logo{
+    transform:
+        translateY(-7px)
+        scale(1.08);
+
+    box-shadow:
+        0 25px 35px
+        rgba(0,0,0,.55),
+
+        0 0 20px
+        color-mix(
+            in srgb,
+            var(--league)
+            10%,
+            transparent
+        );
+}
+
+
+.team-name{
+    max-width:100px;
+
+    color:#d5dee8;
+
+    text-align:center;
+
+    font-size:9px;
+
+    line-height:1.3;
+
+    font-weight:800;
+}
+
+
+.vs{
+    width:31px;
+    height:31px;
+
+    display:grid;
+
+    place-items:center;
+
+    color:#667589;
+
+    border:
+        1px solid
+        rgba(255,255,255,.065);
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-size:7px;
+
+    font-weight:900;
+}
+
+
+/* =========================================================
+   MATCH BOTTOM
+========================================================= */
+
+.match-bottom{
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding-top:14px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.055);
+}
+
+
+.match-date{
+    color:#69788b;
+
+    font-size:8px;
+
+    font-weight:800;
+}
+
+
+.watch-btn{
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:
+        9px
+        13px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--league),
+            #075fb6
+        );
+
+    box-shadow:
+        0 8px 20px
+        color-mix(
+            in srgb,
+            var(--league)
+            18%,
+            transparent
+        );
+
+    font-size:8px;
+
+    font-weight:900;
+
+    transition:
+        .35s
+        var(--ease);
+}
+
+
+.watch-btn:hover{
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 13px 30px
+        color-mix(
+            in srgb,
+            var(--league)
+            30%,
+            transparent
+        );
+}
+
+
+/* =========================================================
+   EMPTY
+========================================================= */
+
+.empty{
+    display:none;
+
+    padding:70px 20px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.06);
+
+    border-radius:22px;
+
+    background:
+        rgba(255,255,255,.02);
+}
+
+
+.empty.show{
+    display:block;
+}
+
+
+.empty-icon{
+    width:55px;
+    height:55px;
+
+    margin:0 auto 15px;
+
+    display:grid;
+
+    place-items:center;
+
+    color:#59697d;
+
+    border:
+        1px solid
+        rgba(255,255,255,.07);
+
+    border-radius:16px;
+
+    font-size:20px;
+}
+
+
+.empty-title{
+    color:#cbd5e1;
+
+    font-size:13px;
+
+    font-weight:900;
+}
+
+
+.empty-text{
+    margin-top:7px;
+
+    color:#5f6e81;
+
+    font-size:9px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    width:min(
+        1480px,
+        calc(100% - 40px)
+    );
+
+    margin:
+        80px
+        auto
+        25px;
+
+    padding-top:25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    color:#4f5d70;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.055);
+
+    font-size:8px;
+}
+
+
+.footer-logo{
+    color:#8593a4;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:25px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.reveal{
+    opacity:0;
+
+    transform:
+        translateY(30px);
+
+    transition:
+        opacity .8s var(--ease),
+        transform .8s var(--ease);
+}
+
+
+.reveal.visible{
+    opacity:1;
+
+    transform:none;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:1150px){
+
+    .matches{
+        grid-template-columns:
+            repeat(
+                2,
+                minmax(0,1fr)
+            );
+    }
+
+    .hero-content{
+        grid-template-columns:
+            1fr
+            190px;
+    }
+
+    .hero-logo{
+        width:145px;
+        height:145px;
+    }
+
+}
+
+
+@media(max-width:760px){
+
+    .header{
+        height:62px;
+    }
+
+
+    .header-inner{
+        width:
+            calc(100% - 24px);
+
+        gap:12px;
+    }
+
+
+    .logo{
+        font-size:34px;
+    }
+
+
+    .main-nav{
+        display:none;
+    }
+
+
+    .search{
+        width:170px;
+
+        margin-left:auto;
+
+        height:38px;
+    }
+
+
+    .league-nav{
+        top:62px;
+    }
+
+
+    .league-scroll{
+        width:
+            calc(100% - 24px);
+    }
+
+
+    .main{
+        width:
+            calc(100% - 24px);
+
+        margin-top:30px;
+    }
+
+
+    .league-hero{
+        min-height:450px;
+
+        border-radius:22px;
+    }
+
+
+    .hero-content{
+        min-height:450px;
+
+        padding:25px;
+
+        display:flex;
+
+        flex-direction:column;
+
+        justify-content:center;
+
+        text-align:center;
+    }
+
+
+    .hero-kicker{
+        justify-content:center;
+    }
+
+
+    .hero-title{
+        font-size:58px;
+    }
+
+
+    .hero-description{
+        font-size:9px;
+    }
+
+
+    .hero-meta{
+        justify-content:center;
+    }
+
+
+    .hero-logo-wrap{
+        order:-1;
+
+        width:145px;
+        height:145px;
+
+        margin-bottom:-5px;
+    }
+
+
+    .hero-logo{
+        width:125px;
+        height:125px;
+    }
+
+
+    .section{
+        margin-top:42px;
+    }
+
+
+    .section-title{
+        font-size:36px;
+    }
+
+
+    .matches{
+        grid-template-columns:1fr;
+    }
+
+
+    .footer{
+        width:
+            calc(100% - 24px);
+
+        flex-direction:column;
+
+        gap:10px;
+    }
+
+}
+
+
+@media(max-width:400px){
+
+    .search{
+        width:135px;
+    }
+
+
+    .hero-title{
+        font-size:50px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation:none!important;
+
+        transition:none!important;
+    }
+
+}
+
+</style></head><body><div class="ambient"></div>
+<div class="ambient2"></div><!-- =======================================================
+     HEADER
+======================================================= --><header class="header"><div class="header-inner"><a href="index.html" class="logo">
+    CR<span>EX</span>
+</a><nav class="main-nav"><a href="index.html">
+    ANA SAYFA
+</a><a href="index.html#matches">
+    SON EKLENENLER
+</a><a href="index.html#leagues">
+    LİGLER
+</a></nav><div class="search"><svg
+viewBox="0 0 24 24"
+fill="none"
+stroke="currentColor"
+stroke-width="2">
+
+<circle
+cx="11"
+cy="11"
+r="7">
+</circle>
+
+<path
+d="m20 20-4-4">
+</path>
+
+</svg><input
+id="searchInput"
+type="search"
+placeholder="Maç veya lig ara..."
+autocomplete="off">
+
+</div></div></header><!-- =======================================================
+     LEAGUE NAV
+======================================================= --><div class="league-nav"><div
+class="league-scroll"
+id="leagueScroll"><a
+href="lig.html?lig=premier-league"
+class="league-link"
+data-league="premier-league"
+style="--lc:#9846d7">
+
+<img
+class="league-mini-logo"
+src="https://download.logo.wine/logo/Premier_League/Premier_League-Logo.wine.png"
+alt="Premier League">
+
+<span>Premier League</span>
+
+</a><a
+href="lig.html?lig=la-liga"
+class="league-link"
+data-league="la-liga"
+style="--lc:#ef4937">
+
+<img
+class="league-mini-logo"
+src="https://upload.wikimedia.org/wikipedia/commons/2/20/LaLiga_2023_Vertical_Logo.svg"
+alt="La Liga">
+
+<span>La Liga</span>
+
+</a><a
+href="lig.html?lig=serie-a"
+class="league-link"
+data-league="serie-a"
+style="--lc:#168cff">
+
+<img
+class="league-mini-logo"
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Serie_A_logo_2022.svg/1280px-Serie_A_logo_2022.svg.png"
+alt="Serie A">
+
+<span>Serie A</span>
+
+</a><a
+href="lig.html?lig=bundesliga"
+class="league-link"
+data-league="bundesliga"
+style="--lc:#e51c35">
+
+<img
+class="league-mini-logo"
+src="https://assets.football-logos.cc/logos/germany/1500x1500/bundesliga.77719ba2.png"
+alt="Bundesliga">
+
+<span>Bundesliga</span>
+
+</a><a
+href="lig.html?lig=ligue-1"
+class="league-link"
+data-league="ligue-1"
+style="--lc:#159fe8">
+
+<img
+class="league-mini-logo"
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ligue_1_2024_Logo.png/960px-Ligue_1_2024_Logo.png"
+alt="Ligue 1">
+
+<span>Ligue 1</span>
+
+</a><a
+href="lig.html?lig=super-lig"
+class="league-link"
+data-league="super-lig"
+style="--lc:#e51d3b">
+
+<img
+class="league-mini-logo"
+src="https://upload.wikimedia.org/wikipedia/tr/archive/5/5e/20260826234136%21Trendyol-super-lig-dikey-logo.png"
+alt="Süper Lig">
+
+<span>Süper Lig</span>
+
+</a><a
+href="lig.html?lig=champions-league"
+class="league-link"
+data-league="champions-league"
+style="--lc:#426dff">
+
+<img
+class="league-mini-logo"
+src="https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA_Champions_League_logo.png"
+alt="Champions League">
+
+<span>Champions League</span>
+
+</a><a
+href="lig.html?lig=europa-league"
+class="league-link"
+data-league="europa-league"
+style="--lc:#ff7417">
+
+<img
+class="league-mini-logo"
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UEFA_Europa_League_logo_%282024_version%29.svg/960px-UEFA_Europa_League_logo_%282024_version%29.svg.png"
+alt="Europa League">
+
+<span>Europa League</span>
+
+</a><a
+href="lig.html?lig=conference-league"
+class="league-link"
+data-league="conference-league"
+style="--lc:#18b98b">
+
+<img
+class="league-mini-logo"
+src="https://assets.football-logos.cc/logos/tournaments/700x700/uefa-conference-league.4a977457.png"
+alt="Conference League">
+
+<span>Conference League</span>
+
+</a><a
+href="lig.html?lig=eredivisie"
+class="league-link"
+data-league="eredivisie"
+style="--lc:#ed5b21">
+
+<img
+class="league-mini-logo"
+src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Eredivisie_nieuw_logo_2017-.svg"
+alt="Eredivisie">
+
+<span>Eredivisie</span>
+
+</a></div></div><!-- =======================================================
+     MAIN
+======================================================= --><main class="main"><!-- =======================================================
+     LEAGUE HERO
+======================================================= --><section
+class="league-hero reveal"><div class="hero-bg"></div><div class="hero-grid"></div><div class="hero-content"><div><div class="hero-kicker"><i></i>
+
+<span id="heroCountry">
+UEFA
+</span><span>•</span>
+
+<span>LİG SAYFASI</span>
+
+</div><h1
+class="hero-title"
+id="heroTitle">Premier
+<span>League</span>
+
+</h1><p
+class="hero-description"
+id="heroDescription">Premier League karşılaşmalarını keşfet.
+Günün ve yaklaşan maçları tek sayfadan takip et.
+
+</p><div class="hero-meta"><div class="hero-pill">MAÇLAR
+
+<b id="matchCount">
+4
+</b></div><div class="hero-pill">DURUM
+
+<b>GÜNCEL</b>
+
+</div><div class="hero-pill">CREX
+
+<b>FUTBOL</b>
+
+</div></div></div><div class="hero-logo-wrap"><img
+id="heroLogo"
+class="hero-logo"
+src=""
+alt="Lig logosu">
+
+</div></div></section><!-- =======================================================
+     MATCHES
+======================================================= --><section
+class="section reveal"
+id="matches"><div class="section-head"><div><div class="section-kicker"><i></i>
+
+LİG KARŞILAŞMALARI
+
+</div><div class="section-title">MAÇLAR <span>BURADA</span>
+
+</div><div
+class="section-desc"
+id="sectionDescription">Premier League karşılaşmaları
+
+</div></div></div><div class="filters"><button
+class="filter active"
+data-filter="all">
+
+TÜMÜ
+
+</button><button
+class="filter"
+data-filter="today">
+
+BUGÜN
+
+</button><button
+class="filter"
+data-filter="tomorrow">
+
+YARIN
+
+</button><button
+class="filter"
+data-filter="finished">
+
+TAMAMLANAN
+
+</button></div><div
+class="matches"
+id="matchGrid"><!-- =====================================================
+     MATCH 1
+===================================================== --><article
+class="match-card"
+data-date="today"
+data-status="upcoming"
+data-search="Manchester City Arsenal Premier League"><div class="card-glow"></div><div class="match-number">
+01
+</div><div class="match-content"><div class="match-top"><div class="match-league-tag"><span class="league-dot"></span>
+
+<span class="match-league-name">
+Premier League
+</span></div><div class="match-status">
+YENİ
+</div></div><div class="teams"><div class="team"><div class="team-logo">
+MCI
+</div><div class="team-name">
+Manchester City
+</div></div><div class="vs">
+VS
+</div><div class="team"><div class="team-logo">
+ARS
+</div><div class="team-name">
+Arsenal
+</div></div></div><div class="match-bottom"><div class="match-date">
+BUGÜN • 20:00
+</div><a
+href="mac.html?id=1"
+class="watch-btn">
+
+İZLE →
+
+</a></div></div></article><!-- =====================================================
+     MATCH 2
+===================================================== --><article
+class="match-card"
+data-date="today"
+data-status="upcoming"
+data-search="Liverpool Chelsea Premier League"><div class="card-glow"></div><div class="match-number">
+02
+</div><div class="match-content"><div class="match-top"><div class="match-league-tag"><span class="league-dot"></span>
+
+<span class="match-league-name">
+Premier League
+</span></div><div class="match-status">
+YENİ
+</div></div><div class="teams"><div class="team"><div class="team-logo">
+LIV
+</div><div class="team-name">
+Liverpool
+</div></div><div class="vs">
+VS
+</div><div class="team"><div class="team-logo">
+CHE
+</div><div class="team-name">
+Chelsea
+</div></div></div><div class="match-bottom"><div class="match-date">
+BUGÜN • 21:30
+</div><a
+href="mac.html?id=5"
+class="watch-btn">
+
+İZLE →
+
+</a></div></div></article><!-- =====================================================
+     MATCH 3
+===================================================== --><article
+class="match-card"
+data-date="tomorrow"
+data-status="upcoming"
+data-search="Manchester United Tottenham Premier League"><div class="card-glow"></div><div class="match-number">
+03
+</div><div class="match-content"><div class="match-top"><div class="match-league-tag"><span class="league-dot"></span>
+
+<span class="match-league-name">
+Premier League
+</span></div><div class="match-status">
+YAKINDA
+</div></div><div class="teams"><div class="team"><div class="team-logo">
+MUN
+</div><div class="team-name">
+Manchester United
+</div></div><div class="vs">
+VS
+</div><div class="team"><div class="team-logo">
+TOT
+</div><div class="team-name">
+Tottenham
+</div></div></div><div class="match-bottom"><div class="match-date">
+YARIN • 18:30
+</div><a
+href="mac.html?id=6"
+class="watch-btn">
+
+İZLE →
+
+</a></div></div></article><!-- =====================================================
+     MATCH 4
+===================================================== --><article
+class="match-card"
+data-date="finished"
+data-status="finished"
+data-search="Newcastle Aston Villa Premier League"><div class="card-glow"></div><div class="match-number">
+04
+</div><div class="match-content"><div class="match-top"><div class="match-league-tag"><span class="league-dot"></span>
+
+<span class="match-league-name">
+Premier League
+</span></div><div class="match-status">
+TAMAMLANDI
+</div></div><div class="teams"><div class="team"><div class="team-logo">
+NEW
+</div><div class="team-name">
+Newcastle
+</div></div><div class="vs">
+VS
+</div><div class="team"><div class="team-logo">
+AVL
+</div><div class="team-name">
+Aston Villa
+</div></div></div><div class="match-bottom"><div class="match-date">
+DÜN • 19:00
+</div><a
+href="mac.html?id=7"
+class="watch-btn">
+
+İZLE →
+
+</a></div></div></article></div><div
+class="empty"
+id="emptyState"><div class="empty-icon">
+⌁
+</div><div class="empty-title">
+Maç bulunamadı
+</div><div class="empty-text">
+Bu filtre için henüz karşılaşma eklenmemiş.
+</div></div></section></main><!-- =======================================================
+     FOOTER
+======================================================= --><footer class="footer"><div class="footer-logo">
+CREX
+</div><div>
+© 2026 CREX
+</div></footer><script>
+
+/* =========================================================
+   LEAGUE DATABASE
+========================================================= */
+
+const leagues = {
+
+    "premier-league": {
+
+        name:"Premier League",
+
+        title:"Premier",
+
+        titleAccent:"League",
+
+        country:"ENGLAND",
+
+        color:"#9846d7",
+
+        logo:
+        "https://download.logo.wine/logo/Premier_League/Premier_League-Logo.wine.png",
+
+        description:
+        "İngiltere'nin en üst düzey futbol ligi. Premier League karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "la-liga": {
+
+        name:"La Liga",
+
+        title:"La",
+
+        titleAccent:"Liga",
+
+        country:"SPAIN",
+
+        color:"#ef4937",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/2/20/LaLiga_2023_Vertical_Logo.svg",
+
+        description:
+        "İspanya'nın en üst düzey futbol ligi. La Liga karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "serie-a": {
+
+        name:"Serie A",
+
+        title:"Serie",
+
+        titleAccent:"A",
+
+        country:"ITALY",
+
+        color:"#168cff",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Serie_A_logo_2022.svg/1280px-Serie_A_logo_2022.svg.png",
+
+        description:
+        "İtalya'nın en üst düzey futbol ligi. Serie A karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "bundesliga": {
+
+        name:"Bundesliga",
+
+        title:"Bundes",
+
+        titleAccent:"liga",
+
+        country:"GERMANY",
+
+        color:"#e51c35",
+
+        logo:
+        "https://assets.football-logos.cc/logos/germany/1500x1500/bundesliga.77719ba2.png",
+
+        description:
+        "Almanya'nın en üst düzey futbol ligi. Bundesliga karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "ligue-1": {
+
+        name:"Ligue 1",
+
+        title:"Ligue",
+
+        titleAccent:"1",
+
+        country:"FRANCE",
+
+        color:"#159fe8",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ligue_1_2024_Logo.png/960px-Ligue_1_2024_Logo.png",
+
+        description:
+        "Fransa'nın en üst düzey futbol ligi. Ligue 1 karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "super-lig": {
+
+        name:"Süper Lig",
+
+        title:"Süper",
+
+        titleAccent:"Lig",
+
+        country:"TÜRKİYE",
+
+        color:"#e51d3b",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/tr/archive/5/5e/20260826234136%21Trendyol-super-lig-dikey-logo.png",
+
+        description:
+        "Türkiye'nin en üst düzey futbol ligi. Süper Lig karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "champions-league": {
+
+        name:"Champions League",
+
+        title:"Champions",
+
+        titleAccent:"League",
+
+        country:"UEFA",
+
+        color:"#426dff",
+
+        logo:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA_Champions_League_logo.png",
+
+        description:
+        "Avrupa'nın en prestijli kulüp turnuvası. Champions League karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "europa-league": {
+
+        name:"Europa League",
+
+        title:"Europa",
+
+        titleAccent:"League",
+
+        country:"UEFA",
+
+        color:"#ff7417",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UEFA_Europa_League_logo_%282024_version%29.svg/960px-UEFA_Europa_League_logo_%282024_version%29.svg.png",
+
+        description:
+        "UEFA Avrupa Ligi karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "conference-league": {
+
+        name:"Conference League",
+
+        title:"Conference",
+
+        titleAccent:"League",
+
+        country:"UEFA",
+
+        color:"#18b98b",
+
+        logo:
+        "https://assets.football-logos.cc/logos/tournaments/700x700/uefa-conference-league.4a977457.png",
+
+        description:
+        "UEFA Konferans Ligi karşılaşmalarını CREX üzerinden keşfet."
+
+    },
+
+
+    "eredivisie": {
+
+        name:"Eredivisie",
+
+        title:"Ere",
+
+        titleAccent:"divisie",
+
+        country:"NETHERLANDS",
+
+        color:"#ed5b21",
+
+        logo:
+        "https://commons.wikimedia.org/wiki/Special:Redirect/file/Eredivisie_nieuw_logo_2017-.svg",
+
+        description:
+        "Hollanda'nın üst düzey futbol ligi. Eredivisie karşılaşmalarını CREX üzerinden keşfet."
+
+    }
+
+};
+
+
+/* =========================================================
+   GET CURRENT LEAGUE
+========================================================= */
+
+const params =
+new URLSearchParams(
+    window.location.search
+);
+
+const leagueKey =
+params.get("lig") ||
+"premier-league";
+
+
+const league =
+leagues[leagueKey] ||
+leagues["premier-league"];
+
+
+/* =========================================================
+   APPLY LEAGUE
+========================================================= */
+
+document.documentElement.style
+    .setProperty(
+        "--league",
+        league.color
+    );
+
+
+document.title =
+`CREX — ${league.name}`;
+
+
+document.getElementById(
+    "heroCountry"
+).textContent =
+league.country;
+
+
+document.getElementById(
+    "heroTitle"
+).innerHTML =
+`${league.title}
+<span>${league.titleAccent}</span>`;
+
+
+document.getElementById(
+    "heroDescription"
+).textContent =
+league.description;
+
+
+document.getElementById(
+    "sectionDescription"
+).textContent =
+`${league.name} karşılaşmaları`;
+
+
+const heroLogo =
+document.getElementById("heroLogo");
+
+
+heroLogo.src =
+league.logo;
+
+
+heroLogo.alt =
+league.name;
+
+
+/* =========================================================
+   ACTIVE LEAGUE
+========================================================= */
+
+document
+.querySelectorAll(".league-link")
+.forEach(link=>{
+
+    if(
+        link.dataset.league ===
+        leagueKey
+    ){
+
+        link.classList.add("active");
+
+    }
+
+});
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchInput =
+document.getElementById(
+    "searchInput"
+);
+
+
+const matchCards =
+[
+    ...document.querySelectorAll(
+        ".match-card"
+    )
+];
+
+
+searchInput.addEventListener(
+    "input",
+    function(){
+
+        const query =
+            this.value
+            .toLocaleLowerCase(
+                "tr-TR"
+            )
+            .trim();
+
+
+        let visible=0;
+
+
+        matchCards.forEach(card=>{
+
+            const text =
+                card.dataset.search
+                .toLocaleLowerCase(
+                    "tr-TR"
+                );
+
+
+            const matches =
+                !query ||
+                text.includes(query);
+
+
+            if(matches){
+
+                card.style.display="";
+                visible++;
+
+            }else{
+
+                card.style.display="none";
+
+            }
+
+        });
+
+
+        document
+        .getElementById(
+            "emptyState"
+        )
+        .classList
+        .toggle(
+            "show",
+            visible===0
+        );
+
+    }
+);
+
+
+/* =========================================================
+   FILTERS
+========================================================= */
+
+const filters =
+document.querySelectorAll(
+    ".filter"
+);
+
+
+filters.forEach(filter=>{
+
+    filter.addEventListener(
+        "click",
+        ()=>{
+
+            filters.forEach(x=>{
+                x.classList.remove(
+                    "active"
+                );
+            });
+
+
+            filter.classList.add(
+                "active"
+            );
+
+
+            const selected =
+                filter.dataset.filter;
+
+
+            let visible=0;
+
+
+            matchCards.forEach(card=>{
+
+                const show =
+                    selected==="all" ||
+                    card.dataset.date ===
+                    selected;
+
+
+                if(show){
+
+                    card.style.display="";
+                    visible++;
+
+                }else{
+
+                    card.style.display="none";
+
+                }
+
+            });
+
+
+            document
+            .getElementById(
+                "emptyState"
+            )
+            .classList
+            .toggle(
+                "show",
+                visible===0
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   LEAGUE BAR DRAG
+========================================================= */
+
+const leagueScroll =
+document.getElementById(
+    "leagueScroll"
+);
+
+
+let dragging=false;
+
+let startX=0;
+
+let scrollStart=0;
+
+
+leagueScroll.addEventListener(
+    "mousedown",
+    e=>{
+
+        dragging=true;
+
+        leagueScroll
+        .classList
+        .add("dragging");
+
+        startX=e.pageX;
+
+        scrollStart=
+            leagueScroll.scrollLeft;
+
+    }
+);
+
+
+window.addEventListener(
+    "mouseup",
+    ()=>{
+
+        dragging=false;
+
+        leagueScroll
+        .classList
+        .remove("dragging");
+
+    }
+);
+
+
+leagueScroll.addEventListener(
+    "mousemove",
+    e=>{
+
+        if(!dragging)
+            return;
+
+
+        e.preventDefault();
+
+
+        leagueScroll.scrollLeft =
+            scrollStart -
+            (e.pageX-startX)*1.35;
+
+    }
+);
+
+
+/* =========================================================
+   TOUCH SWIPE
+========================================================= */
+
+let touchStart=0;
+
+let touchScroll=0;
+
+
+leagueScroll.addEventListener(
+    "touchstart",
+    e=>{
+
+        touchStart=
+            e.touches[0].pageX;
+
+        touchScroll=
+            leagueScroll.scrollLeft;
+
+    },
+    {passive:true}
+);
+
+
+leagueScroll.addEventListener(
+    "touchmove",
+    e=>{
+
+        const current =
+            e.touches[0].pageX;
+
+
+        leagueScroll.scrollLeft =
+            touchScroll -
+            (current-touchStart);
+
+    },
+    {passive:true}
+);
+
+
+/* =========================================================
+   MATCH MOUSE LIGHT
+========================================================= */
+
+document
+.querySelectorAll(".match-card")
+.forEach(card=>{
+
+    card.addEventListener(
+        "mousemove",
+        e=>{
+
+            if(
+                window.innerWidth<=760
+            )
+                return;
+
+
+            const rect =
+                card.getBoundingClientRect();
+
+
+            const x =
+                ((e.clientX-rect.left)
+                /rect.width)*100;
+
+
+            const y =
+                ((e.clientY-rect.top)
+                /rect.height)*100;
+
+
+            card.style.background =
+            `
+            radial-gradient(
+                300px circle
+                at ${x}% ${y}%,
+                color-mix(
+                    in srgb,
+                    var(--league)
+                    9%,
+                    transparent
+                ),
+                transparent 55%
+            ),
+            #080e16
+            `;
+
+        }
+    );
+
+
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            card.style.background =
+                "#080e16";
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   MATCH 3D TILT
+========================================================= */
+
+document
+.querySelectorAll(".match-card")
+.forEach(card=>{
+
+    card.addEventListener(
+        "mousemove",
+        e=>{
+
+            if(
+                window.innerWidth<=760
+            )
+                return;
+
+
+            const rect =
+                card.getBoundingClientRect();
+
+
+            const x =
+                e.clientX -
+                rect.left;
+
+
+            const y =
+                e.clientY -
+                rect.top;
+
+
+            const rotateY =
+                ((x/rect.width)-.5)*5;
+
+
+            const rotateX =
+                ((y/rect.height)-.5)*-5;
+
+
+            card.style.transform =
+            `
+            translateY(-10px)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            `;
+
+        }
+    );
+
+
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            card.style.transform="";
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   HERO PARALLAX
+========================================================= */
+
+const hero =
+document.querySelector(
+    ".league-hero"
+);
+
+
+hero.addEventListener(
+    "mousemove",
+    e=>{
+
+        if(
+            window.innerWidth<=760
+        )
+            return;
+
+
+        const rect =
+            hero.getBoundingClientRect();
+
+
+        const x =
+            ((e.clientX-rect.left)
+            /rect.width)-.5;
+
+
+        const y =
+            ((e.clientY-rect.top)
+            /rect.height)-.5;
+
+
+        const logo =
+            document.querySelector(
+                ".hero-logo-wrap"
+            );
+
+
+        logo.style.transform =
+        `
+        translate(
+            ${x*12}px,
+            ${y*12}px
+        )
+        `;
+
+    }
+);
+
+
+hero.addEventListener(
+    "mouseleave",
+    ()=>{
+
+        const logo =
+            document.querySelector(
+                ".hero-logo-wrap"
+            );
+
+
+        logo.style.transform="";
+
+    }
+);
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+const reveal =
+document.querySelectorAll(
+    ".reveal"
+);
+
+
+const observer =
+new IntersectionObserver(
+    entries=>{
+
+        entries.forEach(
+            entry=>{
+
+                if(
+                    entry.isIntersecting
+                ){
+
+                    entry.target
+                        .classList
+                        .add("visible");
+
+
+                    observer.unobserve(
+                        entry.target
+                    );
+
+                }
+
+            }
+        );
+
+    },
+    {
+        threshold:.12
+    }
+);
+
+
+reveal.forEach(el=>{
+    observer.observe(el);
+});
+
+
+/* =========================================================
+   IMAGE FALLBACK
+========================================================= */
+
+document
+.querySelectorAll("img")
+.forEach(img=>{
+
+    img.addEventListener(
+        "error",
+        function(){
+
+            this.style.opacity="0";
+
+        }
+    );
+
+});
+
+
+</script></body>
+  </html>
