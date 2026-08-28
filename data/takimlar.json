@@ -1,0 +1,989 @@
+[
+  {
+    "takim": "Arsenal",
+    "kisa": "ARS",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/arsenal.e5528ede.png"
+  },
+  {
+    "takim": "Aston Villa",
+    "kisa": "AVL",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/aston-villa.png"
+  },
+  {
+    "takim": "Bournemouth",
+    "kisa": "BOU",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/bournemouth.png"
+  },
+  {
+    "takim": "Brentford",
+    "kisa": "BRE",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/brentford.png"
+  },
+  {
+    "takim": "Brighton",
+    "kisa": "BRI",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/brighton.png"
+  },
+  {
+    "takim": "Chelsea",
+    "kisa": "CHE",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/chelsea.png"
+  },
+  {
+    "takim": "Coventry",
+    "kisa": "COV",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/coventry-city.png"
+  },
+  {
+    "takim": "Crystal Palace",
+    "kisa": "CRY",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/crystal-palace.png"
+  },
+  {
+    "takim": "Everton",
+    "kisa": "EVE",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/everton.png"
+  },
+  {
+    "takim": "Fulham",
+    "kisa": "FUL",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/fulham.png"
+  },
+  {
+    "takim": "Hull City",
+    "kisa": "HUL",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/hull-city.png"
+  },
+  {
+    "takim": "Ipswich",
+    "kisa": "IPS",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/ipswich-town.png"
+  },
+  {
+    "takim": "Leeds United",
+    "kisa": "LEE",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/leeds-united.png"
+  },
+  {
+    "takim": "Liverpool",
+    "kisa": "LIV",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/liverpool.png"
+  },
+  {
+    "takim": "Man. City",
+    "kisa": "MCI",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/manchester-city.png"
+  },
+  {
+    "takim": "Man. United",
+    "kisa": "MUN",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/manchester-united.png"
+  },
+  {
+    "takim": "Newcastle",
+    "kisa": "NEW",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/newcastle-united.png"
+  },
+  {
+    "takim": "Nottingham",
+    "kisa": "NFO",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/nottingham-forest.png"
+  },
+  {
+    "takim": "Sunderland",
+    "kisa": "SUN",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/sunderland.png"
+  },
+  {
+    "takim": "Tottenham",
+    "kisa": "TOT",
+    "lig": "premier-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/tottenham-hotspur.png"
+  },
+
+  {
+    "takim": "Athletic Club Bilbao",
+    "kisa": "ATH",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/athletic-club-bilbao.png"
+  },
+  {
+    "takim": "Atletico Madrid",
+    "kisa": "ATM",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/atletico-madrid.png"
+  },
+  {
+    "takim": "Barcelona",
+    "kisa": "BAR",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/barcelona.png"
+  },
+  {
+    "takim": "Celta",
+    "kisa": "CEL",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/celta-vigo.png"
+  },
+  {
+    "takim": "Deportivo Alavés",
+    "kisa": "ALA",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/deportivo-alaves.png"
+  },
+  {
+    "takim": "Deportivo La Coruña",
+    "kisa": "DEP",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/deportivo-la-coruna.png"
+  },
+  {
+    "takim": "Elche",
+    "kisa": "ELC",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/elche.png"
+  },
+  {
+    "takim": "Espanyol",
+    "kisa": "ESP",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/espanyol.png"
+  },
+  {
+    "takim": "Getafe",
+    "kisa": "GET",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/getafe.png"
+  },
+  {
+    "takim": "Levante",
+    "kisa": "LEV",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/levante.png"
+  },
+  {
+    "takim": "Málaga",
+    "kisa": "MAL",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/malaga.png"
+  },
+  {
+    "takim": "Osasuna",
+    "kisa": "OSA",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/osasuna.png"
+  },
+  {
+    "takim": "Racing Santander",
+    "kisa": "RAC",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/racing-santander.png"
+  },
+  {
+    "takim": "Rayo Vallecano",
+    "kisa": "RAY",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/rayo-vallecano.png"
+  },
+  {
+    "takim": "Real Betis",
+    "kisa": "BET",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/real-betis.png"
+  },
+  {
+    "takim": "Real Madrid",
+    "kisa": "RMA",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/real-madrid.png"
+  },
+  {
+    "takim": "Real Sociedad",
+    "kisa": "RSO",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/real-sociedad.png"
+  },
+  {
+    "takim": "Sevilla",
+    "kisa": "SEV",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/sevilla.png"
+  },
+  {
+    "takim": "Valencia",
+    "kisa": "VAL",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/valencia.png"
+  },
+  {
+    "takim": "Villarreal",
+    "kisa": "VIL",
+    "lig": "la-liga",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/villarreal.png"
+  },
+
+  {
+    "takim": "Atalanta",
+    "kisa": "ATA",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/atalanta.png"
+  },
+  {
+    "takim": "Bologna",
+    "kisa": "BOL",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/bologna.png"
+  },
+  {
+    "takim": "Cagliari",
+    "kisa": "CAG",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/cagliari.png"
+  },
+  {
+    "takim": "Como 1907",
+    "kisa": "COM",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/como-1907.png"
+  },
+  {
+    "takim": "Fiorentina",
+    "kisa": "FIO",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/fiorentina.png"
+  },
+  {
+    "takim": "Frosinone Calcio",
+    "kisa": "FRO",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/frosinone-calcio.png"
+  },
+  {
+    "takim": "Genoa",
+    "kisa": "GEN",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/genoa.png"
+  },
+  {
+    "takim": "Inter",
+    "kisa": "INT",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/inter.png"
+  },
+  {
+    "takim": "Juventus",
+    "kisa": "JUV",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/juventus.png"
+  },
+  {
+    "takim": "Lazio",
+    "kisa": "LAZ",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/lazio.png"
+  },
+  {
+    "takim": "Lecce",
+    "kisa": "LEC",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/lecce.png"
+  },
+  {
+    "takim": "Milan",
+    "kisa": "MIL",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/milan.png"
+  },
+  {
+    "takim": "AC Monza",
+    "kisa": "MON",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/ac-monza.png"
+  },
+  {
+    "takim": "Napoli",
+    "kisa": "NAP",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/napoli.png"
+  },
+  {
+    "takim": "Parma",
+    "kisa": "PAR",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/parma.png"
+  },
+  {
+    "takim": "Roma",
+    "kisa": "ROM",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/roma.png"
+  },
+  {
+    "takim": "Sassuolo",
+    "kisa": "SAS",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/sassuolo.png"
+  },
+  {
+    "takim": "Torino",
+    "kisa": "TOR",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/torino.png"
+  },
+  {
+    "takim": "Udinese",
+    "kisa": "UDI",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/udinese.png"
+  },
+  {
+    "takim": "Venezia",
+    "kisa": "VEN",
+    "lig": "serie-a",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/venezia.png"
+  },
+
+  {
+    "takim": "Augsburg",
+    "kisa": "AUG",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/augsburg.png"
+  },
+  {
+    "takim": "Bayer Leverkusen",
+    "kisa": "B04",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/bayer-leverkusen.png"
+  },
+  {
+    "takim": "Bayern Munich",
+    "kisa": "BAY",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/bayern-munich.png"
+  },
+  {
+    "takim": "Borussia Dortmund",
+    "kisa": "BVB",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/borussia-dortmund.png"
+  },
+  {
+    "takim": "Borussia Mönchengladbach",
+    "kisa": "BMG",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/borussia-monchengladbach.png"
+  },
+  {
+    "takim": "Eintracht Frankfurt",
+    "kisa": "SGE",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/eintracht-frankfurt.png"
+  },
+  {
+    "takim": "Freiburg",
+    "kisa": "SCF",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/freiburg.png"
+  },
+  {
+    "takim": "Hamburger SV",
+    "kisa": "HSV",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/hamburger-sv.png"
+  },
+  {
+    "takim": "Hoffenheim",
+    "kisa": "TSG",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/hoffenheim.png"
+  },
+  {
+    "takim": "Cologne",
+    "kisa": "KOE",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/cologne.png"
+  },
+  {
+    "takim": "Mainz 05",
+    "kisa": "M05",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/mainz-05.png"
+  },
+  {
+    "takim": "SC Paderborn",
+    "kisa": "PAD",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/sc-paderborn.png"
+  },
+  {
+    "takim": "RB Leipzig",
+    "kisa": "RBL",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/rb-leipzig.png"
+  },
+  {
+    "takim": "Schalke 04",
+    "kisa": "S04",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/schalke-04.png"
+  },
+  {
+    "takim": "SV Elversberg",
+    "kisa": "ELV",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/sv-elversberg.png"
+  },
+  {
+    "takim": "Union Berlin",
+    "kisa": "FCU",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/union-berlin.png"
+  },
+  {
+    "takim": "VfB Stuttgart",
+    "kisa": "VFB",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/vfb-stuttgart.png"
+  },
+  {
+    "takim": "Werder Bremen",
+    "kisa": "SVW",
+    "lig": "bundesliga",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/werder-bremen.png"
+  },
+
+  {
+    "takim": "Paris Saint-Germain",
+    "kisa": "PSG",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/paris-saint-germain.png"
+  },
+  {
+    "takim": "Marseille",
+    "kisa": "OM",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/marseille.png"
+  },
+  {
+    "takim": "Lyon",
+    "kisa": "LYO",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/lyon.png"
+  },
+  {
+    "takim": "Monaco",
+    "kisa": "ASM",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/monaco.png"
+  },
+  {
+    "takim": "Lille",
+    "kisa": "LIL",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/lille.png"
+  },
+  {
+    "takim": "Nice",
+    "kisa": "NIC",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/nice.png"
+  },
+  {
+    "takim": "Lens",
+    "kisa": "RCL",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/lens.png"
+  },
+  {
+    "takim": "Rennes",
+    "kisa": "REN",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/rennes.png"
+  },
+  {
+    "takim": "Nantes",
+    "kisa": "NAN",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/nantes.png"
+  },
+  {
+    "takim": "Strasbourg",
+    "kisa": "STR",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/strasbourg.png"
+  },
+  {
+    "takim": "Montpellier",
+    "kisa": "MPL",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/montpellier.png"
+  },
+  {
+    "takim": "Toulouse",
+    "kisa": "TFC",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/toulouse.png"
+  },
+  {
+    "takim": "Brest",
+    "kisa": "BRE",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/brest.png"
+  },
+  {
+    "takim": "Reims",
+    "kisa": "REI",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/reims.png"
+  },
+  {
+    "takim": "Saint-Étienne",
+    "kisa": "ASSE",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/saint-etienne.png"
+  },
+  {
+    "takim": "Auxerre",
+    "kisa": "AJA",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/auxerre.png"
+  },
+  {
+    "takim": "Le Havre",
+    "kisa": "HAC",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/le-havre.png"
+  },
+  {
+    "takim": "Angers",
+    "kisa": "SCO",
+    "lig": "ligue-1",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/angers.png"
+  },
+
+  {
+    "takim": "Galatasaray",
+    "kisa": "GAL",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/galatasaray.png"
+  },
+  {
+    "takim": "Fenerbahçe",
+    "kisa": "FEN",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/fenerbahce.png"
+  },
+  {
+    "takim": "Beşiktaş",
+    "kisa": "BJK",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/besiktas.png"
+  },
+  {
+    "takim": "Trabzonspor",
+    "kisa": "TS",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/trabzonspor.png"
+  },
+  {
+    "takim": "Başakşehir",
+    "kisa": "IBFK",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/istanbul-basaksehir.png"
+  },
+  {
+    "takim": "Samsunspor",
+    "kisa": "SAM",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/samsunspor.png"
+  },
+  {
+    "takim": "Göztepe",
+    "kisa": "GOZ",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/goztepe.png"
+  },
+  {
+    "takim": "Konyaspor",
+    "kisa": "KON",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/konyaspor.png"
+  },
+  {
+    "takim": "Antalyaspor",
+    "kisa": "ANT",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/antalyaspor.png"
+  },
+  {
+    "takim": "Rizespor",
+    "kisa": "RIZ",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/caykur-rizespor.png"
+  },
+  {
+    "takim": "Alanyaspor",
+    "kisa": "ALA",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/alanyaspor.png"
+  },
+  {
+    "takim": "Gaziantep",
+    "kisa": "GFK",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/gaziantep-fk.png"
+  },
+  {
+    "takim": "Kasımpaşa",
+    "kisa": "KAS",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/kasimpasa.png"
+  },
+  {
+    "takim": "Eyüpspor",
+    "kisa": "EYP",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/eyupspor.png"
+  },
+  {
+    "takim": "Kocaelispor",
+    "kisa": "KOC",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/kocaelispor.png"
+  },
+  {
+    "takim": "Gençlerbirliği",
+    "kisa": "GEN",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/genclerbirligi.png"
+  },
+  {
+    "takim": "Amedspor",
+    "kisa": "AME",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/amedspor.png"
+  },
+  {
+    "takim": "Erzurumspor",
+    "kisa": "ERZ",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/erzurumspor.png"
+  },
+  {
+    "takim": "Çorum FK",
+    "kisa": "COR",
+    "lig": "super-lig",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/corum-fk.png"
+  },
+
+  {
+    "takim": "Ajax",
+    "kisa": "AJA",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/ajax.png"
+  },
+  {
+    "takim": "PSV Eindhoven",
+    "kisa": "PSV",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/psv-eindhoven.png"
+  },
+  {
+    "takim": "Feyenoord",
+    "kisa": "FEY",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/feyenoord.png"
+  },
+  {
+    "takim": "AZ Alkmaar",
+    "kisa": "AZ",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/az-alkmaar.png"
+  },
+  {
+    "takim": "Twente",
+    "kisa": "TWE",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/twente.png"
+  },
+  {
+    "takim": "Utrecht",
+    "kisa": "UTR",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/utrecht.png"
+  },
+  {
+    "takim": "Ajax",
+    "kisa": "AJA",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/ajax.png"
+  },
+  {
+    "takim": "Groningen",
+    "kisa": "GRO",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/groningen.png"
+  },
+  {
+    "takim": "Heerenveen",
+    "kisa": "HEE",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/heerenveen.png"
+  },
+  {
+    "takim": "NAC Breda",
+    "kisa": "NAC",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/nac-breda.png"
+  },
+  {
+    "takim": "NEC Nijmegen",
+    "kisa": "NEC",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/nec-nijmegen.png"
+  },
+  {
+    "takim": "Go Ahead Eagles",
+    "kisa": "GAE",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/go-ahead-eagles.png"
+  },
+  {
+    "takim": "Sparta Rotterdam",
+    "kisa": "SPA",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/sparta-rotterdam.png"
+  },
+  {
+    "takim": "Fortuna Sittard",
+    "kisa": "FOR",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/fortuna-sittard.png"
+  },
+  {
+    "takim": "RKC Waalwijk",
+    "kisa": "RKC",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/rkc-waalwijk.png"
+  },
+  {
+    "takim": "Heracles",
+    "kisa": "HER",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/heracles.png"
+  },
+  {
+    "takim": "PEC Zwolle",
+    "kisa": "PEC",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/pec-zwolle.png"
+  },
+  {
+    "takim": "Willem II",
+    "kisa": "WIL",
+    "lig": "eredivisie",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/willem-ii.png"
+  },
+
+  {
+    "takim": "Real Madrid",
+    "kisa": "RMA",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/real-madrid.png"
+  },
+  {
+    "takim": "Barcelona",
+    "kisa": "BAR",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/barcelona.png"
+  },
+  {
+    "takim": "Arsenal",
+    "kisa": "ARS",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/arsenal.e5528ede.png"
+  },
+  {
+    "takim": "Liverpool",
+    "kisa": "LIV",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/liverpool.png"
+  },
+  {
+    "takim": "Manchester City",
+    "kisa": "MCI",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/manchester-city.png"
+  },
+  {
+    "takim": "Bayern Munich",
+    "kisa": "BAY",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/bayern-munich.png"
+  },
+  {
+    "takim": "Borussia Dortmund",
+    "kisa": "BVB",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/germany/256x256/borussia-dortmund.png"
+  },
+  {
+    "takim": "Inter",
+    "kisa": "INT",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/inter.png"
+  },
+  {
+    "takim": "Juventus",
+    "kisa": "JUV",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/juventus.png"
+  },
+  {
+    "takim": "Milan",
+    "kisa": "MIL",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/milan.png"
+  },
+  {
+    "takim": "Napoli",
+    "kisa": "NAP",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/napoli.png"
+  },
+  {
+    "takim": "PSG",
+    "kisa": "PSG",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/paris-saint-germain.png"
+  },
+  {
+    "takim": "Galatasaray",
+    "kisa": "GAL",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/galatasaray.png"
+  },
+  {
+    "takim": "Ajax",
+    "kisa": "AJA",
+    "lig": "champions-league",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/ajax.png"
+  },
+
+  {
+    "takim": "Manchester United",
+    "kisa": "MUN",
+    "lig": "europa-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/manchester-united.png"
+  },
+  {
+    "takim": "Roma",
+    "kisa": "ROM",
+    "lig": "europa-league",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/roma.png"
+  },
+  {
+    "takim": "Porto",
+    "kisa": "POR",
+    "lig": "europa-league",
+    "logo": "https://assets.football-logos.cc/logos/portugal/256x256/porto.png"
+  },
+  {
+    "takim": "Benfica",
+    "kisa": "BEN",
+    "lig": "europa-league",
+    "logo": "https://assets.football-logos.cc/logos/portugal/256x256/benfica.png"
+  },
+  {
+    "takim": "Fenerbahçe",
+    "kisa": "FEN",
+    "lig": "europa-league",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/fenerbahce.png"
+  },
+  {
+    "takim": "Lyon",
+    "kisa": "LYO",
+    "lig": "europa-league",
+    "logo": "https://assets.football-logos.cc/logos/france/256x256/lyon.png"
+  },
+  {
+    "takim": "Ajax",
+    "kisa": "AJA",
+    "lig": "europa-league",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/ajax.png"
+  },
+  {
+    "takim": "Rangers",
+    "kisa": "RAN",
+    "lig": "europa-league",
+    "logo": "https://assets.football-logos.cc/logos/scotland/256x256/rangers.png"
+  },
+
+  {
+    "takim": "Beşiktaş",
+    "kisa": "BJK",
+    "lig": "conference-league",
+    "logo": "https://assets.football-logos.cc/logos/turkey/256x256/besiktas.png"
+  },
+  {
+    "takim": "Fiorentina",
+    "kisa": "FIO",
+    "lig": "conference-league",
+    "logo": "https://assets.football-logos.cc/logos/italy/256x256/fiorentina.png"
+  },
+  {
+    "takim": "Real Betis",
+    "kisa": "BET",
+    "lig": "conference-league",
+    "logo": "https://assets.football-logos.cc/logos/spain/256x256/real-betis.png"
+  },
+  {
+    "takim": "Chelsea",
+    "kisa": "CHE",
+    "lig": "conference-league",
+    "logo": "https://assets.football-logos.cc/logos/england/256x256/chelsea.png"
+  },
+  {
+    "takim": "AZ Alkmaar",
+    "kisa": "AZ",
+    "lig": "conference-league",
+    "logo": "https://assets.football-logos.cc/logos/netherlands/256x256/az-alkmaar.png"
+  },
+  {
+    "takim": "Anderlecht",
+    "kisa": "AND",
+    "lig": "conference-league",
+    "logo": "https://assets.football-logos.cc/logos/belgium/256x256/anderlecht.png"
+  },
+  {
+    "takim": "Panathinaikos",
+    "kisa": "PAN",
+    "lig": "conference-league",
+    "logo": "https://assets.football-logos.cc/logos/greece/256x256/panathinaikos.png"
+  },
+  {
+    "takim": "Basel",
+    "kisa": "BAS",
+    "lig": "conference-league",
+    "logo": "https://assets.football-logos.cc/logos/switzerland/256x256/basel.png"
+  }
+    ]
