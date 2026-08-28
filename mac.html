@@ -614,6 +614,8 @@ body::before{
 
     overflow:hidden;
 
+    isolation:isolate;
+
     border:1px solid rgba(255,255,255,.08);
     border-radius:24px;
 
@@ -631,15 +633,27 @@ body::before{
     width:100%;
     height:100%;
 
+    z-index:1;
+
+    display:block;
+
     border:0;
 
     background:#000;
+
+    /*
+       iframe dışına taşan içerikleri
+       sınırlandırır.
+    */
+    overflow:hidden;
 }
 
 .player-placeholder{
     position:absolute;
 
     inset:0;
+
+    z-index:5;
 
     display:flex;
     flex-direction:column;
@@ -1406,6 +1420,7 @@ function renderMatch(match){
     matchStatus.textContent =
         match.durum || "YAYIN";
 
+
     /* =====================================================
        TIME
     ===================================================== */
@@ -1569,7 +1584,7 @@ function renderPlayer(match){
         broadcast.tip === "embed"
     ){
 
-        createEmbed(
+        createSecureEmbed(
             broadcast.url
         );
 
@@ -1581,11 +1596,6 @@ function renderPlayer(match){
     }
 
 
-    /*
-       İleride farklı yayın tipleri
-       eklenebilir.
-    */
-
     placeholder.style.display =
         "flex";
 
@@ -1596,29 +1606,95 @@ function renderPlayer(match){
 
 
 /* =========================================================
-   EMBED
+   SECURE EMBED
 ========================================================= */
 
-function createEmbed(url){
+function createSecureEmbed(url){
+
+    /*
+       Daha önce oluşturulmuş iframe varsa
+       kaldırıyoruz.
+    */
+
+    const oldIframe =
+        player.querySelector("iframe");
+
+    if(oldIframe){
+        oldIframe.remove();
+    }
+
 
     placeholder.style.display =
         "none";
 
+
     const iframe =
         document.createElement("iframe");
 
-    iframe.src = url;
+
+    /*
+       URL'yi doğrudan iframe'e veriyoruz.
+    */
+
+    iframe.src =
+        url;
+
 
     iframe.title =
         "CREX yayın oynatıcı";
 
+
+    /*
+       ======================================================
+       SANDBOX KORUMASI
+       ======================================================
+
+       Bilerek ŞUNLARI EKLEMİYORUZ:
+
+       allow-popups
+       allow-popups-to-escape-sandbox
+       allow-top-navigation
+       allow-top-navigation-by-user-activation
+
+       Böylece iframe içerisindeki içeriğin:
+
+       window.open()
+       target="_blank"
+       üst pencere yönlendirmesi
+
+       gibi işlemleri sandbox tarafından kısıtlanır.
+    */
+
+    iframe.sandbox =
+        "allow-scripts " +
+        "allow-same-origin " +
+        "allow-forms " +
+        "allow-presentation";
+
+
+    /*
+       Video için gerekli izinler.
+    */
+
     iframe.allow =
         "autoplay; fullscreen; picture-in-picture";
 
-    iframe.allowFullscreen = true;
+
+    iframe.allowFullscreen =
+        true;
+
 
     iframe.referrerPolicy =
         "strict-origin-when-cross-origin";
+
+
+    iframe.loading =
+        "eager";
+
+
+    /*
+       iframe'i player içine ekle.
+    */
 
     player.appendChild(
         iframe
@@ -1684,4 +1760,4 @@ loadMatch();
 </script>
 
 </body>
-  </html>
+    </html>
