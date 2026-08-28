@@ -4,259 +4,268 @@
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-21",
-    "gun": "Cuma",
-    "saat": "",
+
     "evSahibi": "Arsenal",
     "evKisa": "ARS",
     "evLogo": "",
+
     "deplasman": "Coventry",
     "depKisa": "COV",
     "depLogo": "",
-    "skor": {
-      "ev": 3,
-      "dep": 0
-    },
+
+    "skor": "3 - 0",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-21",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
-      "url": ""
+      "url": "https://mixdrop.top/e/4dnx9mzgcz819o"
     }
   },
+
   {
     "id": 2,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-22",
-    "gun": "Cumartesi",
-    "saat": "",
+
     "evSahibi": "Hull City",
     "evKisa": "HUL",
     "evLogo": "",
+
     "deplasman": "Man. United",
     "depKisa": "MUN",
     "depLogo": "",
-    "skor": {
-      "ev": 2,
-      "dep": 0
-    },
+
+    "skor": "2 - 0",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-22",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   },
+
   {
     "id": 3,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-22",
-    "gun": "Cumartesi",
-    "saat": "",
+
     "evSahibi": "Ipswich",
     "evKisa": "IPS",
     "evLogo": "",
+
     "deplasman": "Sunderland",
     "depKisa": "SUN",
     "depLogo": "",
-    "skor": {
-      "ev": 2,
-      "dep": 1
-    },
+
+    "skor": "2 - 1",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-22",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   },
+
   {
     "id": 4,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-22",
-    "gun": "Cumartesi",
-    "saat": "",
+
     "evSahibi": "Nottingham",
     "evKisa": "NFO",
     "evLogo": "",
+
     "deplasman": "Leeds United",
     "depKisa": "LEE",
     "depLogo": "",
-    "skor": {
-      "ev": 0,
-      "dep": 1
-    },
+
+    "skor": "0 - 1",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-22",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   },
+
   {
     "id": 5,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-22",
-    "gun": "Cumartesi",
-    "saat": "",
+
     "evSahibi": "Everton",
     "evKisa": "EVE",
     "evLogo": "",
+
     "deplasman": "Crystal Palace",
     "depKisa": "CRY",
     "depLogo": "",
-    "skor": {
-      "ev": 2,
-      "dep": 0
-    },
+
+    "skor": "2 - 0",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-22",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   },
+
   {
     "id": 6,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-22",
-    "gun": "Cumartesi",
-    "saat": "",
+
     "evSahibi": "Brentford",
     "evKisa": "BRE",
     "evLogo": "",
+
     "deplasman": "Tottenham",
     "depKisa": "TOT",
     "depLogo": "",
-    "skor": {
-      "ev": 3,
-      "dep": 0
-    },
+
+    "skor": "3 - 0",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-22",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   },
+
   {
     "id": 7,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-23",
-    "gun": "Pazar",
-    "saat": "",
+
     "evSahibi": "Man. City",
     "evKisa": "MCI",
     "evLogo": "",
+
     "deplasman": "Bournemouth",
     "depKisa": "BOU",
     "depLogo": "",
-    "skor": {
-      "ev": 2,
-      "dep": 1
-    },
+
+    "skor": "2 - 1",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-23",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   },
+
   {
     "id": 8,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-23",
-    "gun": "Pazar",
-    "saat": "",
+
     "evSahibi": "Brighton",
-    "evKisa": "BHA",
+    "evKisa": "BRI",
     "evLogo": "",
+
     "deplasman": "Aston Villa",
     "depKisa": "AVL",
     "depLogo": "",
-    "skor": {
-      "ev": 4,
-      "dep": 0
-    },
+
+    "skor": "4 - 0",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-23",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   },
+
   {
     "id": 9,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-23",
-    "gun": "Pazar",
-    "saat": "",
+
     "evSahibi": "Newcastle",
     "evKisa": "NEW",
     "evLogo": "",
+
     "deplasman": "Liverpool",
     "depKisa": "LIV",
     "depLogo": "",
-    "skor": {
-      "ev": 2,
-      "dep": 2
-    },
+
+    "skor": "2 - 2",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-23",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   },
+
   {
     "id": 10,
     "lig": "premier-league",
     "ligAdi": "Premier League",
     "hafta": "1. Hafta",
-    "tarih": "2026-08-24",
-    "gun": "Pazartesi",
-    "saat": "",
+
     "evSahibi": "Fulham",
     "evKisa": "FUL",
     "evLogo": "",
+
     "deplasman": "Chelsea",
     "depKisa": "CHE",
     "depLogo": "",
-    "skor": {
-      "ev": 2,
-      "dep": 3
-    },
+
+    "skor": "2 - 3",
     "durum": "MS",
-    "etiket": "1. HAFTA",
+
+    "tarih": "2026-08-24",
+    "saat": "",
+
     "yayin": {
       "aktif": false,
       "tip": "embed",
       "url": ""
     }
   }
-      ]
+]
