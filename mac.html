@@ -1,0 +1,1687 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>CREX — Maç</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --bg:#03060b;
+    --panel:#080e16;
+    --panel2:#0d1621;
+    --blue:#1595ff;
+    --blue2:#62c0ff;
+    --white:#f7fbff;
+    --text:#d7e0ea;
+    --muted:#718096;
+    --line:rgba(255,255,255,.075);
+    --ease:cubic-bezier(.16,1,.3,1);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    color:var(--text);
+
+    background:
+        radial-gradient(
+            700px 450px at 5% -10%,
+            rgba(21,149,255,.14),
+            transparent 65%
+        ),
+        radial-gradient(
+            700px 450px at 100% 20%,
+            rgba(36,77,255,.09),
+            transparent 65%
+        ),
+        linear-gradient(
+            180deg,
+            #02050a,
+            #050a12 45%,
+            #02050a
+        );
+
+    font-family:"Manrope",sans-serif;
+}
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    pointer-events:none;
+    opacity:.18;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size:70px 70px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 85%
+        );
+}
+
+.ambient{
+    position:fixed;
+    width:500px;
+    height:500px;
+    left:-250px;
+    top:10%;
+    border-radius:50%;
+
+    background:#168cff;
+    filter:blur(150px);
+    opacity:.08;
+
+    z-index:-4;
+    pointer-events:none;
+
+    animation:ambient 13s ease-in-out infinite alternate;
+}
+
+.ambient2{
+    position:fixed;
+    width:500px;
+    height:500px;
+    right:-300px;
+    bottom:5%;
+    border-radius:50%;
+
+    background:#315dff;
+    filter:blur(150px);
+    opacity:.07;
+
+    z-index:-4;
+    pointer-events:none;
+
+    animation:ambient2 16s ease-in-out infinite alternate;
+}
+
+@keyframes ambient{
+    to{
+        transform:
+            translate(180px,-80px)
+            scale(1.25);
+    }
+}
+
+@keyframes ambient2{
+    to{
+        transform:
+            translate(-150px,80px)
+            scale(1.2);
+    }
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    height:74px;
+
+    background:rgba(2,6,11,.78);
+
+    border-bottom:1px solid var(--line);
+
+    backdrop-filter:
+        blur(25px)
+        saturate(150%);
+
+    -webkit-backdrop-filter:
+        blur(25px)
+        saturate(150%);
+}
+
+.header-inner{
+    width:min(1480px,calc(100% - 40px));
+    height:100%;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    gap:30px;
+}
+
+.logo{
+    position:relative;
+
+    color:#fff;
+    text-decoration:none;
+
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:40px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--blue);
+}
+
+.logo:after{
+    content:"";
+
+    position:absolute;
+    left:1px;
+    bottom:-6px;
+
+    width:30px;
+    height:2px;
+
+    border-radius:10px;
+
+    background:var(--blue);
+
+    box-shadow:
+        0 0 15px var(--blue);
+}
+
+.main-nav{
+    display:flex;
+    align-items:center;
+    gap:4px;
+    flex:1;
+}
+
+.main-nav a{
+    color:#718096;
+    text-decoration:none;
+
+    padding:11px 14px;
+
+    border-radius:10px;
+
+    font-size:10px;
+    font-weight:900;
+
+    transition:.3s var(--ease);
+}
+
+.main-nav a:hover{
+    color:#fff;
+    background:rgba(255,255,255,.04);
+}
+
+.search{
+    width:245px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    padding:0 14px;
+
+    border:1px solid var(--line);
+    border-radius:13px;
+
+    background:rgba(255,255,255,.035);
+
+    transition:.35s var(--ease);
+}
+
+.search:focus-within{
+    border-color:rgba(21,149,255,.4);
+
+    box-shadow:
+        0 0 30px
+        rgba(21,149,255,.08);
+}
+
+.search svg{
+    width:16px;
+    color:#68788d;
+}
+
+.search input{
+    width:100%;
+
+    border:0;
+    outline:0;
+
+    color:#fff;
+    background:transparent;
+
+    font-family:inherit;
+    font-size:10px;
+}
+
+.search input::placeholder{
+    color:#59687b;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+    width:min(1200px,calc(100% - 40px));
+    margin:40px auto 80px;
+}
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+.back{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    margin-bottom:20px;
+
+    color:#728196;
+    text-decoration:none;
+
+    font-size:10px;
+    font-weight:900;
+
+    transition:.3s;
+}
+
+.back:hover{
+    color:#fff;
+    transform:translateX(-4px);
+}
+
+/* =========================================================
+   MATCH HERO
+========================================================= */
+
+.match-hero{
+    position:relative;
+
+    overflow:hidden;
+
+    min-height:270px;
+
+    padding:30px;
+
+    border:1px solid rgba(255,255,255,.075);
+    border-radius:28px;
+
+    background:
+        radial-gradient(
+            500px circle at 50% 50%,
+            rgba(21,149,255,.09),
+            transparent 65%
+        ),
+        linear-gradient(
+            145deg,
+            #0d1621,
+            #050a10
+        );
+
+    box-shadow:
+        0 35px 80px rgba(0,0,0,.35);
+}
+
+.match-hero::before{
+    content:"";
+
+    position:absolute;
+
+    width:450px;
+    height:450px;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    border-radius:50%;
+
+    border:1px solid rgba(21,149,255,.06);
+
+    box-shadow:
+        0 0 100px rgba(21,149,255,.04);
+
+    pointer-events:none;
+}
+
+.match-hero-top{
+    position:relative;
+    z-index:2;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:15px;
+}
+
+.match-league{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 11px;
+
+    color:#9aa8b9;
+
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:9px;
+
+    background:rgba(255,255,255,.025);
+
+    font-size:9px;
+    font-weight:900;
+}
+
+.league-dot{
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--blue);
+
+    box-shadow:
+        0 0 12px var(--blue);
+}
+
+.match-status{
+    padding:7px 10px;
+
+    color:#4db0ff;
+
+    border:1px solid rgba(21,149,255,.16);
+    border-radius:8px;
+
+    background:rgba(21,149,255,.06);
+
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+/* =========================================================
+   TEAMS
+========================================================= */
+
+.match-teams{
+    position:relative;
+    z-index:2;
+
+    min-height:180px;
+
+    display:grid;
+
+    grid-template-columns:
+        1fr
+        110px
+        1fr;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.hero-team{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:14px;
+}
+
+.hero-team-logo{
+    width:105px;
+    height:105px;
+
+    display:grid;
+    place-items:center;
+
+    color:#fff;
+
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:27px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #172433,
+            #080d14
+        );
+
+    box-shadow:
+        0 25px 45px rgba(0,0,0,.5),
+        inset 0 1px 1px rgba(255,255,255,.08);
+
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:23px;
+    font-weight:900;
+
+    transition:.5s var(--ease);
+}
+
+.hero-team:hover .hero-team-logo{
+    transform:
+        translateY(-7px)
+        scale(1.05);
+}
+
+.hero-team-name{
+    max-width:180px;
+
+    color:#fff;
+
+    text-align:center;
+
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:23px;
+    font-weight:800;
+    text-transform:uppercase;
+}
+
+.hero-vs{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+}
+
+.hero-vs-circle{
+    width:60px;
+    height:60px;
+
+    display:grid;
+    place-items:center;
+
+    color:#75859a;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:50%;
+
+    background:rgba(255,255,255,.025);
+
+    font-size:10px;
+    font-weight:900;
+
+    box-shadow:
+        inset 0 0 25px rgba(255,255,255,.015);
+}
+
+.match-time{
+    color:#67768a;
+    text-align:center;
+
+    font-size:9px;
+    font-weight:900;
+}
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+.player-section{
+    margin-top:28px;
+}
+
+.player-title{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:12px;
+}
+
+.player-label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    color:#a5b1bf;
+
+    font-size:10px;
+    font-weight:900;
+}
+
+.player-label i{
+    width:7px;
+    height:7px;
+
+    border-radius:50%;
+
+    background:#28a7ff;
+
+    box-shadow:
+        0 0 12px #28a7ff;
+
+    animation:playerPulse 1.5s infinite;
+}
+
+@keyframes playerPulse{
+
+    50%{
+        transform:scale(1.4);
+        opacity:.5;
+    }
+
+}
+
+.player-info{
+    color:#536276;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+.player{
+    position:relative;
+
+    width:100%;
+
+    aspect-ratio:16/9;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:24px;
+
+    background:#010306;
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.5);
+}
+
+.player iframe{
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    border:0;
+
+    background:#000;
+}
+
+.player-placeholder{
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+    flex-direction:column;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:12px;
+
+    background:
+        radial-gradient(
+            400px circle at center,
+            rgba(21,149,255,.08),
+            transparent 65%
+        ),
+        #020508;
+}
+
+.placeholder-icon{
+    width:64px;
+    height:64px;
+
+    display:grid;
+    place-items:center;
+
+    color:#52708e;
+
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:20px;
+
+    background:rgba(255,255,255,.025);
+
+    font-size:22px;
+}
+
+.placeholder-title{
+    color:#cbd6e1;
+
+    font-size:13px;
+    font-weight:900;
+}
+
+.placeholder-text{
+    max-width:360px;
+
+    color:#526174;
+
+    text-align:center;
+
+    font-size:9px;
+    line-height:1.6;
+}
+
+/* =========================================================
+   BOTTOM INFO
+========================================================= */
+
+.info-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:14px;
+
+    margin-top:20px;
+}
+
+.info-card{
+    padding:18px;
+
+    border:1px solid rgba(255,255,255,.065);
+    border-radius:17px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.012)
+        );
+}
+
+.info-label{
+    color:#536276;
+
+    margin-bottom:7px;
+
+    font-size:8px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.info-value{
+    color:#dce6ef;
+
+    font-size:11px;
+    font-weight:900;
+}
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error{
+    display:none;
+
+    padding:60px 20px;
+
+    text-align:center;
+
+    border:1px solid rgba(255,80,80,.12);
+    border-radius:25px;
+
+    background:
+        rgba(255,60,60,.025);
+}
+
+.error.show{
+    display:block;
+}
+
+.error-title{
+    margin-bottom:10px;
+
+    color:#fff;
+
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:34px;
+    font-weight:900;
+}
+
+.error-text{
+    color:#657488;
+    font-size:10px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+    width:min(1200px,calc(100% - 40px));
+
+    margin:0 auto 25px;
+
+    padding-top:25px;
+
+    display:flex;
+    justify-content:space-between;
+
+    color:#4f5d70;
+
+    border-top:1px solid rgba(255,255,255,.055);
+
+    font-size:8px;
+}
+
+.footer-logo{
+    color:#8593a4;
+
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:760px){
+
+    .header{
+        height:62px;
+    }
+
+    .header-inner{
+        width:calc(100% - 24px);
+        gap:12px;
+    }
+
+    .logo{
+        font-size:34px;
+    }
+
+    .main-nav{
+        display:none;
+    }
+
+    .search{
+        width:170px;
+        margin-left:auto;
+        height:38px;
+    }
+
+    .main{
+        width:calc(100% - 24px);
+        margin-top:25px;
+    }
+
+    .match-hero{
+        min-height:0;
+        padding:20px 15px;
+        border-radius:20px;
+    }
+
+    .match-teams{
+        grid-template-columns:
+            1fr
+            65px
+            1fr;
+
+        gap:5px;
+    }
+
+    .hero-team-logo{
+        width:72px;
+        height:72px;
+        border-radius:18px;
+        font-size:16px;
+    }
+
+    .hero-team-name{
+        max-width:120px;
+        font-size:15px;
+    }
+
+    .hero-vs-circle{
+        width:43px;
+        height:43px;
+        font-size:8px;
+    }
+
+    .match-time{
+        font-size:7px;
+    }
+
+    .player{
+        border-radius:17px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
+    .footer{
+        width:calc(100% - 24px);
+
+        flex-direction:column;
+
+        gap:10px;
+    }
+
+}
+
+@media(max-width:400px){
+
+    .search{
+        width:135px;
+    }
+
+    .match-teams{
+        grid-template-columns:
+            1fr
+            50px
+            1fr;
+    }
+
+    .hero-team-name{
+        font-size:13px;
+    }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation:none!important;
+        transition:none!important;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="ambient"></div>
+<div class="ambient2"></div>
+
+
+<header class="header">
+
+<div class="header-inner">
+
+<a href="index.html" class="logo">
+    CR<span>EX</span>
+</a>
+
+<nav class="main-nav">
+
+<a href="index.html">
+    ANA SAYFA
+</a>
+
+<a href="index.html#matches">
+    SON EKLENENLER
+</a>
+
+<a href="index.html#leagues">
+    LİGLER
+</a>
+
+</nav>
+
+<div class="search">
+
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+
+<circle cx="11" cy="11" r="7"></circle>
+
+<path d="m20 20-4-4"></path>
+
+</svg>
+
+<input
+    id="searchInput"
+    type="search"
+    placeholder="Maç veya lig ara..."
+    autocomplete="off"
+>
+
+</div>
+
+</div>
+
+</header>
+
+
+<main class="main">
+
+<a href="javascript:history.back()" class="back">
+    ← GERİ DÖN
+</a>
+
+
+<!-- MATCH -->
+
+<section id="matchArea">
+
+<div class="match-hero">
+
+<div class="match-hero-top">
+
+<div class="match-league">
+
+<span class="league-dot"></span>
+
+<span id="leagueName">
+Yükleniyor...
+</span>
+
+</div>
+
+<div class="match-status" id="matchStatus">
+YÜKLENİYOR
+</div>
+
+</div>
+
+
+<div class="match-teams">
+
+<div class="hero-team">
+
+<div
+    class="hero-team-logo"
+    id="homeLogo"
+>
+    —
+</div>
+
+<div
+    class="hero-team-name"
+    id="homeTeam"
+>
+    —
+</div>
+
+</div>
+
+
+<div class="hero-vs">
+
+<div class="hero-vs-circle">
+VS
+</div>
+
+<div
+    class="match-time"
+    id="matchTime"
+>
+    —
+</div>
+
+</div>
+
+
+<div class="hero-team">
+
+<div
+    class="hero-team-logo"
+    id="awayLogo"
+>
+    —
+</div>
+
+<div
+    class="hero-team-name"
+    id="awayTeam"
+>
+    —
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- PLAYER -->
+
+<div class="player-section">
+
+<div class="player-title">
+
+<div class="player-label">
+
+<i></i>
+
+YAYIN / TEKRAR
+
+</div>
+
+<div
+    class="player-info"
+    id="playerInfo"
+>
+    Kaynak bekleniyor
+</div>
+
+</div>
+
+
+<div class="player" id="player">
+
+<div class="player-placeholder" id="placeholder">
+
+<div class="placeholder-icon">
+▶
+</div>
+
+<div class="placeholder-title">
+Yayın hazır değil
+</div>
+
+<div class="placeholder-text">
+Bu karşılaşma için henüz yayın veya tekrar bağlantısı eklenmemiş.
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- INFO -->
+
+<div class="info-grid">
+
+<div class="info-card">
+
+<div class="info-label">
+LİG
+</div>
+
+<div
+    class="info-value"
+    id="infoLeague"
+>
+    —
+</div>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="info-label">
+HAFTA
+</div>
+
+<div
+    class="info-value"
+    id="infoWeek"
+>
+    —
+</div>
+
+</div>
+
+
+<div class="info-card">
+
+<div class="info-label">
+DURUM
+</div>
+
+<div
+    class="info-value"
+    id="infoStatus"
+>
+    —
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- ERROR -->
+
+<section class="error" id="errorBox">
+
+<div class="error-title">
+MAÇ BULUNAMADI
+</div>
+
+<div class="error-text">
+URL içerisindeki maç ID'si maclar.json dosyasında bulunamadı.
+</div>
+
+</section>
+
+</main>
+
+
+<footer class="footer">
+
+<div class="footer-logo">
+CREX
+</div>
+
+<div>
+© 2026 CREX
+</div>
+
+</footer>
+
+
+<script>
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const DATA_URL = "data/maclar.json";
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const homeTeam =
+document.getElementById("homeTeam");
+
+const awayTeam =
+document.getElementById("awayTeam");
+
+const homeLogo =
+document.getElementById("homeLogo");
+
+const awayLogo =
+document.getElementById("awayLogo");
+
+const leagueName =
+document.getElementById("leagueName");
+
+const matchStatus =
+document.getElementById("matchStatus");
+
+const matchTime =
+document.getElementById("matchTime");
+
+const infoLeague =
+document.getElementById("infoLeague");
+
+const infoWeek =
+document.getElementById("infoWeek");
+
+const infoStatus =
+document.getElementById("infoStatus");
+
+const player =
+document.getElementById("player");
+
+const placeholder =
+document.getElementById("placeholder");
+
+const playerInfo =
+document.getElementById("playerInfo");
+
+const errorBox =
+document.getElementById("errorBox");
+
+
+/* =========================================================
+   GET MATCH ID
+========================================================= */
+
+const params =
+new URLSearchParams(
+    window.location.search
+);
+
+const matchId =
+params.get("id");
+
+
+/* =========================================================
+   FORMAT DATE
+========================================================= */
+
+function formatDate(dateString){
+
+    if(!dateString)
+        return "";
+
+    const date =
+        new Date(
+            dateString + "T00:00:00"
+        );
+
+    if(Number.isNaN(date.getTime()))
+        return dateString;
+
+    return date.toLocaleDateString(
+        "tr-TR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================================================
+   LOAD MATCH
+========================================================= */
+
+async function loadMatch(){
+
+    try{
+
+        if(!matchId){
+            showError();
+            return;
+        }
+
+        const response =
+            await fetch(
+                DATA_URL,
+                {
+                    cache:"no-store"
+                }
+            );
+
+        if(!response.ok){
+            throw new Error(
+                "maclar.json yüklenemedi"
+            );
+        }
+
+        const matches =
+            await response.json();
+
+        if(!Array.isArray(matches)){
+            throw new Error(
+                "JSON formatı geçersiz"
+            );
+        }
+
+        const match =
+            matches.find(
+                item =>
+                    String(item.id) ===
+                    String(matchId)
+            );
+
+        if(!match){
+            showError();
+            return;
+        }
+
+        renderMatch(match);
+
+    }catch(error){
+
+        console.error(error);
+
+        showError();
+
+    }
+
+}
+
+
+/* =========================================================
+   RENDER
+========================================================= */
+
+function renderMatch(match){
+
+    const home =
+        match.evSahibi || "Ev Sahibi";
+
+    const away =
+        match.deplasman || "Deplasman";
+
+    const league =
+        match.ligAdi || match.lig || "Lig";
+
+    homeTeam.textContent =
+        home;
+
+    awayTeam.textContent =
+        away;
+
+    leagueName.textContent =
+        league;
+
+    infoLeague.textContent =
+        league;
+
+    infoWeek.textContent =
+        match.hafta || "—";
+
+    infoStatus.textContent =
+        match.durum || "—";
+
+    matchStatus.textContent =
+        match.durum || "YAYIN";
+
+    /* =====================================================
+       TIME
+    ===================================================== */
+
+    let timeText = "";
+
+    if(match.tarih){
+
+        timeText =
+            formatDate(match.tarih);
+
+    }
+
+    if(match.saat){
+
+        if(timeText)
+            timeText += " • ";
+
+        timeText +=
+            match.saat;
+
+    }
+
+    if(!timeText)
+        timeText = "TARİH BİLGİSİ YOK";
+
+    matchTime.textContent =
+        timeText;
+
+
+    /* =====================================================
+       TEAM LOGOS
+    ===================================================== */
+
+    setTeamLogo(
+        homeLogo,
+        match.evLogo,
+        match.evKisa || getInitials(home)
+    );
+
+    setTeamLogo(
+        awayLogo,
+        match.depLogo,
+        match.depKisa || getInitials(away)
+    );
+
+
+    /* =====================================================
+       PAGE TITLE
+    ===================================================== */
+
+    document.title =
+        `CREX — ${home} vs ${away}`;
+
+
+    /* =====================================================
+       PLAYER
+    ===================================================== */
+
+    renderPlayer(match);
+
+}
+
+
+/* =========================================================
+   TEAM LOGO
+========================================================= */
+
+function setTeamLogo(
+    element,
+    url,
+    fallback
+){
+
+    if(url){
+
+        const img =
+            document.createElement("img");
+
+        img.src = url;
+
+        img.alt = fallback;
+
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "contain";
+
+        img.onload = ()=>{
+
+            element.innerHTML = "";
+
+            element.appendChild(img);
+
+        };
+
+        img.onerror = ()=>{
+
+            element.textContent =
+                fallback;
+
+        };
+
+    }else{
+
+        element.textContent =
+            fallback;
+
+    }
+
+}
+
+
+/* =========================================================
+   INITIALS
+========================================================= */
+
+function getInitials(name){
+
+    return name
+        .split(/\s+/)
+        .filter(Boolean)
+        .slice(0,3)
+        .map(
+            word =>
+                word
+                .charAt(0)
+                .toUpperCase()
+        )
+        .join("");
+
+}
+
+
+/* =========================================================
+   PLAYER
+========================================================= */
+
+function renderPlayer(match){
+
+    const broadcast =
+        match.yayin;
+
+    if(
+        !broadcast ||
+        broadcast.aktif !== true ||
+        !broadcast.url
+    ){
+
+        placeholder.style.display =
+            "flex";
+
+        playerInfo.textContent =
+            "Yayın / tekrar mevcut değil";
+
+        return;
+
+    }
+
+
+    if(
+        broadcast.tip === "embed"
+    ){
+
+        createEmbed(
+            broadcast.url
+        );
+
+        playerInfo.textContent =
+            "EMBED YAYIN";
+
+        return;
+
+    }
+
+
+    /*
+       İleride farklı yayın tipleri
+       eklenebilir.
+    */
+
+    placeholder.style.display =
+        "flex";
+
+    playerInfo.textContent =
+        "Desteklenmeyen yayın tipi";
+
+}
+
+
+/* =========================================================
+   EMBED
+========================================================= */
+
+function createEmbed(url){
+
+    placeholder.style.display =
+        "none";
+
+    const iframe =
+        document.createElement("iframe");
+
+    iframe.src = url;
+
+    iframe.title =
+        "CREX yayın oynatıcı";
+
+    iframe.allow =
+        "autoplay; fullscreen; picture-in-picture";
+
+    iframe.allowFullscreen = true;
+
+    iframe.referrerPolicy =
+        "strict-origin-when-cross-origin";
+
+    player.appendChild(
+        iframe
+    );
+
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+function showError(){
+
+    document
+        .getElementById("matchArea")
+        .style.display = "none";
+
+    errorBox.classList.add("show");
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchInput =
+document.getElementById("searchInput");
+
+if(searchInput){
+
+    searchInput.addEventListener(
+        "keydown",
+        function(e){
+
+            if(e.key !== "Enter")
+                return;
+
+            const query =
+                this.value
+                .trim();
+
+            if(!query)
+                return;
+
+            window.location.href =
+                "index.html?search=" +
+                encodeURIComponent(query);
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   START
+========================================================= */
+
+loadMatch();
+
+</script>
+
+</body>
+  </html>
