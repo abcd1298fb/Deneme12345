@@ -1,1033 +1,4302 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>CREX</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800;900&display=swap" rel="stylesheet"/>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<!-- Plyr Player CSS JS-->
-<link rel="stylesheet" href="https://cdn.plyr.io/3.7.8/plyr.css" />
-<script src="https://cdn.plyr.io/3.7.8/plyr.polyfilled.js"></script>
-<!-- Vercel Analytics -->
-<script>
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-</script>
-<script defer src="/_vercel/insights/script.js"></script>
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+>
+
+<title>CREX — Futbol</title>
+
+<meta
+    name="description"
+    content="CREX futbol platformu — son eklenen maçlar ve popüler ligler."
+>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link
+    href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+>
+
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+/* =========================================================
+   CREX — MODERN HOME
+========================================================= */
+
 :root{
-  --bg:#02050f;
-  --surface: rgba(10, 15, 30, 0.95);
-  --surface2: rgba(255, 255, 255, 0.03);
-  --surface3: rgba(0, 122, 255, 0.2);
-  --border: rgba(255, 255, 255, 0.14);
-  --border2: rgba(0, 122, 255, 0.5);
-  --accent:#007aff;
-  --accent-glow:rgba(0, 122, 255, 0.2);
-  --blue:#0055ff;
-  --text:#ffffff;
-  --muted:#7ba1d5;
-  --muted2:#94a3b8;
-  
-  --plyr-color-main: var(--accent);
-  --plyr-video-background: #000000;
+
+    --bg:#02050a;
+    --bg-soft:#060b12;
+
+    --panel:#0a111a;
+    --panel-2:#0d1722;
+
+    --white:#f7faff;
+    --text:#d9e2ec;
+    --muted:#738195;
+    --muted-2:#4c5a6d;
+
+    --blue:#168cff;
+    --blue-2:#49b2ff;
+
+    --line:rgba(255,255,255,.075);
+    --line-strong:rgba(255,255,255,.13);
+
+    --shadow:
+        0 30px 80px rgba(0,0,0,.55);
+
+    --ease:
+        cubic-bezier(.16,1,.3,1);
+
+    --radius:22px;
+
 }
-html{scroll-behavior:smooth}
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
 body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:'Manrope',sans-serif;
-  min-height:100vh;
-  overflow-x:hidden;
-  position: relative;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+    color:var(--text);
+
+    background:
+
+        radial-gradient(
+            700px 400px at 8% -5%,
+            rgba(0,128,255,.14),
+            transparent 65%
+        ),
+
+        radial-gradient(
+            600px 400px at 100% 20%,
+            rgba(0,85,255,.08),
+            transparent 65%
+        ),
+
+        linear-gradient(
+            180deg,
+            #02050a,
+            #040811 45%,
+            #02050a
+        );
+
+    font-family:"Manrope",sans-serif;
+
 }
 
-/* ─── ARKA PLAN ─── */
-.liquid-bg {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: -1;
-  background: #02050f;
+/* =========================================================
+   AMBIENT BACKGROUND
+========================================================= */
+
+.ambient{
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-5;
+
+    pointer-events:none;
+
+    overflow:hidden;
+
 }
 
-/* ─── NAV ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:300;
-  height:58px;
-  background: rgba(2, 6, 18, 0.98);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;
-  justify-content: space-between;
-  padding:0 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-}
-.nav-logo{
-  display: flex;
-  align-items: center;
-  width: 150px;
-  height: 36px;
-  cursor: pointer;
-  user-select: none;
-  flex-shrink: 0;
-}
-.nav-logo img {
-  max-height: 100%;
-  max-width: 100%;
-  object-fit: contain;
-}
-.nav-search{
-  flex:1;
-  max-width:320px;
-  display:flex;align-items:center;gap:10px;
-  background: rgba(255, 255, 255, 0.06);
-  border:1px solid var(--border);
-  border-radius:8px;padding:0 14px;height:36px;
-  margin: 0 auto;
-}
-.nav-search input{
-  background:none;border:none;outline:none;
-  color:var(--text);font-size:13px;font-family:'Manrope',sans-serif;
-  width:100%;
-}
-.nav-search input::placeholder{color:var(--muted)}
-.search-icon{color:var(--muted);font-size:14px;flex-shrink:0}
-.nav-spacer { width: 150px; flex-shrink: 0; display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
-.live-dot{width:7px;height:7px;background:#34c759;border-radius:50%;opacity:0.9;}
+.ambient::before,
+.ambient::after{
 
-/* ─── LAYOUT ─── */
-.layout{
-  display:grid;
-  grid-template-columns:320px 1fr;
-  margin-top:58px;
-  height:calc(100vh - 58px);
-}
-.layout.theater-active { grid-template-columns: 0px 1fr; }
+    content:"";
 
-/* ─── CHANNEL SIDEBAR ─── */
-.ch-sidebar{
-  background: var(--surface);
-  border-right:1px solid var(--border);
-  display:flex;flex-direction:column;
-  overflow:hidden;
-  height: 100%;
-  position: relative;
-}
-.layout.theater-active .ch-sidebar {
-  transform: translateX(-320px);
-  opacity: 0;
-  pointer-events: none;
+    position:absolute;
+
+    width:500px;
+    height:500px;
+
+    border-radius:50%;
+
+    filter:blur(100px);
+
+    opacity:.08;
+
+    animation:
+        ambientMove 14s ease-in-out infinite alternate;
+
 }
 
-/* DOMAIN */
-.domain-alert {
-  padding: 10px 12px;
-  background: rgba(0, 122, 255, 0.08);
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.domain-alert-text {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 11px;
-  color: var(--text);
-  line-height: 1.4;
-}
-.domain-icon { font-size: 14px; }
-.domain-link {
-  color: var(--accent);
-  font-weight: 800;
-  text-decoration: underline;
-  cursor: pointer;
+.ambient::before{
+
+    top:10%;
+    left:-200px;
+
+    background:#168cff;
+
 }
 
-.country-filter-wrap{
-  padding: 10px 8px;
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-  overflow-x: auto;
-  display: flex;
-  gap: 6px;
-}
-.country-filter-wrap::-webkit-scrollbar { height: 3px; }
-.country-filter-wrap::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.15);
-  border-radius: 10px;
-}
-.country-btn{
-  display: flex; align-items: center; gap: 6px;
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid var(--border);
-  border-radius: 20px;
-  color: var(--text);
-  font-size: 12px; font-weight: 600;
-  cursor: pointer; white-space: nowrap;
-}
-.country-btn.active{
-  background: var(--accent);
-  border-color: var(--accent);
-}
-.country-btn .flag-icon { font-size: 14px; }
+.ambient::after{
 
-/* Sekmeler (Kanallar / Maçlar) */
-.main-tabs-wrap {
-  display: flex;
-  background: rgba(0,0,0,0.3);
-  border-bottom: 1px solid var(--border);
-  padding: 8px;
-  gap: 8px;
-}
-.main-tab-btn {
-  flex: 1;
-  padding: 8px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--muted2);
-  font-weight: 700;
-  font-size: 13px;
-  cursor: pointer;
-  text-align: center;
-}
-.main-tab-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    right:-250px;
+    bottom:10%;
 
-.ch-list{
-  flex:1;overflow-y:auto;padding:8px;
-  position: relative;
-}
-.ch-list::-webkit-scrollbar{width:4px}
-.ch-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.2);border-radius:2px}
+    background:#145eff;
 
-.ch-card{
-  display:flex;align-items:center;gap:12px;
-  padding:12px;border-radius:8px;
-  cursor:pointer;
-  border:1px solid transparent;
-  margin-bottom:4px;
-  background: rgba(255, 255, 255, 0.02);
-  position: relative;
-  overflow: hidden;
-}
-.ch-card:hover{
-  background: rgba(255, 255, 255, 0.09);
-  border-color: rgba(255, 255, 255, 0.25);
-}
-.ch-card.active{
-  background: var(--surface3);
-  border-color: var(--accent);
+    animation-delay:-6s;
+
 }
 
-.ch-card-flag {
-  font-size: 16px; flex-shrink: 0;
-  width: 24px; height: 24px;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(255,255,255,0.04);
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.08);
+@keyframes ambientMove{
+
+    from{
+        transform:translate3d(0,0,0) scale(1);
+    }
+
+    to{
+        transform:translate3d(120px,-60px,0) scale(1.3);
+    }
+
 }
 
-.ch-logo{
-  width:44px;height:44px;border-radius:8px;
-  background: rgba(255, 255, 255, 0.98);
-  border:1px solid rgba(255,255,255,0.5);
-  display:flex;align-items:center;justify-content:center;
-  overflow:hidden;flex-shrink:0;padding:4px;
-}
-.ch-logo img{ max-width:100%;max-height:100%;object-fit:contain; }
-.ch-info{flex:1;min-width:0}
-.ch-name{font-size:14px;font-weight:700;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ch-live-badge{ flex-shrink:0;width:7px;height:7px;background:#34c759;border-radius:50%; }
+/* GRID */
 
-/* Lig / Kategori Başlığı */
-.league-group-header {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 14px;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.06);
-  padding: 5px 10px;
-  border-radius: 4px;
-  margin: 12px 0 6px 0;
-  border-left: 3px solid var(--accent);
-}
-.league-group-header:first-child {
-  margin-top: 2px;
-}
+body::after{
 
-/* Tarih Grubu Başlığı */
-.date-group-header {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 1px;
-  color: var(--accent);
-  background: rgba(0, 122, 255, 0.08);
-  padding: 6px 10px;
-  border-radius: 6px;
-  margin: 10px 0 6px 0;
-  border-left: 3px solid var(--accent);
-}
-.date-group-header:first-child {
-  margin-top: 2px;
+    content:"";
+
+    position:fixed;
+
+    inset:0;
+
+    z-index:-4;
+
+    pointer-events:none;
+
+    opacity:.15;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size:64px 64px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 80%
+        );
+
 }
 
-/* Maç Kartı Tasarımı */
-.match-card {
-  display: flex;
-  flex-direction: column;
-  padding: 10px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  margin-bottom: 6px;
-  gap: 8px;
-}
-.match-card:hover {
-  border-color: rgba(255, 255, 255, 0.25);
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    height:74px;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.065);
+
+    background:
+        rgba(2,6,11,.72);
+
+    backdrop-filter:
+        blur(25px)
+        saturate(140%);
+
+    -webkit-backdrop-filter:
+        blur(25px)
+        saturate(140%);
+
 }
 
-/* 3D Şampiyonlar Ligi Kura Kartı & Güneş Sistemi Animasyonu */
-.match-card.ucl-3d-card {
-  background: linear-gradient(135deg, rgba(0, 20, 60, 0.8) 0%, rgba(5, 10, 25, 0.95) 100%);
-  border: 1px solid rgba(0, 122, 255, 0.6);
-  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3), inset 0 0 20px rgba(0, 122, 255, 0.2);
-  transform: perspective(800px) rotateX(3deg);
-  transition: all 0.3s ease;
-}
-.match-card.ucl-3d-card:hover {
-  transform: perspective(800px) rotateX(0deg) scale(1.01);
-  box-shadow: 0 12px 35px rgba(0, 122, 255, 0.5);
+.header::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:-1px;
+    left:0;
+
+    width:100%;
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(22,140,255,.5),
+            transparent
+        );
+
+    opacity:.35;
+
 }
 
-/* Güneş Sistemi Yörünge Alanı */
-.solar-system-container {
-  position: relative;
-  width: 100%;
-  height: 90px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  perspective: 600px;
-  margin: 4px 0;
+.header-inner{
+
+    width:min(
+        1480px,
+        calc(100% - 40px)
+    );
+
+    height:100%;
+
+    margin:auto;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:28px;
+
 }
 
-/* Güneş (Şampiyonlar Ligi Logosu - Merkezde Sabit ve Parlar) */
-.sun-center {
-  width: 42px;
-  height: 42px;
-  object-fit: contain;
-  position: relative;
-  z-index: 2;
-  filter: drop-shadow(0 0 12px rgba(0, 122, 255, 0.9));
-  animation: sunPulse 3s ease-in-out infinite;
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo{
+
+    position:relative;
+
+    flex:none;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:40px;
+
+    font-weight:900;
+
+    letter-spacing:2px;
+
+    line-height:1;
+
+    text-shadow:
+        0 0 25px rgba(22,140,255,.15);
+
 }
 
-@keyframes sunPulse {
-  0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(0, 122, 255, 0.8)); }
-  50% { transform: scale(1.08); filter: drop-shadow(0 0 18px rgba(0, 160, 255, 1)); }
+.logo span{
+
+    color:var(--blue);
+
 }
 
-/* Yörünge Çizgisi */
-.orbit-path {
-  position: absolute;
-  width: 150px;
-  height: 55px;
-  border: 1px dashed rgba(0, 122, 255, 0.4);
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotateX(55deg);
-  pointer-events: none;
+.logo::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:-8px;
+    top:50%;
+
+    width:4px;
+    height:25px;
+
+    border-radius:10px;
+
+    background:var(--blue);
+
+    box-shadow:
+        0 0 15px rgba(22,140,255,.8);
+
+    transform:
+        translateY(-50%);
+
 }
 
-/* Gezegenler (GS ve FB Logoları) İçin Dönüş Animasyonu */
-@keyframes orbitRevolution {
-  0% { transform: translate(-50%, -50%) rotate(0deg) translateX(75px) rotate(0deg); }
-  100% { transform: translate(-50%, -50%) rotate(360deg) translateX(75px) rotate(-360deg); }
+.logo::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    bottom:-8px;
+
+    width:31px;
+    height:3px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--blue),
+            transparent
+        );
+
 }
 
-@keyframes orbitRevolutionReverse {
-  0% { transform: translate(-50%, -50%) rotate(180deg) translateX(75px) rotate(-180deg); }
-  100% { transform: translate(-50%, -50%) rotate(540deg) translateX(75px) rotate(-540deg); }
+/* =========================================================
+   NAV
+========================================================= */
+
+.main-nav{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:3px;
+
+    flex:1;
+
 }
 
-.planet-logo {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 26px;
-  height: 26px;
-  object-fit: contain;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.6));
-  z-index: 3;
+.main-nav a{
+
+    position:relative;
+
+    color:#758398;
+
+    text-decoration:none;
+
+    padding:11px 14px;
+
+    border-radius:10px;
+
+    font-size:10px;
+
+    font-weight:800;
+
+    transition:.3s var(--ease);
+
 }
 
-.planet-gs {
-  animation: orbitRevolution 6s linear infinite;
+.main-nav a::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+    bottom:3px;
+
+    width:0;
+    height:2px;
+
+    border-radius:10px;
+
+    background:var(--blue);
+
+    transform:
+        translateX(-50%);
+
+    transition:.3s var(--ease);
+
 }
 
-.planet-fb {
-  animation: orbitRevolutionReverse 6s linear infinite;
+.main-nav a:hover{
+
+    color:#fff;
+
+    background:
+        rgba(255,255,255,.045);
+
 }
 
-.match-main-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 8px;
-  cursor: pointer;
-}
-.match-team-side {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex: 1;
-  min-width: 0;
-}
-.match-team-side.right {
-  justify-content: flex-end;
-  text-align: right;
-}
-.match-team-name {
-  font-size: 12px;
-  font-weight: 700;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.match-team-logo {
-  width: 24px;
-  height: 24px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-.match-center-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 0 4px;
-  flex-shrink: 0;
-}
-.match-time {
-  font-size: 10px;
-  font-weight: 800;
-  color: var(--accent);
-  background: rgba(0, 122, 255, 0.1);
-  padding: 2px 5px;
-  border-radius: 4px;
-  margin-bottom: 2px;
-}
-.match-vs {
-  font-size: 9px;
-  color: var(--muted2);
-  font-weight: 700;
+.main-nav a.active{
+
+    color:#fff;
+
 }
 
-/* Alternatif Yayın Butonları */
-.match-alternatives {
-  display: flex;
-  gap: 6px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  padding-top: 6px;
-}
-.alt-stream-btn {
-  flex: 1;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  color: var(--text);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 5px 4px;
-  cursor: pointer;
-  text-align: center;
-}
-.alt-stream-btn:hover {
-  background: var(--accent);
-  border-color: var(--accent);
+.main-nav a.active::before{
+
+    width:18px;
+
 }
 
-/* REKLAM ALANI */
-.adv-panel{
-  padding:12px;
-  border-top:1px solid var(--border);
-  background: rgba(0, 0, 0, 0.4);
-  flex-shrink:0;
-  display:flex; justify-content:center; align-items:center;
-}
-.adv-link{ text-decoration: none; width: 100%; max-width: 300px; display: block; }
-.adv-box{
-  width:100%; height:100px;
-  background: rgba(0, 0, 0, 0.3);
-  border:1px dashed rgba(255,255,255,0.25);
-  border-radius:6px;
-  display:flex; align-items:center; justify-content:center;
-  color:var(--muted2);
-  font-size:12px; font-weight:600; letter-spacing:0.5px;
-  text-align:center; cursor:pointer;
-}
+/* =========================================================
+   SEARCH
+========================================================= */
 
-/* ─── PLAYER AREA YAPISI ─── */
-.player-area{
-  display:flex;flex-direction:column;
-  overflow:hidden;
-  background:transparent;
-  position: relative;
-}
+.search{
 
-.content-body-flex {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  position: relative;
-  z-index: 5;
-  overflow: hidden;
+    width:245px;
+    height:42px;
+
+    flex:none;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    padding:0 14px;
+
+    border:
+        1px solid var(--line);
+
+    border-radius:13px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    transition:
+        .35s var(--ease);
+
 }
 
-.video-main-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  background: #000;
-  min-height: 250px;
-  width: 100%;
+.search:focus-within{
+
+    width:275px;
+
+    border-color:
+        rgba(22,140,255,.42);
+
+    background:
+        rgba(22,140,255,.045);
+
+    box-shadow:
+        0 0 35px rgba(22,140,255,.08),
+        inset 0 0 20px rgba(22,140,255,.02);
+
 }
 
-.btn-theater {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 6px 10px; border-radius: 6px;
-  cursor: pointer; font-size: 12px; font-weight: 600;
-  display: flex; align-items: center; gap: 5px;
-  white-space: nowrap;
+.search svg{
+
+    width:16px;
+    height:16px;
+
+    flex:none;
+
+    color:#708095;
+
+    transition:.3s;
+
 }
 
-.now-header{
-  padding:10px 16px;
-  background: rgba(2, 6, 18, 0.95);
-  border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:10px;
-  flex-shrink:0; min-height:60px; z-index:5;
-}
-.now-logo{
-  width:40px;height:40px;border-radius:8px;
-  background: rgba(255, 255, 255, 0.98);
-  border:1px solid rgba(255,255,255,0.5);
-  display:none; align-items:center;justify-content:center;
-  overflow:hidden;padding:4px;flex-shrink:0;
-}
-.now-logo img{ max-width:100%;max-height:100%;object-fit:contain; }
-.now-info{flex:1; display:flex; align-items:center; gap:8px; flex-wrap: nowrap; overflow:hidden;}
-.now-ch-name{ font-family:'Barlow Condensed',sans-serif; font-size:18px;font-weight:800;letter-spacing:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.search:focus-within svg{
 
-.now-badges{display:flex;gap:8px;margin-left:auto}
-.badge{ padding:4px 8px;border-radius:6px; font-size:10px;font-weight:700;letter-spacing:1px; }
-.badge-live{background:var(--accent-glow);color:var(--accent);border:1px solid var(--border2);display:flex;align-items:center;gap:4px}
+    color:var(--blue-2);
 
-.video-wrap{ flex:1;background:#000;position:relative;overflow:hidden; z-index:5; display:flex; align-items:center; justify-content:center; }
-iframe, .plyr-container-box{ width:100%; height:100%; border:none; display:none; background:#000; }
-.vid-overlay{ position:absolute;inset:0; background: rgba(1, 3, 8, 0.95); z-index:10; }
-
-.plyr { height: 100% !important; width: 100% !important; }
-.plyr__video-wrapper { height: 100% !important; display: flex; align-items: center; justify-content: center; }
-.plyr video { object-fit: contain; }
-
-/* Yüklenme Ekranı */
-.skeleton-loader {
-  position: absolute; inset: 0;
-  background: rgba(6, 12, 28, 0.95);
-  z-index: 15;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 20px;
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.2s ease;
-}
-.skeleton-loader.active { opacity: 1; pointer-events: auto; }
-
-.glass-card {
-  width: min(85%, 480px);
-  padding: 30px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  display: flex; flex-direction: column; gap: 16px; align-items: center;
 }
 
-.skeleton-box {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-}
-.sk-logo { width: 64px; height: 64px; border-radius: 12px; }
-.sk-title { width: 60%; height: 20px; }
-.sk-subtitle { width: 40%; height: 12px; }
-.sk-bar { width: 100%; height: 6px; border-radius: 3px; margin-top: 10px; }
+.search input{
 
-/* ─── MOBİL UYUMLULUK ─── */
-@media(max-width:768px){
-  .layout{ grid-template-columns:1fr; grid-template-rows: auto 1fr; height: calc(100vh - 58px); }
-  .layout.theater-active { grid-template-columns: 1fr; grid-template-rows: calc(100vh - 58px) 0px; }
-  .ch-sidebar{ flex: 1; height: auto; max-height: none; border-right:none; order:2; position: relative; }
-  .layout.theater-active .ch-sidebar { transform: translateY(100%); max-height: 0px; opacity: 0; padding: 0; }
-  .player-area{ order:1; height: auto; }
-  nav{padding:0 14px}
-  .nav-logo{ width: auto; }
-  .nav-search{ max-width: 140px; margin: 0 0 0 auto; }
-  .nav-spacer { width: auto; }
+    width:100%;
+
+    outline:none;
+    border:0;
+
+    color:#fff;
+
+    background:transparent;
+
+    font-family:inherit;
+
+    font-size:10px;
+
 }
+
+.search input::placeholder{
+
+    color:#59687b;
+
+}
+
+/* =========================================================
+   LEAGUE BAR
+========================================================= */
+
+.league-nav{
+
+    position:sticky;
+
+    top:74px;
+
+    z-index:900;
+
+    border-bottom:
+        1px solid rgba(255,255,255,.055);
+
+    background:
+        rgba(4,8,14,.65);
+
+    backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:blur(20px);
+
+}
+
+.league-scroll{
+
+    width:min(
+        1480px,
+        calc(100% - 40px)
+    );
+
+    margin:auto;
+
+    padding:9px 0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    overflow-x:auto;
+
+    scrollbar-width:none;
+
+    cursor:grab;
+
+    user-select:none;
+
+    scroll-behavior:smooth;
+
+}
+
+.league-scroll::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+.league-scroll.dragging{
+
+    cursor:grabbing;
+
+    scroll-behavior:auto;
+
+}
+
+/* =========================================================
+   LEAGUE NAV ITEM
+========================================================= */
+
+.league-link{
+
+    position:relative;
+
+    flex:none;
+
+    height:47px;
+
+    min-width:max-content;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    padding:0 15px;
+
+    color:#77869a;
+
+    text-decoration:none;
+
+    border:
+        1px solid rgba(255,255,255,.065);
+
+    border-radius:13px;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.012)
+        );
+
+    transition:
+        .35s var(--ease);
+
+}
+
+.league-link::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            105deg,
+            transparent 20%,
+            rgba(255,255,255,.1) 48%,
+            transparent 75%
+        );
+
+    transform:
+        translateX(-130%);
+
+    transition:
+        .8s var(--ease);
+
+}
+
+.league-link:hover::before{
+
+    transform:
+        translateX(130%);
+
+}
+
+.league-link:hover,
+.league-link.active{
+
+    color:#fff;
+
+    border-color:
+        rgba(22,140,255,.32);
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(22,140,255,.1),
+            rgba(22,140,255,.025)
+        );
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.2),
+        0 0 25px rgba(22,140,255,.06);
+
+    transform:
+        translateY(-1px);
+
+}
+
+.league-link::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:15px;
+    right:15px;
+    bottom:0;
+
+    height:2px;
+
+    border-radius:10px;
+
+    background:var(--blue);
+
+    transform:
+        scaleX(0);
+
+    transform-origin:center;
+
+    transition:.3s;
+
+}
+
+.league-link.active::after{
+
+    transform:
+        scaleX(1);
+
+}
+
+.league-mini-logo{
+
+    position:relative;
+
+    z-index:2;
+
+    width:30px;
+    height:30px;
+
+    object-fit:contain;
+
+    filter:
+        drop-shadow(
+            0 5px 5px rgba(0,0,0,.5)
+        );
+
+    transition:
+        .45s var(--ease);
+
+}
+
+.league-link:hover .league-mini-logo{
+
+    transform:
+        scale(1.12)
+        rotate(-3deg);
+
+}
+
+.league-link span{
+
+    position:relative;
+
+    z-index:2;
+
+    font-size:10px;
+
+    font-weight:800;
+
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+.main{
+
+    width:min(
+        1480px,
+        calc(100% - 40px)
+    );
+
+    margin:
+        42px auto 0;
+
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.section-head{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    margin-bottom:20px;
+
+}
+
+.section-kicker{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-bottom:7px;
+
+    color:#617086;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:1.6px;
+
+    text-transform:uppercase;
+
+}
+
+.section-kicker i{
+
+    display:block;
+
+    width:6px;
+    height:6px;
+
+    border-radius:50%;
+
+    background:var(--blue);
+
+    box-shadow:
+        0 0 12px var(--blue);
+
+    animation:
+        pulse 1.7s ease-in-out infinite;
+
+}
+
+@keyframes pulse{
+
+    0%,100%{
+        opacity:.45;
+        transform:scale(.8);
+    }
+
+    50%{
+        opacity:1;
+        transform:scale(1.15);
+    }
+
+}
+
+.section-title{
+
+    color:#fff;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:43px;
+
+    font-weight:900;
+
+    line-height:.82;
+
+    letter-spacing:.2px;
+
+    text-transform:uppercase;
+
+}
+
+.section-title span{
+
+    color:var(--blue);
+
+    text-shadow:
+        0 0 25px rgba(22,140,255,.15);
+
+}
+
+.section-desc{
+
+    margin-top:9px;
+
+    color:#5d6d81;
+
+    font-size:10px;
+
+}
+
+.view-all{
+
+    color:#758499;
+
+    text-decoration:none;
+
+    font-size:9px;
+
+    font-weight:900;
+
+    transition:.3s;
+
+}
+
+.view-all:hover{
+
+    color:var(--blue-2);
+
+    transform:
+        translateX(4px);
+
+}
+
+/* =========================================================
+   MATCH GRID
+========================================================= */
+
+.matches{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:16px;
+
+}
+
+/* =========================================================
+   MODERN MATCH CARD
+========================================================= */
+
+.match-card{
+
+    --mx:50%;
+    --my:50%;
+
+    position:relative;
+
+    min-height:270px;
+
+    overflow:hidden;
+
+    border:
+        1px solid rgba(255,255,255,.075);
+
+    border-radius:23px;
+
+    background:
+
+        radial-gradient(
+            350px circle at var(--mx) var(--my),
+            rgba(22,140,255,.12),
+            transparent 42%
+        ),
+
+        linear-gradient(
+            145deg,
+            #101a26,
+            #070c13 72%
+        );
+
+    transform-style:preserve-3d;
+
+    will-change:
+        transform;
+
+    transition:
+        transform .45s var(--ease),
+        border-color .35s,
+        box-shadow .45s;
+
+}
+
+/* TOP LIGHT */
+
+.match-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 20%,
+            rgba(255,255,255,.075) 48%,
+            transparent 67%
+        );
+
+    transform:
+        translateX(-130%);
+
+    transition:
+        1s var(--ease);
+
+}
+
+.match-card:hover::before{
+
+    transform:
+        translateX(130%);
+
+}
+
+/* BORDER GLOW */
+
+.match-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:inherit;
+
+    pointer-events:none;
+
+    opacity:0;
+
+    background:
+        radial-gradient(
+            450px circle at var(--mx) var(--my),
+            rgba(22,140,255,.22),
+            transparent 38%
+        );
+
+    transition:.4s;
+
+}
+
+.match-card:hover::after{
+
+    opacity:1;
+
+}
+
+.match-card:hover{
+
+    border-color:
+        rgba(45,157,255,.32);
+
+    box-shadow:
+
+        0 30px 70px rgba(0,0,0,.5),
+
+        0 0 40px rgba(22,140,255,.06);
+
+}
+
+/* =========================================================
+   MATCH INNER
+========================================================= */
+
+.match-inner{
+
+    position:relative;
+
+    z-index:5;
+
+    min-height:270px;
+
+    padding:18px;
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+/* =========================================================
+   MATCH HEADER
+========================================================= */
+
+.match-top{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    color:#64748a;
+
+    font-size:9px;
+
+    font-weight:800;
+
+}
+
+.match-time{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+}
+
+.match-time-dot{
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#5c6c7f;
+
+}
+
+.status{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    color:#45aaff;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:.8px;
+
+}
+
+.status-dot{
+
+    width:5px;
+    height:5px;
+
+    border-radius:50%;
+
+    background:#2ba1ff;
+
+    box-shadow:
+        0 0 9px #168cff;
+
+    animation:
+        pulse 1.5s infinite;
+
+}
+
+/* =========================================================
+   MATCH CENTER
+========================================================= */
+
+.match-center{
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+.teams{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:18px;
+
+    margin-top:5px;
+
+}
+
+.team{
+
+    width:105px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.team-logo{
+
+    position:relative;
+
+    width:68px;
+    height:68px;
+
+    display:grid;
+
+    place-items:center;
+
+    color:#fff;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:15px;
+
+    font-weight:900;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    border-radius:20px;
+
+    background:
+
+        radial-gradient(
+            circle at 30% 20%,
+            #34475b,
+            #0b121b 70%
+        );
+
+    box-shadow:
+
+        0 15px 30px rgba(0,0,0,.4),
+
+        inset 0 1px 1px
+        rgba(255,255,255,.15);
+
+    transform:
+        translateZ(35px);
+
+    transition:
+        .5s var(--ease);
+
+}
+
+.team-logo::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:5px;
+
+    border-radius:15px;
+
+    border:
+        1px solid rgba(255,255,255,.045);
+
+}
+
+.match-card:hover .team-logo{
+
+    transform:
+        translateZ(70px)
+        translateY(-8px)
+        scale(1.08);
+
+    box-shadow:
+
+        0 24px 38px rgba(0,0,0,.5),
+
+        0 0 25px rgba(22,140,255,.08);
+
+}
+
+.team-name{
+
+    color:#d1d9e3;
+
+    text-align:center;
+
+    font-size:9px;
+
+    font-weight:800;
+
+    line-height:1.3;
+
+}
+
+.vs{
+
+    width:27px;
+    height:27px;
+
+    display:grid;
+
+    place-items:center;
+
+    color:#617085;
+
+    border:
+        1px solid rgba(255,255,255,.07);
+
+    border-radius:50%;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-size:7px;
+
+    font-weight:900;
+
+}
+
+/* =========================================================
+   SCORE / DATE STRIP
+========================================================= */
+
+.match-meta{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-top:17px;
+
+}
+
+.meta-pill{
+
+    padding:7px 11px;
+
+    color:#6f7e91;
+
+    border:
+        1px solid rgba(255,255,255,.06);
+
+    border-radius:8px;
+
+    background:
+        rgba(255,255,255,.025);
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+/* =========================================================
+   MATCH FOOTER
+========================================================= */
+
+.match-bottom{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding-top:14px;
+
+    border-top:
+        1px solid rgba(255,255,255,.055);
+
+}
+
+.match-league{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:#78879a;
+
+    font-size:8px;
+
+    font-weight:800;
+
+}
+
+.match-league-icon{
+
+    width:19px;
+    height:19px;
+
+    object-fit:contain;
+
+}
+
+.watch-btn{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:8px 12px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    overflow:hidden;
+
+    border:
+        1px solid rgba(75,176,255,.25);
+
+    border-radius:9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #178fff,
+            #0d66be
+        );
+
+    box-shadow:
+        0 8px 22px rgba(22,140,255,.18);
+
+    font-size:8px;
+
+    font-weight:900;
+
+    transition:
+        .3s var(--ease);
+
+}
+
+.watch-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            100deg,
+            transparent,
+            rgba(255,255,255,.3),
+            transparent
+        );
+
+    transform:
+        translateX(-130%);
+
+    transition:.6s;
+
+}
+
+.watch-btn:hover::before{
+
+    transform:
+        translateX(130%);
+
+}
+
+.watch-btn:hover{
+
+    transform:
+        translateY(-3px);
+
+    box-shadow:
+        0 13px 30px rgba(22,140,255,.3);
+
+}
+
+/* =========================================================
+   POPULAR LEAGUES
+========================================================= */
+
+.leagues-section{
+
+    margin-top:72px;
+
+}
+
+/* =========================================================
+   LEAGUE GRID
+========================================================= */
+
+.leagues{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:18px;
+
+}
+
+/* =========================================================
+   LEAGUE CARD
+========================================================= */
+
+.league-card{
+
+    --league:#168cff;
+
+    position:relative;
+
+    min-height:320px;
+
+    overflow:hidden;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    border:
+        1px solid rgba(255,255,255,.075);
+
+    border-radius:25px;
+
+    background:
+
+        radial-gradient(
+            400px circle at 78% 15%,
+            color-mix(
+                in srgb,
+                var(--league) 22%,
+                transparent
+            ),
+            transparent 45%
+        ),
+
+        linear-gradient(
+            145deg,
+            #101b28,
+            #060b12 75%
+        );
+
+    transform-style:preserve-3d;
+
+    transition:
+        transform .5s var(--ease),
+        border-color .4s,
+        box-shadow .5s;
+
+    will-change:
+        transform;
+
+}
+
+/* LARGE GLOW */
+
+.league-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:330px;
+    height:330px;
+
+    top:-190px;
+    right:-130px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            var(--league),
+            transparent 68%
+        );
+
+    opacity:.16;
+
+    filter:blur(8px);
+
+    transition:
+        .7s var(--ease);
+
+}
+
+.league-card:hover::before{
+
+    opacity:.32;
+
+    transform:
+        scale(1.35);
+
+}
+
+/* LIGHT SWEEP */
+
+.league-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    inset:-100%;
+
+    z-index:20;
+
+    pointer-events:none;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 44%,
+            rgba(255,255,255,.11) 50%,
+            transparent 56%
+        );
+
+    transform:
+        translateX(-55%)
+        rotate(10deg);
+
+    transition:
+        1.1s var(--ease);
+
+}
+
+.league-card:hover::after{
+
+    transform:
+        translateX(55%)
+        rotate(10deg);
+
+}
+
+/* =========================================================
+   LEAGUE PATTERN
+========================================================= */
+
+.league-pattern{
+
+    position:absolute;
+
+    inset:-80px;
+
+    opacity:.075;
+
+    background:
+
+        linear-gradient(
+            135deg,
+            transparent 44%,
+            var(--league) 49%,
+            transparent 54%
+        );
+
+    background-size:
+        75px 75px;
+
+    transform:
+        rotate(-8deg)
+        scale(1.4)
+        translateZ(10px);
+
+    transition:
+        .8s var(--ease);
+
+}
+
+.league-card:hover .league-pattern{
+
+    opacity:.13;
+
+    transform:
+        rotate(-2deg)
+        scale(1.65)
+        translateZ(25px);
+
+}
+
+/* =========================================================
+   LEAGUE TOP LINE
+========================================================= */
+
+.league-line{
+
+    position:absolute;
+
+    left:22px;
+    right:22px;
+    top:18px;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            color-mix(
+                in srgb,
+                var(--league) 70%,
+                transparent
+            ),
+            transparent
+        );
+
+    opacity:.7;
+
+}
+
+/* =========================================================
+   LEAGUE LOGO
+========================================================= */
+
+.league-logo-wrap{
+
+    position:absolute;
+
+    top:25px;
+    right:22px;
+
+    width:160px;
+    height:160px;
+
+    display:grid;
+
+    place-items:center;
+
+    transform:
+        translateZ(55px)
+        rotate(-3deg);
+
+    transition:
+        .65s var(--ease);
+
+}
+
+.league-card:hover .league-logo-wrap{
+
+    transform:
+        translateZ(100px)
+        translateY(-12px)
+        scale(1.1)
+        rotate(3deg);
+
+}
+
+.league-logo{
+
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    filter:
+
+        drop-shadow(
+            0 22px 20px rgba(0,0,0,.58)
+        )
+
+        drop-shadow(
+            0 0 20px
+            color-mix(
+                in srgb,
+                var(--league) 24%,
+                transparent
+            )
+        );
+
+    transition:
+        .5s var(--ease);
+
+}
+
+.league-card:hover .league-logo{
+
+    filter:
+
+        drop-shadow(
+            0 28px 25px rgba(0,0,0,.65)
+        )
+
+        drop-shadow(
+            0 0 34px
+            color-mix(
+                in srgb,
+                var(--league) 42%,
+                transparent
+            )
+        );
+
+}
+
+/* =========================================================
+   LEAGUE CONTENT
+========================================================= */
+
+.league-content{
+
+    position:relative;
+
+    z-index:30;
+
+    min-height:320px;
+
+    padding:22px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+    transform-style:preserve-3d;
+
+}
+
+.league-number{
+
+    position:absolute;
+
+    top:22px;
+    left:22px;
+
+    color:#536276;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:13px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+
+    transform:
+        translateZ(30px);
+
+}
+
+.league-country{
+
+    margin-bottom:8px;
+
+    color:
+        color-mix(
+            in srgb,
+            var(--league) 80%,
+            white
+        );
+
+    font-size:8px;
+
+    font-weight:900;
+
+    letter-spacing:1.8px;
+
+    transform:
+        translateZ(30px);
+
+}
+
+.league-title{
+
+    max-width:235px;
+
+    color:#fff;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:37px;
+
+    font-weight:900;
+
+    line-height:.82;
+
+    text-transform:uppercase;
+
+    transform:
+        translateZ(35px);
+
+}
+
+.league-info{
+
+    max-width:230px;
+
+    margin-top:11px;
+
+    color:#718095;
+
+    font-size:9px;
+
+    line-height:1.45;
+
+    transform:
+        translateZ(25px);
+
+}
+
+.league-action{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:17px;
+
+    color:#9aa7b8;
+
+    font-size:8px;
+
+    font-weight:900;
+
+    transform:
+        translateZ(30px);
+
+    transition:.3s;
+
+}
+
+.league-action-arrow{
+
+    width:24px;
+    height:24px;
+
+    display:grid;
+
+    place-items:center;
+
+    color:#fff;
+
+    border:
+        1px solid rgba(255,255,255,.08);
+
+    border-radius:7px;
+
+    background:
+        rgba(255,255,255,.035);
+
+    transition:.35s var(--ease);
+
+}
+
+.league-card:hover .league-action{
+
+    color:#fff;
+
+}
+
+.league-card:hover .league-action-arrow{
+
+    background:
+        var(--league);
+
+    border-color:
+        var(--league);
+
+    transform:
+        translateX(5px);
+
+    box-shadow:
+        0 0 18px
+        color-mix(
+            in srgb,
+            var(--league) 35%,
+            transparent
+        );
+
+}
+
+/* =========================================================
+   LEAGUE COLORS
+========================================================= */
+
+.premier{
+    --league:#8d45d8;
+}
+
+.laliga{
+    --league:#f04a35;
+}
+
+.seriea{
+    --league:#168cff;
+}
+
+.bundesliga{
+    --league:#e51d35;
+}
+
+.ligue1{
+    --league:#159fe9;
+}
+
+.superlig{
+    --league:#e21d39;
+}
+
+.champions{
+    --league:#396cff;
+}
+
+.europa{
+    --league:#ff7519;
+}
+
+.conference{
+    --league:#19ba89;
+}
+
+.eredivisie{
+    --league:#ef5c20;
+}
+
+.primeira{
+    --league:#1bb779;
+}
+
+.saudipro{
+    --league:#32d59e;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.footer{
+
+    width:min(
+        1480px,
+        calc(100% - 40px)
+    );
+
+    margin:
+        80px auto 25px;
+
+    padding-top:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    border-top:
+        1px solid rgba(255,255,255,.055);
+
+    color:#4f5d70;
+
+    font-size:8px;
+
+}
+
+.footer-logo{
+
+    color:#8492a4;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:25px;
+
+    font-weight:900;
+
+    letter-spacing:1.5px;
+
+}
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+        translateY(35px)
+        scale(.98);
+
+    transition:
+        opacity .8s var(--ease),
+        transform .8s var(--ease);
+
+}
+
+.reveal.visible{
+
+    opacity:1;
+
+    transform:
+        translateY(0)
+        scale(1);
+
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1150px){
+
+    .matches,
+    .leagues{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
+}
+
+@media(max-width:760px){
+
+    .header{
+
+        height:62px;
+
+    }
+
+    .header-inner{
+
+        width:
+            calc(100% - 24px);
+
+        gap:12px;
+
+    }
+
+    .logo{
+
+        font-size:33px;
+
+    }
+
+    .logo::before{
+
+        display:none;
+
+    }
+
+    .main-nav{
+
+        display:none;
+
+    }
+
+    .search{
+
+        width:170px;
+
+        height:38px;
+
+        margin-left:auto;
+
+    }
+
+    .search:focus-within{
+
+        width:170px;
+
+    }
+
+    .league-nav{
+
+        top:62px;
+
+    }
+
+    .league-scroll{
+
+        width:
+            calc(100% - 24px);
+
+    }
+
+    .main{
+
+        width:
+            calc(100% - 24px);
+
+        margin-top:30px;
+
+    }
+
+    .section-title{
+
+        font-size:34px;
+
+    }
+
+    .section-desc{
+
+        font-size:9px;
+
+    }
+
+    .matches{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .match-card{
+
+        min-height:250px;
+
+    }
+
+    .match-inner{
+
+        min-height:250px;
+
+    }
+
+    .leagues{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+        gap:10px;
+
+    }
+
+    .league-card{
+
+        min-height:245px;
+
+        border-radius:19px;
+
+    }
+
+    .league-content{
+
+        min-height:245px;
+
+        padding:16px;
+
+    }
+
+    .league-logo-wrap{
+
+        width:105px;
+        height:105px;
+
+        top:16px;
+        right:9px;
+
+    }
+
+    .league-title{
+
+        max-width:150px;
+
+        font-size:26px;
+
+    }
+
+    .league-info{
+
+        max-width:145px;
+
+        font-size:8px;
+
+    }
+
+    .league-number{
+
+        top:16px;
+        left:16px;
+
+    }
+
+    .league-country{
+
+        font-size:7px;
+
+    }
+
+    .league-action{
+
+        margin-top:12px;
+
+        font-size:7px;
+
+    }
+
+    .footer{
+
+        width:
+            calc(100% - 24px);
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:10px;
+
+    }
+
+}
+
+@media(max-width:400px){
+
+    .search{
+
+        width:135px;
+
+    }
+
+    .search:focus-within{
+
+        width:135px;
+
+    }
+
+    .leagues{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+
+        animation:none!important;
+
+        transition:none!important;
+
+        scroll-behavior:auto!important;
+
+    }
+
+}
+
 </style>
 </head>
+
+
 <body>
 
-<div class="liquid-bg"></div>
 
-<nav>
-  <div class="nav-logo">
-    <img src="https://resmim.net/cdn/2026/08/26/Ex1rvD.png" alt="CREX Logo" />
-  </div>
-  <div class="nav-search">
-    <span class="search-icon">🔍</span>
-    <input type="text" placeholder="Kanal ara..." id="searchInput" oninput="filterChannels(this.value)"/>
-  </div>
-  <div class="nav-spacer"></div> 
-</nav>
+<div class="ambient"></div>
 
-<div class="layout" id="mainLayout">
 
-  <div class="ch-sidebar">
-    <div class="domain-alert">
-      <div class="domain-alert-text">
-        <span class="domain-icon">📢</span>
-        <div>
-          Bir sonraki alan adımız <span class="domain-link" onclick="window.open('https:crex2.vercel.app', '_blank')">crex2.vercel.app</span> olacaktır.
-        </div>
-      </div>
-    </div>
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
-    <div class="main-tabs-wrap">
-      <button class="main-tab-btn active" id="tabChannelsBtn" onclick="switchMainTab('channels')">📺 Kanallar</button>
-      <button class="main-tab-btn" id="tabMatchesBtn" onclick="switchMainTab('matches')">⚽ Maçlar</button>
-    </div>
+<header class="header">
 
-    <div class="country-filter-wrap" id="countryFilters"></div>
-    <div class="ch-list" id="chList"></div>
-    
-    <div class="adv-panel">
-      <a href="mailto:crexproton@proton.me?subject=Reklam%20Basvurusu" class="adv-link">
-        <div class="adv-box">
-          Buraya Reklam Verebilirsiniz
-        </div>
-      </a>
-    </div>
-  </div>
+    <div class="header-inner">
 
-  <div class="player-area">
-    <div class="now-header">
-      <div class="now-logo" id="nowLogo"></div>
-      <div class="now-info">
-        <div class="now-ch-name" id="nowName"></div>
-        <button class="btn-theater" id="theaterBtn" onclick="toggleTheaterMode()" style="display:none;">
-          <span>⛶</span><span class="btn-text">Tam Ekran</span>
-        </button>
-      </div>
-      <div class="now-badges">
-        <div class="badge badge-live"><div class="live-dot"></div>CANLI</div>
-      </div>
-    </div>
+        <a
+            href="index.html"
+            class="logo">
+            CR<span>EX</span>
+        </a>
 
-    <div class="content-body-flex">
-      <div class="video-main-container" id="videoWrap">
-        <div class="vid-overlay" id="vidOverlay"></div>
-        
-        <div class="skeleton-loader" id="skeletonLoader">
-          <div class="glass-card">
-            <div class="skeleton-box sk-logo"></div>
-            <div class="skeleton-box sk-title"></div>
-            <div class="skeleton-box sk-subtitle"></div>
-            <div class="skeleton-box sk-bar"></div>
-          </div>
+
+        <nav class="main-nav">
+
+            <a
+                href="index.html"
+                class="active">
+                ANA SAYFA
+            </a>
+
+            <a href="#matches">
+                SON EKLENENLER
+            </a>
+
+            <a href="#leagues">
+                LİGLER
+            </a>
+
+        </nav>
+
+
+        <div class="search">
+
+            <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2">
+
+                <circle
+                    cx="11"
+                    cy="11"
+                    r="7">
+                </circle>
+
+                <path
+                    d="m20 20-4-4">
+                </path>
+
+            </svg>
+
+            <input
+                id="searchInput"
+                type="search"
+                autocomplete="off"
+                placeholder="Maç veya lig ara...">
+
         </div>
 
-        <iframe id="embedPlayer" src="" allowfullscreen allow="autoplay; encrypted-media"></iframe>
-        
-        <div id="plyrWrapper" class="plyr-container-box">
-          <video id="hlsPlayer" controls autoplay playsinline></video>
-        </div>
-      </div>
     </div>
 
-  </div>
+</header>
+
+
+<!-- =======================================================
+     LEAGUE NAV
+======================================================= -->
+
+<div class="league-nav">
+
+    <div
+        class="league-scroll"
+        id="leagueScroll">
+
+
+        <a
+            href="lig.html?lig=premier-league"
+            class="league-link active">
+
+            <img
+                class="league-mini-logo"
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/UK_Premier_League_logo.png"
+                alt="Premier League">
+
+            <span>Premier League</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=la-liga"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/LaLiga_2023_Vertical_Logo.svg"
+                alt="La Liga">
+
+            <span>La Liga</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=serie-a"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Serie_A_logo_2022.svg"
+                alt="Serie A">
+
+            <span>Serie A</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=bundesliga"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Bundesliga_Wordmark_(2010-2017).svg"
+                alt="Bundesliga">
+
+            <span>Bundesliga</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=ligue-1"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Ligue_1_McDonald's_logo.svg"
+                alt="Ligue 1">
+
+            <span>Ligue 1</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=super-lig"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/TFF_1._Lig_logo.svg/320px-TFF_1._Lig_logo.svg.png"
+                alt="Süper Lig">
+
+            <span>Süper Lig</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=champions-league"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA_Champions_League_logo.png"
+                alt="Champions League">
+
+            <span>Champions League</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=europa-league"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/UEFA_Europa_League_logo.svg/320px-UEFA_Europa_League_logo.svg.png"
+                alt="Europa League">
+
+            <span>Europa League</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=conference-league"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/UEFA_Europa_Conference_League_logo.svg/320px-UEFA_Europa_Conference_League_logo.svg.png"
+                alt="Conference League">
+
+            <span>Conference League</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=eredivisie"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Eredivisie_nieuw_logo_2017-.svg"
+                alt="Eredivisie">
+
+            <span>Eredivisie</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=primeira-liga"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Liga_Portugal_logo.svg/320px-Liga_Portugal_logo.svg.png"
+                alt="Primeira Liga">
+
+            <span>Primeira Liga</span>
+
+        </a>
+
+
+        <a
+            href="lig.html?lig=saudi-pro-league"
+            class="league-link">
+
+            <img
+                class="league-mini-logo"
+                src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Saudi_Pro_League_Logo.svg"
+                alt="Saudi Pro League">
+
+            <span>Saudi Pro League</span>
+
+        </a>
+
+
+    </div>
 
 </div>
 
+
+<!-- =======================================================
+     MAIN
+======================================================= -->
+
+<main class="main">
+
+
+    <!-- ===================================================
+         MATCHES
+    =================================================== -->
+
+    <section
+        id="matches"
+        class="reveal">
+
+        <div class="section-head">
+
+            <div>
+
+                <div class="section-kicker">
+                    <i></i>
+                    Güncel içerikler
+                </div>
+
+                <div class="section-title">
+                    Son <span>Eklenenler</span>
+                </div>
+
+                <div class="section-desc">
+                    Platforma en son eklenen karşılaşmalar
+                </div>
+
+            </div>
+
+
+            <a
+                href="#matches"
+                class="view-all">
+                TÜM MAÇLAR →
+            </a>
+
+        </div>
+
+
+        <div
+            class="matches"
+            id="matchGrid">
+
+
+            <!-- =================================================
+                 MATCH 1
+            ================================================= -->
+
+            <article
+                class="match-card"
+                data-search="
+                    Manchester City
+                    Arsenal
+                    Premier League
+                ">
+
+                <div class="match-inner">
+
+                    <div class="match-top">
+
+                        <div class="match-time">
+
+                            <span class="match-time-dot"></span>
+
+                            Bugün • 20:00
+
+                        </div>
+
+                        <div class="status">
+
+                            <span class="status-dot"></span>
+
+                            YENİ
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-center">
+
+                        <div class="teams">
+
+                            <div class="team">
+
+                                <div class="team-logo">
+                                    MCI
+                                </div>
+
+                                <div class="team-name">
+                                    Manchester City
+                                </div>
+
+                            </div>
+
+
+                            <div class="vs">
+                                VS
+                            </div>
+
+
+                            <div class="team">
+
+                                <div class="team-logo">
+                                    ARS
+                                </div>
+
+                                <div class="team-name">
+                                    Arsenal
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="match-meta">
+
+                            <div class="meta-pill">
+                                90 DAKİKA
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-bottom">
+
+                        <div class="match-league">
+
+                            <span>
+                                Premier League
+                            </span>
+
+                        </div>
+
+
+                        <a
+                            href="mac.html?id=1"
+                            class="watch-btn">
+
+                            İZLE
+
+                            <span>→</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 MATCH 2
+            ================================================= -->
+
+            <article
+                class="match-card"
+                data-search="
+                    Real Madrid
+                    Barcelona
+                    La Liga
+                ">
+
+                <div class="match-inner">
+
+                    <div class="match-top">
+
+                        <div class="match-time">
+
+                            <span class="match-time-dot"></span>
+
+                            Bugün • 22:00
+
+                        </div>
+
+                        <div class="status">
+
+                            <span class="status-dot"></span>
+
+                            YENİ
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-center">
+
+                        <div class="teams">
+
+                            <div class="team">
+
+                                <div class="team-logo">
+                                    RMA
+                                </div>
+
+                                <div class="team-name">
+                                    Real Madrid
+                                </div>
+
+                            </div>
+
+
+                            <div class="vs">
+                                VS
+                            </div>
+
+
+                            <div class="team">
+
+                                <div class="team-logo">
+                                    BAR
+                                </div>
+
+                                <div class="team-name">
+                                    Barcelona
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="match-meta">
+
+                            <div class="meta-pill">
+                                90 DAKİKA
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-bottom">
+
+                        <div class="match-league">
+                            La Liga
+                        </div>
+
+                        <a
+                            href="mac.html?id=2"
+                            class="watch-btn">
+
+                            İZLE
+
+                            <span>→</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 MATCH 3
+            ================================================= -->
+
+            <article
+                class="match-card"
+                data-search="
+                    Inter
+                    Juventus
+                    Serie A
+                ">
+
+                <div class="match-inner">
+
+                    <div class="match-top">
+
+                        <div class="match-time">
+
+                            <span class="match-time-dot"></span>
+
+                            Dün • 21:45
+
+                        </div>
+
+                        <div class="status">
+
+                            <span class="status-dot"></span>
+
+                            YENİ
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-center">
+
+                        <div class="teams">
+
+                            <div class="team">
+
+                                <div class="team-logo">
+                                    INT
+                                </div>
+
+                                <div class="team-name">
+                                    Inter
+                                </div>
+
+                            </div>
+
+
+                            <div class="vs">
+                                VS
+                            </div>
+
+
+                            <div class="team">
+
+                                <div class="team-logo">
+                                    JUV
+                                </div>
+
+                                <div class="team-name">
+                                    Juventus
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="match-meta">
+
+                            <div class="meta-pill">
+                                90 DAKİKA
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-bottom">
+
+                        <div class="match-league">
+                            Serie A
+                        </div>
+
+                        <a
+                            href="mac.html?id=3"
+                            class="watch-btn">
+
+                            İZLE
+
+                            <span>→</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+            <!-- =================================================
+                 MATCH 4
+            ================================================= -->
+
+            <article
+                class="match-card"
+                data-search="
+                    Bayern Munich
+                    Dortmund
+                    Bundesliga
+                ">
+
+                <div class="match-inner">
+
+                    <div class="match-top">
+
+                        <div class="match-time">
+
+                            <span class="match-time-dot"></span>
+
+                            Dün • 19:30
+
+                        </div>
+
+                        <div class="status">
+
+                            <span class="status-dot"></span>
+
+                            YENİ
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-center">
+
+                        <div class="teams">
+
+                            <div class="team">
+
+                                <div class="team-logo">
+                                    FCB
+                                </div>
+
+                                <div class="team-name">
+                                    Bayern Munich
+                                </div>
+
+                            </div>
+
+
+                            <div class="vs">
+                                VS
+                            </div>
+
+
+                            <div class="team">
+
+                                <div class="team-logo">
+                                    BVB
+                                </div>
+
+                                <div class="team-name">
+                                    Dortmund
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="match-meta">
+
+                            <div class="meta-pill">
+                                90 DAKİKA
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="match-bottom">
+
+                        <div class="match-league">
+                            Bundesliga
+                        </div>
+
+                        <a
+                            href="mac.html?id=4"
+                            class="watch-btn">
+
+                            İZLE
+
+                            <span>→</span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         LEAGUES
+    =================================================== -->
+
+    <section
+        id="leagues"
+        class="leagues-section reveal">
+
+
+        <div class="section-head">
+
+            <div>
+
+                <div class="section-kicker">
+                    <i></i>
+                    Dünyanın en popüler ligleri
+                </div>
+
+                <div class="section-title">
+                    Popüler <span>Ligler</span>
+                </div>
+
+                <div class="section-desc">
+                    Bir lige dokun ve karşılaşmaları keşfet
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="leagues">
+
+
+            <!-- =================================================
+                 PREMIER LEAGUE
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=premier-league"
+                class="league-card premier">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    01
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/UK_Premier_League_logo.png"
+                        alt="Premier League"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        ENGLAND
+                    </div>
+
+                    <div class="league-title">
+                        Premier<br>
+                        League
+                    </div>
+
+                    <div class="league-info">
+                        İngiltere'nin en üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 LA LIGA
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=la-liga"
+                class="league-card laliga">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    02
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/LaLiga_2023_Vertical_Logo.svg"
+                        alt="La Liga"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        SPAIN
+                    </div>
+
+                    <div class="league-title">
+                        La<br>
+                        Liga
+                    </div>
+
+                    <div class="league-info">
+                        İspanya'nın en üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 SERIE A
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=serie-a"
+                class="league-card seriea">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    03
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Serie_A_logo_2022.svg"
+                        alt="Serie A"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        ITALY
+                    </div>
+
+                    <div class="league-title">
+                        Serie<br>
+                        A
+                    </div>
+
+                    <div class="league-info">
+                        İtalya'nın en üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 BUNDESLIGA
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=bundesliga"
+                class="league-card bundesliga">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    04
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Bundesliga_Wordmark_(2010-2017).svg"
+                        alt="Bundesliga"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        GERMANY
+                    </div>
+
+                    <div class="league-title">
+                        Bundes<br>
+                        liga
+                    </div>
+
+                    <div class="league-info">
+                        Almanya'nın en üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 LIGUE 1
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=ligue-1"
+                class="league-card ligue1">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    05
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Ligue_1_McDonald's_logo.svg"
+                        alt="Ligue 1"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        FRANCE
+                    </div>
+
+                    <div class="league-title">
+                        Ligue<br>
+                        1
+                    </div>
+
+                    <div class="league-info">
+                        Fransa'nın en üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 SUPER LIG
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=super-lig"
+                class="league-card superlig">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    06
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/TFF_1._Lig_logo.svg/320px-TFF_1._Lig_logo.svg.png"
+                        alt="Süper Lig"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        TÜRKİYE
+                    </div>
+
+                    <div class="league-title">
+                        Süper<br>
+                        Lig
+                    </div>
+
+                    <div class="league-info">
+                        Türkiye'nin en üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 CHAMPIONS LEAGUE
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=champions-league"
+                class="league-card champions">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    07
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA_Champions_League_logo.png"
+                        alt="Champions League"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        UEFA
+                    </div>
+
+                    <div class="league-title">
+                        Champions<br>
+                        League
+                    </div>
+
+                    <div class="league-info">
+                        Avrupa'nın en prestijli kulüp turnuvası.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 EUROPA
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=europa-league"
+                class="league-card europa">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    08
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/UEFA_Europa_League_logo.svg/320px-UEFA_Europa_League_logo.svg.png"
+                        alt="Europa League"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        UEFA
+                    </div>
+
+                    <div class="league-title">
+                        Europa<br>
+                        League
+                    </div>
+
+                    <div class="league-info">
+                        UEFA Avrupa Ligi karşılaşmaları.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 CONFERENCE
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=conference-league"
+                class="league-card conference">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    09
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/UEFA_Europa_Conference_League_logo.svg/320px-UEFA_Europa_Conference_League_logo.svg.png"
+                        alt="Conference League"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        UEFA
+                    </div>
+
+                    <div class="league-title">
+                        Conference<br>
+                        League
+                    </div>
+
+                    <div class="league-info">
+                        UEFA Konferans Ligi karşılaşmaları.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 EREDIVISIE
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=eredivisie"
+                class="league-card eredivisie">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    10
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Eredivisie_nieuw_logo_2017-.svg"
+                        alt="Eredivisie"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        NETHERLANDS
+                    </div>
+
+                    <div class="league-title">
+                        Ere<br>
+                        divisie
+                    </div>
+
+                    <div class="league-info">
+                        Hollanda'nın üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 PRIMEIRA
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=primeira-liga"
+                class="league-card primeira">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    11
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/Liga_Portugal_logo.svg/320px-Liga_Portugal_logo.svg.png"
+                        alt="Primeira Liga"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        PORTUGAL
+                    </div>
+
+                    <div class="league-title">
+                        Primeira<br>
+                        Liga
+                    </div>
+
+                    <div class="league-info">
+                        Portekiz'in üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+            <!-- =================================================
+                 SAUDI PRO
+            ================================================= -->
+
+            <a
+                href="lig.html?lig=saudi-pro-league"
+                class="league-card saudipro">
+
+                <div class="league-line"></div>
+
+                <div class="league-pattern"></div>
+
+                <div class="league-number">
+                    12
+                </div>
+
+                <div class="league-logo-wrap">
+
+                    <img
+                        class="league-logo"
+                        src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Saudi_Pro_League_Logo.svg"
+                        alt="Saudi Pro League"
+                        loading="lazy">
+
+                </div>
+
+
+                <div class="league-content">
+
+                    <div class="league-country">
+                        SAUDI ARABIA
+                    </div>
+
+                    <div class="league-title">
+                        Saudi Pro<br>
+                        League
+                    </div>
+
+                    <div class="league-info">
+                        Suudi Arabistan'ın üst düzey futbol ligi.
+                    </div>
+
+                    <div class="league-action">
+
+                        LİGE GİT
+
+                        <span class="league-action-arrow">
+                            →
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+
+        </div>
+
+    </section>
+
+
+</main>
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+        CREX
+    </div>
+
+    <div>
+        © 2026 CREX
+    </div>
+
+</footer>
+
+
 <script>
-let hlsInstance = null;
-let selectedChannelObj = null;
-let plyrInstance = null;
 
-function initPlyr() {
-  if (!plyrInstance) {
-    plyrInstance = new Plyr('#hlsPlayer', {
-      controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'fullscreen'],
-      tooltips: { controls: true, seek: true }
-    });
-  }
-}
+/* =========================================================
+   SEARCH
+========================================================= */
 
-function switchMainTab(tab) {
-  activeTab = tab;
-  document.getElementById('tabChannelsBtn').classList.toggle('active', tab === 'channels');
-  document.getElementById('tabMatchesBtn').classList.toggle('active', tab === 'matches');
-  
-  const countryFilters = document.getElementById('countryFilters');
-  const searchInput = document.getElementById('searchInput');
+const searchInput =
+    document.getElementById("searchInput");
 
-  if (tab === 'matches') {
-    countryFilters.style.display = 'none';
-    if(searchInput) searchInput.parentElement.style.display = 'none';
-    renderMatchesList();
-  } else {
-    countryFilters.style.display = 'flex';
-    if(searchInput) searchInput.parentElement.style.display = 'flex';
-    renderCountryFilters();
-    renderList();
-  }
-}
+const matchCards =
+    [...document.querySelectorAll(".match-card")];
 
-function renderCountryFilters() {
-  const container = document.getElementById('countryFilters');
-  container.innerHTML = '';
-  const fragment = document.createDocumentFragment();
-  countries.forEach(country => {
-    const btn = document.createElement('button');
-    btn.className = `country-btn ${currentCategory === country.code ? 'active' : ''}`;
-    btn.innerHTML = `<span class="flag-icon">${country.flag}</span> ${country.name}`;
-    btn.onclick = () => {
-      currentCategory = country.code;
-      renderCountryFilters();
-      renderList();
-    };
-    fragment.appendChild(btn);
-  });
-  container.appendChild(fragment);
-}
+searchInput.addEventListener(
+    "input",
+    function(){
 
-function renderMatchesList() {
-  const list = document.getElementById('chList');
-  list.innerHTML = '';
-  const fragment = document.createDocumentFragment();
-  
-  dailyMatchesByDate.forEach(group => {
-    const dateHeader = document.createElement('div');
-    dateHeader.className = 'date-group-header';
-    dateHeader.textContent = group.date;
-    fragment.appendChild(dateHeader);
+        const query =
+            this.value
+                .toLocaleLowerCase("tr-TR")
+                .trim();
 
-    group.matches.forEach(match => {
-      if (match.league) {
-        const leagueHeader = document.createElement('div');
-        leagueHeader.className = 'league-group-header';
-        leagueHeader.textContent = match.league;
-        fragment.appendChild(leagueHeader);
-      }
+        matchCards.forEach(card=>{
 
-      const card = document.createElement('div');
-      
-      // Eğer Kura Çekimi ise özel 3D ve Güneş Sistemi sınıfını verelim
-      if (match.isUclDraw) {
-        card.className = 'match-card ucl-3d-card';
-      } else {
-        card.className = 'match-card';
-      }
+            const text =
+                card.dataset.search
+                    .toLocaleLowerCase("tr-TR");
 
-      let firstChannelId = (match.channelIds && match.channelIds.length > 0) ? match.channelIds[0] : null;
+            if(
+                !query ||
+                text.includes(query)
+            ){
 
-      let cardHtml = '';
-      if (match.isUclDraw) {
-        // Güneş Sistemi (Şampiyonlar Ligi Güneş, GS ve FB Gezegenler)
-        cardHtml = `
-          <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat" style="flex-direction: column; align-items: center; padding: 2px 0;">
-            <div class="solar-system-container">
-              <div class="orbit-path"></div>
-              <img src="${match.homeLogo}" class="sun-center" onerror="this.src='${fallbackLogo}'"/>
-              <img src="${match.gsLogo}" class="planet-logo planet-gs" onerror="this.src='${fallbackLogo}'"/>
-              <img src="${match.fbLogo}" class="planet-logo planet-fb" onerror="this.src='${fallbackLogo}'"/>
-            </div>
-            <div style="text-align: center; margin-top: 2px;">
-              <span class="match-time">${match.time}</span>
-            </div>
-          </div>
-        `;
-      } else if (match.awayTeam) {
-        cardHtml = `
-          <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat">
-            <div class="match-team-side">
-              ${match.homeLogo ? `<img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>` : ''}
-              <span class="match-team-name">${match.homeTeam}</span>
-            </div>
-            <div class="match-center-info">
-              <span class="match-time">${match.time}</span>
-              <span class="match-vs">VS</span>
-            </div>
-            <div class="match-team-side right">
-              <span class="match-team-name">${match.awayTeam}</span>
-              ${match.awayLogo ? `<img src="${match.awayLogo}" alt="${match.awayTeam}" class="match-team-logo" onerror="this.src='${fallbackLogo}'"/>` : ''}
-            </div>
-          </div>
-        `;
-      } else {
-        cardHtml = `
-          <div class="match-main-row" ${firstChannelId ? `onclick="playMatchChannel(${firstChannelId})"` : ''} title="Yayını Başlat" style="justify-content: center; gap: 12px;">
-            ${match.homeLogo ? `<img src="${match.homeLogo}" alt="${match.homeTeam}" class="match-team-logo" style="width: 24px; height: 24px;" onerror="this.src='${fallbackLogo}'"/>` : ''}
-            <div style="display: flex; flex-direction: column; align-items: center;">
-              <span class="match-time" style="margin-bottom: 2px;">${match.time}</span>
-              <span class="match-team-name" style="font-size: 13px;">${match.homeTeam}</span>
-            </div>
-          </div>
-        `;
-      }
+                card.style.display="";
 
-      if (match.channelIds && match.channelIds.length > 0) {
-        cardHtml += `<div class="match-alternatives">`;
-        match.channelIds.forEach((chId, index) => {
-          const foundCh = channels.find(c => c.id === chId);
-          const btnLabel = foundCh ? foundCh.name : `Alternatif ${index + 1}`;
-          cardHtml += `<button class="alt-stream-btn" onclick="playMatchChannel(${chId})">▶ ${btnLabel}</button>`;
+                requestAnimationFrame(()=>{
+                    card.style.opacity="1";
+                    card.style.transform="";
+                });
+
+            }else{
+
+                card.style.opacity="0";
+
+                card.style.transform=
+                    "scale(.96)";
+
+                setTimeout(()=>{
+
+                    if(
+                        !text.includes(
+                            searchInput.value
+                                .toLocaleLowerCase("tr-TR")
+                                .trim()
+                        )
+                    ){
+                        card.style.display="none";
+                    }
+
+                },250);
+
+            }
+
         });
-        cardHtml += `</div>`;
-      }
-      card.innerHTML = cardHtml;
-      fragment.appendChild(card);
-    });
-  });
-  list.appendChild(fragment);
-}
 
-function playMatchChannel(chId) {
-  const targetChannel = channels.find(c => c.id === chId);
-  if (targetChannel) selectChannel(targetChannel);
-}
-
-function renderList(){
-  if (activeTab !== 'channels') return;
-  const list = document.getElementById('chList');
-  let filtered = channels.filter(c => c.cat === currentCategory && (!currentSearch || c.name.toLowerCase().includes(currentSearch.toLowerCase())));
-
-  list.innerHTML='';
-  const fragment = document.createDocumentFragment();
-  
-  filtered.forEach(c => {
-    const countryObj = countries.find(item => item.code === c.cat);
-    const flagSymbol = countryObj ? countryObj.flag : "🌐";
-
-    const card = document.createElement('div');
-    card.className = 'ch-card' + (activeId === c.id ? ' active' : '');
-    card.innerHTML = `
-      <div class="ch-card-flag">${flagSymbol}</div>
-      <div class="ch-logo">
-        <img src="${c.logo}" alt="${c.name}" loading="lazy" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>
-      </div>
-      <div class="ch-info">
-        <div class="ch-name">${c.name}</div>
-      </div>
-      <div class="ch-live-badge"></div>
-    `;
-    card.onclick = () => selectChannel(c);
-    fragment.appendChild(card);
-  });
-  list.appendChild(fragment);
-}
-
-function selectChannel(c){
-  activeId = c.id;
-  selectedChannelObj = c; 
-  if (activeTab === 'channels') renderList();
-
-  const logoEl = document.getElementById('nowLogo');
-  logoEl.style.display = 'flex';
-  logoEl.innerHTML = `<img src="${c.logo}" alt="${c.name}" onerror="this.onerror=null; this.src='${fallbackLogo}';"/>`;
-  document.getElementById('nowName').textContent = c.name;
-  document.getElementById('theaterBtn').style.display = 'flex';
-  document.getElementById('vidOverlay').style.display = 'none';
-  
-  const iframePlayer = document.getElementById('embedPlayer');
-  const plyrWrapper = document.getElementById('plyrWrapper');
-  const hlsPlayer = document.getElementById('hlsPlayer');
-
-  if (hlsInstance) {
-    hlsInstance.destroy();
-    hlsInstance = null;
-  }
-  
-  hlsPlayer.pause();
-  hlsPlayer.src = "";
-  plyrWrapper.style.display = "none";
-  iframePlayer.style.display = "none";
-  iframePlayer.src = "";
-
-  startActualStream(c);
-}
-
-function showSkeleton() { document.getElementById('skeletonLoader').classList.add('active'); }
-function hideSkeleton() { document.getElementById('skeletonLoader').classList.remove('active'); }
-
-function startActualStream(c) {
-  showSkeleton();
-  const iframePlayer = document.getElementById('embedPlayer');
-  const plyrWrapper = document.getElementById('plyrWrapper');
-  const hlsPlayer = document.getElementById('hlsPlayer');
-
-  if (c.stream.includes('.m3u8')) {
-    iframePlayer.removeAttribute('sandbox');
-    plyrWrapper.style.display = "block";
-    initPlyr(); 
-    
-    if (Hls.isSupported()) {
-      hlsInstance = new Hls();
-      hlsInstance.loadSource(c.stream);
-      hlsInstance.attachMedia(hlsPlayer);
-      hlsInstance.on(Hls.Events.MANIFEST_PARSED, function() {
-        hlsPlayer.play().catch(() => {});
-        hideSkeleton();
-      });
-      hlsInstance.on(Hls.Events.ERROR, function() { hideSkeleton(); });
-    } else if (hlsPlayer.canPlayType('application/vnd.apple.mpegurl')) {
-      hlsPlayer.src = c.stream;
-      hlsPlayer.play().catch(() => {});
-      hideSkeleton();
     }
-  } else {
-    iframePlayer.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-forms');
-    iframePlayer.style.display = "block";
-    iframePlayer.src = c.stream; 
-    iframePlayer.onload = function() { hideSkeleton(); };
-    setTimeout(() => { hideSkeleton(); }, 2500);
-  }
-}
+);
 
-function toggleTheaterMode() {
-  const layout = document.getElementById('mainLayout');
-  const btn = document.getElementById('theaterBtn');
-  const btnText = btn.querySelector('.btn-text');
-  
-  layout.classList.toggle('theater-active');
-  btn.classList.toggle('active');
-  
-  if(layout.classList.contains('theater-active')) {
-    if(btnText) btnText.textContent = "Normal";
-  } else {
-    if(btnText) btnText.textContent = "Sinema";
-  }
-}
 
-function filterChannels(q){
-  currentSearch = q;
-  renderList();
-}
+/* =========================================================
+   MOUSE FOLLOW LIGHT
+========================================================= */
 
-const countries = [{ code: "tr", name: "Türkiye", flag: "🇹🇷" }];
+document
+.querySelectorAll(".match-card")
+.forEach(card=>{
 
-const channels = [
-  {id:1,  name:"BeIN Sports 1",  cat:"tr", logo:"https://royaltv35.com/img/beinsports1.png", stream: "https://royaltv35.com/channel?id=zirve"},
-  {id:2,  name:"BeIN Sports 1 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports1.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports1b"},
-  {id:3,  name:"BeIN Sports 1 C",  cat:"tr", logo:"https://royaltv35.com/img/beinsports1.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports1c"},
-  {id:4,  name:"BeIN Sports 2",  cat:"tr", logo:"https://royaltv35.com/img/beinsports2.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports2"},
-  {id:5,  name:"BeIN Sports 2 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports2.png", stream:"https://royaltv35.com/channel?id=b2"},
-  {id:6,  name:"BeIN Sports 2 C",  cat:"tr", logo:"https://royaltv35.com/img/beinsports2.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports2"},
-  {id:7,  name:"BeIN Sports 3",  cat:"tr", logo:"https://royaltv35.com/img/beinsports3.png", stream:"https://royaltv35.com/channel?id=b3"},
-  {id:8,  name:"BeIN Sports 3 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports3.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports3"},
-  {id:9,  name:"BeIN Sports 4",  cat:"tr", logo:"https://royaltv35.com/img/beinsports4.png", stream: "https://playersystem1.vercel.app/?kanal=beinsports4"},
-  {id:10, name:"BeIN Sports 4 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports4.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports4b"},
-  {id:11, name:"BeIN Sports 5",  cat:"tr", logo:"https://royaltv35.com/img/beinsports5.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports5"},
-  {id:12, name:"BeIN Sports 5 B",  cat:"tr", logo:"https://royaltv35.com/img/beinsports5.png", stream:"https://playersystem1.vercel.app/?kanal=beinsports5b"},
-  {id:13, name:"BeIN Max 1",     cat:"tr", logo:"https://royaltv35.com/img/beinsportsmax1.png", stream:"https://royaltv35.com/channel?id=bm1"},
-  {id:14, name:"BeIN Max 1 B",     cat:"tr", logo:"https://royaltv35.com/img/beinsportsmax1.png", stream:"https://playersystem1.vercel.app/?kanal=beinmax1b"},
-  {id:15, name:"BeIN Max 2",     cat:"tr", logo:"https://royaltv35.com/img/beinsportsmax2.png", stream:"https://royaltv35.com/channel?id=bm2"},
-  {id:16, name:"BeIN Max 2 B",     cat:"tr", logo:"https://royaltv35.com/img/beinsportsmax2.png", stream:"https://playersystem1.vercel.app/?kanal=beinmax2b"},
-  {id:17, name:"S Sport 1",      cat:"tr", logo:"https://royaltv35.com/img/ssport1.png", stream:"https://royaltv35.com/channel?id=ss"},
-  {id:18, name:"S Sport 1 B", cat:"tr", logo:"https://royaltv35.com/img/ssport1.png", stream:"https://playersystem1.vercel.app/?kanal=ssport1b"},
-  {id:19, name:"S Sport 2",      cat:"tr", logo:"https://royaltv35.com/img/ssport2.png", stream:"https://royaltv35.com/channel?id=ss2"},
-  {id:20, name:"S Sport 2 B",      cat:"tr", logo:"https://royaltv35.com/img/ssport2.png", stream:"https://playersystem1.vercel.app/?kanal=ssport2b"},
-  {id:21, name:"Tivibu 1",       cat:"tr", logo:"https://royaltv35.com/img/tivibu1.png", stream:"https://royaltv35.com/channel?id=t1"},
-  {id:22, name:"Tivibu 1 B",       cat:"tr", logo:"https://royaltv35.com/img/tivibu1.png", stream:"https://playersystem1.vercel.app/?kanal=tivibu1b"},
-  {id:23, name:"Tivibu 2",       cat:"tr", logo:"https://royaltv35.com/img/tivibu2.png", stream:"https://royaltv35.com/channel?id=t2"},
-  {id:24, name:"Tivibu 2 B ",       cat:"tr", logo:"https://royaltv35.com/img/tivibu2.png", stream:"https://playersystem1.vercel.app/?kanal=tivibu2b"},
-  {id:25, name:"Tivibu 3",       cat:"tr", logo:"https://royaltv35.com/img/tivibu3.png", stream:"https://royaltv35.com/channel?id=t3"},
-  {id:26, name:"Tivibu 3 B",       cat:"tr", logo:"https://royaltv35.com/img/tivibu3.png", stream:"https://playersystem1.vercel.app/?kanal=tivibu3b"},
-  {id:27, name:"Tivibu 4",       cat:"tr", logo:"https://royaltv35.com/img/tivibu4.png", stream:"https://royaltv35.com/channel?id=t4"},
-  {id:28, name:"Tivibu 4 B",       cat:"tr", logo:"https://royaltv35.com/img/tivibu4.png", stream:"https://playersystem1.vercel.app/?kanal=tivibu4b"},
-  {id:29, name:"Smartspor",      cat:"tr", logo:"https://royaltv35.com/img/smartspor.png", stream:"https://royaltv35.com/channel?id=smarts"},
-  {id:30, name:"Smartspor B",      cat:"tr", logo:"https://royaltv35.com/img/smartspor.png", stream:"https://playersystem1.vercel.app/?kanal=smartsporb"},
-  {id:31, name:"Smartspor 2",    cat:"tr", logo:"https://royaltv35.com/img/smartspor2.png", stream:"https://royaltv35.com/channel?id=sms2"},
-  {id:32, name:"Smartspor 2 B",    cat:"tr", logo:"https://royaltv35.com/img/smartspor2.png", stream:"https://playersystem1.vercel.app/?kanal=smartspor2b"},
-  {id:33, name:"TV100",          cat:"tr", logo:"https://upload.wikimedia.org/wikipedia/tr/0/0f/TV100_logo.png", stream:"https://royaltv35.com/channel?id=ex1"},
-  {id:34, name:"Tabii Spor",     cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor"},
-  {id:35, name:"Tabii Spor 1",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor1"},
-  {id:36, name:"Tabii Spor 2",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor2"},
-  {id:37, name:"Tabii Spor 3",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor3"},
-  {id:38, name:"Tabii Spor 4",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor4"},
-  {id:39, name:"Tabii Spor 5",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor5"},
-  {id:40, name:"Tabii Spor 6",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor6"},
-  {id:41, name:"Tabii Spor 7",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor7"},
-  {id:42, name:"Tabii Spor 8",   cat:"tr", logo:"https://royaltv35.com/img/tabii.png", stream:"https://playersystem1.vercel.app/?kanal=tabiispor8"},
-  {id:43, name:"TRT Spor",       cat:"tr", logo:"https://royaltv35.com/img/trtspornew.png", stream:"https://playersystem1.vercel.app/?kanal=trtspor"},
-  {id:44, name:"A Spor",         cat:"tr", logo:"https://royaltv35.com/img/aspornew.png", stream:"https://royaltv35.com/channel?id=as"},
-  {id:45, name:"TRT 1",          cat:"tr", logo:"https://royaltv35.com/img/trt1.png", stream:"https://playersystem1.vercel.app/?kanal=trt1"},
-  {id:46, name:"ATV",            cat:"tr", logo:"https://royaltv35.com/img/atv.png", stream:"https://royaltv35.com/channel?id=atv"},
-  {id:47, name:"TV 8",           cat:"tr", logo:"https://royaltv35.com/img/tv8.png", stream:"https://royaltv35.com/channel?id=tv8"},
-  {id:48, name:"TV 8,5",         cat:"tr", logo:"https://royaltv35.com/img/tv85.png", stream:"https://royaltv35.com/channel?id=tv85"}
-];
+    card.addEventListener(
+        "mousemove",
+        event=>{
 
-const dailyMatchesByDate = [
-  {
-    date: "26 Ağustos 2026",
-    matches: [
-      {
-        league: "UEFA Şampiyonlar Ligi Kura Çekimi",
-        time: "19:00",
-        homeTeam: "Şampiyonlar Ligi Kura Çekimi",
-        isUclDraw: true,
-        homeLogo: "https://upload.wikimedia.org/wikipedia/commons/e/e2/UEFA_Champions_League_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        gsLogo: "https://upload.wikimedia.org/wikipedia/commons/4/49/Galatasaray_SK_football_logo.png?utm_source=tr.wikipedia.org&utm_campaign=index&utm_content=original",
-        fbLogo: "https://upload.wikimedia.org/wikipedia/tr/archive/8/86/20210127193236%21Fenerbah%C3%A7e_SK.png",
-        channelIds: [43]
-      },
-      {
-        league: "UEFA Avrupa Ligi, Play-off Turu",
-        time: "20:00",
-        homeTeam: "Kauno Zalgiris",
-        homeLogo: "https://assets.offsidescores.com/team/pics/42396d01-e2c9-4098-95e9-a014241db616639214821862652575.png",
-        awayTeam: "Beşiktaş",
-        awayLogo: "https://assets.offsidescores.com/team/pics/d745aea6-9531-4680-bb2a-7347a98e64e8638629771654583172.png",
-        channelIds: [17,33]
-      },
-      {
-        league: "UEFA Avrupa Ligi, Play-off Turu",
-        time: "21:30",
-        homeTeam: "Ferencvaros",
-        homeLogo: "https://assets.offsidescores.com/teams/pics/a2a2c9a6-2e9c-4527-a6f9-f56815b3b014638623428861719671.png",
-        awayTeam: "Trabzonspor",
-        awayLogo: "https://assets.offsidescores.com/team/pics/4b96c631-18ab-4551-9bd3-4bcbaefae014638694449400070062.png",
-        channelIds: [46]
-      }
-    ]
-  }
-];
-  
-const fallbackLogo = "https://img.icons8.com/fluency/48/television.png";
+            if(window.innerWidth<=760)
+                return;
 
-let currentCategory = 'tr'; 
-let currentSearch = '';
-let activeTab = 'channels'; 
-let activeId = null;
+            const rect =
+                card.getBoundingClientRect();
 
-renderCountryFilters();
-renderList();
+            const x =
+                event.clientX - rect.left;
+
+            const y =
+                event.clientY - rect.top;
+
+            card.style.setProperty(
+                "--mx",
+                `${x}px`
+            );
+
+            card.style.setProperty(
+                "--my",
+                `${y}px`
+            );
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   MATCH 3D TILT
+========================================================= */
+
+document
+.querySelectorAll(".match-card")
+.forEach(card=>{
+
+    card.addEventListener(
+        "mousemove",
+        event=>{
+
+            if(window.innerWidth<=760)
+                return;
+
+            const rect =
+                card.getBoundingClientRect();
+
+            const x =
+                event.clientX - rect.left;
+
+            const y =
+                event.clientY - rect.top;
+
+            const rotateY =
+                ((x / rect.width)-.5)*5;
+
+            const rotateX =
+                ((y / rect.height)-.5)*-5;
+
+            card.style.transform=
+                `
+                translateY(-8px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale(1.008)
+                `;
+
+        }
+    );
+
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            card.style.transform="";
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   LEAGUE 3D TILT
+========================================================= */
+
+document
+.querySelectorAll(".league-card")
+.forEach(card=>{
+
+    card.addEventListener(
+        "mousemove",
+        event=>{
+
+            if(window.innerWidth<=760)
+                return;
+
+            const rect =
+                card.getBoundingClientRect();
+
+            const x =
+                event.clientX - rect.left;
+
+            const y =
+                event.clientY - rect.top;
+
+            const rotateY =
+                ((x / rect.width)-.5)*8;
+
+            const rotateX =
+                ((y / rect.height)-.5)*-8;
+
+            card.style.transform=
+                `
+                translateY(-13px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale(1.01)
+                `;
+
+        }
+    );
+
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            card.style.transform="";
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   DRAG LEAGUE BAR
+========================================================= */
+
+const leagueScroll =
+    document.getElementById(
+        "leagueScroll"
+    );
+
+let dragging=false;
+let startX=0;
+let scrollStart=0;
+
+leagueScroll.addEventListener(
+    "mousedown",
+    event=>{
+
+        dragging=true;
+
+        leagueScroll
+            .classList
+            .add("dragging");
+
+        startX=event.pageX;
+
+        scrollStart=
+            leagueScroll.scrollLeft;
+
+    }
+);
+
+window.addEventListener(
+    "mouseup",
+    ()=>{
+
+        dragging=false;
+
+        leagueScroll
+            .classList
+            .remove("dragging");
+
+    }
+);
+
+leagueScroll.addEventListener(
+    "mousemove",
+    event=>{
+
+        if(!dragging)
+            return;
+
+        event.preventDefault();
+
+        const distance=
+            event.pageX-startX;
+
+        leagueScroll.scrollLeft=
+            scrollStart-distance*1.4;
+
+    }
+);
+
+
+/* =========================================================
+   TOUCH SWIPE
+========================================================= */
+
+let touchX=0;
+let touchScroll=0;
+
+leagueScroll.addEventListener(
+    "touchstart",
+    event=>{
+
+        touchX=
+            event.touches[0].pageX;
+
+        touchScroll=
+            leagueScroll.scrollLeft;
+
+    },
+    {passive:true}
+);
+
+leagueScroll.addEventListener(
+    "touchmove",
+    event=>{
+
+        const current=
+            event.touches[0].pageX;
+
+        leagueScroll.scrollLeft=
+            touchScroll-
+            (current-touchX);
+
+    },
+    {passive:true}
+);
+
+
+/* =========================================================
+   ACTIVE LEAGUE
+========================================================= */
+
+document
+.querySelectorAll(".league-link")
+.forEach(link=>{
+
+    link.addEventListener(
+        "click",
+        function(){
+
+            document
+            .querySelectorAll(".league-link")
+            .forEach(item=>{
+                item.classList.remove(
+                    "active"
+                );
+            });
+
+            this.classList.add("active");
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const revealElements =
+    document.querySelectorAll(".reveal");
+
+const revealObserver =
+    new IntersectionObserver(
+        entries=>{
+
+            entries.forEach(
+                entry=>{
+
+                    if(
+                        entry.isIntersecting
+                    ){
+
+                        entry.target
+                            .classList
+                            .add("visible");
+
+                        revealObserver
+                            .unobserve(
+                                entry.target
+                            );
+
+                    }
+
+                }
+            );
+
+        },
+        {
+            threshold:.12
+        }
+    );
+
+revealElements.forEach(
+    element=>{
+        revealObserver.observe(
+            element
+        );
+    }
+);
+
+
+/* =========================================================
+   IMAGE FALLBACK
+========================================================= */
+
+document
+.querySelectorAll("img")
+.forEach(img=>{
+
+    img.addEventListener(
+        "error",
+        function(){
+
+            this.style.opacity="0";
+
+        }
+    );
+
+});
+
+
+/* =========================================================
+   SMOOTH ANCHOR
+========================================================= */
+
+document
+.querySelectorAll('a[href^="#"]')
+.forEach(link=>{
+
+    link.addEventListener(
+        "click",
+        event=>{
+
+            const target =
+                document.querySelector(
+                    link.getAttribute("href")
+                );
+
+            if(!target)
+                return;
+
+            event.preventDefault();
+
+            target.scrollIntoView({
+                behavior:"smooth",
+                block:"start"
+            });
+
+        }
+    );
+
+});
+
 </script>
+
 </body>
-</html>
+  </html>
