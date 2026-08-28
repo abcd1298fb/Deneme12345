@@ -13,10 +13,6 @@
 
 <style>
 
-/* =========================================================
-   ROOT
-========================================================= */
-
 :root{
     --bg:#02050a;
     --panel:#080e16;
@@ -1090,6 +1086,23 @@ body::before{
     transition:.5s var(--ease);
 }
 
+.team-logo img{
+    width:100%;
+    height:100%;
+
+    object-fit:contain;
+
+    padding:10px;
+}
+
+.team-logo.text-logo{
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:17px;
+}
+
 .match-card:hover .team-logo{
     transform:
         translateY(-7px)
@@ -1161,6 +1174,8 @@ body::before{
     font-size:8px;
 
     font-weight:800;
+
+    line-height:1.4;
 }
 
 .watch-btn{
@@ -1535,7 +1550,8 @@ LİGLER
 
 <div class="search">
 
-<svg viewBox="0 0 24 24"
+<svg
+viewBox="0 0 24 24"
 fill="none"
 stroke="currentColor"
 stroke-width="2">
@@ -1744,16 +1760,22 @@ CREX
 
 /* =========================================================
    CREX LEAGUE SYSTEM
+   maclar.json FORMATINA %100 UYUMLU
+========================================================= */
+
+
+/* =========================================================
+   URL
 ========================================================= */
 
 const params =
 new URLSearchParams(
-window.location.search
+    window.location.search
 );
 
 const leagueSlug =
-params.get("lig") ||
-"premier-league";
+    params.get("lig") ||
+    "premier-league";
 
 
 /* =========================================================
@@ -1762,143 +1784,175 @@ params.get("lig") ||
 
 const leagues = {
 
-"premier-league":{
-    name:"Premier League",
-    country:"İngiltere",
-    logo:"https://download.logo.wine/logo/Premier_League/Premier_League-Logo.wine.png",
-    color:"#9846d7"
-},
+    "premier-league":{
+        name:"Premier League",
+        country:"İngiltere",
+        logo:"https://download.logo.wine/logo/Premier_League/Premier_League-Logo.wine.png",
+        color:"#9846d7"
+    },
 
-"la-liga":{
-    name:"La Liga",
-    country:"İspanya",
-    logo:"https://upload.wikimedia.org/wikipedia/commons/2/20/LaLiga_2023_Vertical_Logo.svg",
-    color:"#ef4937"
-},
+    "la-liga":{
+        name:"La Liga",
+        country:"İspanya",
+        logo:"https://upload.wikimedia.org/wikipedia/commons/2/20/LaLiga_2023_Vertical_Logo.svg",
+        color:"#ef4937"
+    },
 
-"serie-a":{
-    name:"Serie A",
-    country:"İtalya",
-    logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Serie_A_logo_2022.svg/1280px-Serie_A_logo_2022.svg.png",
-    color:"#168cff"
-},
+    "serie-a":{
+        name:"Serie A",
+        country:"İtalya",
+        logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Serie_A_logo_2022.svg/1280px-Serie_A_logo_2022.svg.png",
+        color:"#168cff"
+    },
 
-"bundesliga":{
-    name:"Bundesliga",
-    country:"Almanya",
-    logo:"https://assets.football-logos.cc/logos/germany/1500x1500/bundesliga.77719ba2.png",
-    color:"#e51c35"
-},
+    "bundesliga":{
+        name:"Bundesliga",
+        country:"Almanya",
+        logo:"https://assets.football-logos.cc/logos/germany/1500x1500/bundesliga.77719ba2.png",
+        color:"#e51c35"
+    },
 
-"ligue-1":{
-    name:"Ligue 1",
-    country:"Fransa",
-    logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ligue_1_2024_Logo.png/960px-Ligue_1_2024_Logo.png",
-    color:"#159fe8"
-},
+    "ligue-1":{
+        name:"Ligue 1",
+        country:"Fransa",
+        logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ligue_1_2024_Logo.png/960px-Ligue_1_2024_Logo.png",
+        color:"#159fe8"
+    },
 
-"super-lig":{
-    name:"Süper Lig",
-    country:"Türkiye",
-    logo:"https://upload.wikimedia.org/wikipedia/tr/archive/5/5e/20260826234136%21Trendyol-super-lig-dikey-logo.png",
-    color:"#e51d3b"
-},
+    "super-lig":{
+        name:"Süper Lig",
+        country:"Türkiye",
+        logo:"https://upload.wikimedia.org/wikipedia/tr/archive/5/5e/20260826234136%21Trendyol-super-lig-dikey-logo.png",
+        color:"#e51d3b"
+    },
 
-"champions-league":{
-    name:"Champions League",
-    country:"UEFA",
-    logo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA_Champions_League_logo.png",
-    color:"#426dff"
-},
+    "champions-league":{
+        name:"Champions League",
+        country:"UEFA",
+        logo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/UEFA_Champions_League_logo.png",
+        color:"#426dff"
+    },
 
-"europa-league":{
-    name:"Europa League",
-    country:"UEFA",
-    logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UEFA_Europa_League_logo_%282024_version%29.svg/960px-UEFA_Europa_League_logo_%282024_version%29.svg.png",
-    color:"#ff7417"
-},
+    "europa-league":{
+        name:"Europa League",
+        country:"UEFA",
+        logo:"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UEFA_Europa_League_logo_%282024_version%29.svg/960px-UEFA_Europa_League_logo_%282024_version%29.svg.png",
+        color:"#ff7417"
+    },
 
-"conference-league":{
-    name:"Conference League",
-    country:"UEFA",
-    logo:"https://assets.football-logos.cc/logos/tournaments/700x700/uefa-conference-league.4a977457.png",
-    color:"#18b98b"
-},
+    "conference-league":{
+        name:"Conference League",
+        country:"UEFA",
+        logo:"https://assets.football-logos.cc/logos/tournaments/700x700/uefa-conference-league.4a977457.png",
+        color:"#18b98b"
+    },
 
-"eredivisie":{
-    name:"Eredivisie",
-    country:"Hollanda",
-    logo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Eredivisie_nieuw_logo_2017-.svg",
-    color:"#ed5b21"
-}
+    "eredivisie":{
+        name:"Eredivisie",
+        country:"Hollanda",
+        logo:"https://commons.wikimedia.org/wiki/Special:Redirect/file/Eredivisie_nieuw_logo_2017-.svg",
+        color:"#ed5b21"
+    }
 
 };
+
+
+/* =========================================================
+   SELECTED LEAGUE
+========================================================= */
+
+const league =
+    leagues[leagueSlug] ||
+    leagues["premier-league"];
+
+
+/* =========================================================
+   THEME
+========================================================= */
+
+document.documentElement
+    .style
+    .setProperty(
+        "--league",
+        league.color
+    );
 
 
 /* =========================================================
    ELEMENTS
 ========================================================= */
 
-const league =
-leagues[leagueSlug] ||
-leagues["premier-league"];
-
-document.documentElement.style
-.setProperty(
-    "--league",
-    league.color
-);
-
 const heroLogo =
-document.getElementById("heroLogo");
+    document.getElementById(
+        "heroLogo"
+    );
 
 const leagueTitle =
-document.getElementById("leagueTitle");
+    document.getElementById(
+        "leagueTitle"
+    );
 
 const leagueCountry =
-document.getElementById("leagueCountry");
+    document.getElementById(
+        "leagueCountry"
+    );
 
 const matchGrid =
-document.getElementById("matchGrid");
+    document.getElementById(
+        "matchGrid"
+    );
 
 const searchInput =
-document.getElementById("searchInput");
+    document.getElementById(
+        "searchInput"
+    );
 
 const empty =
-document.getElementById("empty");
+    document.getElementById(
+        "empty"
+    );
 
 const loader =
-document.getElementById("loader");
+    document.getElementById(
+        "loader"
+    );
 
 const resultCount =
-document.getElementById("resultCount");
+    document.getElementById(
+        "resultCount"
+    );
 
 const totalMatches =
-document.getElementById("totalMatches");
+    document.getElementById(
+        "totalMatches"
+    );
 
 const upcomingMatches =
-document.getElementById("upcomingMatches");
+    document.getElementById(
+        "upcomingMatches"
+    );
 
 
 /* =========================================================
-   SET LEAGUE HEADER
+   LEAGUE HEADER
 ========================================================= */
 
 document.title =
-"CREX — " + league.name;
+    "CREX — " +
+    league.name;
 
 heroLogo.src =
-league.logo;
+    league.logo;
 
 heroLogo.alt =
-league.name;
+    league.name;
 
 leagueTitle.textContent =
-league.name;
+    league.name;
 
 leagueCountry.textContent =
-league.country +
-" • CREX MAÇ MERKEZİ";
+    league.country +
+    " • CREX MAÇ MERKEZİ";
 
 
 /* =========================================================
@@ -1917,59 +1971,209 @@ const PAGE_SIZE = 24;
 
 
 /* =========================================================
-   JSON PATH
+   JSON
 ========================================================= */
 
 const jsonPath =
-"./data/ligler/" +
-leagueSlug +
-".json";
+    "./data/maclar.json";
+
+
+/* =========================================================
+   NORMALIZE STATUS
+========================================================= */
+
+function getMatchStatus(match){
+
+    /*
+       Senin JSON formatın:
+
+       "durum": "MS"
+
+       MS = maç tamamlandı.
+
+       Bunun yanında gelecekte:
+       "YAYINDA"
+       "CANLI"
+       "GELECEK"
+       gibi değerler de desteklenir.
+    */
+
+    const status =
+        String(
+            match.durum || ""
+        )
+        .trim()
+        .toLocaleLowerCase(
+            "tr-TR"
+        );
+
+
+    /* Tamamlanan */
+
+    const finishedStatuses = [
+
+        "ms",
+        "tamamlandı",
+        "tamamlandi",
+        "finished",
+        "finished",
+        "bitti",
+        "bitmiş",
+        "bitmis"
+
+    ];
+
+    if(
+        finishedStatuses.includes(
+            status
+        )
+    ){
+
+        return "finished";
+
+    }
+
+
+    /* Canlı */
+
+    const liveStatuses = [
+
+        "canlı",
+        "canli",
+        "live",
+        "yayında",
+        "yayinda"
+
+    ];
+
+    if(
+        liveStatuses.includes(
+            status
+        )
+    ){
+
+        return "live";
+
+    }
+
+
+    /* Eğer durum açıkça gelecek ise */
+
+    const upcomingStatuses = [
+
+        "gelecek",
+        "yaklaşıyor",
+        "yaklasiyor",
+        "upcoming",
+        "scheduled"
+
+    ];
+
+    if(
+        upcomingStatuses.includes(
+            status
+        )
+    ){
+
+        return "upcoming";
+
+    }
+
+
+    /*
+       Durum tanınmıyorsa
+       tarih + saat üzerinden karar ver.
+    */
+
+    const date =
+        getMatchDate(match);
+
+    if(!date)
+        return "upcoming";
+
+
+    return date < new Date()
+        ? "finished"
+        : "upcoming";
+
+}
 
 
 /* =========================================================
    DATE PARSER
 ========================================================= */
 
-function parseDate(value){
+function getMatchDate(match){
 
-    if(!value)
+    if(!match.tarih)
         return null;
 
+
+    const dateValue =
+        String(
+            match.tarih
+        ).trim();
+
+
+    if(!dateValue)
+        return null;
+
+
+    /*
+       YYYY-MM-DD formatını
+       Türkiye yerel saatine yakın
+       şekilde oluşturuyoruz.
+    */
+
+    let dateString =
+        dateValue;
+
+
+    if(
+        match.saat &&
+        String(match.saat).trim()
+    ){
+
+        dateString +=
+            "T" +
+            String(match.saat).trim();
+
+    }
+    else{
+
+        /*
+           Saat yoksa günün sonuna
+           yakın kabul ediyoruz.
+           Böylece MS olmayan tarihli
+           maçlar yanlışlıkla erken
+           tamamlanmış görünmez.
+        */
+
+        dateString +=
+            "T23:59:59";
+
+    }
+
+
     const date =
-        new Date(value);
+        new Date(
+            dateString
+        );
+
 
     if(
         Number.isNaN(
             date.getTime()
         )
     ){
+
         return null;
+
     }
 
+
     return date;
-}
 
-
-/* =========================================================
-   STATUS
-========================================================= */
-
-function getMatchStatus(match){
-
-    if(match.status)
-        return match.status;
-
-    const date =
-        parseDate(
-            match.date
-        );
-
-    if(!date)
-        return "upcoming";
-
-    return date < new Date()
-        ? "finished"
-        : "upcoming";
 }
 
 
@@ -1977,34 +2181,129 @@ function getMatchStatus(match){
    DATE FORMAT
 ========================================================= */
 
-function formatDate(value){
+function formatDate(match){
+
+    if(!match.tarih){
+
+        return "TARİH YOK";
+
+    }
+
+
+    let result =
+        formatSimpleDate(
+            match.tarih
+        );
+
+
+    if(
+        match.saat &&
+        String(match.saat).trim()
+    ){
+
+        result +=
+            " • " +
+            String(
+                match.saat
+            );
+
+    }
+
+
+    return result;
+
+}
+
+
+/* =========================================================
+   SIMPLE DATE
+========================================================= */
+
+function formatSimpleDate(value){
 
     const date =
-        parseDate(value);
+        new Date(
+            String(value) +
+            "T00:00:00"
+        );
 
-    if(!date)
-        return value || "TARİH YOK";
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return String(value);
+
+    }
+
 
     return new Intl.DateTimeFormat(
         "tr-TR",
         {
             day:"2-digit",
             month:"2-digit",
-            year:"numeric",
-            hour:"2-digit",
-            minute:"2-digit"
+            year:"numeric"
         }
     ).format(date);
+
 }
 
 
 /* =========================================================
-   LOAD JSON
+   FILTER BY LEAGUE
+========================================================= */
+
+function isCorrectLeague(match){
+
+    /*
+       maclar.json:
+
+       "lig": "premier-league"
+
+       Bu yüzden öncelikli kontrol
+       doğrudan match.lig üzerinden.
+    */
+
+    const matchLeague =
+        String(
+            match.lig || ""
+        )
+        .trim()
+        .toLocaleLowerCase(
+            "tr-TR"
+        );
+
+
+    const targetLeague =
+        String(
+            leagueSlug
+        )
+        .trim()
+        .toLocaleLowerCase(
+            "tr-TR"
+        );
+
+
+    return (
+        matchLeague ===
+        targetLeague
+    );
+
+}
+
+
+/* =========================================================
+   LOAD MATCHES
 ========================================================= */
 
 async function loadMatches(){
 
-    loader.classList.add("show");
+    loader.classList.add(
+        "show"
+    );
+
 
     try{
 
@@ -2016,75 +2315,150 @@ async function loadMatches(){
                 }
             );
 
+
         if(!response.ok){
 
             throw new Error(
-                "JSON bulunamadı: " +
+                "maclar.json yüklenemedi: " +
                 response.status
             );
 
         }
 
+
         const data =
             await response.json();
 
+
         /*
-           JSON şu iki formattan biri olabilir:
+           Ana format:
 
            [
               {...},
               {...}
            ]
 
-           veya
+           Ayrıca güvenlik amacıyla:
 
            {
               "matches":[...]
            }
+
+           formatını da destekliyoruz.
         */
+
+        let matches;
+
 
         if(Array.isArray(data)){
 
-            allMatches = data;
+            matches =
+                data;
 
-        }else if(
+        }
+        else if(
+            data &&
             Array.isArray(
                 data.matches
             )
         ){
 
-            allMatches =
+            matches =
                 data.matches;
 
-        }else{
+        }
+        else{
 
             throw new Error(
-                "JSON formatı geçersiz."
+                "maclar.json formatı geçersiz."
             );
 
         }
+
+
+        /*
+           Sadece URL'deki lige ait
+           maçları al.
+        */
+
+        allMatches =
+            matches.filter(
+                match =>
+                    isCorrectLeague(
+                        match
+                    )
+            );
+
+
+        /*
+           ID kontrolü.
+        */
+
+        allMatches =
+            allMatches.filter(
+                match =>
+                    match &&
+                    match.id !== undefined &&
+                    match.id !== null
+            );
+
 
         updateStats();
 
         applyFilters();
 
-    }catch(error){
 
-        console.error(error);
+        leagueCountry.textContent =
+            league.country +
+            " • CREX MAÇ MERKEZİ";
+
+
+        console.log(
+            "CREX Lig:",
+            league.name
+        );
+
+        console.log(
+            "CREX Maç Sayısı:",
+            allMatches.length
+        );
+
+
+    }
+    catch(error){
+
+        console.error(
+            "CREX Lig Hatası:",
+            error
+        );
+
 
         allMatches = [];
 
         filteredMatches = [];
 
-        renderMatches();
+
+        matchGrid.innerHTML =
+            "";
+
+
+        renderNextPage();
+
 
         leagueCountry.textContent =
             league.country +
             " • MAÇ VERİSİ BULUNAMADI";
 
-    }finally{
 
-        loader.classList.remove("show");
+        resultCount.textContent =
+            "0 MAÇ";
+
+    }
+    finally{
+
+        loader.classList.remove(
+            "show"
+        );
 
     }
 
@@ -2100,80 +2474,116 @@ function updateStats(){
     const total =
         allMatches.length;
 
+
     const upcoming =
         allMatches.filter(
             match =>
-                getMatchStatus(match)
-                === "upcoming"
+                getMatchStatus(
+                    match
+                ) === "upcoming"
         ).length;
 
+
     totalMatches.textContent =
-        total.toLocaleString("tr-TR");
+        total.toLocaleString(
+            "tr-TR"
+        );
+
 
     upcomingMatches.textContent =
-        upcoming.toLocaleString("tr-TR");
+        upcoming.toLocaleString(
+            "tr-TR"
+        );
 
 }
 
 
 /* =========================================================
-   FILTER
+   APPLY FILTERS
 ========================================================= */
 
 function applyFilters(){
 
     const query =
         searchInput.value
-        .toLocaleLowerCase("tr-TR")
-        .trim();
+        .trim()
+        .toLocaleLowerCase(
+            "tr-TR"
+        );
+
 
     filteredMatches =
-        allMatches.filter(match=>{
+        allMatches.filter(
+            match => {
 
-            const status =
-                getMatchStatus(match);
+                const status =
+                    getMatchStatus(
+                        match
+                    );
 
-            const filterOK =
-                currentFilter === "all" ||
-                status === currentFilter;
 
-            if(!filterOK)
-                return false;
+                const filterOK =
+                    currentFilter === "all" ||
+                    status === currentFilter;
 
-            if(!query)
-                return true;
 
-            const searchable = [
+                if(!filterOK)
+                    return false;
 
-                match.home,
-                match.away,
-                match.homeTeam,
-                match.awayTeam,
-                match.league,
-                match.date
 
-            ]
-            .filter(Boolean)
-            .join(" ")
-            .toLocaleLowerCase(
-                "tr-TR"
-            );
+                if(!query)
+                    return true;
 
-            return searchable.includes(
-                query
-            );
 
-        });
+                const searchable = [
+
+                    match.evSahibi,
+                    match.deplasman,
+
+                    match.evKisa,
+                    match.depKisa,
+
+                    match.lig,
+                    match.ligAdi,
+
+                    match.hafta,
+
+                    match.tarih,
+                    match.saat,
+
+                    match.skor,
+                    match.durum
+
+                ]
+                .filter(Boolean)
+                .join(" ")
+                .toLocaleLowerCase(
+                    "tr-TR"
+                );
+
+
+                return searchable.includes(
+                    query
+                );
+
+            }
+        );
+
 
     renderedCount = 0;
 
-    matchGrid.innerHTML = "";
+    matchGrid.innerHTML =
+        "";
+
 
     renderNextPage();
 
+
     resultCount.textContent =
         filteredMatches.length
-        .toLocaleString("tr-TR") +
+        .toLocaleString(
+            "tr-TR"
+        ) +
         " MAÇ";
 
 }
@@ -2183,47 +2593,75 @@ function applyFilters(){
    MATCH CARD
 ========================================================= */
 
-function createMatchCard(match,index){
+function createMatchCard(
+    match
+){
 
     const home =
-        match.home ||
-        match.homeTeam ||
+        match.evSahibi ||
         "Ev Sahibi";
 
+
     const away =
-        match.away ||
-        match.awayTeam ||
+        match.deplasman ||
         "Deplasman";
 
-    const homeLogo =
-        match.homeLogo ||
-        match.home_logo ||
+
+    const homeShort =
+        match.evKisa ||
+        getInitials(home);
+
+
+    const awayShort =
+        match.depKisa ||
+        getInitials(away);
+
+
+    const homeLogoUrl =
+        match.evLogo ||
         "";
 
-    const awayLogo =
-        match.awayLogo ||
-        match.away_logo ||
+
+    const awayLogoUrl =
+        match.depLogo ||
         "";
+
 
     const status =
-        getMatchStatus(match);
+        getMatchStatus(
+            match
+        );
+
+
+    /*
+       ID doğrudan JSON'dan alınır.
+       index kullanılmaz.
+    */
 
     const matchId =
-        match.id ??
-        index + 1;
+        match.id;
+
 
     const date =
         formatDate(
-            match.date
+            match
         );
+
+
+    const score =
+        match.skor ||
+        "";
+
 
     const card =
         document.createElement(
             "article"
         );
 
+
     card.className =
         "match-card";
+
 
     card.dataset.search =
         [
@@ -2231,6 +2669,41 @@ function createMatchCard(match,index){
             away,
             league.name
         ].join(" ");
+
+
+    let statusText;
+
+
+    if(status === "finished"){
+
+        statusText =
+            "TAMAMLANDI";
+
+    }
+    else if(status === "live"){
+
+        statusText =
+            "CANLI";
+
+    }
+    else{
+
+        statusText =
+            "YAKLAŞIYOR";
+
+    }
+
+
+    /*
+       Skor varsa tarih bölümünün
+       üstüne/yanına gösteriyoruz.
+    */
+
+    const bottomText =
+        score
+        ? `${escapeHTML(date)} • ${escapeHTML(score)}`
+        : escapeHTML(date);
+
 
     card.innerHTML = `
 
@@ -2241,16 +2714,17 @@ function createMatchCard(match,index){
             <div class="match-top">
 
                 <div class="match-league-tag">
-                    ${escapeHTML(league.name)}
+
+                    ${escapeHTML(
+                        match.ligAdi ||
+                        league.name
+                    )}
+
                 </div>
 
                 <div class="match-status">
 
-                    ${
-                        status === "finished"
-                        ? "TAMAMLANDI"
-                        : "YAKLAŞIYOR"
-                    }
+                    ${statusText}
 
                 </div>
 
@@ -2264,26 +2738,42 @@ function createMatchCard(match,index){
                     <div class="team-logo">
 
                         ${
-                            homeLogo
+                            homeLogoUrl
 
                             ? `
+
                             <img
-                                src="${escapeAttr(homeLogo)}"
-                                alt="${escapeAttr(home)}"
+                                src="${escapeAttr(
+                                    homeLogoUrl
+                                )}"
+                                alt="${escapeAttr(
+                                    home
+                                )}"
                                 loading="lazy"
-                                onerror="this.style.display='none';this.parentElement.classList.add('text-logo')"
+                                onerror="
+                                    this.style.display='none';
+                                    this.parentElement.classList.add('text-logo');
+                                    this.parentElement.textContent='${escapeJS(
+                                        homeShort
+                                    )}';
+                                "
                             >
+
                             `
 
                             : escapeHTML(
-                                getInitials(home)
+                                homeShort
                             )
                         }
 
                     </div>
 
                     <div class="team-name">
-                        ${escapeHTML(home)}
+
+                        ${escapeHTML(
+                            home
+                        )}
+
                     </div>
 
                 </div>
@@ -2299,26 +2789,42 @@ function createMatchCard(match,index){
                     <div class="team-logo">
 
                         ${
-                            awayLogo
+                            awayLogoUrl
 
                             ? `
+
                             <img
-                                src="${escapeAttr(awayLogo)}"
-                                alt="${escapeAttr(away)}"
+                                src="${escapeAttr(
+                                    awayLogoUrl
+                                )}"
+                                alt="${escapeAttr(
+                                    away
+                                )}"
                                 loading="lazy"
-                                onerror="this.style.display='none';this.parentElement.classList.add('text-logo')"
+                                onerror="
+                                    this.style.display='none';
+                                    this.parentElement.classList.add('text-logo');
+                                    this.parentElement.textContent='${escapeJS(
+                                        awayShort
+                                    )}';
+                                "
                             >
+
                             `
 
                             : escapeHTML(
-                                getInitials(away)
+                                awayShort
                             )
                         }
 
                     </div>
 
                     <div class="team-name">
-                        ${escapeHTML(away)}
+
+                        ${escapeHTML(
+                            away
+                        )}
+
                     </div>
 
                 </div>
@@ -2329,14 +2835,21 @@ function createMatchCard(match,index){
             <div class="match-bottom">
 
                 <div class="match-date">
-                    ${escapeHTML(date)}
+
+                    ${bottomText}
+
                 </div>
 
+
                 <a
-                    href="mac.html?id=${encodeURIComponent(matchId)}"
+                    href="mac.html?id=${encodeURIComponent(
+                        String(matchId)
+                    )}"
                     class="watch-btn"
                 >
+
                     MAÇA GİT →
+
                 </a>
 
             </div>
@@ -2344,6 +2857,14 @@ function createMatchCard(match,index){
         </div>
 
     `;
+
+
+    /*
+       Kartın tamamına tıklanabilir
+       alan eklemiyoruz.
+       Buton doğrudan mac.html?id=ID.
+    */
+
 
     return card;
 
@@ -2365,11 +2886,16 @@ function renderNextPage(){
             filteredMatches.length === 0
         ){
 
-            empty.classList.add("show");
+            empty.classList.add(
+                "show"
+            );
 
-        }else{
+        }
+        else{
 
-            empty.classList.remove("show");
+            empty.classList.remove(
+                "show"
+            );
 
         }
 
@@ -2377,64 +2903,84 @@ function renderNextPage(){
 
     }
 
-    empty.classList.remove("show");
+
+    empty.classList.remove(
+        "show"
+    );
+
 
     const next =
         filteredMatches.slice(
             renderedCount,
-            renderedCount + PAGE_SIZE
+            renderedCount +
+            PAGE_SIZE
         );
+
 
     const fragment =
         document.createDocumentFragment();
 
+
     next.forEach(
-        (match,index)=>{
+        (
+            match,
+            index
+        )=>{
 
             const card =
                 createMatchCard(
-                    match,
-                    renderedCount + index
+                    match
                 );
 
-            fragment.appendChild(card);
 
-            requestAnimationFrame(()=>{
+            fragment.appendChild(
+                card
+            );
 
-                card.animate(
-                    [
+
+            requestAnimationFrame(
+                ()=>{
+
+                    card.animate(
+                        [
+                            {
+                                opacity:0,
+                                transform:
+                                    "translateY(22px) scale(.97)"
+                            },
+                            {
+                                opacity:1,
+                                transform:
+                                    "translateY(0) scale(1)"
+                            }
+                        ],
                         {
-                            opacity:0,
-                            transform:
-                                "translateY(22px) scale(.97)"
-                        },
-                        {
-                            opacity:1,
-                            transform:
-                                "translateY(0) scale(1)"
+                            duration:550,
+
+                            delay:
+                                Math.min(
+                                    index * 45,
+                                    350
+                                ),
+
+                            easing:
+                                "cubic-bezier(.16,1,.3,1)",
+
+                            fill:"both"
                         }
-                    ],
-                    {
-                        duration:550,
-                        delay:
-                            Math.min(
-                                index * 45,
-                                350
-                            ),
-                        easing:
-                            "cubic-bezier(.16,1,.3,1)",
-                        fill:"both"
-                    }
-                );
+                    );
 
-            });
+                }
+            );
 
         }
     );
 
+
     matchGrid.appendChild(
         fragment
     );
+
 
     renderedCount +=
         next.length;
@@ -2447,10 +2993,10 @@ function renderNextPage(){
 ========================================================= */
 
 searchInput.addEventListener(
-"input",
-()=>{
-    applyFilters();
-}
+    "input",
+    ()=>{
+        applyFilters();
+    }
 );
 
 
@@ -2459,37 +3005,44 @@ searchInput.addEventListener(
 ========================================================= */
 
 document
-.querySelectorAll(".filter")
-.forEach(button=>{
+.querySelectorAll(
+    ".filter"
+)
+.forEach(
+    button => {
 
-    button.addEventListener(
-        "click",
-        ()=>{
+        button.addEventListener(
+            "click",
+            ()=>{
 
-            document
-            .querySelectorAll(
-                ".filter"
-            )
-            .forEach(
-                btn =>
-                btn.classList.remove(
-                    "active"
+                document
+                .querySelectorAll(
+                    ".filter"
                 )
-            );
+                .forEach(
+                    btn =>
+                    btn.classList.remove(
+                        "active"
+                    )
+                );
 
-            button.classList.add(
-                "active"
-            );
 
-            currentFilter =
-                button.dataset.filter;
+                button.classList.add(
+                    "active"
+                );
 
-            applyFilters();
 
-        }
-    );
+                currentFilter =
+                    button.dataset.filter;
 
-});
+
+                applyFilters();
+
+            }
+        );
+
+    }
+);
 
 
 /* =========================================================
@@ -2497,46 +3050,48 @@ document
 ========================================================= */
 
 const infiniteObserver =
-new IntersectionObserver(
-entries=>{
+    new IntersectionObserver(
+        entries => {
 
-    entries.forEach(
-        entry=>{
+            entries.forEach(
+                entry => {
 
-            if(
-                entry.isIntersecting
-            ){
+                    if(
+                        entry.isIntersecting
+                    ){
 
-                renderNextPage();
+                        renderNextPage();
 
-            }
+                    }
 
+                }
+            );
+
+        },
+        {
+            rootMargin:"500px"
         }
     );
 
-},
-{
-    rootMargin:"500px"
-}
-);
-
-
-/*
-   Sayfanın sonuna görünmez
-   sentinel ekliyoruz.
-*/
 
 const sentinel =
-document.createElement("div");
+    document.createElement(
+        "div"
+    );
+
 
 sentinel.style.height =
-"1px";
+    "1px";
+
 
 document
-.querySelector("#matches")
+.querySelector(
+    "#matches"
+)
 .appendChild(
     sentinel
 );
+
 
 infiniteObserver.observe(
     sentinel
@@ -2548,42 +3103,56 @@ infiniteObserver.observe(
 ========================================================= */
 
 document.addEventListener(
-"mousemove",
-event=>{
+    "mousemove",
+    event => {
 
-    const card =
-        event.target.closest(
-            ".match-card"
+        const card =
+            event.target.closest(
+                ".match-card"
+            );
+
+
+        if(!card)
+            return;
+
+
+        const rect =
+            card.getBoundingClientRect();
+
+
+        const x =
+            (
+                (event.clientX -
+                rect.left)
+                /
+                rect.width
+            ) * 100;
+
+
+        const y =
+            (
+                (event.clientY -
+                rect.top)
+                /
+                rect.height
+            ) * 100;
+
+
+        card.style.setProperty(
+            "--mx",
+            x + "%"
         );
 
-    if(!card)
-        return;
 
-    const rect =
-        card.getBoundingClientRect();
+        card.style.setProperty(
+            "--my",
+            y + "%"
+        );
 
-    const x =
-        ((event.clientX - rect.left)
-        / rect.width) * 100;
-
-    const y =
-        ((event.clientY - rect.top)
-        / rect.height) * 100;
-
-    card.style.setProperty(
-        "--mx",
-        x + "%"
-    );
-
-    card.style.setProperty(
-        "--my",
-        y + "%"
-    );
-
-},
-{
-    passive:true
-}
+    },
+    {
+        passive:true
+    }
 );
 
 
@@ -2591,14 +3160,33 @@ event=>{
    ESCAPE HTML
 ========================================================= */
 
-function escapeHTML(value){
+function escapeHTML(
+    value
+){
 
-    return String(value ?? "")
-        .replaceAll("&","&amp;")
-        .replaceAll("<","&lt;")
-        .replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;")
-        .replaceAll("'","&#039;");
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "&",
+        "&amp;"
+    )
+    .replaceAll(
+        "<",
+        "&lt;"
+    )
+    .replaceAll(
+        ">",
+        "&gt;"
+    )
+    .replaceAll(
+        '"',
+        "&quot;"
+    )
+    .replaceAll(
+        "'",
+        "&#039;"
+    );
 
 }
 
@@ -2607,9 +3195,44 @@ function escapeHTML(value){
    ESCAPE ATTRIBUTE
 ========================================================= */
 
-function escapeAttr(value){
+function escapeAttr(
+    value
+){
 
-    return escapeHTML(value);
+    return escapeHTML(
+        value
+    );
+
+}
+
+
+/* =========================================================
+   ESCAPE JS
+========================================================= */
+
+function escapeJS(
+    value
+){
+
+    return String(
+        value ?? ""
+    )
+    .replaceAll(
+        "\\",
+        "\\\\"
+    )
+    .replaceAll(
+        "'",
+        "\\'"
+    )
+    .replaceAll(
+        "\n",
+        "\\n"
+    )
+    .replaceAll(
+        "\r",
+        "\\r"
+    );
 
 }
 
@@ -2618,7 +3241,9 @@ function escapeAttr(value){
    TEAM INITIALS
 ========================================================= */
 
-function getInitials(name){
+function getInitials(
+    name
+){
 
     const words =
         String(name)
@@ -2626,13 +3251,17 @@ function getInitials(name){
         .split(/\s+/)
         .filter(Boolean);
 
-    if(words.length === 1){
+
+    if(
+        words.length === 1
+    ){
 
         return words[0]
             .slice(0,3)
             .toUpperCase();
 
     }
+
 
     return words
         .slice(0,3)
@@ -2651,45 +3280,52 @@ function getInitials(name){
 ========================================================= */
 
 document.addEventListener(
-"error",
-event=>{
+    "error",
+    event => {
 
-    const img =
-        event.target;
+        const img =
+            event.target;
 
-    if(
-        img.tagName !== "IMG"
-    )
-        return;
 
-    if(
-        img.classList.contains(
-            "hero-logo"
+        if(
+            img.tagName !==
+            "IMG"
         )
-    ){
+            return;
 
-        img.style.opacity =
-            "0";
 
-        return;
+        if(
+            img.classList.contains(
+                "hero-logo"
+            )
+        ){
 
-    }
+            img.style.opacity =
+                "0";
 
-    img.style.display =
-        "none";
+            return;
 
-    if(
-        img.parentElement
-    ){
+        }
 
-        img.parentElement
-        .classList
-        .add("text-logo");
 
-    }
+        img.style.display =
+            "none";
 
-},
-true
+
+        if(
+            img.parentElement
+        ){
+
+            img.parentElement
+                .classList
+                .add(
+                    "text-logo"
+                );
+
+        }
+
+    },
+    true
 );
 
 
