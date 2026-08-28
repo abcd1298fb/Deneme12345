@@ -1,17 +1,8 @@
-<!DOCTYPE html>
-<html lang="tr">
+<!DOCTYPE html><html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CREX — Lig</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CREX — Lig</title><link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><style>
 
 :root{
     --bg:#02050a;
@@ -75,58 +66,34 @@ body{
         );
 }
 
-/* =========================================================
-   AMBIENT
-========================================================= */
-
 .ambient{
     position:fixed;
-
     width:520px;
     height:520px;
-
     left:-260px;
     top:10%;
-
     border-radius:50%;
-
     background:var(--league);
-
     filter:blur(150px);
-
     opacity:.07;
-
     pointer-events:none;
-
     z-index:-5;
-
-    animation:
-        ambientMove 14s ease-in-out infinite alternate;
+    animation:ambientMove 14s ease-in-out infinite alternate;
 }
 
 .ambient2{
     position:fixed;
-
     width:500px;
     height:500px;
-
     right:-260px;
     bottom:0;
-
     border-radius:50%;
-
     background:#315dff;
-
     filter:blur(160px);
-
     opacity:.06;
-
     pointer-events:none;
-
     z-index:-5;
-
-    animation:
-        ambientMove2 16s ease-in-out infinite alternate;
+    animation:ambientMove2 16s ease-in-out infinite alternate;
 }
 
 @keyframes ambientMove{
@@ -145,20 +112,12 @@ body{
     }
 }
 
-/* =========================================================
-   GRID
-========================================================= */
-
 body::before{
     content:"";
-
     position:fixed;
     inset:0;
-
     z-index:-4;
-
     pointer-events:none;
-
     opacity:.14;
 
     background-image:
@@ -188,11 +147,8 @@ body::before{
 
 .header{
     position:sticky;
-
     top:0;
-
     z-index:1000;
-
     height:74px;
 
     border-bottom:
@@ -218,21 +174,16 @@ body::before{
         );
 
     height:100%;
-
     margin:auto;
 
     display:flex;
-
     align-items:center;
-
     gap:28px;
 }
 
 .logo{
     position:relative;
-
     color:#fff;
-
     text-decoration:none;
 
     font-family:
@@ -240,11 +191,8 @@ body::before{
         sans-serif;
 
     font-size:40px;
-
     line-height:1;
-
     font-weight:900;
-
     letter-spacing:2px;
 }
 
@@ -254,17 +202,12 @@ body::before{
 
 .logo::after{
     content:"";
-
     position:absolute;
-
     left:1px;
     bottom:-7px;
-
     width:30px;
     height:2px;
-
     border-radius:10px;
-
     background:var(--blue);
 
     box-shadow:
@@ -273,17 +216,13 @@ body::before{
 
 .main-nav{
     display:flex;
-
     align-items:center;
-
     gap:4px;
-
     flex:1;
 }
 
 .main-nav a{
     color:#718096;
-
     text-decoration:none;
 
     padding:
@@ -292,7 +231,6 @@ body::before{
     border-radius:10px;
 
     font-size:10px;
-
     font-weight:900;
 
     transition:.3s var(--ease);
@@ -300,7 +238,6 @@ body::before{
 
 .main-nav a:hover{
     color:#fff;
-
     background:
         rgba(255,255,255,.04);
 }
@@ -310,9 +247,7 @@ body::before{
     height:42px;
 
     display:flex;
-
     align-items:center;
-
     gap:10px;
 
     padding:
@@ -348,24 +283,17 @@ body::before{
 
 .search svg{
     width:16px;
-
     color:#68788d;
-
     flex:none;
 }
 
 .search input{
     width:100%;
-
     border:0;
     outline:0;
-
     color:#fff;
-
     background:transparent;
-
     font-family:inherit;
-
     font-size:10px;
 }
 
@@ -394,13 +322,10 @@ body::before{
 
 .league-hero{
     position:relative;
-
     min-height:255px;
-
     overflow:hidden;
 
     display:flex;
-
     align-items:center;
 
     border:
@@ -421,15 +346,12 @@ body::before{
 
 .hero-bg{
     position:absolute;
-
     inset:0;
-
     overflow:hidden;
 }
 
 .hero-bg::before{
     content:"";
-
     position:absolute;
 
     width:550px;
@@ -448,7 +370,6 @@ body::before{
         );
 
     opacity:.18;
-
     filter:blur(15px);
 
     animation:
@@ -458,22 +379,18 @@ body::before{
 @keyframes heroPulse{
     to{
         transform:scale(1.2);
-
         opacity:.28;
     }
 }
 
 .hero-bg::after{
     content:"";
-
     position:absolute;
 
     width:130%;
-
     height:160px;
 
     left:-15%;
-
     top:55px;
 
     transform:rotate(-9deg);
@@ -509,9 +426,7 @@ body::before{
 
 .hero-content{
     position:relative;
-
     z-index:3;
-
     width:100%;
 
     display:grid;
@@ -520,7 +435,6 @@ body::before{
         170px 1fr auto;
 
     align-items:center;
-
     gap:35px;
 
     padding:35px 45px;
@@ -531,7 +445,6 @@ body::before{
     height:150px;
 
     display:grid;
-
     place-items:center;
 
     position:relative;
@@ -544,11 +457,8 @@ body::before{
 
 .hero-logo-wrap::before{
     content:"";
-
     position:absolute;
-
     inset:15px;
-
     border-radius:50%;
 
     background:
@@ -612,19 +522,14 @@ body::before{
 
 .hero-kicker{
     display:flex;
-
     align-items:center;
-
     gap:8px;
-
     margin-bottom:9px;
 
     color:#748399;
 
     font-size:9px;
-
     font-weight:900;
-
     letter-spacing:1.8px;
 }
 
@@ -646,7 +551,6 @@ body::before{
 @keyframes dotPulse{
     50%{
         transform:scale(1.4);
-
         opacity:.5;
     }
 }
@@ -659,13 +563,9 @@ body::before{
         sans-serif;
 
     font-size:72px;
-
     line-height:.82;
-
     font-weight:900;
-
     text-transform:uppercase;
-
     letter-spacing:-1px;
 }
 
@@ -675,15 +575,12 @@ body::before{
     color:#728095;
 
     font-size:10px;
-
     font-weight:800;
-
     letter-spacing:1px;
 }
 
 .hero-stats{
     display:flex;
-
     gap:10px;
 }
 
@@ -706,7 +603,6 @@ body::before{
 
 .stat strong{
     display:block;
-
     color:#fff;
 
     font-family:
@@ -714,7 +610,6 @@ body::before{
         sans-serif;
 
     font-size:28px;
-
     font-weight:900;
 }
 
@@ -722,9 +617,7 @@ body::before{
     color:#66768a;
 
     font-size:7px;
-
     font-weight:900;
-
     letter-spacing:1px;
 }
 
@@ -734,25 +627,19 @@ body::before{
 
 .controls{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
-
     gap:15px;
 
     margin-top:30px;
-
     margin-bottom:20px;
 }
 
 .filters{
     display:flex;
-
     gap:8px;
 
     overflow-x:auto;
-
     scrollbar-width:none;
 }
 
@@ -781,7 +668,6 @@ body::before{
     font-family:inherit;
 
     font-size:8px;
-
     font-weight:900;
 
     transition:.3s var(--ease);
@@ -820,7 +706,6 @@ body::before{
     color:#58677a;
 
     font-size:8px;
-
     font-weight:900;
 }
 
@@ -845,7 +730,6 @@ body::before{
     position:relative;
 
     min-height:315px;
-
     overflow:hidden;
 
     border:
@@ -870,11 +754,8 @@ body::before{
 
 .match-card::before{
     content:"";
-
     position:absolute;
-
     inset:0;
-
     opacity:0;
 
     background:
@@ -889,7 +770,6 @@ body::before{
         );
 
     transition:.3s;
-
     pointer-events:none;
 }
 
@@ -921,11 +801,9 @@ body::before{
 
 .card-glow{
     position:absolute;
-
     top:0;
     left:8%;
     right:8%;
-
     height:3px;
 
     border-radius:10px;
@@ -953,23 +831,18 @@ body::before{
 
 .match-content{
     position:relative;
-
     z-index:3;
 
     height:315px;
-
     padding:19px;
 
     display:flex;
-
     flex-direction:column;
 }
 
 .match-top{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 }
 
@@ -988,23 +861,18 @@ body::before{
         rgba(255,255,255,.025);
 
     font-size:8px;
-
     font-weight:900;
 }
 
 .match-status{
     display:flex;
-
     align-items:center;
-
     gap:6px;
 
     color:#45adff;
 
     font-size:8px;
-
     font-weight:900;
-
     letter-spacing:1px;
 }
 
@@ -1035,17 +903,13 @@ body::before{
         1fr auto 1fr;
 
     align-items:center;
-
     gap:10px;
 }
 
 .team{
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     gap:11px;
 }
 
@@ -1054,7 +918,6 @@ body::before{
     height:78px;
 
     display:grid;
-
     place-items:center;
 
     color:#fff;
@@ -1076,7 +939,6 @@ body::before{
         sans-serif;
 
     font-size:17px;
-
     font-weight:900;
 
     box-shadow:
@@ -1093,6 +955,8 @@ body::before{
     object-fit:contain;
 
     padding:10px;
+
+    display:block;
 }
 
 .team-logo.text-logo{
@@ -1126,9 +990,7 @@ body::before{
     text-align:center;
 
     font-size:9px;
-
     line-height:1.3;
-
     font-weight:800;
 }
 
@@ -1137,7 +999,6 @@ body::before{
     height:34px;
 
     display:grid;
-
     place-items:center;
 
     color:#667589;
@@ -1151,15 +1012,12 @@ body::before{
         rgba(255,255,255,.025);
 
     font-size:7px;
-
     font-weight:900;
 }
 
 .match-bottom{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 
     padding-top:14px;
@@ -1172,24 +1030,19 @@ body::before{
     color:#68778a;
 
     font-size:8px;
-
     font-weight:800;
-
     line-height:1.4;
 }
 
 .watch-btn{
     display:flex;
-
     align-items:center;
-
     gap:7px;
 
     padding:
         9px 13px;
 
     color:#fff;
-
     text-decoration:none;
 
     border-radius:9px;
@@ -1210,7 +1063,6 @@ body::before{
         );
 
     font-size:8px;
-
     font-weight:900;
 
     transition:.35s var(--ease);
@@ -1237,7 +1089,6 @@ body::before{
     display:none;
 
     justify-content:center;
-
     align-items:center;
 
     padding:35px;
@@ -1291,23 +1142,18 @@ body::before{
 
 .empty-icon{
     font-size:35px;
-
     margin-bottom:15px;
-
     opacity:.4;
 }
 
 .empty h3{
     color:#fff;
-
     font-size:16px;
 }
 
 .empty p{
     margin-top:7px;
-
     color:#68778a;
-
     font-size:9px;
 }
 
@@ -1328,14 +1174,12 @@ body::before{
     padding-top:25px;
 
     display:flex;
-
     justify-content:space-between;
 
     border-top:
         1px solid rgba(255,255,255,.055);
 
     color:#4f5d70;
-
     font-size:8px;
 }
 
@@ -1347,9 +1191,7 @@ body::before{
         sans-serif;
 
     font-size:25px;
-
     font-weight:900;
-
     letter-spacing:2px;
 }
 
@@ -1410,9 +1252,7 @@ body::before{
 
     .search{
         width:170px;
-
         height:38px;
-
         margin-left:auto;
     }
 
@@ -1429,11 +1269,8 @@ body::before{
 
     .hero-content{
         display:flex;
-
         flex-direction:column;
-
         text-align:center;
-
         padding:30px 20px;
     }
 
@@ -1453,13 +1290,11 @@ body::before{
 
     .hero-stats{
         width:100%;
-
         justify-content:center;
     }
 
     .stat{
         flex:1;
-
         min-width:0;
     }
 
@@ -1469,7 +1304,6 @@ body::before{
 
     .controls{
         align-items:flex-start;
-
         flex-direction:column;
     }
 
@@ -1482,7 +1316,6 @@ body::before{
             calc(100% - 24px);
 
         flex-direction:column;
-
         gap:10px;
     }
 
@@ -1500,57 +1333,27 @@ body::before{
 
 }
 
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
 @media(prefers-reduced-motion:reduce){
 
     *,
     *::before,
     *::after{
         animation:none!important;
-
         transition:none!important;
     }
 
 }
 
-</style>
-</head>
-
-<body>
-
-<div class="ambient"></div>
-<div class="ambient2"></div>
-
-<header class="header">
-
-<div class="header-inner">
-
-<a href="index.html" class="logo">
+</style></head><body><div class="ambient"></div>
+<div class="ambient2"></div><header class="header"><div class="header-inner"><a href="index.html" class="logo">
 CR<span>EX</span>
-</a>
-
-<nav class="main-nav">
-
-<a href="index.html">
+</a><nav class="main-nav"><a href="index.html">
 ANA SAYFA
-</a>
-
-<a href="#matches" class="active">
+</a><a href="#matches" class="active">
 MAÇLAR
-</a>
-
-<a href="index.html#leagues">
+</a><a href="index.html#leagues">
 LİGLER
-</a>
-
-</nav>
-
-<div class="search">
-
-<svg
+</a></nav><div class="search"><svg
 viewBox="0 0 24 24"
 fill="none"
 stroke="currentColor"
@@ -1560,207 +1363,83 @@ stroke-width="2">
 
 <path d="m20 20-4-4"></path>
 
-</svg>
-
-<input
+</svg><input
 id="searchInput"
 type="search"
 placeholder="Takım veya maç ara..."
 autocomplete="off">
 
-</div>
-
-</div>
-
-</header>
-
-
-<main class="main">
-
-<!-- =====================================================
-     LEAGUE HERO
-====================================================== -->
-
-<section class="league-hero">
-
-<div class="hero-bg"></div>
-
-<div class="hero-content">
-
-<div class="hero-logo-wrap">
-
-<img
+</div></div></header><main class="main"><section class="league-hero"><div class="hero-bg"></div><div class="hero-content"><div class="hero-logo-wrap"><img
 id="heroLogo"
 class="hero-logo"
 src=""
 alt="Lig logosu">
 
-</div>
-
-<div>
-
-<div class="hero-kicker">
-
-<span class="hero-dot"></span>
+</div><div><div class="hero-kicker"><span class="hero-dot"></span>
 
 CREX LİG MERKEZİ
 
-</div>
-
-<h1
+</div><h1
 id="leagueTitle"
-class="hero-title">
+class="hero-title">YÜKLENİYOR...
 
-YÜKLENİYOR...
-
-</h1>
-
-<div
+</h1><div
 id="leagueCountry"
-class="hero-country">
+class="hero-country">MAÇLAR YÜKLENİYOR
 
-MAÇLAR YÜKLENİYOR
-
-</div>
-
-</div>
-
-<div class="hero-stats">
-
-<div class="stat">
-
-<strong id="totalMatches">
+</div></div><div class="hero-stats"><div class="stat"><strong id="totalMatches">
 0
-</strong>
+</strong><span>MAÇ</span>
 
-<span>MAÇ</span>
-
-</div>
-
-<div class="stat">
-
-<strong id="upcomingMatches">
+</div><div class="stat"><strong id="upcomingMatches">
 0
-</strong>
+</strong><span>GELECEK</span>
 
-<span>GELECEK</span>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- =====================================================
-     CONTROLS
-====================================================== -->
-
-<section id="matches">
-
-<div class="controls">
-
-<div class="filters">
-
-<button
+</div></div></div></section><section id="matches"><div class="controls"><div class="filters"><button
 class="filter active"
 data-filter="all">
 
 TÜMÜ
 
-</button>
-
-<button
+</button><button
 class="filter"
 data-filter="upcoming">
 
 GELECEK
 
-</button>
-
-<button
+</button><button
 class="filter"
 data-filter="finished">
 
 TAMAMLANAN
 
-</button>
-
-</div>
-
-<div
+</button></div><div
 id="resultCount"
-class="result-count">
+class="result-count">0 MAÇ
 
-0 MAÇ
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     MATCH GRID
-====================================================== -->
-
-<div
+</div></div><div
 id="matchGrid"
 class="matches">
-</div>
-
-
-<div
+</div><div
 id="empty"
-class="empty">
-
-<div class="empty-icon">
+class="empty"><div class="empty-icon">
 ⚽
-</div>
-
-<h3>
+</div><h3>
 Maç bulunamadı
-</h3>
-
-<p>
+</h3><p>
 Arama veya filtre kriterlerini değiştirmeyi deneyin.
-</p>
-
-</div>
-
-
-<div
+</p></div><div
 id="loader"
-class="loader">
-
-<div class="loader-ring"></div>
-
-</div>
-
-</section>
-
-</main>
-
-
-<footer class="footer">
-
-<div class="footer-logo">
+class="loader"><div class="loader-ring"></div></div></section></main><footer class="footer"><div class="footer-logo">
 CREX
-</div>
-
-<div>
+</div><div>
 © 2026 CREX
-</div>
-
-</footer>
-
-
-<script>
+</div></footer><script>
 
 /* =========================================================
-   CREX LEAGUE SYSTEM
-   maclar.json FORMATINA %100 UYUMLU
+   CREX LIG SISTEMI
+   maclar.json + takimlar.json
+   OTOMATIK LOGO SISTEMI
 ========================================================= */
 
 
@@ -1857,10 +1536,6 @@ const leagues = {
 };
 
 
-/* =========================================================
-   SELECTED LEAGUE
-========================================================= */
-
 const league =
     leagues[leagueSlug] ||
     leagues["premier-league"];
@@ -1934,7 +1609,7 @@ const upcomingMatches =
 
 
 /* =========================================================
-   LEAGUE HEADER
+   HEADER
 ========================================================= */
 
 document.title =
@@ -1970,33 +1645,476 @@ let renderedCount = 0;
 const PAGE_SIZE = 24;
 
 
+/*
+   İki JSON dosyası:
+
+   data/maclar.json
+   data/takımlar.json
+*/
+
+const matchesJsonPath =
+    "./data/maclar.json";
+
+const teamsJsonPath =
+    "./data/takımlar.json";
+
+
+/*
+   Takım logo veritabanı.
+*/
+
+let teamDatabase = [];
+
+
 /* =========================================================
-   JSON
+   NORMALIZE TEXT
 ========================================================= */
 
-const jsonPath =
-    "./data/maclar.json";
+function normalizeText(value){
+
+    return String(
+        value ?? ""
+    )
+    .normalize("NFD")
+    .replace(
+        /[\u0300-\u036f]/g,
+        ""
+    )
+    .toLocaleLowerCase(
+        "tr-TR"
+    )
+    .replace(
+        /ı/g,
+        "i"
+    )
+    .replace(
+        /ş/g,
+        "s"
+    )
+    .replace(
+        /ğ/g,
+        "g"
+    )
+    .replace(
+        /ü/g,
+        "u"
+    )
+    .replace(
+        /ö/g,
+        "o"
+    )
+    .replace(
+        /ç/g,
+        "c"
+    )
+    .replace(
+        /[^a-z0-9]/g,
+        ""
+    );
+
+}
+
+
+/* =========================================================
+   TEAM DATABASE NORMALIZER
+========================================================= */
+
+function normalizeTeamDatabase(data){
+
+    /*
+       Desteklenen örnekler:
+
+       1)
+
+       [
+         {
+           "ad":"Arsenal",
+           "kisa":"ARS",
+           "logo":"https://..."
+         }
+       ]
+
+       2)
+
+       {
+         "Arsenal":{
+           "logo":"https://..."
+         }
+       }
+
+       3)
+
+       {
+         "teams":[
+           {
+             "ad":"Arsenal",
+             "logo":"https://..."
+           }
+         ]
+       }
+    */
+
+    let list = [];
+
+
+    if(Array.isArray(data)){
+
+        list = data;
+
+    }
+    else if(
+        data &&
+        Array.isArray(
+            data.teams
+        )
+    ){
+
+        list = data.teams;
+
+    }
+    else if(
+        data &&
+        Array.isArray(
+            data.takimlar
+        )
+    ){
+
+        list = data.takimlar;
+
+    }
+    else if(
+        data &&
+        typeof data === "object"
+    ){
+
+        list =
+            Object.entries(
+                data
+            ).map(
+                ([name,value]) => {
+
+                    if(
+                        typeof value ===
+                        "string"
+                    ){
+
+                        return {
+                            ad:name,
+                            logo:value
+                        };
+
+                    }
+
+
+                    return {
+                        ...(value || {}),
+                        ad:
+                            value?.ad ||
+                            value?.name ||
+                            value?.isim ||
+                            name
+                    };
+
+                }
+            );
+
+    }
+
+
+    return list
+        .filter(Boolean)
+        .map(
+            team => {
+
+                const name =
+                    team.ad ||
+                    team.name ||
+                    team.isim ||
+                    team.takim ||
+                    team.takimAdi ||
+                    team.teamName ||
+                    "";
+
+                const short =
+                    team.kisa ||
+                    team.short ||
+                    team.kod ||
+                    team.code ||
+                    team.slug ||
+                    "";
+
+                const logo =
+                    team.logo ||
+                    team.logoUrl ||
+                    team.logoURL ||
+                    team.image ||
+                    team.imageUrl ||
+                    team.resim ||
+                    "";
+
+
+                return {
+
+                    name:String(
+                        name
+                    ),
+
+                    short:String(
+                        short
+                    ),
+
+                    logo:String(
+                        logo
+                    ),
+
+                    normalizedName:
+                        normalizeText(
+                            name
+                        ),
+
+                    normalizedShort:
+                        normalizeText(
+                            short
+                        )
+
+                };
+
+            }
+        )
+        .filter(
+            team =>
+                team.logo
+        );
+
+}
+
+
+/* =========================================================
+   FIND TEAM LOGO
+========================================================= */
+
+function findTeamLogo(
+    teamName,
+    teamShort
+){
+
+    const name =
+        normalizeText(
+            teamName
+        );
+
+    const short =
+        normalizeText(
+            teamShort
+        );
+
+
+    if(!name && !short)
+        return "";
+
+
+    /*
+       1. Önce kısa kod birebir.
+    */
+
+    if(short){
+
+        const shortMatch =
+            teamDatabase.find(
+                team =>
+                    team.normalizedShort ===
+                    short
+            );
+
+
+        if(
+            shortMatch &&
+            shortMatch.logo
+        ){
+
+            return shortMatch.logo;
+
+        }
+
+    }
+
+
+    /*
+       2. Takım adı birebir.
+    */
+
+    if(name){
+
+        const exactMatch =
+            teamDatabase.find(
+                team =>
+                    team.normalizedName ===
+                    name
+            );
+
+
+        if(
+            exactMatch &&
+            exactMatch.logo
+        ){
+
+            return exactMatch.logo;
+
+        }
+
+    }
+
+
+    /*
+       3. İçerme kontrolü.
+       Örneğin:
+
+       Man United
+       Manchester United
+    */
+
+    if(name){
+
+        const partialMatch =
+            teamDatabase.find(
+                team => {
+
+                    if(
+                        !team.normalizedName
+                    )
+                        return false;
+
+
+                    return (
+                        team.normalizedName.includes(
+                            name
+                        ) ||
+                        name.includes(
+                            team.normalizedName
+                        )
+                    );
+
+                }
+            );
+
+
+        if(
+            partialMatch &&
+            partialMatch.logo
+        ){
+
+            return partialMatch.logo;
+
+        }
+
+    }
+
+
+    /*
+       4. Kısa kodun isim içinde
+       geçmesi.
+    */
+
+    if(short){
+
+        const shortNameMatch =
+            teamDatabase.find(
+                team => {
+
+                    return (
+                        team.normalizedName.includes(
+                            short
+                        )
+                    );
+
+                }
+            );
+
+
+        if(
+            shortNameMatch &&
+            shortNameMatch.logo
+        ){
+
+            return shortNameMatch.logo;
+
+        }
+
+    }
+
+
+    return "";
+
+}
+
+
+/* =========================================================
+   RESOLVE MATCH LOGOS
+========================================================= */
+
+function resolveMatchLogos(
+    match
+){
+
+    /*
+       Öncelik:
+
+       1. maclar.json'daki evLogo
+       2. takımlar.json'daki takım logosu
+    */
+
+    const existingHomeLogo =
+        String(
+            match.evLogo ||
+            ""
+        ).trim();
+
+
+    const existingAwayLogo =
+        String(
+            match.depLogo ||
+            ""
+        ).trim();
+
+
+    const homeLogo =
+        existingHomeLogo ||
+        findTeamLogo(
+            match.evSahibi,
+            match.evKisa
+        );
+
+
+    const awayLogo =
+        existingAwayLogo ||
+        findTeamLogo(
+            match.deplasman,
+            match.depKisa
+        );
+
+
+    return {
+
+        ...match,
+
+        resolvedEvLogo:
+            homeLogo,
+
+        resolvedDepLogo:
+            awayLogo
+
+    };
+
+}
 
 
 /* =========================================================
    NORMALIZE STATUS
 ========================================================= */
 
-function getMatchStatus(match){
-
-    /*
-       Senin JSON formatın:
-
-       "durum": "MS"
-
-       MS = maç tamamlandı.
-
-       Bunun yanında gelecekte:
-       "YAYINDA"
-       "CANLI"
-       "GELECEK"
-       gibi değerler de desteklenir.
-    */
+function getMatchStatus(
+    match
+){
 
     const status =
         String(
@@ -2008,20 +2126,18 @@ function getMatchStatus(match){
         );
 
 
-    /* Tamamlanan */
-
     const finishedStatuses = [
 
         "ms",
         "tamamlandı",
         "tamamlandi",
         "finished",
-        "finished",
         "bitti",
         "bitmiş",
         "bitmis"
 
     ];
+
 
     if(
         finishedStatuses.includes(
@@ -2034,8 +2150,6 @@ function getMatchStatus(match){
     }
 
 
-    /* Canlı */
-
     const liveStatuses = [
 
         "canlı",
@@ -2045,6 +2159,7 @@ function getMatchStatus(match){
         "yayinda"
 
     ];
+
 
     if(
         liveStatuses.includes(
@@ -2057,8 +2172,6 @@ function getMatchStatus(match){
     }
 
 
-    /* Eğer durum açıkça gelecek ise */
-
     const upcomingStatuses = [
 
         "gelecek",
@@ -2068,6 +2181,7 @@ function getMatchStatus(match){
         "scheduled"
 
     ];
+
 
     if(
         upcomingStatuses.includes(
@@ -2080,13 +2194,11 @@ function getMatchStatus(match){
     }
 
 
-    /*
-       Durum tanınmıyorsa
-       tarih + saat üzerinden karar ver.
-    */
-
     const date =
-        getMatchDate(match);
+        getMatchDate(
+            match
+        );
+
 
     if(!date)
         return "upcoming";
@@ -2103,7 +2215,9 @@ function getMatchStatus(match){
    DATE PARSER
 ========================================================= */
 
-function getMatchDate(match){
+function getMatchDate(
+    match
+){
 
     if(!match.tarih)
         return null;
@@ -2119,35 +2233,25 @@ function getMatchDate(match){
         return null;
 
 
-    /*
-       YYYY-MM-DD formatını
-       Türkiye yerel saatine yakın
-       şekilde oluşturuyoruz.
-    */
-
     let dateString =
         dateValue;
 
 
     if(
         match.saat &&
-        String(match.saat).trim()
+        String(
+            match.saat
+        ).trim()
     ){
 
         dateString +=
             "T" +
-            String(match.saat).trim();
+            String(
+                match.saat
+            ).trim();
 
     }
     else{
-
-        /*
-           Saat yoksa günün sonuna
-           yakın kabul ediyoruz.
-           Böylece MS olmayan tarihli
-           maçlar yanlışlıkla erken
-           tamamlanmış görünmez.
-        */
 
         dateString +=
             "T23:59:59";
@@ -2181,7 +2285,9 @@ function getMatchDate(match){
    DATE FORMAT
 ========================================================= */
 
-function formatDate(match){
+function formatDate(
+    match
+){
 
     if(!match.tarih){
 
@@ -2198,7 +2304,9 @@ function formatDate(match){
 
     if(
         match.saat &&
-        String(match.saat).trim()
+        String(
+            match.saat
+        ).trim()
     ){
 
         result +=
@@ -2219,7 +2327,9 @@ function formatDate(match){
    SIMPLE DATE
 ========================================================= */
 
-function formatSimpleDate(value){
+function formatSimpleDate(
+    value
+){
 
     const date =
         new Date(
@@ -2252,19 +2362,12 @@ function formatSimpleDate(value){
 
 
 /* =========================================================
-   FILTER BY LEAGUE
+   LEAGUE FILTER
 ========================================================= */
 
-function isCorrectLeague(match){
-
-    /*
-       maclar.json:
-
-       "lig": "premier-league"
-
-       Bu yüzden öncelikli kontrol
-       doğrudan match.lig üzerinden.
-    */
+function isCorrectLeague(
+    match
+){
 
     const matchLeague =
         String(
@@ -2295,7 +2398,7 @@ function isCorrectLeague(match){
 
 
 /* =========================================================
-   LOAD MATCHES
+   LOAD ALL DATA
 ========================================================= */
 
 async function loadMatches(){
@@ -2307,50 +2410,102 @@ async function loadMatches(){
 
     try{
 
-        const response =
-            await fetch(
-                jsonPath,
+        /*
+           maclar.json ve takımlar.json
+           aynı anda yükleniyor.
+        */
+
+        const [
+            matchesResponse,
+            teamsResponse
+        ] =
+        await Promise.all([
+
+            fetch(
+                matchesJsonPath,
                 {
                     cache:"no-store"
                 }
-            );
+            ),
+
+            fetch(
+                teamsJsonPath,
+                {
+                    cache:"no-store"
+                }
+            )
+
+        ]);
 
 
-        if(!response.ok){
+        if(
+            !matchesResponse.ok
+        ){
 
             throw new Error(
                 "maclar.json yüklenemedi: " +
-                response.status
+                matchesResponse.status
             );
 
         }
 
 
-        const data =
-            await response.json();
-
-
         /*
-           Ana format:
-
-           [
-              {...},
-              {...}
-           ]
-
-           Ayrıca güvenlik amacıyla:
-
-           {
-              "matches":[...]
-           }
-
-           formatını da destekliyoruz.
+           Takımlar JSON'u yüklenmezse
+           maçlar yine çalışsın.
         */
+
+        let teamsData = [];
+
+
+        if(
+            teamsResponse.ok
+        ){
+
+            try{
+
+                teamsData =
+                    await teamsResponse.json();
+
+            }
+            catch(teamError){
+
+                console.warn(
+                    "takımlar.json JSON formatı okunamadı.",
+                    teamError
+                );
+
+                teamsData = [];
+
+            }
+
+        }
+        else{
+
+            console.warn(
+                "takımlar.json yüklenemedi:",
+                teamsResponse.status
+            );
+
+        }
+
+
+        teamDatabase =
+            normalizeTeamDatabase(
+                teamsData
+            );
+
+
+        const data =
+            await matchesResponse.json();
+
 
         let matches;
 
 
-        if(Array.isArray(data)){
+        if(
+            Array.isArray(data)
+        ){
 
             matches =
                 data;
@@ -2382,24 +2537,24 @@ async function loadMatches(){
         */
 
         allMatches =
-            matches.filter(
+            matches
+            .filter(
                 match =>
                     isCorrectLeague(
                         match
                     )
-            );
-
-
-        /*
-           ID kontrolü.
-        */
-
-        allMatches =
-            allMatches.filter(
+            )
+            .filter(
                 match =>
                     match &&
                     match.id !== undefined &&
                     match.id !== null
+            )
+            .map(
+                match =>
+                    resolveMatchLogos(
+                        match
+                    )
             );
 
 
@@ -2418,11 +2573,43 @@ async function loadMatches(){
             league.name
         );
 
+
         console.log(
             "CREX Maç Sayısı:",
             allMatches.length
         );
 
+
+        console.log(
+            "CREX Takım Logo Sayısı:",
+            teamDatabase.length
+        );
+
+
+        /*
+           Logo eşleştirme kontrolü.
+        */
+
+        allMatches.forEach(
+            match => {
+
+                console.log(
+                    match.evSahibi,
+                    "=>",
+                    match.resolvedEvLogo ||
+                    "LOGO BULUNAMADI"
+                );
+
+
+                console.log(
+                    match.deplasman,
+                    "=>",
+                    match.resolvedDepLogo ||
+                    "LOGO BULUNAMADI"
+                );
+
+            }
+        );
 
     }
     catch(error){
@@ -2617,12 +2804,30 @@ function createMatchCard(
         getInitials(away);
 
 
+    /*
+       ÖNEMLİ:
+
+       maclar.json'da:
+
+       "evLogo": "",
+       "depLogo": ""
+
+       olsa bile burada artık:
+
+       resolvedEvLogo
+       resolvedDepLogo
+
+       kullanılıyor.
+    */
+
     const homeLogoUrl =
+        match.resolvedEvLogo ||
         match.evLogo ||
         "";
 
 
     const awayLogoUrl =
+        match.resolvedDepLogo ||
         match.depLogo ||
         "";
 
@@ -2632,11 +2837,6 @@ function createMatchCard(
             match
         );
 
-
-    /*
-       ID doğrudan JSON'dan alınır.
-       index kullanılmaz.
-    */
 
     const matchId =
         match.id;
@@ -2674,13 +2874,17 @@ function createMatchCard(
     let statusText;
 
 
-    if(status === "finished"){
+    if(
+        status === "finished"
+    ){
 
         statusText =
             "TAMAMLANDI";
 
     }
-    else if(status === "live"){
+    else if(
+        status === "live"
+    ){
 
         statusText =
             "CANLI";
@@ -2694,15 +2898,66 @@ function createMatchCard(
     }
 
 
-    /*
-       Skor varsa tarih bölümünün
-       üstüne/yanına gösteriyoruz.
-    */
-
     const bottomText =
         score
         ? `${escapeHTML(date)} • ${escapeHTML(score)}`
         : escapeHTML(date);
+
+
+    /*
+       Logo HTML oluşturma.
+    */
+
+    const homeLogoHTML =
+        homeLogoUrl
+
+        ? `
+
+            <img
+                src="${escapeAttr(
+                    homeLogoUrl
+                )}"
+                alt="${escapeAttr(
+                    home
+                )}"
+                loading="lazy"
+                decoding="async"
+                onerror="handleTeamLogoError(this, '${escapeJS(
+                    homeShort
+                )}')"
+            >
+
+        `
+
+        : escapeHTML(
+            homeShort
+        );
+
+
+    const awayLogoHTML =
+        awayLogoUrl
+
+        ? `
+
+            <img
+                src="${escapeAttr(
+                    awayLogoUrl
+                )}"
+                alt="${escapeAttr(
+                    away
+                )}"
+                loading="lazy"
+                decoding="async"
+                onerror="handleTeamLogoError(this, '${escapeJS(
+                    awayShort
+                )}')"
+            >
+
+        `
+
+        : escapeHTML(
+            awayShort
+        );
 
 
     card.innerHTML = `
@@ -2737,34 +2992,7 @@ function createMatchCard(
 
                     <div class="team-logo">
 
-                        ${
-                            homeLogoUrl
-
-                            ? `
-
-                            <img
-                                src="${escapeAttr(
-                                    homeLogoUrl
-                                )}"
-                                alt="${escapeAttr(
-                                    home
-                                )}"
-                                loading="lazy"
-                                onerror="
-                                    this.style.display='none';
-                                    this.parentElement.classList.add('text-logo');
-                                    this.parentElement.textContent='${escapeJS(
-                                        homeShort
-                                    )}';
-                                "
-                            >
-
-                            `
-
-                            : escapeHTML(
-                                homeShort
-                            )
-                        }
+                        ${homeLogoHTML}
 
                     </div>
 
@@ -2788,34 +3016,7 @@ function createMatchCard(
 
                     <div class="team-logo">
 
-                        ${
-                            awayLogoUrl
-
-                            ? `
-
-                            <img
-                                src="${escapeAttr(
-                                    awayLogoUrl
-                                )}"
-                                alt="${escapeAttr(
-                                    away
-                                )}"
-                                loading="lazy"
-                                onerror="
-                                    this.style.display='none';
-                                    this.parentElement.classList.add('text-logo');
-                                    this.parentElement.textContent='${escapeJS(
-                                        awayShort
-                                    )}';
-                                "
-                            >
-
-                            `
-
-                            : escapeHTML(
-                                awayShort
-                            )
-                        }
+                        ${awayLogoHTML}
 
                     </div>
 
@@ -2859,14 +3060,51 @@ function createMatchCard(
     `;
 
 
+    return card;
+
+}
+
+
+/* =========================================================
+   TEAM LOGO ERROR
+========================================================= */
+
+function handleTeamLogoError(
+    img,
+    fallbackText
+){
+
     /*
-       Kartın tamamına tıklanabilir
-       alan eklemiyoruz.
-       Buton doğrudan mac.html?id=ID.
+       Logo URL çalışmazsa
+       kutunun içine takım kısaltması gelir.
     */
 
+    if(!img)
+        return;
 
-    return card;
+
+    img.onerror =
+        null;
+
+
+    const parent =
+        img.parentElement;
+
+
+    if(!parent)
+        return;
+
+
+    img.remove();
+
+
+    parent.classList.add(
+        "text-logo"
+    );
+
+
+    parent.textContent =
+        fallbackText || "TEAM";
 
 }
 
@@ -3276,56 +3514,15 @@ function getInitials(
 
 
 /* =========================================================
-   IMAGE FALLBACK
+   HERO LOGO ERROR
 ========================================================= */
 
-document.addEventListener(
+heroLogo.addEventListener(
     "error",
-    event => {
-
-        const img =
-            event.target;
-
-
-        if(
-            img.tagName !==
-            "IMG"
-        )
-            return;
-
-
-        if(
-            img.classList.contains(
-                "hero-logo"
-            )
-        ){
-
-            img.style.opacity =
-                "0";
-
-            return;
-
-        }
-
-
-        img.style.display =
-            "none";
-
-
-        if(
-            img.parentElement
-        ){
-
-            img.parentElement
-                .classList
-                .add(
-                    "text-logo"
-                );
-
-        }
-
-    },
-    true
+    ()=>{
+        heroLogo.style.opacity =
+            "0";
+    }
 );
 
 
@@ -3335,7 +3532,5 @@ document.addEventListener(
 
 loadMatches();
 
-</script>
-
-</body>
-   </html>
+</script></body>
+                                  </html>
