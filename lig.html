@@ -42,11 +42,7 @@ body{
     background:
         radial-gradient(
             800px 500px at 0 -10%,
-            color-mix(
-                in srgb,
-                var(--league) 16%,
-                transparent
-            ),
+            color-mix(in srgb,var(--league) 16%,transparent),
             transparent 65%
         ),
         radial-gradient(
@@ -1244,8 +1240,7 @@ body::before{
 @media(prefers-reduced-motion:reduce){
 
     *,
-    *::before,
-    *::after{
+    *::before{
         animation:none!important;
         transition:none!important;
     }
@@ -1253,221 +1248,192 @@ body::before{
 }
 
 </style></head><body><div class="ambient"></div>
-<div class="ambient2"></div><header class="header"><div class="header-inner">
+<div class="ambient2"></div><header class="header"><div class="header-inner"><a href="index.html" class="logo">
+    CR<span>EX</span>
+</a>
 
-    <a href="index.html" class="logo">
-        CR<span>EX</span>
+<nav class="main-nav">
+
+    <a href="index.html">
+        ANA SAYFA
     </a>
 
-    <nav class="main-nav">
+    <a href="#matches" class="active">
+        MAÇLAR
+    </a>
 
-        <a href="index.html">
-            ANA SAYFA
-        </a>
+    <a href="index.html#leagues">
+        LİGLER
+    </a>
 
-        <a href="#matches" class="active">
-            MAÇLAR
-        </a>
+</nav>
 
-        <a href="index.html#leagues">
-            LİGLER
-        </a>
+<div class="search">
 
-    </nav>
+    <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+    >
+        <circle cx="11" cy="11" r="7"></circle>
+        <path d="m20 20-4-4"></path>
+    </svg>
 
-    <div class="search">
-
-        <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-        >
-            <circle cx="11" cy="11" r="7"></circle>
-            <path d="m20 20-4-4"></path>
-        </svg>
-
-        <input
-            id="searchInput"
-            type="search"
-            placeholder="Takım veya maç ara..."
-            autocomplete="off"
-        >
-
-    </div>
+    <input
+        id="searchInput"
+        type="search"
+        placeholder="Takım veya maç ara..."
+        autocomplete="off"
+    >
 
 </div>
 
-</header><main class="main"><section class="league-hero"><div class="hero-bg"></div>
+</div></header><main class="main"><section class="league-hero"><div class="hero-bg"></div><div class="hero-content"><div class="hero-logo-wrap">
 
-<div class="hero-content">
-
-    <div class="hero-logo-wrap">
-
-        <img
-            id="heroLogo"
-            class="hero-logo"
-            src=""
-            alt="Lig logosu"
-        >
-
-    </div>
-
-
-    <div>
-
-        <div class="hero-kicker">
-
-            <span class="hero-dot"></span>
-
-            CREX LİG MERKEZİ
-
-        </div>
-
-
-        <h1
-            id="leagueTitle"
-            class="hero-title"
-        >
-            YÜKLENİYOR...
-        </h1>
-
-
-        <div
-            id="leagueCountry"
-            class="hero-country"
-        >
-            MAÇLAR YÜKLENİYOR
-        </div>
-
-    </div>
-
-
-    <div class="hero-stats">
-
-        <div class="stat">
-
-            <strong id="totalMatches">
-                0
-            </strong>
-
-            <span>
-                MAÇ
-            </span>
-
-        </div>
-
-
-        <div class="stat">
-
-            <strong id="upcomingMatches">
-                0
-            </strong>
-
-            <span>
-                GELECEK
-            </span>
-
-        </div>
-
-    </div>
+    <img
+        id="heroLogo"
+        class="hero-logo"
+        src=""
+        alt="Lig logosu"
+    >
 
 </div>
 
-</section><section id="matches"><div class="controls">
 
-    <div class="filters">
+<div>
 
-        <button
-            class="filter active"
-            data-filter="all"
-        >
-            TÜMÜ
-        </button>
+    <div class="hero-kicker">
 
-        <button
-            class="filter"
-            data-filter="upcoming"
-        >
-            GELECEK
-        </button>
+        <span class="hero-dot"></span>
 
-        <button
-            class="filter"
-            data-filter="finished"
-        >
-            TAMAMLANAN
-        </button>
+        CREX LİG MERKEZİ
 
     </div>
+
+
+    <h1
+        id="leagueTitle"
+        class="hero-title"
+    >
+        YÜKLENİYOR...
+    </h1>
 
 
     <div
-        id="resultCount"
-        class="result-count"
+        id="leagueCountry"
+        class="hero-country"
     >
-        0 MAÇ
+        MAÇLAR YÜKLENİYOR
     </div>
 
 </div>
 
 
+<div class="hero-stats">
+
+    <div class="stat">
+
+        <strong id="totalMatches">
+            0
+        </strong>
+
+        <span>
+            MAÇ
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong id="upcomingMatches">
+            0
+        </strong>
+
+        <span>
+            GELECEK
+        </span>
+
+    </div>
+
+</div>
+
+</div></section><section id="matches"><div class="controls"><div class="filters">
+
+    <button
+        class="filter active"
+        data-filter="all"
+    >
+        TÜMÜ
+    </button>
+
+    <button
+        class="filter"
+        data-filter="upcoming"
+    >
+        GELECEK
+    </button>
+
+    <button
+        class="filter"
+        data-filter="finished"
+    >
+        TAMAMLANAN
+    </button>
+
+</div>
+
+
 <div
+    id="resultCount"
+    class="result-count"
+>
+    0 MAÇ
+</div>
+
+</div><div
     id="matchGrid"
     class="matches"
-></div>
-
-
-<div
+></div><div
     id="empty"
     class="empty"
->
-
-    <div class="empty-icon">
-        ⚽
-    </div>
-
-    <h3>
-        Maç bulunamadı
-    </h3>
-
-    <p>
-        Arama veya filtre kriterlerini değiştirmeyi deneyin.
-    </p>
-
+><div class="empty-icon">
+    ⚽
 </div>
 
+<h3>
+    Maç bulunamadı
+</h3>
 
-<div
+<p>
+    Arama veya filtre kriterlerini değiştirmeyi deneyin.
+</p>
+
+</div><div
     id="loader"
     class="loader"
->
+><div class="loader-ring"></div>
 
-    <div class="loader-ring"></div>
-
-</div>
-
-</section></main><footer class="footer"><div class="footer-logo">
+</div></section></main><footer class="footer"><div class="footer-logo">
     CREX
-</div>
-
-<div>
+</div><div>
     © 2026 CREX
-</div>
-
-</footer><script>
+</div></footer><script>
 
 /* =========================================================
    CREX LIG SISTEMI
-   maclar.json
-   takimlar.json
+   =========================================================
 
    LOGO SISTEMI:
-   - Önce maclar.json evLogo / depLogo
-   - Boşsa takimlar.json
-   - Takım adı
-   - Kısa kod
-   - Alias
+
+   1. HER ZAMAN takimlar.json kullanilir.
+   2. maclar.json icindeki evLogo / depLogo
+      artik KULLANILMAZ.
+   3. Logo URL'sine cache busting eklenir.
+   4. Takim adi / kisa kod / alias ile aranir.
+   5. Logo yuklenemezse takim kodu gosterilir.
+
 ========================================================= */
 
 
@@ -1483,6 +1449,28 @@ const params =
 const leagueSlug =
     params.get("lig") ||
     "premier-league";
+
+
+/* =========================================================
+   LOGO CACHE VERSION
+=========================================================
+
+   Her logo URL'sinin sonuna versiyon eklenir.
+
+   Ornegin:
+
+   arsenal.png
+   ↓
+   arsenal.png?v=20260829
+
+   Boylece tarayici eski logoyu
+   kullanmak yerine yeni dosyayi
+   istemeye zorlanir.
+
+========================================================= */
+
+const LOGO_VERSION =
+    "20260829";
 
 
 /* =========================================================
@@ -1637,17 +1625,20 @@ const upcomingMatches =
 
 
 /* =========================================================
-   HEADER / HERO
+   HERO
 ========================================================= */
 
 document.title =
     "CREX — " +
     league.name;
 
+
 if(league.logo){
 
     heroLogo.src =
-        league.logo;
+        addLogoCache(
+            league.logo
+        );
 
     heroLogo.alt =
         league.name;
@@ -1660,8 +1651,10 @@ else{
 
 }
 
+
 leagueTitle.textContent =
     league.name;
+
 
 leagueCountry.textContent =
     league.country +
@@ -1699,6 +1692,61 @@ const PAGE_SIZE = 24;
 ========================================================= */
 
 let teamDatabase = [];
+
+
+/* =========================================================
+   LOGO CACHE BUSTER
+========================================================= */
+
+function addLogoCache(url){
+
+    if(!url)
+        return "";
+
+
+    const cleanUrl =
+        String(url)
+        .trim();
+
+
+    if(!cleanUrl)
+        return "";
+
+
+    /*
+       Data URL veya blob URL'lerine
+       cache parametresi ekleme.
+    */
+
+    if(
+        cleanUrl.startsWith("data:") ||
+        cleanUrl.startsWith("blob:")
+    ){
+
+        return cleanUrl;
+
+    }
+
+
+    /*
+       URL'de zaten ? varsa &
+       yoksa ? kullan.
+    */
+
+    const separator =
+        cleanUrl.includes("?")
+            ? "&"
+            : "?";
+
+
+    return (
+        cleanUrl +
+        separator +
+        "v=" +
+        LOGO_VERSION
+    );
+
+}
 
 
 /* =========================================================
@@ -1741,6 +1789,7 @@ function normalizeAliases(value){
     if(!value)
         return [];
 
+
     if(Array.isArray(value)){
 
         return value
@@ -1751,6 +1800,7 @@ function normalizeAliases(value){
             .filter(Boolean);
 
     }
+
 
     return [
         normalizeText(value)
@@ -1851,8 +1901,11 @@ function normalizeTeamDatabase(data){
                     ){
 
                         return {
+
                             ad:name,
+
                             logo:value
+
                         };
 
                     }
@@ -1894,6 +1947,7 @@ function normalizeTeamDatabase(data){
                     team.adi ||
                     "";
 
+
                 const short =
                     team.kisa ||
                     team.short ||
@@ -1902,6 +1956,7 @@ function normalizeTeamDatabase(data){
                     team.slug ||
                     team.kisaAd ||
                     "";
+
 
                 const logo =
                     team.logo ||
@@ -1915,10 +1970,35 @@ function normalizeTeamDatabase(data){
 
 
                 const aliases = [
-                    ...(team.aliases || []),
-                    ...(team.alias || []),
-                    ...(team.alternatif || []),
-                    ...(team.alternatifAd || [])
+
+                    ...(Array.isArray(team.aliases)
+                        ? team.aliases
+                        : team.aliases
+                            ? [team.aliases]
+                            : []
+                    ),
+
+                    ...(Array.isArray(team.alias)
+                        ? team.alias
+                        : team.alias
+                            ? [team.alias]
+                            : []
+                    ),
+
+                    ...(Array.isArray(team.alternatif)
+                        ? team.alternatif
+                        : team.alternatif
+                            ? [team.alternatif]
+                            : []
+                    ),
+
+                    ...(Array.isArray(team.alternatifAd)
+                        ? team.alternatifAd
+                        : team.alternatifAd
+                            ? [team.alternatifAd]
+                            : []
+                    )
+
                 ];
 
 
@@ -1932,9 +2012,17 @@ function normalizeTeamDatabase(data){
                         short
                     ),
 
-                    logo:String(
-                        logo
-                    ),
+                    /*
+                       Burada logo URL'sine
+                       cache busting uygulanıyor.
+                    */
+
+                    logo:
+                        addLogoCache(
+                            String(
+                                logo
+                            ).trim()
+                        ),
 
                     aliases:
                         normalizeAliases(
@@ -1980,6 +2068,7 @@ function findTeamLogo(
             teamName
         );
 
+
     const short =
         normalizeText(
             teamShort
@@ -1991,7 +2080,9 @@ function findTeamLogo(
 
 
     /*
+       =====================================================
        1 — KISA KOD
+       =====================================================
     */
 
     if(short){
@@ -2012,7 +2103,9 @@ function findTeamLogo(
 
 
     /*
-       2 — TAKIM ADI
+       =====================================================
+       2 — TAM TAKIM ADI
+       =====================================================
     */
 
     if(name){
@@ -2033,7 +2126,9 @@ function findTeamLogo(
 
 
     /*
-       3 — ALIAS
+       =====================================================
+       3 — ALIAS TAM ESLESME
+       =====================================================
     */
 
     if(name){
@@ -2055,7 +2150,9 @@ function findTeamLogo(
 
 
     /*
+       =====================================================
        4 — TAKIM ADI ICERME
+       =====================================================
     */
 
     if(name){
@@ -2071,12 +2168,17 @@ function findTeamLogo(
 
 
                     return (
+
                         team.normalizedName.includes(
                             name
-                        ) ||
+                        )
+
+                        ||
+
                         name.includes(
                             team.normalizedName
                         )
+
                     );
 
                 }
@@ -2096,7 +2198,9 @@ function findTeamLogo(
 
 
     /*
+       =====================================================
        5 — ALIAS ICERME
+       =====================================================
     */
 
     if(name){
@@ -2109,8 +2213,17 @@ function findTeamLogo(
                         alias => {
 
                             return (
-                                alias.includes(name) ||
-                                name.includes(alias)
+
+                                alias.includes(
+                                    name
+                                )
+
+                                ||
+
+                                name.includes(
+                                    alias
+                                )
+
                             );
 
                         }
@@ -2139,33 +2252,25 @@ function findTeamLogo(
 
 /* =========================================================
    RESOLVE MATCH LOGOS
+=========================================================
+
+   ONEMLI:
+
+   Artik maclar.json icindeki:
+
+   evLogo
+   depLogo
+
+   HICBIR SEKILDE KULLANILMIYOR.
+
+   Logo HER ZAMAN takimlar.json'dan
+   bulunuyor.
+
 ========================================================= */
 
 function resolveMatchLogos(match){
 
-    /*
-       maclar.json'daki logo varsa
-       onu kullan.
-
-       Yoksa takimlar.json'dan bul.
-    */
-
-    const directHomeLogo =
-        String(
-            match.evLogo ||
-            ""
-        ).trim();
-
-
-    const directAwayLogo =
-        String(
-            match.depLogo ||
-            ""
-        ).trim();
-
-
     const homeLogo =
-        directHomeLogo ||
         findTeamLogo(
             match.evSahibi,
             match.evKisa
@@ -2173,7 +2278,6 @@ function resolveMatchLogos(match){
 
 
     const awayLogo =
-        directAwayLogo ||
         findTeamLogo(
             match.deplasman,
             match.depKisa
@@ -2216,7 +2320,6 @@ function getMatchStatus(match){
         "ms",
         "tamamlandı",
         "tamamlandi",
-        "finished",
         "finished",
         "bitti",
         "bitmiş",
@@ -2553,7 +2656,7 @@ async function loadMatches(){
 
 
         /*
-           Takım database hazırla.
+           TAKIM DATABASE
         */
 
         teamDatabase =
@@ -2563,7 +2666,7 @@ async function loadMatches(){
 
 
         /*
-           Maçları oku.
+           MACLARI OKU
         */
 
         const data =
@@ -2613,7 +2716,7 @@ async function loadMatches(){
 
 
         /*
-           Sadece seçilen lig.
+           SECILEN LIG
         */
 
         allMatches =
@@ -2633,6 +2736,12 @@ async function loadMatches(){
                     match.id !== null
             )
 
+            /*
+               LOGOLAR BURADA
+               TAKIM DATABASE'INDEN
+               TEKRAR COZULUYOR.
+            */
+
             .map(
                 match =>
                     resolveMatchLogos(
@@ -2647,25 +2756,40 @@ async function loadMatches(){
 
 
         console.log(
-            "CREX Lig:",
+            "================================="
+        );
+
+        console.log(
+            "CREX LOGO SISTEMI"
+        );
+
+        console.log(
+            "Lig:",
             league.name
         );
 
-
         console.log(
-            "CREX Maç:",
+            "Maç:",
             allMatches.length
         );
 
+        console.log(
+            "Takım database:",
+            teamDatabase.length
+        );
 
         console.log(
-            "CREX Takım:",
-            teamDatabase.length
+            "Logo cache version:",
+            LOGO_VERSION
+        );
+
+        console.log(
+            "================================="
         );
 
 
         /*
-           Logo kontrolü.
+           LOGO KONTROLU
         */
 
         allMatches.forEach(
@@ -2874,8 +2998,8 @@ function createMatchCard(match){
 
 
     /*
-       Takımlar.json'dan çözülmüş
-       logolar.
+       ARTIK LOGOLAR SADECE
+       TAKIMLAR.JSON'DAN GELIYOR.
     */
 
     const homeLogoUrl =
@@ -2955,13 +3079,7 @@ function createMatchCard(match){
 
 
     /*
-       ALT BİLGİ
-
-       skor varsa:
-       22.08.2026 • 2 - 0
-
-       skor yoksa:
-       22.08.2026
+       ALT BILGI
     */
 
     const bottomText =
@@ -2971,7 +3089,9 @@ function createMatchCard(match){
 
 
     /*
+       =====================================================
        EV LOGO
+       =====================================================
     */
 
     const homeLogoHTML =
@@ -2988,9 +3108,11 @@ function createMatchCard(match){
                 )}"
                 loading="lazy"
                 decoding="async"
-                onerror="handleTeamLogoError(this, '${escapeJS(
-                    homeShort
-                )}')"
+                referrerpolicy="no-referrer"
+                onerror="handleTeamLogoError(
+                    this,
+                    '${escapeJS(homeShort)}'
+                )"
             >
 
         `
@@ -3001,7 +3123,9 @@ function createMatchCard(match){
 
 
     /*
+       =====================================================
        DEPLASMAN LOGO
+       =====================================================
     */
 
     const awayLogoHTML =
@@ -3018,9 +3142,11 @@ function createMatchCard(match){
                 )}"
                 loading="lazy"
                 decoding="async"
-                onerror="handleTeamLogoError(this, '${escapeJS(
-                    awayShort
-                )}')"
+                referrerpolicy="no-referrer"
+                onerror="handleTeamLogoError(
+                    this,
+                    '${escapeJS(awayShort)}'
+                )"
             >
 
         `
@@ -3147,6 +3273,10 @@ function handleTeamLogoError(
     if(!img)
         return;
 
+
+    /*
+       Sonsuz onerror döngüsünü engelle.
+    */
 
     img.onerror =
         null;
