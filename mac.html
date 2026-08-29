@@ -62,10 +62,6 @@ body{
     font-family:"Manrope",sans-serif;
 }
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
 body::before{
     content:"";
     position:fixed;
@@ -299,7 +295,7 @@ body::before{
 }
 
 /* =========================================================
-   BACK BUTTON
+   BACK
 ========================================================= */
 
 .back{
@@ -470,6 +466,8 @@ body::before{
     display:grid;
     place-items:center;
 
+    overflow:hidden;
+
     color:#fff;
 
     border:1px solid rgba(255,255,255,.09);
@@ -491,6 +489,15 @@ body::before{
     font-weight:900;
 
     transition:.5s var(--ease);
+}
+
+.hero-team-logo img{
+    display:block;
+
+    width:82%;
+    height:82%;
+
+    object-fit:contain;
 }
 
 .hero-team:hover .hero-team-logo{
@@ -590,12 +597,10 @@ body::before{
 }
 
 @keyframes playerPulse{
-
     50%{
         transform:scale(1.4);
         opacity:.5;
     }
-
 }
 
 .player-info{
@@ -649,7 +654,7 @@ body::before{
 }
 
 /* =========================================================
-   CREX TAM EKRAN BUTONU
+   FULLSCREEN
 ========================================================= */
 
 .crex-fullscreen{
@@ -713,10 +718,6 @@ body::before{
     pointer-events:none;
 }
 
-/* =========================================================
-   PLAYER FULLSCREEN DURUMU
-========================================================= */
-
 .player:fullscreen{
     width:100vw;
     height:100vh;
@@ -745,21 +746,13 @@ body::before{
     box-shadow:none;
 }
 
-.player:fullscreen iframe{
-    width:100%;
-    height:100%;
-}
-
+.player:fullscreen iframe,
 .player:-webkit-full-screen iframe{
     width:100%;
     height:100%;
 }
 
-.player:fullscreen .crex-fullscreen{
-    right:20px;
-    bottom:20px;
-}
-
+.player:fullscreen .crex-fullscreen,
 .player:-webkit-full-screen .crex-fullscreen{
     right:20px;
     bottom:20px;
@@ -829,7 +822,7 @@ body::before{
 }
 
 /* =========================================================
-   BOTTOM INFO
+   INFO
 ========================================================= */
 
 .info-grid{
@@ -1069,10 +1062,6 @@ body::before{
     }
 
 }
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1511,7 +1500,7 @@ async function loadMatch(){
 
 
 /* =========================================================
-   RENDER
+   RENDER MATCH
 ========================================================= */
 
 function renderMatch(match){
@@ -1526,6 +1515,7 @@ function renderMatch(match){
         match.ligAdi ||
         match.lig ||
         "Lig";
+
 
     homeTeam.textContent =
         home;
@@ -1582,6 +1572,12 @@ function renderMatch(match){
 
     /* =====================================================
        TEAM LOGOS
+       
+       SADECE maclar.json
+       İÇİNDEN OKUNUR.
+       
+       evLogo  -> ev sahibi
+       depLogo -> deplasman
     ===================================================== */
 
     setTeamLogo(
@@ -1626,50 +1622,92 @@ function setTeamLogo(
     fallback
 ){
 
-    if(url){
+    /*
+       Önce eski içeriği temizle.
+    */
 
-        const img =
-            document.createElement("img");
+    element.innerHTML = "";
 
-        img.src =
-            url;
 
-        img.alt =
-            fallback;
+    /*
+       Logo URL'si yoksa direkt
+       takım kısaltmasını göster.
+    */
 
-        img.style.width =
-            "100%";
-
-        img.style.height =
-            "100%";
-
-        img.style.objectFit =
-            "contain";
-
-        img.onload = ()=>{
-
-            element.innerHTML =
-                "";
-
-            element.appendChild(
-                img
-            );
-
-        };
-
-        img.onerror = ()=>{
-
-            element.textContent =
-                fallback;
-
-        };
-
-    }else{
+    if(
+        typeof url !== "string" ||
+        !url.trim()
+    ){
 
         element.textContent =
             fallback;
 
+        return;
+
     }
+
+
+    /*
+       Logo resmi.
+    */
+
+    const img =
+        document.createElement("img");
+
+    img.src =
+        url.trim();
+
+    img.alt =
+        fallback;
+
+    img.loading =
+        "eager";
+
+    img.decoding =
+        "async";
+
+
+    /*
+       Logo başarılı şekilde yüklenirse
+       göster.
+    */
+
+    img.onload = function(){
+
+        element.innerHTML = "";
+
+        element.appendChild(img);
+
+    };
+
+
+    /*
+       URL çalışmıyorsa kısaltmayı
+       göster.
+    */
+
+    img.onerror = function(){
+
+        console.warn(
+            "Logo yüklenemedi:",
+            url
+        );
+
+        element.innerHTML = "";
+
+        element.textContent =
+            fallback;
+
+    };
+
+
+    /*
+       Önceden ekliyoruz.
+       Böylece yüklenme sırasında
+       boş kutu kalmaz.
+    */
+
+    element.appendChild(img);
 
 }
 
@@ -1750,23 +1788,12 @@ function renderPlayer(match){
 
 function createSecureEmbed(url){
 
-    /*
-       Eski iframe varsa kaldır.
-    */
-
     const oldIframe =
         player.querySelector("iframe");
 
     if(oldIframe){
-
         oldIframe.remove();
-
     }
-
-
-    /*
-       Eski CREX fullscreen butonu varsa kaldır.
-    */
 
     const oldButton =
         player.querySelector(
@@ -1774,19 +1801,12 @@ function createSecureEmbed(url){
         );
 
     if(oldButton){
-
         oldButton.remove();
-
     }
-
 
     placeholder.style.display =
         "none";
 
-
-    /* =====================================================
-       IFRAME
-    ===================================================== */
 
     const iframe =
         document.createElement("iframe");
@@ -1797,23 +1817,11 @@ function createSecureEmbed(url){
     iframe.title =
         "CREX yayın oynatıcı";
 
-
-    /*
-       Embed'in kendi reklam/popup
-       yönlendirmelerini üst sayfaya
-       taşımasını sınırlıyoruz.
-    */
-
     iframe.sandbox =
         "allow-scripts " +
         "allow-same-origin " +
         "allow-forms " +
         "allow-presentation";
-
-
-    /*
-       Fullscreen izni.
-    */
 
     iframe.allow =
         "autoplay; fullscreen; picture-in-picture";
@@ -1827,14 +1835,13 @@ function createSecureEmbed(url){
     iframe.loading =
         "eager";
 
-
     player.appendChild(
         iframe
     );
 
 
     /* =====================================================
-       CREX FULLSCREEN BUTTON
+       FULLSCREEN BUTTON
     ===================================================== */
 
     const fullscreenButton =
@@ -1854,7 +1861,6 @@ function createSecureEmbed(url){
         "Tam ekran"
     );
 
-
     fullscreenButton.innerHTML = `
         <svg
             viewBox="0 0 24 24"
@@ -1867,10 +1873,9 @@ function createSecureEmbed(url){
             <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
             <path d="M16 3h3a2 2 0 0 1 2 2v3"/>
             <path d="M8 21H5a2 2 0 0 1-2-2v-3"/>
-            <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
+            <path d="M16 21h3a2 2 0 0 1 2-2v-3"/>
         </svg>
     `;
-
 
     player.appendChild(
         fullscreenButton
@@ -1878,16 +1883,12 @@ function createSecureEmbed(url){
 
 
     /* =====================================================
-       FULLSCREEN FUNCTION
+       FULLSCREEN
     ===================================================== */
 
     async function toggleFullscreen(){
 
         try{
-
-            /*
-               Zaten tam ekrandaysa çık.
-            */
 
             if(
                 document.fullscreenElement ||
@@ -1912,11 +1913,6 @@ function createSecureEmbed(url){
 
             }
 
-
-            /*
-               Player'ı tam ekran yap.
-            */
-
             if(
                 player.requestFullscreen
             ){
@@ -1927,11 +1923,6 @@ function createSecureEmbed(url){
 
             }
 
-
-            /*
-               Safari / WebKit fallback.
-            */
-
             if(
                 player.webkitRequestFullscreen
             ){
@@ -1941,12 +1932,6 @@ function createSecureEmbed(url){
                 return;
 
             }
-
-
-            /*
-               Son fallback:
-               iframe'in kendisini tam ekran dene.
-            */
 
             if(
                 iframe.requestFullscreen
@@ -1988,7 +1973,7 @@ function createSecureEmbed(url){
 
 
     /* =====================================================
-       FULLSCREEN ICON UPDATE
+       FULLSCREEN ICON
     ===================================================== */
 
     function updateFullscreenIcon(){
