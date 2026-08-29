@@ -7,9 +7,11 @@
 
     "evSahibi": "Arsenal",
     "evKisa": "ARS",
+    "evLogo": "",
 
     "deplasman": "Coventry",
     "depKisa": "COV",
+    "depLogo": "",
 
     "skor": "3 - 0",
     "durum": "MS",
@@ -32,9 +34,11 @@
 
     "evSahibi": "Hull City",
     "evKisa": "HUL",
+    "evLogo": "",
 
     "deplasman": "Man. United",
     "depKisa": "MUN",
+    "depLogo": "",
 
     "skor": "2 - 0",
     "durum": "MS",
@@ -57,9 +61,11 @@
 
     "evSahibi": "Ipswich",
     "evKisa": "IPS",
+    "evLogo": "",
 
     "deplasman": "Sunderland",
     "depKisa": "SUN",
+    "depLogo": "",
 
     "skor": "2 - 1",
     "durum": "MS",
@@ -82,9 +88,11 @@
 
     "evSahibi": "Nottingham",
     "evKisa": "NFO",
+    "evLogo": "",
 
     "deplasman": "Leeds United",
     "depKisa": "LEE",
+    "depLogo": "",
 
     "skor": "0 - 1",
     "durum": "MS",
@@ -107,9 +115,11 @@
 
     "evSahibi": "Everton",
     "evKisa": "EVE",
+    "evLogo": "",
 
     "deplasman": "Crystal Palace",
     "depKisa": "CRY",
+    "depLogo": "",
 
     "skor": "2 - 0",
     "durum": "MS",
@@ -132,9 +142,11 @@
 
     "evSahibi": "Brentford",
     "evKisa": "BRE",
+    "evLogo": "",
 
     "deplasman": "Tottenham",
     "depKisa": "TOT",
+    "depLogo": "",
 
     "skor": "3 - 0",
     "durum": "MS",
@@ -157,9 +169,11 @@
 
     "evSahibi": "Man. City",
     "evKisa": "MCI",
+    "evLogo": "",
 
     "deplasman": "Bournemouth",
     "depKisa": "BOU",
+    "depLogo": "",
 
     "skor": "2 - 1",
     "durum": "MS",
@@ -182,9 +196,11 @@
 
     "evSahibi": "Brighton",
     "evKisa": "BRI",
+    "evLogo": "",
 
     "deplasman": "Aston Villa",
     "depKisa": "AVL",
+    "depLogo": "",
 
     "skor": "4 - 0",
     "durum": "MS",
@@ -207,9 +223,11 @@
 
     "evSahibi": "Newcastle",
     "evKisa": "NEW",
+    "evLogo": "",
 
     "deplasman": "Liverpool",
     "depKisa": "LIV",
+    "depLogo": "",
 
     "skor": "2 - 2",
     "durum": "MS",
@@ -232,9 +250,11 @@
 
     "evSahibi": "Fulham",
     "evKisa": "FUL",
+    "evLogo": "",
 
     "deplasman": "Chelsea",
     "depKisa": "CHE",
+    "depLogo": "",
 
     "skor": "2 - 3",
     "durum": "MS",
