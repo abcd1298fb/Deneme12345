@@ -3,7 +3,7 @@
     "takim": "Arsenal",
     "kisa": "ARS",
     "lig": "premier-league",
-    "logo": "https://assets.football-logos.cc/logos/england/256x256/arsenal.e5528ede.png"
+    "logo": "https://img.sofascore.com/api/v1/team/42/image"
   },
   {
     "takim": "Aston Villa",
@@ -39,7 +39,7 @@
     "takim": "Coventry",
     "kisa": "COV",
     "lig": "premier-league",
-    "logo": "https://assets.football-logos.cc/logos/england/256x256/coventry-city.png"
+    "logo": "https://img.sofascore.com/api/v1/team/11/image"
   },
   {
     "takim": "Crystal Palace",
