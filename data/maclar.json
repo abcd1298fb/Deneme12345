@@ -1469,5 +1469,195 @@
       "tip": "embed",
       "url": ""
     }
+  },
+  {
+    "id": 71,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Bayern Münih",
+    "evKisa": "BAY",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/bayern-munchen.90b9d770.png",
+    "deplasman": "Stuttgart",
+    "depKisa": "STU",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/vfb-stuttgart.384702b0.png",
+    "skor": "5 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-28",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 72,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Köln",
+    "evKisa": "KÖL",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/koln.455c33da.png",
+    "deplasman": "Hoffenheim",
+    "depKisa": "HOF",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/hoffenheim.b7d2b115.png",
+    "skor": "3 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 73,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Mainz",
+    "evKisa": "MAI",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/mainz-05.7a2b4739.png",
+    "deplasman": "Paderborn",
+    "depKisa": "PAD",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/paderborn.47be2a08.png",
+    "skor": "0 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 74,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Elversberg",
+    "evKisa": "ELV",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/sv-elversberg.bef66ef1.png",
+    "deplasman": "Leverkusen",
+    "depKisa": "LEV",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/bayer-leverkusen.7c4c95f5.png",
+    "skor": "3 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 75,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Union Berlin",
+    "evKisa": "UNI",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/union-berlin.621cc16d.png",
+    "deplasman": "E. Frankfurt",
+    "depKisa": "FRA",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/eintracht-frankfurt.28da30fd.png",
+    "skor": "3 - 3",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 76,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Leipzig",
+    "evKisa": "RBL",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/rb-leipzig.4948a7be.png",
+    "deplasman": "M'gladbach",
+    "depKisa": "BMG",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/borussia-monchengladbach.1cc352e0.png",
+    "skor": "3 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 77,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Dortmund",
+    "evKisa": "BVB",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/borussia-dortmund.c2e456ab.png",
+    "deplasman": "Hamburg",
+    "depKisa": "HAM",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/hamburger-sv.761202ca.png",
+    "skor": "2 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 78,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Freiburg",
+    "evKisa": "FRE",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/freiburg.d230478e.png",
+    "deplasman": "W. Bremen",
+    "depKisa": "BRE",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/werder-bremen.cf26bff4.png",
+    "skor": "4 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-30",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 79,
+    "lig": "bundesliga",
+    "ligAdi": "Bundesliga",
+    "hafta": "1. Hafta",
+    "evSahibi": "Augsburg",
+    "evKisa": "AUG",
+    "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/augsburg.e3fa9cb8.png",
+    "deplasman": "Schalke",
+    "depKisa": "S04",
+    "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/schalke-04.a2412c18.png",
+    "skor": "3 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-30",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
   }
 ]
+
