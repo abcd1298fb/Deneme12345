@@ -526,6 +526,34 @@ body::before{
     gap:7px;
 }
 
+.hero-score-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 32px;
+    font-weight: 900;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 16px;
+    padding: 10px 16px;
+    min-width: 65px;
+    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.02);
+}
+
+.hero-score-box span {
+    line-height: 1;
+}
+
+.hero-score-divider {
+    width: 20px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 2px 0;
+}
+
 .hero-vs-circle{
     width:60px;
     height:60px;
@@ -1001,6 +1029,13 @@ body::before{
         font-size:8px;
     }
 
+    .hero-score-box{
+        font-size:24px;
+        padding:8px 12px;
+        min-width:50px;
+        border-radius:12px;
+    }
+
     .match-time{
         font-size:7px;
     }
@@ -1177,7 +1212,7 @@ YÜKLENİYOR
 
 </div>
 
-<div class="hero-vs">
+<div class="hero-vs" id="heroCenter">
 
 <div class="hero-vs-circle">
 VS
@@ -1368,6 +1403,9 @@ document.getElementById("matchStatus");
 const matchTime =
 document.getElementById("matchTime");
 
+const heroCenter =
+document.getElementById("heroCenter");
+
 const infoLeague =
 document.getElementById("infoLeague");
 
@@ -1540,7 +1578,7 @@ function renderMatch(match){
 
 
     /* =====================================================
-       TIME
+       TIME & SCORE (ORTA KISIM)
     ===================================================== */
 
     let timeText = "";
@@ -1568,6 +1606,18 @@ function renderMatch(match){
 
     matchTime.textContent =
         timeText;
+
+    // Eğer evSkor ve depSkor tanımlıysa VS yerine alt alta skorları göster
+    if(match.evSkor !== undefined && match.depSkor !== undefined && match.evSkor !== "" && match.depSkor !== ""){
+        heroCenter.innerHTML = `
+            <div class="hero-score-box">
+                <span>${match.evSkor}</span>
+                <div class="hero-score-divider"></div>
+                <span>${match.depSkor}</span>
+            </div>
+            <div class="match-time" id="matchTime">${timeText}</div>
+        `;
+    }
 
 
     /* =====================================================
@@ -2113,4 +2163,4 @@ loadMatch();
 </script>
 
 </body>
-    </html>
+</html>
