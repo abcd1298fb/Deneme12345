@@ -1658,6 +1658,383 @@
       "tip": "embed",
       "url": ""
     }
+  },
+  {
+    "id": 80,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Marsilya",
+    "evKisa": "OM",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/marseille.1a8c6990.png",
+    "deplasman": "Strasbourg",
+    "depKisa": "STR",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/rc-strasbourg-alsace.a0e7954b.png",
+    "skor": "4 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-21",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 81,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Lens",
+    "evKisa": "LEN",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/rc-lens.ae8bb17c.png",
+    "deplasman": "Auxerre",
+    "depKisa": "AUX",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/auxerre.17dfcd8d.png",
+    "skor": "5 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 82,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Le Mans",
+    "evKisa": "LMS",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/le-mans.98e1d785.png",
+    "deplasman": "Brest",
+    "depKisa": "BRE",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/brest.c2e08828.png",
+    "skor": "2 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 83,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Troyes",
+    "evKisa": "TRO",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/troyes.09840354.png",
+    "deplasman": "Paris FC",
+    "depKisa": "PFC",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/paris-fc.e14a10da.png",
+    "skor": "0 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 84,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Nice",
+    "evKisa": "NIC",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/nice.683a1782.png",
+    "deplasman": "Lorient",
+    "depKisa": "LOR",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/lorient.c3bd35bd.png",
+    "skor": "0 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 85,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Toulouse",
+    "evKisa": "TFC",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/toulouse.18048063.png",
+    "deplasman": "Lyon",
+    "depKisa": "OL",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/lyon.7a2d5809.png",
+    "skor": "0 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 86,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Angers",
+    "evKisa": "ANG",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/angers.f3b3d2b9.png",
+    "deplasman": "Lille",
+    "depKisa": "LIL",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/lille.3695616f.png",
+    "skor": "0 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-23",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 87,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Le Havre",
+    "evKisa": "HAC",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/le-havre-ac.a6e1edbd.png",
+    "deplasman": "Monaco",
+    "depKisa": "ASM",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/as-monaco.b63e9cff.png",
+    "skor": "0 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-23",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 88,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "1. Hafta",
+    "evSahibi": "Rennes",
+    "evKisa": "REN",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/rennes.fa29376a.png",
+    "deplasman": "PSG",
+    "depKisa": "PSG",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/paris-saint-germain.a1c91d55.png",
+    "skor": "2 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-23",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 89,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Lille",
+    "evKisa": "LIL",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/lille.3695616f.png",
+    "deplasman": "PSG",
+    "depKisa": "PSG",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/paris-saint-germain.a1c91d55.png",
+    "skor": "2 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-28",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 90,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Strasbourg",
+    "evKisa": "STR",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/rc-strasbourg-alsace.a0e7954b.png",
+    "deplasman": "Lens",
+    "depKisa": "LEN",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/rc-lens.ae8bb17c.png",
+    "skor": "2 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 91,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Lorient",
+    "evKisa": "LOR",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/lorient.c3bd35bd.png",
+    "deplasman": "Troyes",
+    "depKisa": "TRO",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/troyes.09840354.png",
+    "skor": "1 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 92,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Brest",
+    "evKisa": "BRE",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/brest.c2e08828.png",
+    "deplasman": "Toulouse",
+    "depKisa": "TFC",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/toulouse.18048063.png",
+    "skor": "2 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 93,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Auxerre",
+    "evKisa": "AUX",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/auxerre.17dfcd8d.png",
+    "deplasman": "Angers",
+    "depKisa": "ANG",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/angers.f3b3d2b9.png",
+    "skor": "1 - 3",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 94,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Lyon",
+    "evKisa": "OL",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/lyon.7a2d5809.png",
+    "deplasman": "Le Havre",
+    "depKisa": "HAC",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/le-havre-ac.a6e1edbd.png",
+    "skor": "1 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 95,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Paris FC",
+    "evKisa": "PFC",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/paris-fc.e14a10da.png",
+    "deplasman": "Nice",
+    "depKisa": "NIC",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/nice.683a1782.png",
+    "skor": "3 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-30",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 96,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Rennes",
+    "evKisa": "REN",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/rennes.fa29376a.png",
+    "deplasman": "Le Mans",
+    "depKisa": "LMS",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/le-mans.98e1d785.png",
+    "skor": "3 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-30",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 97,
+    "lig": "ligue-1",
+    "ligAdi": "Ligue 1",
+    "hafta": "2. Hafta",
+    "evSahibi": "Monaco",
+    "evKisa": "ASM",
+    "evLogo": "https://assets.football-logos.cc/logos/france/700x700/as-monaco.b63e9cff.png",
+    "deplasman": "Marsilya",
+    "depKisa": "OM",
+    "depLogo": "https://assets.football-logos.cc/logos/france/700x700/marseille.1a8c6990.png",
+    "skor": "2 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-30",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
   }
 ]
-
