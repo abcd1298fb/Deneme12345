@@ -1049,5 +1049,425 @@
       "tip": "embed",
       "url": ""
     }
+  },
+  {
+    "id": 51,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Udinese",
+    "evKisa": "UDI",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/udinese.dc92d43c.png",
+    "deplasman": "Como",
+    "depKisa": "COM",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/como-1907.9113270a.png",
+    "skor": "1 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 52,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Inter",
+    "evKisa": "INT",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/inter.305ef900.png",
+    "deplasman": "Monza",
+    "depKisa": "MON",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/monza.6ecda2cb.png",
+    "skor": "4 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 53,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Parma",
+    "evKisa": "PAR",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/parma.34d9667a.png",
+    "deplasman": "Cagliari",
+    "depKisa": "CAG",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/cagliari.36b537b2.png",
+    "skor": "0 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 54,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Genoa",
+    "evKisa": "GEN",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/genoa.e9e4cc28.png",
+    "deplasman": "Napoli",
+    "depKisa": "NAP",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/napoli.8b5410b2.png",
+    "skor": "0 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-22",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 55,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Frosinone",
+    "evKisa": "FRO",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/frosinone.c62d1243.png",
+    "deplasman": "Juventus",
+    "depKisa": "JUV",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/juventus.35f443cb.png",
+    "skor": "0 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-23",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 56,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Venezia",
+    "evKisa": "VEN",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/venezia.3fe6664e.png",
+    "deplasman": "Lecce",
+    "depKisa": "LEC",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/lecce.fa3a5ff0.png",
+    "skor": "0 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-23",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 57,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Atalanta",
+    "evKisa": "ATA",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/atalanta.55d9b635.png",
+    "deplasman": "Sassuolo",
+    "depKisa": "SAS",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/sassuolo.9531e689.png",
+    "skor": "2 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-23",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 58,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Torino",
+    "evKisa": "TOR",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/torino.ce70f82c.png",
+    "deplasman": "Milan",
+    "depKisa": "MIL",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/milan.23ad6174.png",
+    "skor": "1 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-23",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 59,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Bologna",
+    "evKisa": "BOL",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/bologna.577e3847.png",
+    "deplasman": "Lazio",
+    "depKisa": "LAZ",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/lazio.0926bd10.png",
+    "skor": "0 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-24",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 60,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "1. Hafta",
+    "evSahibi": "Roma",
+    "evKisa": "ROM",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/roma.00288a7d.png",
+    "deplasman": "Fiorentina",
+    "depKisa": "FIO",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/fiorentina.a4632b82.png",
+    "skor": "4 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-24",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 61,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Milan",
+    "evKisa": "MIL",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/milan.23ad6174.png",
+    "deplasman": "Venezia",
+    "depKisa": "VEN",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/venezia.3fe6664e.png",
+    "skor": "2 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-28",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 62,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Fiorentina",
+    "evKisa": "FIO",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/fiorentina.a4632b82.png",
+    "deplasman": "Frosinone",
+    "depKisa": "FRO",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/frosinone.c62d1243.png",
+    "skor": "0 - 3",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 63,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Sassuolo",
+    "evKisa": "SAS",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/sassuolo.9531e689.png",
+    "deplasman": "Torino",
+    "depKisa": "TOR",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/torino.ce70f82c.png",
+    "skor": "2 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 64,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Monza",
+    "evKisa": "MON",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/monza.6ecda2cb.png",
+    "deplasman": "Udinese",
+    "depKisa": "UDI",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/udinese.dc92d43c.png",
+    "skor": "2 - 3",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 65,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Juventus",
+    "evKisa": "JUV",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/juventus.35f443cb.png",
+    "deplasman": "Parma",
+    "depKisa": "PAR",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/parma.34d9667a.png",
+    "skor": "2 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-29",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 66,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Napoli",
+    "evKisa": "NAP",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/napoli.8b5410b2.png",
+    "deplasman": "Como",
+    "depKisa": "COM",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/como-1907.9113270a.png",
+    "skor": "1 - 2",
+    "durum": "MS",
+    "tarih": "2026-08-30",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 67,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Cagliari",
+    "evKisa": "CAG",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/cagliari.36b537b2.png",
+    "deplasman": "Inter",
+    "depKisa": "INT",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/inter.305ef900.png",
+    "skor": "0 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-30",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 68,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Lazio",
+    "evKisa": "LAZ",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/lazio.0926bd10.png",
+    "deplasman": "Genoa",
+    "depKisa": "GEN",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/genoa.e9e4cc28.png",
+    "skor": "1 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-30",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 69,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Lecce",
+    "evKisa": "LEC",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/lecce.fa3a5ff0.png",
+    "deplasman": "Roma",
+    "depKisa": "ROM",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/roma.00288a7d.png",
+    "skor": "",
+    "durum": "MS",
+    "tarih": "2026-08-31",
+    "saat": "19:30",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 70,
+    "lig": "serie-a",
+    "ligAdi": "Serie A",
+    "hafta": "2. Hafta",
+    "evSahibi": "Atalanta",
+    "evKisa": "ATA",
+    "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/atalanta.55d9b635.png",
+    "deplasman": "Bologna",
+    "depKisa": "BOL",
+    "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/bologna.577e3847.png",
+    "skor": "",
+    "durum": "MS",
+    "tarih": "2026-08-31",
+    "saat": "21:45",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
   }
 ]
