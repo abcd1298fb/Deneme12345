@@ -238,6 +238,7 @@ body::before{
 .search svg{
     width:16px;
     color:#68788d;
+    flex:none;
 }
 
 .search input{
@@ -443,7 +444,7 @@ body::before{
 }
 
 /* =========================================================
-   NEW MATCH CARDS
+   MATCH GRID
 ========================================================= */
 
 .matches{
@@ -451,6 +452,34 @@ body::before{
     grid-template-columns:repeat(4,minmax(0,1fr));
     gap:17px;
 }
+
+/* =========================================================
+   LOADING / ERROR
+========================================================= */
+
+.matches-message{
+    grid-column:1/-1;
+    min-height:180px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:30px;
+    border:1px solid rgba(255,255,255,.07);
+    border-radius:24px;
+    background:#080e16;
+    color:#718096;
+    font-size:11px;
+    font-weight:800;
+}
+
+.matches-message.error{
+    color:#ff7282;
+}
+
+/* =========================================================
+   MATCH CARD
+========================================================= */
 
 .match-card{
     position:relative;
@@ -474,8 +503,6 @@ body::before{
         0 0 35px rgba(21,149,255,.06);
 }
 
-/* animated top stripe */
-
 .match-card .card-glow{
     position:absolute;
     top:0;
@@ -497,8 +524,6 @@ body::before{
     transform:scaleX(1);
 }
 
-/* large background number */
-
 .match-number{
     position:absolute;
     right:-5px;
@@ -510,8 +535,6 @@ body::before{
     font-weight:900;
     pointer-events:none;
 }
-
-/* match content */
 
 .match-content{
     position:relative;
@@ -526,6 +549,7 @@ body::before{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    gap:8px;
 }
 
 .match-league-tag{
@@ -544,6 +568,7 @@ body::before{
 .league-dot{
     width:5px;
     height:5px;
+    flex:none;
     border-radius:50%;
     background:var(--blue);
     box-shadow:0 0 9px var(--blue);
@@ -555,8 +580,6 @@ body::before{
     font-weight:900;
     letter-spacing:1px;
 }
-
-/* teams */
 
 .teams{
     flex:1;
@@ -571,6 +594,7 @@ body::before{
     flex-direction:column;
     align-items:center;
     gap:11px;
+    min-width:0;
 }
 
 .team-logo{
@@ -578,6 +602,7 @@ body::before{
     height:72px;
     display:grid;
     place-items:center;
+    overflow:hidden;
     color:#fff;
     border:1px solid rgba(255,255,255,.09);
     border-radius:22px;
@@ -594,6 +619,13 @@ body::before{
         0 17px 30px rgba(0,0,0,.4),
         inset 0 1px 1px rgba(255,255,255,.1);
     transition:.5s var(--ease);
+}
+
+.team-logo img{
+    width:80%;
+    height:80%;
+    object-fit:contain;
+    display:block;
 }
 
 .match-card:hover .team-logo{
@@ -631,6 +663,7 @@ body::before{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    gap:8px;
     padding-top:14px;
     border-top:1px solid rgba(255,255,255,.055);
 }
@@ -676,7 +709,7 @@ body::before{
 }
 
 /* =========================================================
-   NEW LEAGUE CARDS
+   LEAGUE CARDS
 ========================================================= */
 
 .league-card{
@@ -722,8 +755,6 @@ body::before{
         );
 }
 
-/* colored background */
-
 .league-bg{
     position:absolute;
     inset:0;
@@ -753,8 +784,6 @@ body::before{
     transform:scale(1.5);
     opacity:.3;
 }
-
-/* diagonal design */
 
 .league-bg:after{
     content:"";
@@ -789,8 +818,6 @@ body::before{
         );
 }
 
-/* card content */
-
 .league-inner{
     position:relative;
     z-index:5;
@@ -823,8 +850,6 @@ body::before{
     font-weight:900;
     letter-spacing:1.5px;
 }
-
-/* logo */
 
 .league-logo-wrap{
     position:absolute;
@@ -866,8 +891,6 @@ body::before{
             )
         );
 }
-
-/* bottom */
 
 .league-bottom{
     position:absolute;
@@ -967,10 +990,6 @@ body::before{
 
 .conference{
     --league:#18b98b;
-}
-
-.eredivisie{
-    --league:#ed5b21;
 }
 
 /* =========================================================
@@ -1159,7 +1178,6 @@ body::before{
 <div class="ambient"></div>
 <div class="ambient2"></div>
 
-
 <!-- =======================================================
      HEADER
 ======================================================= -->
@@ -1211,15 +1229,14 @@ body::before{
 
 </header>
 
-
 <!-- =======================================================
      TOP LEAGUE BAR
+     EREDIVISIE KALDIRILDI
 ======================================================= -->
 
 <div class="league-nav">
 
 <div class="league-scroll" id="leagueScroll">
-
 
 <a href="lig.html?lig=premier-league"
    class="league-link active"
@@ -1235,7 +1252,6 @@ body::before{
 
 </a>
 
-
 <a href="lig.html?lig=la-liga"
    class="league-link"
    style="--lc:#ef4937">
@@ -1249,7 +1265,6 @@ body::before{
 <span>La Liga</span>
 
 </a>
-
 
 <a href="lig.html?lig=serie-a"
    class="league-link"
@@ -1265,7 +1280,6 @@ body::before{
 
 </a>
 
-
 <a href="lig.html?lig=bundesliga"
    class="league-link"
    style="--lc:#e51c35">
@@ -1279,7 +1293,6 @@ body::before{
 <span>Bundesliga</span>
 
 </a>
-
 
 <a href="lig.html?lig=ligue-1"
    class="league-link"
@@ -1295,7 +1308,6 @@ body::before{
 
 </a>
 
-
 <a href="lig.html?lig=super-lig"
    class="league-link"
    style="--lc:#e51d3b">
@@ -1309,7 +1321,6 @@ body::before{
 <span>Süper Lig</span>
 
 </a>
-
 
 <a href="lig.html?lig=champions-league"
    class="league-link"
@@ -1325,7 +1336,6 @@ body::before{
 
 </a>
 
-
 <a href="lig.html?lig=europa-league"
    class="league-link"
    style="--lc:#ff7417">
@@ -1339,7 +1349,6 @@ body::before{
 <span>Europa League</span>
 
 </a>
-
 
 <a href="lig.html?lig=conference-league"
    class="league-link"
@@ -1355,33 +1364,15 @@ body::before{
 
 </a>
 
-
-<a href="lig.html?lig=eredivisie"
-   class="league-link"
-   style="--lc:#ed5b21">
-
-<img
-    class="league-mini-logo"
-    src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Eredivisie_nieuw_logo_2017-.svg"
-    alt="Eredivisie"
->
-
-<span>Eredivisie</span>
-
-</a>
-
-
 </div>
 
 </div>
-
 
 <!-- =======================================================
      MAIN
 ======================================================= -->
 
 <main class="main">
-
 
 <section id="matches" class="reveal">
 
@@ -1410,346 +1401,21 @@ TÜM MAÇLAR →
 
 </div>
 
+<!-- BURASI ARTIK maclar.json'DAN DOLACAK -->
 
 <div class="matches" id="matchGrid">
 
-
-<!-- MATCH 1 -->
-
-<article
-class="match-card"
-data-search="Manchester City Arsenal Premier League">
-
-<div class="card-glow"></div>
-
-<div class="match-number">01</div>
-
-<div class="match-content">
-
-<div class="match-top">
-
-<div class="match-league-tag">
-
-<span class="league-dot"></span>
-
-Premier League
-
+<div class="matches-message" id="matchesMessage">
+Maçlar yükleniyor...
 </div>
-
-<div class="match-status">
-YENİ
-</div>
-
-</div>
-
-
-<div class="teams">
-
-<div class="team">
-
-<div class="team-logo">
-MCI
-</div>
-
-<div class="team-name">
-Manchester City
-</div>
-
-</div>
-
-
-<div class="vs">
-VS
-</div>
-
-
-<div class="team">
-
-<div class="team-logo">
-ARS
-</div>
-
-<div class="team-name">
-Arsenal
-</div>
-
-</div>
-
-</div>
-
-
-<div class="match-bottom">
-
-<div class="match-date">
-BUGÜN • 20:00
-</div>
-
-<a href="mac.html?id=1"
-class="watch-btn">
-İZLE →
-</a>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- MATCH 2 -->
-
-<article
-class="match-card"
-data-search="Real Madrid Barcelona La Liga">
-
-<div class="card-glow"></div>
-
-<div class="match-number">02</div>
-
-<div class="match-content">
-
-<div class="match-top">
-
-<div class="match-league-tag">
-
-<span class="league-dot"></span>
-
-La Liga
-
-</div>
-
-<div class="match-status">
-YENİ
-</div>
-
-</div>
-
-
-<div class="teams">
-
-<div class="team">
-
-<div class="team-logo">
-RMA
-</div>
-
-<div class="team-name">
-Real Madrid
-</div>
-
-</div>
-
-
-<div class="vs">
-VS
-</div>
-
-
-<div class="team">
-
-<div class="team-logo">
-BAR
-</div>
-
-<div class="team-name">
-Barcelona
-</div>
-
-</div>
-
-</div>
-
-
-<div class="match-bottom">
-
-<div class="match-date">
-BUGÜN • 22:00
-</div>
-
-<a href="mac.html?id=2"
-class="watch-btn">
-İZLE →
-</a>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- MATCH 3 -->
-
-<article
-class="match-card"
-data-search="Inter Juventus Serie A">
-
-<div class="card-glow"></div>
-
-<div class="match-number">03</div>
-
-<div class="match-content">
-
-<div class="match-top">
-
-<div class="match-league-tag">
-
-<span class="league-dot"></span>
-
-Serie A
-
-</div>
-
-<div class="match-status">
-YENİ
-</div>
-
-</div>
-
-
-<div class="teams">
-
-<div class="team">
-
-<div class="team-logo">
-INT
-</div>
-
-<div class="team-name">
-Inter
-</div>
-
-</div>
-
-
-<div class="vs">
-VS
-</div>
-
-
-<div class="team">
-
-<div class="team-logo">
-JUV
-</div>
-
-<div class="team-name">
-Juventus
-</div>
-
-</div>
-
-</div>
-
-
-<div class="match-bottom">
-
-<div class="match-date">
-DÜN • 21:45
-</div>
-
-<a href="mac.html?id=3"
-class="watch-btn">
-İZLE →
-</a>
-
-</div>
-
-</div>
-
-</article>
-
-
-<!-- MATCH 4 -->
-
-<article
-class="match-card"
-data-search="Bayern Munich Dortmund Bundesliga">
-
-<div class="card-glow"></div>
-
-<div class="match-number">04</div>
-
-<div class="match-content">
-
-<div class="match-top">
-
-<div class="match-league-tag">
-
-<span class="league-dot"></span>
-
-Bundesliga
-
-</div>
-
-<div class="match-status">
-YENİ
-</div>
-
-</div>
-
-
-<div class="teams">
-
-<div class="team">
-
-<div class="team-logo">
-FCB
-</div>
-
-<div class="team-name">
-Bayern Munich
-</div>
-
-</div>
-
-
-<div class="vs">
-VS
-</div>
-
-
-<div class="team">
-
-<div class="team-logo">
-BVB
-</div>
-
-<div class="team-name">
-Dortmund
-</div>
-
-</div>
-
-</div>
-
-
-<div class="match-bottom">
-
-<div class="match-date">
-DÜN • 19:30
-</div>
-
-<a href="mac.html?id=4"
-class="watch-btn">
-İZLE →
-</a>
-
-</div>
-
-</div>
-
-</article>
-
 
 </div>
 
 </section>
 
-
 <!-- =======================================================
      LEAGUES
-     PORTUGAL + SAUDI REMOVED
+     EREDIVISIE KALDIRILDI
 ======================================================= -->
 
 <section id="leagues" class="leagues-section reveal">
@@ -1775,9 +1441,7 @@ Bir lige gir ve karşılaşmaları keşfet
 
 </div>
 
-
 <div class="leagues">
-
 
 <!-- PREMIER -->
 
@@ -1819,9 +1483,7 @@ Premier<br>League
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -1834,7 +1496,6 @@ LİGE GİT
 </div>
 
 </a>
-
 
 <!-- LA LIGA -->
 
@@ -1876,9 +1537,7 @@ La<br>Liga
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -1891,7 +1550,6 @@ LİGE GİT
 </div>
 
 </a>
-
 
 <!-- SERIE A -->
 
@@ -1933,9 +1591,7 @@ Serie<br>A
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -1948,7 +1604,6 @@ LİGE GİT
 </div>
 
 </a>
-
 
 <!-- BUNDESLIGA -->
 
@@ -1990,9 +1645,7 @@ Almanya'nın en üst düzey futbol ligi.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -2005,7 +1658,6 @@ LİGE GİT
 </div>
 
 </a>
-
 
 <!-- LIGUE 1 -->
 
@@ -2047,9 +1699,7 @@ Fransa'nın en üst düzey futbol ligi.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -2062,7 +1712,6 @@ LİGE GİT
 </div>
 
 </a>
-
 
 <!-- SUPER LIG -->
 
@@ -2104,9 +1753,7 @@ Türkiye'nin en üst düzey futbol ligi.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -2119,7 +1766,6 @@ LİGE GİT
 </div>
 
 </a>
-
 
 <!-- CHAMPIONS -->
 
@@ -2161,9 +1807,7 @@ Avrupa'nın en prestijli kulüp turnuvası.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -2176,7 +1820,6 @@ LİGE GİT
 </div>
 
 </a>
-
 
 <!-- EUROPA -->
 
@@ -2218,9 +1861,7 @@ UEFA Avrupa Ligi karşılaşmaları.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -2233,7 +1874,6 @@ LİGE GİT
 </div>
 
 </a>
-
 
 <!-- CONFERENCE -->
 
@@ -2275,9 +1915,7 @@ UEFA Konferans Ligi karşılaşmaları.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
 <div class="league-arrow">
 →
@@ -2290,71 +1928,12 @@ LİGE GİT
 </div>
 
 </a>
-
-
-<!-- EREDIVISIE -->
-
-<a
-href="lig.html?lig=eredivisie"
-class="league-card eredivisie">
-
-<div class="league-bg"></div>
-
-<div class="league-inner">
-
-<div class="league-index">
-10
-</div>
-
-<div class="league-country">
-NETHERLANDS
-</div>
-
-<div class="league-logo-wrap">
-
-<img
-class="league-logo"
-src="https://commons.wikimedia.org/wiki/Special:Redirect/file/Eredivisie_nieuw_logo_2017-.svg"
-alt="Eredivisie"
-loading="lazy">
-
-</div>
-
-<div class="league-bottom">
-
-<div class="league-title">
-Ere<br>divisie
-</div>
-
-<div class="league-description">
-Hollanda'nın üst düzey futbol ligi.
-</div>
-
-<div class="league-go">
-
-<span>
-LİGE GİT
-</span>
-
-<div class="league-arrow">
-→
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</a>
-
 
 </div>
 
 </section>
 
 </main>
-
 
 <footer class="footer">
 
@@ -2368,30 +1947,428 @@ CREX
 
 </footer>
 
-
 <script>
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+const matchGrid =
+    document.getElementById("matchGrid");
+
+const searchInput =
+    document.getElementById("searchInput");
+
+let allMatches = [];
+
+
+/* =========================================================
+   TARİH FORMATLAMA
+========================================================= */
+
+function formatDate(dateString){
+
+    if(!dateString)
+        return "";
+
+    const date =
+        new Date(dateString + "T12:00:00");
+
+    if(Number.isNaN(date.getTime()))
+        return dateString;
+
+    return date.toLocaleDateString(
+        "tr-TR",
+        {
+            day:"2-digit",
+            month:"2-digit",
+            year:"numeric"
+        }
+    );
+}
+
+
+/* =========================================================
+   MAÇ KARTI OLUŞTUR
+========================================================= */
+
+function createMatchCard(match,index){
+
+    const homeName =
+        match.evSahibi || "Ev Sahibi";
+
+    const awayName =
+        match.deplasman || "Deplasman";
+
+    const homeShort =
+        match.evKisa || homeName.substring(0,3).toUpperCase();
+
+    const awayShort =
+        match.depKisa || awayName.substring(0,3).toUpperCase();
+
+    const homeLogo =
+        match.evLogo || "";
+
+    const awayLogo =
+        match.depLogo || "";
+
+    const leagueName =
+        match.ligAdi ||
+        match.lig ||
+        "Futbol";
+
+    const score =
+        match.skor || "";
+
+    const status =
+        match.durum || "YENİ";
+
+    const date =
+        formatDate(match.tarih);
+
+    const id =
+        match.id;
+
+    const searchText = [
+
+        homeName,
+        awayName,
+        homeShort,
+        awayShort,
+        leagueName,
+        match.hafta || "",
+        score
+
+    ].join(" ");
+
+    const card =
+        document.createElement("article");
+
+    card.className="match-card";
+
+    card.dataset.search =
+        searchText;
+
+    card.dataset.matchId =
+        id ?? "";
+
+    card.innerHTML = `
+
+        <div class="card-glow"></div>
+
+        <div class="match-number">
+            ${String(index + 1).padStart(2,"0")}
+        </div>
+
+        <div class="match-content">
+
+            <div class="match-top">
+
+                <div class="match-league-tag">
+
+                    <span class="league-dot"></span>
+
+                    ${escapeHTML(leagueName)}
+
+                </div>
+
+                <div class="match-status">
+                    ${escapeHTML(status)}
+                </div>
+
+            </div>
+
+            <div class="teams">
+
+                <div class="team">
+
+                    <div class="team-logo">
+
+                        ${
+                            homeLogo
+                            ?
+                            `<img
+                                src="${escapeAttribute(homeLogo)}"
+                                alt="${escapeAttribute(homeName)}"
+                                loading="lazy"
+                                onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block';"
+                            >`
+                            :
+                            ""
+                        }
+
+                        <span
+                            class="logo-fallback"
+                            style="
+                                display:${homeLogo ? "none" : "block"};
+                            "
+                        >
+                            ${escapeHTML(homeShort)}
+                        </span>
+
+                    </div>
+
+                    <div class="team-name">
+                        ${escapeHTML(homeName)}
+                    </div>
+
+                </div>
+
+                <div class="vs">
+                    VS
+                </div>
+
+                <div class="team">
+
+                    <div class="team-logo">
+
+                        ${
+                            awayLogo
+                            ?
+                            `<img
+                                src="${escapeAttribute(awayLogo)}"
+                                alt="${escapeAttribute(awayName)}"
+                                loading="lazy"
+                                onerror="this.style.display='none';this.parentElement.querySelector('.logo-fallback').style.display='block';"
+                            >`
+                            :
+                            ""
+                        }
+
+                        <span
+                            class="logo-fallback"
+                            style="
+                                display:${awayLogo ? "none" : "block"};
+                            "
+                        >
+                            ${escapeHTML(awayShort)}
+                        </span>
+
+                    </div>
+
+                    <div class="team-name">
+                        ${escapeHTML(awayName)}
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="match-bottom">
+
+                <div class="match-date">
+
+                    ${
+                        date
+                        ? escapeHTML(date)
+                        : "TARİH YOK"
+                    }
+
+                    ${
+                        score
+                        ? " • " + escapeHTML(score)
+                        : ""
+                    }
+
+                </div>
+
+                <a
+                    href="mac.html?id=${encodeURIComponent(id ?? "")}"
+                    class="watch-btn"
+                >
+                    İZLE →
+                </a>
+
+            </div>
+
+        </div>
+    `;
+
+    return card;
+}
+
+
+/* =========================================================
+   HTML GÜVENLİK
+========================================================= */
+
+function escapeHTML(value){
+
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+
+function escapeAttribute(value){
+
+    return escapeHTML(value);
+}
+
+
+/* =========================================================
+   MACLARI RENDER ET
+========================================================= */
+
+function renderMatches(matches){
+
+    matchGrid.innerHTML="";
+
+    if(!Array.isArray(matches) || matches.length===0){
+
+        matchGrid.innerHTML=`
+
+            <div class="matches-message">
+
+                Henüz eklenmiş maç bulunamadı.
+
+            </div>
+
+        `;
+
+        return;
+    }
+
+    matches.forEach((match,index)=>{
+
+        const card =
+            createMatchCard(
+                match,
+                index
+            );
+
+        matchGrid.appendChild(card);
+
+        addMatchEffects(card);
+
+    });
+
+    applySearch();
+}
+
+
+/* =========================================================
+   maclar.json YÜKLE
+========================================================= */
+
+async function loadMatches(){
+
+    matchGrid.innerHTML=`
+
+        <div class="matches-message">
+
+            Maçlar yükleniyor...
+
+        </div>
+
+    `;
+
+    try{
+
+        const response =
+            await fetch(
+                "maclar.json",
+                {
+                    cache:"no-store"
+                }
+            );
+
+        if(!response.ok){
+
+            throw new Error(
+                "maclar.json yüklenemedi. HTTP " +
+                response.status
+            );
+
+        }
+
+        const data =
+            await response.json();
+
+        if(!Array.isArray(data)){
+
+            throw new Error(
+                "maclar.json bir JSON dizisi olmalı."
+            );
+
+        }
+
+        allMatches =
+            data.filter(
+                match =>
+                    match &&
+                    typeof match === "object"
+            );
+
+        /*
+         * Son eklenenleri en yeni ID'lerden
+         * başlayacak şekilde gösteriyoruz.
+         *
+         * ID numaraları düzgün sıradaysa
+         * yüksek ID üstte görünür.
+         */
+
+        allMatches.sort(
+            (a,b)=>
+                Number(b.id || 0) -
+                Number(a.id || 0)
+        );
+
+        renderMatches(allMatches);
+
+    }catch(error){
+
+        console.error(
+            "CREX maclar.json hatası:",
+            error
+        );
+
+        matchGrid.innerHTML=`
+
+            <div class="matches-message error">
+
+                Maçlar yüklenemedi.<br><br>
+
+                <strong>
+                    maclar.json kontrol edin.
+                </strong>
+
+            </div>
+
+        `;
+
+    }
+
+}
+
 
 /* =========================================================
    SEARCH
 ========================================================= */
 
-const searchInput =
-document.getElementById("searchInput");
-
-const matchCards =
-[...document.querySelectorAll(".match-card")];
-
-searchInput.addEventListener("input",function(){
+function applySearch(){
 
     const query =
-        this.value
+        searchInput.value
         .toLocaleLowerCase("tr-TR")
         .trim();
 
-    matchCards.forEach(card=>{
+    const cards =
+        [
+            ...document.querySelectorAll(
+                ".match-card"
+            )
+        ];
+
+    cards.forEach(card=>{
 
         const text =
-            card.dataset.search
+            (
+                card.dataset.search || ""
+            )
             .toLocaleLowerCase("tr-TR");
 
         if(!query || text.includes(query)){
@@ -2402,28 +2379,72 @@ searchInput.addEventListener("input",function(){
 
         }else{
 
+            card.style.display="none";
             card.style.opacity="0";
-            card.style.transform="scale(.96)";
-
-            setTimeout(()=>{
-
-                if(
-                    !text.includes(
-                        searchInput.value
-                        .toLocaleLowerCase("tr-TR")
-                        .trim()
-                    )
-                ){
-                    card.style.display="none";
-                }
-
-            },220);
 
         }
 
     });
 
-});
+}
+
+
+searchInput.addEventListener(
+    "input",
+    applySearch
+);
+
+
+/* =========================================================
+   MATCH MOUSE LIGHT
+========================================================= */
+
+function addMatchEffects(card){
+
+    card.addEventListener(
+        "mousemove",
+        e=>{
+
+            if(window.innerWidth<=760)
+                return;
+
+            const rect =
+                card.getBoundingClientRect();
+
+            const x =
+                ((e.clientX - rect.left) /
+                rect.width) * 100;
+
+            const y =
+                ((e.clientY - rect.top) /
+                rect.height) * 100;
+
+            card.style.background = `
+
+                radial-gradient(
+                    300px circle at ${x}% ${y}%,
+                    rgba(21,149,255,.09),
+                    transparent 50%
+                ),
+
+                #080e16
+
+            `;
+
+        }
+    );
+
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
+
+            card.style.background =
+                "#080e16";
+
+        }
+    );
+
+}
 
 
 /* =========================================================
@@ -2431,44 +2452,60 @@ searchInput.addEventListener("input",function(){
 ========================================================= */
 
 const leagueScroll =
-document.getElementById("leagueScroll");
+    document.getElementById(
+        "leagueScroll"
+    );
 
 let dragging=false;
 let startX=0;
 let scrollStart=0;
 
-leagueScroll.addEventListener("mousedown",e=>{
+leagueScroll.addEventListener(
+    "mousedown",
+    e=>{
 
-    dragging=true;
+        dragging=true;
 
-    leagueScroll.classList.add("dragging");
+        leagueScroll.classList.add(
+            "dragging"
+        );
 
-    startX=e.pageX;
+        startX=e.pageX;
 
-    scrollStart=
-        leagueScroll.scrollLeft;
+        scrollStart =
+            leagueScroll.scrollLeft;
 
-});
+    }
+);
 
-window.addEventListener("mouseup",()=>{
+window.addEventListener(
+    "mouseup",
+    ()=>{
 
-    dragging=false;
+        dragging=false;
 
-    leagueScroll.classList.remove("dragging");
+        leagueScroll.classList.remove(
+            "dragging"
+        );
 
-});
+    }
+);
 
-leagueScroll.addEventListener("mousemove",e=>{
+leagueScroll.addEventListener(
+    "mousemove",
+    e=>{
 
-    if(!dragging) return;
+        if(!dragging)
+            return;
 
-    e.preventDefault();
+        e.preventDefault();
 
-    leagueScroll.scrollLeft =
-        scrollStart -
-        (e.pageX-startX)*1.35;
+        leagueScroll.scrollLeft =
+            scrollStart -
+            (e.pageX-startX)*1.35;
 
-});
+    }
+);
 
 
 /* =========================================================
@@ -2479,76 +2516,37 @@ let touchStart=0;
 let touchScroll=0;
 
 leagueScroll.addEventListener(
-"touchstart",
-e=>{
+    "touchstart",
+    e=>{
 
-    touchStart=
-        e.touches[0].pageX;
+        touchStart =
+            e.touches[0].pageX;
 
-    touchScroll=
-        leagueScroll.scrollLeft;
+        touchScroll =
+            leagueScroll.scrollLeft;
 
-},
-{passive:true}
+    },
+    {
+        passive:true
+    }
 );
 
 leagueScroll.addEventListener(
-"touchmove",
-e=>{
+    "touchmove",
+    e=>{
 
-    const current=
-        e.touches[0].pageX;
+        const current =
+            e.touches[0].pageX;
 
-    leagueScroll.scrollLeft=
-        touchScroll -
-        (current-touchStart);
+        leagueScroll.scrollLeft =
+            touchScroll -
+            (current-touchStart);
 
-},
-{passive:true}
+    },
+    {
+        passive:true
+    }
 );
-
-
-/* =========================================================
-   MATCH MOUSE LIGHT
-========================================================= */
-
-document
-.querySelectorAll(".match-card")
-.forEach(card=>{
-
-    card.addEventListener("mousemove",e=>{
-
-        if(window.innerWidth<=760)
-            return;
-
-        const rect=
-            card.getBoundingClientRect();
-
-        const x=
-            ((e.clientX-rect.left)/rect.width)*100;
-
-        const y=
-            ((e.clientY-rect.top)/rect.height)*100;
-
-        card.style.background=
-            `
-            radial-gradient(
-                300px circle at ${x}% ${y}%,
-                rgba(21,149,255,.09),
-                transparent 50%
-            ),
-            #080e16
-            `;
-
-    });
-
-    card.addEventListener("mouseleave",()=>{
-
-        card.style.background="#080e16";
-
-    });
-
-});
 
 
 /* =========================================================
@@ -2559,41 +2557,48 @@ document
 .querySelectorAll(".league-card")
 .forEach(card=>{
 
-    card.addEventListener("mousemove",e=>{
+    card.addEventListener(
+        "mousemove",
+        e=>{
 
-        if(window.innerWidth<=760)
-            return;
+            if(window.innerWidth<=760)
+                return;
 
-        const rect=
-            card.getBoundingClientRect();
+            const rect =
+                card.getBoundingClientRect();
 
-        const x=
-            e.clientX-rect.left;
+            const x =
+                e.clientX-rect.left;
 
-        const y=
-            e.clientY-rect.top;
+            const y =
+                e.clientY-rect.top;
 
-        const rotateY=
-            ((x/rect.width)-.5)*7;
+            const rotateY =
+                ((x/rect.width)-.5)*7;
 
-        const rotateX=
-            ((y/rect.height)-.5)*-7;
+            const rotateX =
+                ((y/rect.height)-.5)*-7;
 
-        card.style.transform=
-            `
-            translateY(-12px)
-            rotateX(${rotateX}deg)
-            rotateY(${rotateY}deg)
-            scale(1.01)
+            card.style.transform = `
+
+                translateY(-12px)
+                rotateX(${rotateX}deg)
+                rotateY(${rotateY}deg)
+                scale(1.01)
+
             `;
 
-    });
+        }
+    );
 
-    card.addEventListener("mouseleave",()=>{
+    card.addEventListener(
+        "mouseleave",
+        ()=>{
 
-        card.style.transform="";
+            card.style.transform="";
 
-    });
+        }
+    );
 
 });
 
@@ -2602,37 +2607,41 @@ document
    REVEAL
 ========================================================= */
 
-const reveal=
-document.querySelectorAll(".reveal");
+const reveal =
+    document.querySelectorAll(
+        ".reveal"
+    );
 
-const observer=
-new IntersectionObserver(
-entries=>{
+const observer =
+    new IntersectionObserver(
+        entries=>{
 
-    entries.forEach(entry=>{
+            entries.forEach(entry=>{
 
-        if(entry.isIntersecting){
+                if(entry.isIntersecting){
 
-            entry.target
-                .classList
-                .add("visible");
+                    entry.target
+                        .classList
+                        .add("visible");
 
-            observer.unobserve(
-                entry.target
-            );
+                    observer.unobserve(
+                        entry.target
+                    );
 
+                }
+
+            });
+
+        },
+        {
+            threshold:.12
         }
-
-    });
-
-},
-{
-    threshold:.12
-}
-);
+    );
 
 reveal.forEach(el=>{
+
     observer.observe(el);
+
 });
 
 
@@ -2644,17 +2653,28 @@ document
 .querySelectorAll(".league-link")
 .forEach(link=>{
 
-    link.addEventListener("click",function(){
+    link.addEventListener(
+        "click",
+        function(){
 
-        document
-        .querySelectorAll(".league-link")
-        .forEach(x=>{
-            x.classList.remove("active");
-        });
+            document
+            .querySelectorAll(
+                ".league-link"
+            )
+            .forEach(x=>{
 
-        this.classList.add("active");
+                x.classList.remove(
+                    "active"
+                );
 
-    });
+            });
+
+            this.classList.add(
+                "active"
+            );
+
+        }
+    );
 
 });
 
@@ -2667,13 +2687,23 @@ document
 .querySelectorAll("img")
 .forEach(img=>{
 
-    img.addEventListener("error",function(){
+    img.addEventListener(
+        "error",
+        function(){
 
-        this.style.opacity="0";
+            this.style.opacity="0";
 
-    });
+        }
+    );
 
 });
+
+
+/* =========================================================
+   BAŞLAT
+========================================================= */
+
+loadMatches();
 
 </script>
 
