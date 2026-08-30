@@ -2036,5 +2036,26 @@
       "tip": "embed",
       "url": ""
     }
-  }
+  },
+    {
+    "id": 98,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "Türkiye - Süper Lig",
+    "evSahibi": "Erzurumspor",
+    "evKisa": "ERZ",
+    "evLogo": "https://assets.football-logos.cc/logos/turkey/700x700/erzurumspor.c58a43cc.png",
+    "deplasman": "Galatasaray",
+    "depKisa": "GS",
+    "depLogo": "https://assets.football-logos.cc/logos/turkey/700x700/galatasaray.090f837e.png",
+    "skor": "0 - 4",
+    "durum": "MS",
+    "tarih": "2026-08-21",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+    }
 ]
