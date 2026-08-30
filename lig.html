@@ -1259,6 +1259,7 @@ body::before{
     padding:10px;
 
     display:block;
+
 }
 
 .team-logo.text-logo{
@@ -1305,8 +1306,8 @@ body::before{
 }
 
 .vs{
-    width:34px;
-
+    min-width:34px;
+    padding:0 6px;
     height:34px;
 
     display:grid;
@@ -1337,6 +1338,7 @@ body::before{
     font-size:7px;
 
     font-weight:900;
+    white-space:nowrap;
 }
 
 .match-bottom{
@@ -1514,6 +1516,7 @@ body::before{
     color:#fff;
 
     font-size:16px;
+
 }
 
 .empty p{
@@ -3129,12 +3132,6 @@ function createMatchCard(match){
     }
 
 
-    const bottomText =
-        score
-        ? `${escapeHTML(date)} • ${escapeHTML(score)}`
-        : escapeHTML(date);
-
-
     /*
        EV LOGO
     */
@@ -3247,7 +3244,7 @@ function createMatchCard(match){
 
 
                 <div class="vs">
-                    VS
+                    ${score ? escapeHTML(score) : 'VS'}
                 </div>
 
 
@@ -3276,7 +3273,7 @@ function createMatchCard(match){
 
                 <div class="match-date">
 
-                    ${bottomText}
+                    ${escapeHTML(date)}
 
                 </div>
 
@@ -3772,4 +3769,4 @@ loadMatches();
 </script>
 
 </body>
-    </html>
+</html>
