@@ -1341,6 +1341,17 @@ body::before{
     white-space:nowrap;
 }
 
+/* SKOR ALANI (Logoların Altı) */
+.team-score {
+    margin-top: 4px;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 16px;
+    font-weight: 900;
+    color: #fff;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
 .match-bottom{
     display:flex;
 
@@ -2003,29 +2014,7 @@ CREX LİG MERKEZİ
 
 /* =========================================================
    CREX LIG SISTEMI
-   =========================================================
-
-   LOGO SISTEMI:
-
-   Artik takimlar.json KULLANILMIYOR.
-
-   Tum takim logolari dogrudan:
-
-       maclar.json
-
-   icindeki:
-
-       evLogo
-       depLogo
-
-   alanlarindan alinir.
-
-========================================================= */
-
-
-/* =========================================================
-   URL
-========================================================= */
+   ========================================================= */
 
 const params =
     new URLSearchParams(
@@ -2038,17 +2027,9 @@ const leagueSlug =
     "premier-league";
 
 
-/* =========================================================
-   LOGO CACHE VERSION
-========================================================= */
-
 const LOGO_VERSION =
     "20260829";
 
-
-/* =========================================================
-   LEAGUE DATABASE
-========================================================= */
 
 const leagues = {
 
@@ -2130,10 +2111,6 @@ const league =
     leagues["premier-league"];
 
 
-/* =========================================================
-   THEME
-========================================================= */
-
 document.documentElement
     .style
     .setProperty(
@@ -2141,10 +2118,6 @@ document.documentElement
         league.color
     );
 
-
-/* =========================================================
-   ELEMENTS
-========================================================= */
 
 const heroLogo =
     document.getElementById(
@@ -2197,10 +2170,6 @@ const upcomingMatches =
     );
 
 
-/* =========================================================
-   HERO
-========================================================= */
-
 document.title =
     "CREX — " +
     league.name;
@@ -2234,17 +2203,9 @@ leagueCountry.textContent =
     " • CREX MAÇ MERKEZİ";
 
 
-/* =========================================================
-   DATA PATH
-========================================================= */
-
 const matchesJsonPath =
     "./data/maclar.json";
 
-
-/* =========================================================
-   DATA VARIABLES
-========================================================= */
 
 let allMatches = [];
 
@@ -2256,10 +2217,6 @@ let renderedCount = 0;
 
 const PAGE_SIZE = 24;
 
-
-/* =========================================================
-   LOGO CACHE BUSTER
-========================================================= */
 
 function addLogoCache(url){
 
@@ -2275,11 +2232,6 @@ function addLogoCache(url){
     if(!cleanUrl)
         return "";
 
-
-    /*
-       Data ve blob URL'lerine
-       cache parametresi eklenmez.
-    */
 
     if(
         cleanUrl.startsWith("data:") ||
@@ -2306,10 +2258,6 @@ function addLogoCache(url){
 
 }
 
-
-/* =========================================================
-   NORMALIZE TEXT
-========================================================= */
 
 function normalizeText(value){
 
@@ -2338,26 +2286,6 @@ function normalizeText(value){
 }
 
 
-/* =========================================================
-   LOGO RESOLUTION
-=========================================================
-
-   ONEMLI:
-
-   Logo artik takimlar.json'dan aranmaz.
-
-   maclar.json:
-
-       evLogo
-
-   ve
-
-       depLogo
-
-   alanlari dogrudan kullanilir.
-
-========================================================= */
-
 function resolveMatchLogos(match){
 
     return {
@@ -2380,10 +2308,6 @@ function resolveMatchLogos(match){
 
 }
 
-
-/* =========================================================
-   STATUS
-========================================================= */
 
 function getMatchStatus(match){
 
@@ -2482,10 +2406,6 @@ function getMatchStatus(match){
 }
 
 
-/* =========================================================
-   DATE
-========================================================= */
-
 function getMatchDate(match){
 
     if(!match.tarih)
@@ -2549,10 +2469,6 @@ function getMatchDate(match){
 
 }
 
-
-/* =========================================================
-   DATE FORMAT
-========================================================= */
 
 function formatDate(match){
 
@@ -2622,10 +2538,6 @@ function formatSimpleDate(value){
 }
 
 
-/* =========================================================
-   LEAGUE CHECK
-========================================================= */
-
 function isCorrectLeague(match){
 
     const matchLeague =
@@ -2647,10 +2559,6 @@ function isCorrectLeague(match){
 
 }
 
-
-/* =========================================================
-   LOAD DATA
-========================================================= */
 
 async function loadMatches(){
 
@@ -2682,25 +2590,12 @@ async function loadMatches(){
         }
 
 
-        /*
-           MACLAR JSON
-        */
-
         const data =
             await matchesResponse.json();
 
 
         let matches;
 
-
-        /*
-           FORMAT 1
-
-           [
-              {...},
-              {...}
-           ]
-        */
 
         if(
             Array.isArray(data)
@@ -2710,15 +2605,6 @@ async function loadMatches(){
                 data;
 
         }
-
-
-        /*
-           FORMAT 2
-
-           {
-              "matches":[...]
-           }
-        */
 
         else if(
             data &&
@@ -2732,15 +2618,6 @@ async function loadMatches(){
 
         }
 
-
-        /*
-           FORMAT 3
-
-           {
-              "maclar":[...]
-           }
-        */
-
         else if(
             data &&
             Array.isArray(
@@ -2753,7 +2630,6 @@ async function loadMatches(){
 
         }
 
-
         else{
 
             throw new Error(
@@ -2762,10 +2638,6 @@ async function loadMatches(){
 
         }
 
-
-        /*
-           SECILEN LIG
-        */
 
         allMatches =
             matches
@@ -2784,11 +2656,6 @@ async function loadMatches(){
                     match.id !== null
             )
 
-            /*
-               LOGOLAR DOGRUDAN
-               MACLAR.JSON'DAN ALINIYOR.
-            */
-
             .map(
                 match =>
                     resolveMatchLogos(
@@ -2800,68 +2667,6 @@ async function loadMatches(){
         updateStats();
 
         applyFilters();
-
-
-        console.log(
-            "================================="
-        );
-
-        console.log(
-            "CREX MAÇ SISTEMI"
-        );
-
-        console.log(
-            "Lig:",
-            league.name
-        );
-
-        console.log(
-            "Maç:",
-            allMatches.length
-        );
-
-        console.log(
-            "Logo kaynağı:",
-            "maclar.json"
-        );
-
-        console.log(
-            "Logo alanları:",
-            "evLogo / depLogo"
-        );
-
-        console.log(
-            "Logo cache version:",
-            LOGO_VERSION
-        );
-
-        console.log(
-            "================================="
-        );
-
-
-        /*
-           LOGO KONTROLU
-        */
-
-        allMatches.forEach(
-            match => {
-
-                console.log(
-                    `${match.evSahibi} =>`,
-                    match.resolvedEvLogo ||
-                    "EV LOGOSU YOK"
-                );
-
-
-                console.log(
-                    `${match.deplasman} =>`,
-                    match.resolvedDepLogo ||
-                    "DEPLASMAN LOGOSU YOK"
-                );
-
-            }
-        );
 
     }
     catch(error){
@@ -2901,10 +2706,6 @@ async function loadMatches(){
 }
 
 
-/* =========================================================
-   STATS
-========================================================= */
-
 function updateStats(){
 
     const total =
@@ -2933,10 +2734,6 @@ function updateStats(){
 
 }
 
-
-/* =========================================================
-   FILTERS
-========================================================= */
 
 function applyFilters(){
 
@@ -3023,10 +2820,6 @@ function applyFilters(){
 }
 
 
-/* =========================================================
-   MATCH CARD
-========================================================= */
-
 function createMatchCard(match){
 
     const home =
@@ -3048,11 +2841,6 @@ function createMatchCard(match){
         match.depKisa ||
         getInitials(away);
 
-
-    /*
-       LOGOLAR DOGRUDAN
-       MACLAR.JSON'DAN GELIYOR.
-    */
 
     const homeLogoUrl =
         match.resolvedEvLogo ||
@@ -3081,8 +2869,25 @@ function createMatchCard(match){
 
 
     const score =
-        match.skor ||
-        "";
+        String(match.skor || "").trim();
+
+
+    let homeScoreHtml = "";
+    let awayScoreHtml = "";
+    let centerContent = "";
+
+
+    if(score && score.includes("-")){
+        const parts = score.split("-");
+        const hScore = parts[0].trim();
+        const aScore = parts[1].trim();
+
+        homeScoreHtml = `<div class="team-score">${escapeHTML(hScore)}</div>`;
+        awayScoreHtml = `<div class="team-score">${escapeHTML(aScore)}</div>`;
+        centerContent = `<div class="vs">-</div>`;
+    } else {
+        centerContent = `<div class="vs">VS</div>`;
+    }
 
 
     const card =
@@ -3132,10 +2937,6 @@ function createMatchCard(match){
     }
 
 
-    /*
-       EV LOGO
-    */
-
     const homeLogoHTML =
         homeLogoUrl
 
@@ -3163,10 +2964,6 @@ function createMatchCard(match){
             homeShort
         );
 
-
-    /*
-       DEPLASMAN LOGO
-    */
 
     const awayLogoHTML =
         awayLogoUrl
@@ -3232,6 +3029,8 @@ function createMatchCard(match){
 
                     </div>
 
+                    ${homeScoreHtml}
+
                     <div class="team-name">
 
                         ${escapeHTML(
@@ -3243,9 +3042,7 @@ function createMatchCard(match){
                 </div>
 
 
-                <div class="vs">
-                    ${score ? escapeHTML(score) : 'VS'}
-                </div>
+                ${centerContent}
 
 
                 <div class="team">
@@ -3255,6 +3052,8 @@ function createMatchCard(match){
                         ${awayLogoHTML}
 
                     </div>
+
+                    ${awayScoreHtml}
 
                     <div class="team-name">
 
@@ -3301,10 +3100,6 @@ function createMatchCard(match){
 }
 
 
-/* =========================================================
-   LOGO ERROR
-========================================================= */
-
 function handleTeamLogoError(
     img,
     fallbackText
@@ -3340,10 +3135,6 @@ function handleTeamLogoError(
 
 }
 
-
-/* =========================================================
-   PAGINATION
-========================================================= */
 
 function renderNextPage(){
 
@@ -3462,10 +3253,6 @@ function renderNextPage(){
 }
 
 
-/* =========================================================
-   SEARCH
-========================================================= */
-
 searchInput.addEventListener(
     "input",
     ()=>{
@@ -3473,10 +3260,6 @@ searchInput.addEventListener(
     }
 );
 
-
-/* =========================================================
-   FILTER BUTTONS
-========================================================= */
 
 document
     .querySelectorAll(
@@ -3518,10 +3301,6 @@ document
         }
     );
 
-
-/* =========================================================
-   INFINITE SCROLL
-========================================================= */
 
 const infiniteObserver =
     new IntersectionObserver(
@@ -3571,10 +3350,6 @@ infiniteObserver.observe(
     sentinel
 );
 
-
-/* =========================================================
-   CARD LIGHT EFFECT
-========================================================= */
 
 document.addEventListener(
     "mousemove",
@@ -3634,10 +3409,6 @@ document.addEventListener(
 );
 
 
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
 function escapeHTML(value){
 
     return String(
@@ -3667,10 +3438,6 @@ function escapeHTML(value){
 }
 
 
-/* =========================================================
-   ESCAPE ATTRIBUTE
-========================================================= */
-
 function escapeAttr(value){
 
     return escapeHTML(
@@ -3679,10 +3446,6 @@ function escapeAttr(value){
 
 }
 
-
-/* =========================================================
-   ESCAPE JS
-========================================================= */
 
 function escapeJS(value){
 
@@ -3708,10 +3471,6 @@ function escapeJS(value){
 
 }
 
-
-/* =========================================================
-   TEAM INITIALS
-========================================================= */
 
 function getInitials(name){
 
@@ -3745,10 +3504,6 @@ function getInitials(name){
 }
 
 
-/* =========================================================
-   HERO LOGO ERROR
-========================================================= */
-
 heroLogo.addEventListener(
     "error",
     ()=>{
@@ -3759,10 +3514,6 @@ heroLogo.addEventListener(
     }
 );
 
-
-/* =========================================================
-   INITIAL LOAD
-========================================================= */
 
 loadMatches();
 
