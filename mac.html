@@ -681,22 +681,18 @@ body::before{
     overflow:hidden;
 }
 
-/* =========================================================
-   1. ŞEFFAF PERDE (OVERLAY) & AKILLI TIKLAMA YAKALAMA
-========================================================= */
-.crex-click-shield {
-    position: absolute;
-    inset: 0;
-    z-index: 20;
-    background: transparent;
-    cursor: pointer;
-    display: block;
+/* Şeffaf Perde (Click Shield) Stilleri */
+.crex-click-shield{
+    position:absolute;
+    inset:0;
+    z-index:10;
+    background:transparent;
+    cursor:pointer;
 }
 
-.crex-click-shield.disabled {
-    pointer-events: none;
+.crex-click-shield.disabled{
+    pointer-events:none;
 }
-
 
 /* =========================================================
    FULLSCREEN
@@ -1624,7 +1620,6 @@ function renderMatch(match){
     matchTime.textContent =
         timeText;
 
-    // Eğer evSkor ve depSkor tanımlıysa VS yerine alt alta skorları göster
     if(match.evSkor !== undefined && match.depSkor !== undefined && match.evSkor !== "" && match.depSkor !== ""){
         heroCenter.innerHTML = `
             <div class="hero-score-box">
@@ -1853,11 +1848,14 @@ function createSecureEmbed(url){
     iframe.title =
         "CREX yayın oynatıcı";
 
+    // MixDrop sandbox hatasını aşmak için izinler genişletildi:
     iframe.sandbox =
         "allow-scripts " +
         "allow-same-origin " +
         "allow-forms " +
-        "allow-presentation";
+        "allow-presentation " +
+        "allow-popups " +
+        "allow-popups-to-escape-sandbox";
 
     iframe.allow =
         "autoplay; fullscreen; picture-in-picture";
@@ -1894,12 +1892,11 @@ function createSecureEmbed(url){
         e.preventDefault();
         e.stopPropagation();
 
-        // Tıklamayı engelle ve geçici olarak devre dışı bırak (oynatıcı kontrollerine izin ver)
         clickShield.classList.add("disabled");
 
         setTimeout(function(){
             clickShield.classList.remove("disabled");
-        }, 600); // 600ms sonra perde tekrar aktif olur
+        }, 600);
     });
 
 
