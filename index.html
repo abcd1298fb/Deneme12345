@@ -1024,7 +1024,10 @@ body::before{
     letter-spacing:1.2px;
 }
 
-/* WATCH */
+
+/* =========================================================
+   WATCH BUTTON — GÜNCELLENDİ
+========================================================= */
 
 .watch-btn{
     position:relative;
@@ -1032,75 +1035,158 @@ body::before{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:7px;
+    gap:9px;
 
-    min-width:80px;
+    min-width:116px;
+    height:44px;
 
-    padding:10px 13px;
+    padding:0 18px;
 
     overflow:hidden;
 
     color:#fff;
     text-decoration:none;
 
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:10px;
+    border:1px solid rgba(130,210,255,.32);
+    border-radius:13px;
 
     background:
         linear-gradient(
             135deg,
-            #168fff,
-            #075fb6
+            #2aa8ff 0%,
+            #168fff 42%,
+            #075fb6 100%
         );
 
     box-shadow:
-        0 9px 22px rgba(21,149,255,.18);
+        0 10px 28px rgba(21,149,255,.22),
+        0 0 0 1px rgba(21,149,255,.04) inset,
+        0 1px 0 rgba(255,255,255,.18) inset;
 
-    font-size:8px;
+    font-family:"Manrope",sans-serif;
+    font-size:10px;
     font-weight:900;
 
+    letter-spacing:.7px;
+
+    text-transform:uppercase;
+
     transition:
-        transform .4s var(--ease),
-        box-shadow .4s;
+        transform .45s var(--ease),
+        box-shadow .45s var(--ease),
+        border-color .35s,
+        filter .35s;
 }
+
+
+/* parlak üst çizgi */
+
+.watch-btn:after{
+    content:"";
+
+    position:absolute;
+
+    left:12%;
+    right:12%;
+    top:0;
+
+    height:1px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.9),
+            transparent
+        );
+
+    opacity:.7;
+}
+
+
+/* ışık geçişi */
 
 .watch-btn:before{
     content:"";
 
     position:absolute;
 
-    top:0;
-    left:-100%;
+    top:-20%;
+    left:-80%;
 
-    width:70%;
-    height:100%;
+    width:55%;
+    height:140%;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.3),
+            rgba(255,255,255,.42),
             transparent
         );
 
-    transform:skewX(-20deg);
+    transform:skewX(-22deg);
 
-    transition:.7s;
+    transition:
+        left .75s var(--ease);
+
+    pointer-events:none;
 }
 
-.watch-btn:hover:before{
-    left:140%;
-}
+
+/* hover */
 
 .watch-btn:hover{
     transform:
-        translateY(-3px)
-        scale(1.03);
+        translateY(-4px)
+        scale(1.045);
+
+    border-color:
+        rgba(140,220,255,.7);
+
+    filter:
+        brightness(1.08);
 
     box-shadow:
-        0 15px 32px rgba(21,149,255,.3),
-        0 0 20px rgba(21,149,255,.1);
+        0 17px 38px rgba(21,149,255,.34),
+        0 0 30px rgba(21,149,255,.16),
+        0 0 0 1px rgba(21,149,255,.12) inset,
+        0 1px 0 rgba(255,255,255,.25) inset;
 }
+
+
+.watch-btn:hover:before{
+    left:135%;
+}
+
+
+/* tıklama */
+
+.watch-btn:active{
+    transform:
+        translateY(-1px)
+        scale(.98);
+
+    box-shadow:
+        0 7px 18px rgba(21,149,255,.22);
+}
+
+
+/* ok animasyonu */
+
+.watch-btn{
+    text-shadow:
+        0 1px 3px rgba(0,0,0,.25);
+}
+
+
+/* yayın yok butonu mevcut yapısını korur */
+
+.watch-btn[style*="opacity"]{
+    box-shadow:none;
+    filter:none;
+}
+
 
 /* =========================================================
    LOADING
@@ -1681,9 +1767,30 @@ body::before{
         font-size:10px;
     }
 
+
+    /* =====================================================
+       MOBİL WATCH BUTTON — BÜYÜK
+    ===================================================== */
+
     .watch-btn{
-        min-width:78px;
+        min-width:112px;
+        height:43px;
+        padding:0 15px;
+
+        border-radius:12px;
+
+        font-size:9px;
+
+        box-shadow:
+            0 9px 24px rgba(21,149,255,.2);
     }
+
+    .watch-btn:hover{
+        transform:
+            translateY(-2px)
+            scale(1.02);
+    }
+
 
     .leagues{
         grid-template-columns:
@@ -1765,9 +1872,14 @@ body::before{
         font-size:9px;
     }
 
+
+    /* küçük ekranlarda da buton ezilmesin */
+
     .watch-btn{
-        min-width:72px;
-        padding:9px 10px;
+        min-width:106px;
+        height:42px;
+        padding:0 12px;
+        font-size:8px;
     }
 
 }
@@ -2606,10 +2718,6 @@ document.getElementById("matchGrid");
 const searchInput =
 document.getElementById("searchInput");
 
-/*
-   ANA SAYFADA GÖSTERİLECEK
-   MAKSİMUM MAÇ SAYISI
-*/
 const MAX_MATCHES = 10;
 
 let allMatches = [];
@@ -2707,17 +2815,9 @@ function createMatchCard(match,index){
         match.yayin &&
         match.yayin.aktif;
 
-    /*
-       HAFTA
-    */
-
     const hafta =
         match.hafta ||
         "Hafta bilgisi yok";
-
-    /*
-       TARİH
-    */
 
     const tarih =
         formatDate(match.tarih);
@@ -2733,8 +2833,6 @@ function createMatchCard(match,index){
         </div>
 
         <div class="match-content">
-
-            <!-- TOP -->
 
             <div class="match-top">
 
@@ -2754,8 +2852,6 @@ function createMatchCard(match,index){
 
             </div>
 
-
-            <!-- TEAMS -->
 
             <div class="teams">
 
@@ -2840,12 +2936,7 @@ function createMatchCard(match,index){
             </div>
 
 
-            <!-- BOTTOM -->
-
             <div class="match-bottom">
-
-
-                <!-- HAFTA -->
 
                 <div class="match-week">
 
@@ -2854,15 +2945,11 @@ function createMatchCard(match,index){
                     </div>
 
                     <div class="match-week-value">
-
                         ${escapeHtml(hafta)}
-
                     </div>
 
                 </div>
 
-
-                <!-- TARİH -->
 
                 <div class="match-date">
 
@@ -2877,8 +2964,6 @@ function createMatchCard(match,index){
                 </div>
 
 
-                <!-- İZLE -->
-
                 ${
                     yayinAktif
                     ?
@@ -2886,6 +2971,7 @@ function createMatchCard(match,index){
                     <a
                         href="mac.html?id=${encodeURIComponent(id)}"
                         class="watch-btn"
+                        aria-label="${escapeAttribute(evSahibi)} - ${escapeAttribute(deplasman)} maçını izle"
                     >
                         İZLE →
                     </a>
@@ -2968,10 +3054,6 @@ function initMatchEffects(){
                 rect.top;
 
 
-            /*
-               3D TILT
-            */
-
             const rotateY =
                 ((x / rect.width) - .5) * 4;
 
@@ -2987,10 +3069,6 @@ function initMatchEffects(){
                 rotateY(${rotateY}deg)
                 `;
 
-
-            /*
-               MOUSE LIGHT
-            */
 
             if(glow){
 
@@ -3076,10 +3154,6 @@ async function loadMatches(){
         }
 
 
-        /*
-           TÜM MAÇLARI AL
-        */
-
         allMatches =
             data
             .filter(
@@ -3111,11 +3185,6 @@ async function loadMatches(){
                 }
             );
 
-
-        /*
-           ANA SAYFADA SADECE
-           10 MAÇ GÖSTER
-        */
 
         renderMatches(
             allMatches.slice(
@@ -3214,10 +3283,6 @@ function renderMatches(matches){
     matchGrid.innerHTML = "";
 
 
-    /*
-       HER DURUMDA MAKSİMUM 10
-    */
-
     const limitedMatches =
         matches.slice(
             0,
@@ -3297,11 +3362,6 @@ function(){
             }
         );
 
-
-    /*
-       ARAMA SONUCU DA
-       MAKSİMUM 10
-    */
 
     renderMatches(
         filtered.slice(
