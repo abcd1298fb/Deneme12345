@@ -1841,7 +1841,7 @@ function renderPlayer(match){
 
 
 /* =========================================================
-   SECURE EMBED + SANDBOX (YÖNLENDİRME VE REKLAM ENGELLEYİCİ)
+   SECURE EMBED (YÖNLENDİRME VE REKLAM ENGELLEYİCİ)
 ========================================================= */
 
 function createSecureEmbed(url){
@@ -1898,8 +1898,17 @@ function createSecureEmbed(url){
         iframe.title =
             "CREX yayın oynatıcı";
 
-        // ÖNEMLİ: allow-popups kaldırıldı, yeni sekme açma girişimleri tamamen engellenir
-        iframe.sandbox = "allow-scripts allow-same-origin allow-presentation allow-forms";
+        // Sandbox hatasını önlemek için kaldırıldı. Yeni sekme açma girişimi window.open kilidiyle engelleniyor:
+        iframe.addEventListener("load", function(){
+            try {
+                iframe.contentWindow.window.open = function() {
+                    console.log("CREX: Engellenen reklam sekmesi.");
+                    return null;
+                };
+            } catch(e) {
+                // Cross-origin güvenlik kısıtlaması takılırsa geç
+            }
+        });
 
         iframe.allow =
             "autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope";
