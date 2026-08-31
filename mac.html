@@ -682,7 +682,7 @@ body::before{
 }
 
 /* =========================================================
-   PLAYER OVERLAY (GÜÇLENDİRİLMİŞ İLK TIKLAMA KORUMASI)
+   PLAYER OVERLAY (İLK TIKLAMA KORUMASI)
 ========================================================= */
 
 .player-overlay {
@@ -1841,7 +1841,7 @@ function renderPlayer(match){
 
 
 /* =========================================================
-   SECURE EMBED + CLICK-TO-LOAD (REKLAM KORUMALI)
+   SECURE EMBED + SANDBOX (YÖNLENDİRME VE REKLAM ENGELLEYİCİ)
 ========================================================= */
 
 function createSecureEmbed(url){
@@ -1897,6 +1897,9 @@ function createSecureEmbed(url){
 
         iframe.title =
             "CREX yayın oynatıcı";
+
+        // ÖNEMLİ: allow-popups kaldırıldı, yeni sekme açma girişimleri tamamen engellenir
+        iframe.sandbox = "allow-scripts allow-same-origin allow-presentation allow-forms";
 
         iframe.allow =
             "autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope";
@@ -1955,7 +1958,7 @@ function createSecureEmbed(url){
             <path d="M8 3H5a2 2 0 0 0-2 2v3"/>
             <path d="M16 3h3a2 2 0 0 1 2 2v3"/>
             <path d="M8 21H5a2 2 0 0 1-2-2v-3"/>
-            <path d="M16 21h3a2 2 0 0 1 2-2v-3"/>
+            <path d="M16 21h3a2 2 0 0 0 2-2v-3"/>
         </svg>
     `;
 
