@@ -681,19 +681,6 @@ body::before{
     overflow:hidden;
 }
 
-/* Şeffaf Perde (Click Shield) Stilleri */
-.crex-click-shield{
-    position:absolute;
-    inset:0;
-    z-index:10;
-    background:transparent;
-    cursor:pointer;
-}
-
-.crex-click-shield.disabled{
-    pointer-events:none;
-}
-
 /* =========================================================
    FULLSCREEN
 ========================================================= */
@@ -1805,7 +1792,7 @@ function renderPlayer(match){
 
 
 /* =========================================================
-   SECURE EMBED + CREX FULLSCREEN + TRANSPARENT OVERLAY
+   SECURE EMBED + CREX FULLSCREEN
 ========================================================= */
 
 function createSecureEmbed(url){
@@ -1826,15 +1813,6 @@ function createSecureEmbed(url){
         oldButton.remove();
     }
 
-    const oldShield =
-        player.querySelector(
-            ".crex-click-shield"
-        );
-
-    if(oldShield){
-        oldShield.remove();
-    }
-
     placeholder.style.display =
         "none";
 
@@ -1848,7 +1826,7 @@ function createSecureEmbed(url){
     iframe.title =
         "CREX yayın oynatıcı";
 
-    // MixDrop sandbox hatasını aşmak için izinler genişletildi:
+    /* MixDrop ve benzeri embed sağlayıcıların hata vermemesi için sandbox izinleri genişletildi */
     iframe.sandbox =
         "allow-scripts " +
         "allow-same-origin " +
@@ -1872,32 +1850,6 @@ function createSecureEmbed(url){
     player.appendChild(
         iframe
     );
-
-
-    /* =====================================================
-       1. ŞEFFAF PERDE (OVERLAY) & AKILLI TIKLAMA YAKALAMA
-    ===================================================== */
-    const clickShield =
-        document.createElement("div");
-
-    clickShield.className =
-        "crex-click-shield";
-
-    clickShield.title =
-        "Yayını başlatmak veya kontrol etmek için tıklayın";
-
-    player.appendChild(clickShield);
-
-    clickShield.addEventListener("click", function(e){
-        e.preventDefault();
-        e.stopPropagation();
-
-        clickShield.classList.add("disabled");
-
-        setTimeout(function(){
-            clickShield.classList.remove("disabled");
-        }, 600);
-    });
 
 
     /* =====================================================
