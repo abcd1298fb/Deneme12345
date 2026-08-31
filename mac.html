@@ -682,6 +682,18 @@ body::before{
 }
 
 /* =========================================================
+   PLAYER OVERLAY (REKLAM ENGELLEME PERDESİ)
+========================================================= */
+
+.player-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    cursor: pointer;
+    background: transparent;
+}
+
+/* =========================================================
    FULLSCREEN
 ========================================================= */
 
@@ -1813,6 +1825,15 @@ function createSecureEmbed(url){
         oldButton.remove();
     }
 
+    const oldOverlay =
+        player.querySelector(
+            ".player-overlay"
+        );
+
+    if(oldOverlay){
+        oldOverlay.remove();
+    }
+
     placeholder.style.display =
         "none";
 
@@ -1825,8 +1846,6 @@ function createSecureEmbed(url){
 
     iframe.title =
         "CREX yayın oynatıcı";
-
-    // Sandbox tamamen kaldırıldı (Mixdrop vb. servislerin hata vermesi engellendi)
 
     iframe.allow =
         "autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope";
@@ -1843,6 +1862,21 @@ function createSecureEmbed(url){
     player.appendChild(
         iframe
     );
+
+
+    /* =====================================================
+       PLAYER OVERLAY (REKLAM ENGELLEME PERDESİ)
+    ===================================================== */
+
+    const overlay = document.createElement("div");
+    overlay.className = "player-overlay";
+    overlay.title = "Oynatmak için tıklayın";
+
+    overlay.addEventListener("click", function(){
+        overlay.remove(); // İlk tıklandığında perde kalkar ve video normal kontrol edilir
+    });
+
+    player.appendChild(overlay);
 
 
     /* =====================================================
