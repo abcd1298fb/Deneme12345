@@ -209,7 +209,6 @@
       "url": "https://mixdrop.top/e/dkq0ng4nclo9e7"
     }
   },
-
   {
     "id": 11,
     "lig": "premier-league",
@@ -2037,7 +2036,7 @@
       "url": "https://playmate.to/embed/Vb40KbSVhjeRT"
     }
   },
-    {
+  {
     "id": 98,
     "lig": "super-lig",
     "ligAdi": "Türkiye - Süper Lig",
@@ -2056,8 +2055,9 @@
       "aktif": true,
       "tip": "embed",
       "url": "https://www.dailymotion.com/embed/video/xb210f2"
-    },
-          {
+    }
+  },
+  {
     "id": 99,
     "lig": "super-lig",
     "ligAdi": "Türkiye - Süper Lig",
@@ -2076,8 +2076,9 @@
       "aktif": true,
       "tip": "embed",
       "url": "https://www.dailymotion.com/embed/video/xaxtmjq"
-    },
-     {
+    }
+  },
+  {
     "id": 100,
     "lig": "super-lig",
     "ligAdi": "Türkiye - Süper Lig",
@@ -2097,4 +2098,5 @@
       "tip": "embed",
       "url": "https://www.dailymotion.com/embed/video/xay8csm"
     }
+  }
 ]
