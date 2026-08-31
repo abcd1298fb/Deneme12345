@@ -2098,5 +2098,153 @@
       "tip": "embed",
       "url": "https://www.dailymotion.com/embed/video/xay8csm"
     }
+  },
+  [
+  {
+    "id": 101,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Konyaspor",
+    "evKisa": "KON",
+    "evLogo": "",
+    "deplasman": "Ç. Rizespor",
+    "depKisa": "RİZ",
+    "depLogo": "",
+    "skor": "0 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-15",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 102,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Kasımpaşa",
+    "evKisa": "KAS",
+    "evLogo": "",
+    "deplasman": "Trabzonspor",
+    "depKisa": "TS",
+    "depLogo": "",
+    "skor": "1 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-15",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 103,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Gaziantep FK",
+    "evKisa": "GFK",
+    "evLogo": "",
+    "deplasman": "Alanyaspor",
+    "depKisa": "ALN",
+    "depLogo": "",
+    "skor": "1 - 1",
+    "durum": "MS",
+    "tarih": "2026-08-15",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 104,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Başakşehir",
+    "evKisa": "BAŞ",
+    "evLogo": "",
+    "deplasman": "Kocaelispor",
+    "depKisa": "KOC",
+    "depLogo": "",
+    "skor": "2 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-16",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 105,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Amed SK",
+    "evKisa": "AMD",
+    "evLogo": "",
+    "deplasman": "Erzurumspor",
+    "depKisa": "ERZ",
+    "depLogo": "",
+    "skor": "3 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-16",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 106,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Beşiktaş",
+    "evKisa": "BJK",
+    "evLogo": "",
+    "deplasman": "Eyüpspor",
+    "depKisa": "EYÜ",
+    "depLogo": "",
+    "skor": "1 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-16",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
+  },
+  {
+    "id": 107,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Samsunspor",
+    "evKisa": "SAM",
+    "evLogo": "",
+    "deplasman": "Göztepe",
+    "depKisa": "GÖZ",
+    "depLogo": "",
+    "skor": "3 - 3",
+    "durum": "MS",
+    "tarih": "2026-08-17",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": ""
+    }
   }
 ]
