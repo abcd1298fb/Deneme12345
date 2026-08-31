@@ -1914,7 +1914,7 @@ CREX
 
 
 /*
- * URL:
+ * DESTEKLENEN URL'LER:
  *
  * lig.html?lig=premier-league
  * lig.html?lig=la-liga
@@ -1922,9 +1922,16 @@ CREX
  * lig.html?lig=bundesliga
  * lig.html?lig=ligue-1
  * lig.html?lig=super-lig
+ *
  * lig.html?lig=champions-league
  * lig.html?lig=europa-league
  * lig.html?lig=conference-league
+ *
+ * Türkçe alternatifler de desteklenir:
+ *
+ * lig.html?lig=sampiyonlar-ligi
+ * lig.html?lig=avrupa-ligi
+ * lig.html?lig=konferans-ligi
  */
 
 
@@ -1939,13 +1946,19 @@ const requestedLeague =
 
 
 /*
- * URL'de lig yoksa Premier League
- * varsayılan olarak açılır.
+ * URL'de lig belirtilmemişse
+ * Premier League varsayılan olur.
+ *
+ * ÖNEMLİ:
+ * URL'de lig belirtilmiş fakat geçersizse
+ * artık Premier League açılmaz.
  */
 
 const leagueSlug =
-    requestedLeague ||
-    "premier-league";
+    requestedLeague &&
+    String(requestedLeague).trim()
+        ? requestedLeague
+        : "premier-league";
 
 
 /*
@@ -2101,6 +2114,10 @@ const leagues = {
     },
 
 
+    /* =====================================================
+       ŞAMPİYONLAR LİGİ
+    ===================================================== */
+
     "champions-league":{
 
         name:"Champions League",
@@ -2108,10 +2125,24 @@ const leagues = {
         country:"UEFA",
 
         aliases:[
+
             "champions league",
             "championsleague",
             "champions-league",
-            "uefa champions league"
+            "uefa champions league",
+
+            /* Türkçe */
+            "şampiyonlar ligi",
+            "sampiyonlar ligi",
+            "şampiyonlar-ligi",
+            "sampiyonlar-ligi",
+            "şampiyonlar",
+            "sampiyonlar",
+
+            /* Alternatif */
+            "ucl",
+            "uefa champions"
+
         ],
 
         logo:
@@ -2122,6 +2153,10 @@ const leagues = {
     },
 
 
+    /* =====================================================
+       AVRUPA LİGİ
+    ===================================================== */
+
     "europa-league":{
 
         name:"Europa League",
@@ -2129,10 +2164,22 @@ const leagues = {
         country:"UEFA",
 
         aliases:[
+
             "europa league",
             "europaleague",
             "europa-league",
-            "uefa europa league"
+            "uefa europa league",
+
+            /* Türkçe */
+            "avrupa ligi",
+            "avrupa-ligi",
+            "avrupa",
+            "uefa avrupa ligi",
+
+            /* Alternatif */
+            "uel",
+            "uefa europa"
+
         ],
 
         logo:
@@ -2143,6 +2190,10 @@ const leagues = {
     },
 
 
+    /* =====================================================
+       KONFERANS LİGİ
+    ===================================================== */
+
     "conference-league":{
 
         name:"Conference League",
@@ -2150,11 +2201,24 @@ const leagues = {
         country:"UEFA",
 
         aliases:[
+
             "conference league",
             "conferenceleague",
             "conference-league",
             "uefa conference league",
-            "europa conference league"
+            "europa conference league",
+
+            /* Türkçe */
+            "konferans ligi",
+            "konferans-ligi",
+            "konferans",
+            "uefa konferans ligi",
+            "avrupa konferans ligi",
+
+            /* Alternatif */
+            "uecl",
+            "uefa conference"
+
         ],
 
         logo:
@@ -2204,8 +2268,16 @@ function resolveLeagueSlug(value){
         normalizeText(value);
 
 
+    if(!normalized)
+        return null;
+
+
+    /*
+     * Önce doğrudan slug kontrolü.
+     */
+
     for(
-        const [slug, data]
+        const [slug]
         of Object.entries(leagues)
     ){
 
@@ -2218,6 +2290,17 @@ function resolveLeagueSlug(value){
 
         }
 
+    }
+
+
+    /*
+     * Sonra alias kontrolü.
+     */
+
+    for(
+        const [slug,data]
+        of Object.entries(leagues)
+    ){
 
         if(
             data.aliases.some(
@@ -2239,9 +2322,9 @@ function resolveLeagueSlug(value){
 }
 
 
-/*
- * URL'deki lig gerçekten mevcut mu?
- */
+/* =========================================================
+   URL'DEKİ LİGİ ÇÖZ
+========================================================= */
 
 const resolvedSlug =
     resolveLeagueSlug(
@@ -2249,23 +2332,22 @@ const resolvedSlug =
     );
 
 
+/*
+ * Eğer URL'de lig parametresi yoksa
+ * Premier League kullan.
+ *
+ * Eğer parametre VAR ama geçersizse
+ * artık Premier League kullanma.
+ */
+
 const league =
-    leagues[
-        resolvedSlug ||
-        "premier-league"
-    ];
-
-
-/* =========================================================
-   LİG RENGİ
-========================================================= */
-
-document.documentElement
-    .style
-    .setProperty(
-        "--league",
-        league.color
-    );
+    resolvedSlug
+        ? leagues[resolvedSlug]
+        : (
+            requestedLeague
+                ? null
+                : leagues["premier-league"]
+        );
 
 
 /* =========================================================
@@ -2324,1489 +2406,1561 @@ const upcomingMatches =
 
 
 /* =========================================================
-   BAŞLIK
+   GEÇERSİZ LİG
 ========================================================= */
 
-document.title =
-    "CREX — " +
-    league.name;
+if(!league){
+
+    document.title =
+        "CREX — Lig Bulunamadı";
 
 
-/* =========================================================
-   LİG HERO
-========================================================= */
-
-leagueTitle.textContent =
-    league.name;
+    leagueTitle.textContent =
+        "LİG BULUNAMADI";
 
 
-leagueCountry.textContent =
-    league.country +
-    " • CREX MAÇ MERKEZİ";
+    leagueCountry.textContent =
+        "GEÇERSİZ LİG LİNKİ";
 
-
-if(league.logo){
-
-    heroLogo.src =
-        addLogoCache(
-            league.logo
-        );
-
-    heroLogo.alt =
-        league.name;
-
-    heroLogo.style.display =
-        "block";
-
-}
-else{
 
     heroLogo.style.display =
         "none";
 
-}
 
+    matchGrid.innerHTML = "";
 
-/* =========================================================
-   VERİ
-========================================================= */
 
-const matchesJsonPath =
-    "./data/maclar.json";
+    resultCount.textContent =
+        "0 MAÇ";
 
 
-let allMatches = [];
+    totalMatches.textContent =
+        "0";
 
-let filteredMatches = [];
 
-let currentFilter =
-    "all";
+    upcomingMatches.textContent =
+        "0";
 
 
-/* =========================================================
-   LOGO CACHE
-========================================================= */
-
-function addLogoCache(url){
-
-    if(!url)
-        return "";
-
-
-    const cleanUrl =
-        String(url)
-        .trim();
-
-
-    if(!cleanUrl)
-        return "";
-
-
-    if(
-        cleanUrl.startsWith("data:") ||
-        cleanUrl.startsWith("blob:")
-    ){
-
-        return cleanUrl;
-
-    }
-
-
-    const separator =
-        cleanUrl.includes("?")
-            ? "&"
-            : "?";
-
-
-    return (
-        cleanUrl +
-        separator +
-        "v=" +
-        LOGO_VERSION
-    );
-
-}
-
-
-/* =========================================================
-   TAKIM LOGOLARI
-========================================================= */
-
-function resolveMatchLogos(match){
-
-    return {
-
-        ...match,
-
-        resolvedEvLogo:
-            addLogoCache(
-                match.evLogo ||
-                match.homeLogo ||
-                match.ev_logo ||
-                ""
-            ),
-
-        resolvedDepLogo:
-            addLogoCache(
-                match.depLogo ||
-                match.awayLogo ||
-                match.dep_logo ||
-                ""
-            )
-
-    };
-
-}
-
-
-/* =========================================================
-   MAC DURUMU
-========================================================= */
-
-function getMatchStatus(match){
-
-    const status =
-        String(
-            match.durum ||
-            match.status ||
-            ""
-        )
-        .trim()
-        .toLocaleLowerCase(
-            "tr-TR"
-        );
-
-
-    const finishedStatuses = [
-
-        "ms",
-        "tamamlandı",
-        "tamamlandi",
-        "finished",
-        "bitti",
-        "bitmiş",
-        "bitmis"
-
-    ];
-
-
-    if(
-        finishedStatuses.includes(
-            status
-        )
-    ){
-
-        return "finished";
-
-    }
-
-
-    const liveStatuses = [
-
-        "canlı",
-        "canli",
-        "live",
-        "yayında",
-        "yayinda"
-
-    ];
-
-
-    if(
-        liveStatuses.includes(
-            status
-        )
-    ){
-
-        return "live";
-
-    }
-
-
-    const upcomingStatuses = [
-
-        "gelecek",
-        "yaklaşıyor",
-        "yaklasiyor",
-        "upcoming",
-        "scheduled"
-
-    ];
-
-
-    if(
-        upcomingStatuses.includes(
-            status
-        )
-    ){
-
-        return "upcoming";
-
-    }
-
-
-    const date =
-        getMatchDate(
-            match
-        );
-
-
-    if(!date)
-        return "upcoming";
-
-
-    return date < new Date()
-        ? "finished"
-        : "upcoming";
-
-}
-
-
-/* =========================================================
-   TARİH
-========================================================= */
-
-function getMatchDate(match){
-
-    const rawDate =
-        match.tarih ||
-        match.date ||
-        match.matchDate;
-
-
-    if(!rawDate)
-        return null;
-
-
-    const dateValue =
-        String(
-            rawDate
-        ).trim();
-
-
-    if(!dateValue)
-        return null;
-
-
-    let dateString =
-        dateValue;
-
-
-    const rawTime =
-        match.saat ||
-        match.time ||
-        "";
-
-
-    if(
-        rawTime &&
-        String(rawTime).trim()
-    ){
-
-        dateString +=
-            "T" +
-            String(
-                rawTime
-            ).trim();
-
-    }
-    else if(
-        !dateString.includes("T")
-    ){
-
-        dateString +=
-            "T23:59:59";
-
-    }
-
-
-    const date =
-        new Date(
-            dateString
-        );
-
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-
-        return null;
-
-    }
-
-
-    return date;
-
-}
-
-
-/* =========================================================
-   HAFTA / TARİH
-========================================================= */
-
-function formatDate(match){
-
-    if(
-        match.hafta &&
-        String(
-            match.hafta
-        ).trim()
-    ){
-
-        return String(
-            match.hafta
-        ).trim();
-
-    }
-
-
-    if(
-        match.tarih &&
-        String(
-            match.tarih
-        ).trim()
-    ){
-
-        return String(
-            match.tarih
-        ).trim();
-
-    }
-
-
-    if(
-        match.date &&
-        String(
-            match.date
-        ).trim()
-    ){
-
-        return String(
-            match.date
-        ).trim();
-
-    }
-
-
-    return "TARİH YOK";
-
-}
-
-
-/* =========================================================
-   LİG KONTROL
-========================================================= */
-
-/*
- * JSON'daki şu alanların hepsini destekler:
- *
- * lig
- * ligAdi
- * league
- * leagueName
- * leagueSlug
- */
-
-function isCorrectLeague(match){
-
-    const matchValues = [
-
-        match.lig,
-        match.ligAdi,
-        match.league,
-        match.leagueName,
-        match.leagueSlug
-
-    ]
-    .filter(
-        value =>
-            value !== undefined &&
-            value !== null &&
-            String(value).trim() !== ""
-    );
-
-
-    const targetSlug =
-        resolvedSlug ||
-        "premier-league";
-
-
-    return matchValues.some(
-        value => {
-
-            const matchSlug =
-                resolveLeagueSlug(
-                    value
-                );
-
-
-            return (
-                matchSlug ===
-                targetSlug
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   MACLARI YÜKLE
-========================================================= */
-
-async function loadMatches(){
-
-    loader.classList.add(
+    empty.classList.add(
         "show"
     );
 
 
-    try{
+    const emptyTitle =
+        empty.querySelector("h3");
 
-        const response =
-            await fetch(
-                matchesJsonPath,
-                {
-                    cache:"no-store"
+
+    const emptyText =
+        empty.querySelector("p");
+
+
+    if(emptyTitle){
+
+        emptyTitle.textContent =
+            "Lig bulunamadı";
+
+    }
+
+
+    if(emptyText){
+
+        emptyText.textContent =
+            "Lig bağlantısını kontrol edip tekrar deneyin.";
+
+    }
+
+
+    loader.classList.remove(
+        "show"
+    );
+
+
+}
+else{
+
+    /* =====================================================
+       BAŞLIK
+    ===================================================== */
+
+    document.title =
+        "CREX — " +
+        league.name;
+
+
+    /* =====================================================
+       LİG HERO
+    ===================================================== */
+
+    leagueTitle.textContent =
+        league.name;
+
+
+    leagueCountry.textContent =
+        league.country +
+        " • CREX MAÇ MERKEZİ";
+
+
+    if(league.logo){
+
+        heroLogo.src =
+            addLogoCache(
+                league.logo
+            );
+
+        heroLogo.alt =
+            league.name;
+
+        heroLogo.style.display =
+            "block";
+
+    }
+    else{
+
+        heroLogo.style.display =
+            "none";
+
+    }
+
+
+    /* =====================================================
+       VERİ
+    ===================================================== */
+
+    const matchesJsonPath =
+        "./data/maclar.json";
+
+
+    let allMatches = [];
+
+    let filteredMatches = [];
+
+    let currentFilter =
+        "all";
+
+
+    /* =====================================================
+       LOGO CACHE
+    ===================================================== */
+
+    function addLogoCache(url){
+
+        if(!url)
+            return "";
+
+
+        const cleanUrl =
+            String(url)
+            .trim();
+
+
+        if(!cleanUrl)
+            return "";
+
+
+        if(
+            cleanUrl.startsWith("data:") ||
+            cleanUrl.startsWith("blob:")
+        ){
+
+            return cleanUrl;
+
+        }
+
+
+        const separator =
+            cleanUrl.includes("?")
+                ? "&"
+                : "?";
+
+
+        return (
+            cleanUrl +
+            separator +
+            "v=" +
+            LOGO_VERSION
+        );
+
+    }
+
+
+    /* =====================================================
+       TAKIM LOGOLARI
+    ===================================================== */
+
+    function resolveMatchLogos(match){
+
+        return {
+
+            ...match,
+
+            resolvedEvLogo:
+                addLogoCache(
+                    match.evLogo ||
+                    match.homeLogo ||
+                    match.ev_logo ||
+                    ""
+                ),
+
+            resolvedDepLogo:
+                addLogoCache(
+                    match.depLogo ||
+                    match.awayLogo ||
+                    match.dep_logo ||
+                    ""
+                )
+
+        };
+
+    }
+
+
+    /* =====================================================
+       MAC DURUMU
+    ===================================================== */
+
+    function getMatchStatus(match){
+
+        const status =
+            String(
+                match.durum ||
+                match.status ||
+                ""
+            )
+            .trim()
+            .toLocaleLowerCase(
+                "tr-TR"
+            );
+
+
+        const finishedStatuses = [
+
+            "ms",
+            "tamamlandı",
+            "tamamlandi",
+            "finished",
+            "bitti",
+            "bitmiş",
+            "bitmis"
+
+        ];
+
+
+        if(
+            finishedStatuses.includes(
+                status
+            )
+        ){
+
+            return "finished";
+
+        }
+
+
+        const liveStatuses = [
+
+            "canlı",
+            "canli",
+            "live",
+            "yayında",
+            "yayinda"
+
+        ];
+
+
+        if(
+            liveStatuses.includes(
+                status
+            )
+        ){
+
+            return "live";
+
+        }
+
+
+        const upcomingStatuses = [
+
+            "gelecek",
+            "yaklaşıyor",
+            "yaklasiyor",
+            "upcoming",
+            "scheduled"
+
+        ];
+
+
+        if(
+            upcomingStatuses.includes(
+                status
+            )
+        ){
+
+            return "upcoming";
+
+        }
+
+
+        const date =
+            getMatchDate(
+                match
+            );
+
+
+        if(!date)
+            return "upcoming";
+
+
+        return date < new Date()
+            ? "finished"
+            : "upcoming";
+
+    }
+
+
+    /* =====================================================
+       TARİH
+    ===================================================== */
+
+    function getMatchDate(match){
+
+        const rawDate =
+            match.tarih ||
+            match.date ||
+            match.matchDate;
+
+
+        if(!rawDate)
+            return null;
+
+
+        const dateValue =
+            String(
+                rawDate
+            ).trim();
+
+
+        if(!dateValue)
+            return null;
+
+
+        let dateString =
+            dateValue;
+
+
+        const rawTime =
+            match.saat ||
+            match.time ||
+            "";
+
+
+        if(
+            rawTime &&
+            String(rawTime).trim()
+        ){
+
+            dateString +=
+                "T" +
+                String(
+                    rawTime
+                ).trim();
+
+        }
+        else if(
+            !dateString.includes("T")
+        ){
+
+            dateString +=
+                "T23:59:59";
+
+        }
+
+
+        const date =
+            new Date(
+                dateString
+            );
+
+
+        if(
+            Number.isNaN(
+                date.getTime()
+            )
+        ){
+
+            return null;
+
+        }
+
+
+        return date;
+
+    }
+
+
+    /* =====================================================
+       HAFTA / TARİH
+    ===================================================== */
+
+    function formatDate(match){
+
+        if(
+            match.hafta &&
+            String(
+                match.hafta
+            ).trim()
+        ){
+
+            return String(
+                match.hafta
+            ).trim();
+
+        }
+
+
+        if(
+            match.tarih &&
+            String(
+                match.tarih
+            ).trim()
+        ){
+
+            return String(
+                match.tarih
+            ).trim();
+
+        }
+
+
+        if(
+            match.date &&
+            String(
+                match.date
+            ).trim()
+        ){
+
+            return String(
+                match.date
+            ).trim();
+
+        }
+
+
+        return "TARİH YOK";
+
+    }
+
+
+    /* =====================================================
+       LİG KONTROL
+    ===================================================== */
+
+    function isCorrectLeague(match){
+
+        const matchValues = [
+
+            match.lig,
+            match.ligAdi,
+            match.league,
+            match.leagueName,
+            match.leagueSlug
+
+        ]
+        .filter(
+            value =>
+                value !== undefined &&
+                value !== null &&
+                String(value).trim() !== ""
+        );
+
+
+        const targetSlug =
+            resolvedSlug;
+
+
+        /*
+         * JSON'da lig bilgisi yoksa
+         * maçı bu ligde gösterme.
+         */
+
+        if(
+            matchValues.length === 0
+        ){
+
+            return false;
+
+        }
+
+
+        return matchValues.some(
+            value => {
+
+                const matchSlug =
+                    resolveLeagueSlug(
+                        value
+                    );
+
+
+                return (
+                    matchSlug ===
+                    targetSlug
+                );
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       MACLARI YÜKLE
+    ===================================================== */
+
+    async function loadMatches(){
+
+        loader.classList.add(
+            "show"
+        );
+
+
+        try{
+
+            const response =
+                await fetch(
+                    matchesJsonPath,
+                    {
+                        cache:"no-store"
+                    }
+                );
+
+
+            if(!response.ok){
+
+                throw new Error(
+                    "maclar.json yüklenemedi: " +
+                    response.status
+                );
+
+            }
+
+
+            const data =
+                await response.json();
+
+
+            let matches;
+
+
+            if(
+                Array.isArray(data)
+            ){
+
+                matches =
+                    data;
+
+            }
+
+            else if(
+                data &&
+                Array.isArray(
+                    data.matches
+                )
+            ){
+
+                matches =
+                    data.matches;
+
+            }
+
+            else if(
+                data &&
+                Array.isArray(
+                    data.maclar
+                )
+            ){
+
+                matches =
+                    data.maclar;
+
+            }
+
+            else{
+
+                throw new Error(
+                    "maclar.json formatı geçersiz."
+                );
+
+            }
+
+
+            allMatches =
+                matches
+
+                .filter(
+                    match =>
+                        match &&
+                        isCorrectLeague(
+                            match
+                        )
+                )
+
+                .filter(
+                    match =>
+                        match.id !== undefined &&
+                        match.id !== null
+                )
+
+                .map(
+                    match =>
+                        resolveMatchLogos(
+                            match
+                        )
+                );
+
+
+            updateStats();
+
+            applyFilters();
+
+        }
+        catch(error){
+
+            console.error(
+                "CREX Lig Hatası:",
+                error
+            );
+
+
+            allMatches = [];
+
+            filteredMatches = [];
+
+            matchGrid.innerHTML = "";
+
+
+            leagueCountry.textContent =
+                league.country +
+                " • MAÇ VERİSİ BULUNAMADI";
+
+
+            resultCount.textContent =
+                "0 MAÇ";
+
+
+            empty.classList.add(
+                "show"
+            );
+
+        }
+        finally{
+
+            loader.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       İSTATİSTİK
+    ===================================================== */
+
+    function updateStats(){
+
+        const total =
+            allMatches.length;
+
+
+        const upcoming =
+            allMatches.filter(
+                match =>
+                    getMatchStatus(
+                        match
+                    ) === "upcoming"
+            ).length;
+
+
+        totalMatches.textContent =
+            total.toLocaleString(
+                "tr-TR"
+            );
+
+
+        upcomingMatches.textContent =
+            upcoming.toLocaleString(
+                "tr-TR"
+            );
+
+    }
+
+
+    /* =====================================================
+       FİLTRE
+    ===================================================== */
+
+    function applyFilters(){
+
+        const query =
+            searchInput.value
+            .trim()
+            .toLocaleLowerCase(
+                "tr-TR"
+            );
+
+
+        let results =
+            allMatches.filter(
+                match => {
+
+                    const status =
+                        getMatchStatus(
+                            match
+                        );
+
+
+                    const filterOK =
+                        currentFilter === "all" ||
+                        status === currentFilter;
+
+
+                    if(!filterOK)
+                        return false;
+
+
+                    if(!query)
+                        return true;
+
+
+                    const searchable = [
+
+                        match.evSahibi,
+                        match.deplasman,
+
+                        match.evKisa,
+                        match.depKisa,
+
+                        match.lig,
+                        match.ligAdi,
+
+                        match.league,
+                        match.leagueName,
+
+                        match.hafta,
+
+                        match.tarih,
+                        match.saat,
+
+                        match.skor,
+                        match.durum
+
+                    ]
+                    .filter(Boolean)
+                    .join(" ")
+                    .toLocaleLowerCase(
+                        "tr-TR"
+                    );
+
+
+                    return searchable.includes(
+                        query
+                    );
+
                 }
             );
 
 
-        if(!response.ok){
+        /*
+         * Maksimum 10 maç.
+         */
 
-            throw new Error(
-                "maclar.json yüklenemedi: " +
-                response.status
+        filteredMatches =
+            results.slice(
+                0,
+                MAX_MATCHES
             );
 
-        }
 
-
-        const data =
-            await response.json();
-
-
-        let matches;
+        renderMatches();
 
 
         if(
-            Array.isArray(data)
+            results.length >
+            MAX_MATCHES
         ){
 
-            matches =
-                data;
+            resultCount.textContent =
+                MAX_MATCHES +
+                " MAÇ GÖSTERİLİYOR";
 
         }
-
-        else if(
-            data &&
-            Array.isArray(
-                data.matches
-            )
-        ){
-
-            matches =
-                data.matches;
-
-        }
-
-        else if(
-            data &&
-            Array.isArray(
-                data.maclar
-            )
-        ){
-
-            matches =
-                data.maclar;
-
-        }
-
         else{
 
-            throw new Error(
-                "maclar.json formatı geçersiz."
-            );
+            resultCount.textContent =
+                filteredMatches.length
+                .toLocaleString(
+                    "tr-TR"
+                ) +
+                " MAÇ";
 
         }
 
-
-        allMatches =
-            matches
-
-            .filter(
-                match =>
-                    match &&
-                    isCorrectLeague(
-                        match
-                    )
-            )
-
-            .filter(
-                match =>
-                    match.id !== undefined &&
-                    match.id !== null
-            )
-
-            .map(
-                match =>
-                    resolveMatchLogos(
-                        match
-                    )
-            );
-
-
-        updateStats();
-
-        applyFilters();
-
     }
-    catch(error){
-
-        console.error(
-            "CREX Lig Hatası:",
-            error
-        );
 
 
-        allMatches = [];
+    /* =====================================================
+       RENDER
+    ===================================================== */
 
-        filteredMatches = [];
+    function renderMatches(){
 
         matchGrid.innerHTML = "";
 
 
-        leagueCountry.textContent =
-            league.country +
-            " • MAÇ VERİSİ BULUNAMADI";
+        if(
+            filteredMatches.length === 0
+        ){
+
+            empty.classList.add(
+                "show"
+            );
+
+            return;
+
+        }
 
 
-        resultCount.textContent =
-            "0 MAÇ";
-
-
-        empty.classList.add(
+        empty.classList.remove(
             "show"
         );
 
-    }
-    finally{
 
-        loader.classList.remove(
-            "show"
-        );
-
-    }
-
-}
+        const fragment =
+            document.createDocumentFragment();
 
 
-/* =========================================================
-   İSTATİSTİK
-========================================================= */
+        filteredMatches.forEach(
+            (
+                match,
+                index
+            )=>{
 
-function updateStats(){
-
-    const total =
-        allMatches.length;
-
-
-    const upcoming =
-        allMatches.filter(
-            match =>
-                getMatchStatus(
-                    match
-                ) === "upcoming"
-        ).length;
-
-
-    totalMatches.textContent =
-        total.toLocaleString(
-            "tr-TR"
-        );
-
-
-    upcomingMatches.textContent =
-        upcoming.toLocaleString(
-            "tr-TR"
-        );
-
-}
-
-
-/* =========================================================
-   FİLTRE
-========================================================= */
-
-function applyFilters(){
-
-    const query =
-        searchInput.value
-        .trim()
-        .toLocaleLowerCase(
-            "tr-TR"
-        );
-
-
-    let results =
-        allMatches.filter(
-            match => {
-
-                const status =
-                    getMatchStatus(
+                const card =
+                    createMatchCard(
                         match
                     );
 
 
-                const filterOK =
-                    currentFilter === "all" ||
-                    status === currentFilter;
-
-
-                if(!filterOK)
-                    return false;
-
-
-                if(!query)
-                    return true;
-
-
-                const searchable = [
-
-                    match.evSahibi,
-                    match.deplasman,
-
-                    match.evKisa,
-                    match.depKisa,
-
-                    match.lig,
-                    match.ligAdi,
-
-                    match.league,
-                    match.leagueName,
-
-                    match.hafta,
-
-                    match.tarih,
-                    match.saat,
-
-                    match.skor,
-                    match.durum
-
-                ]
-                .filter(Boolean)
-                .join(" ")
-                .toLocaleLowerCase(
-                    "tr-TR"
+                fragment.appendChild(
+                    card
                 );
 
 
-                return searchable.includes(
-                    query
+                requestAnimationFrame(
+                    ()=>{
+
+                        card.animate(
+                            [
+                                {
+                                    opacity:0,
+
+                                    transform:
+                                        "translateY(25px) scale(.96)"
+                                },
+
+                                {
+                                    opacity:1,
+
+                                    transform:
+                                        "translateY(0) scale(1)"
+                                }
+                            ],
+                            {
+                                duration:550,
+
+                                delay:
+                                    Math.min(
+                                        index * 45,
+                                        350
+                                    ),
+
+                                easing:
+                                    "cubic-bezier(.16,1,.3,1)",
+
+                                fill:"both"
+                            }
+                        );
+
+                    }
                 );
 
             }
         );
 
 
-    /*
-     * Maksimum 10 maç.
-     */
-
-    filteredMatches =
-        results.slice(
-            0,
-            MAX_MATCHES
+        matchGrid.appendChild(
+            fragment
         );
 
-
-    renderMatches();
-
-
-    if(
-        results.length >
-        MAX_MATCHES
-    ){
-
-        resultCount.textContent =
-            MAX_MATCHES +
-            " MAÇ GÖSTERİLİYOR";
-
-    }
-    else{
-
-        resultCount.textContent =
-            filteredMatches.length
-            .toLocaleString(
-                "tr-TR"
-            ) +
-            " MAÇ";
-
-    }
-
-}
-
-
-/* =========================================================
-   RENDER
-========================================================= */
-
-function renderMatches(){
-
-    matchGrid.innerHTML = "";
-
-
-    if(
-        filteredMatches.length === 0
-    ){
-
-        empty.classList.add(
-            "show"
-        );
-
-        return;
-
     }
 
 
-    empty.classList.remove(
-        "show"
-    );
+    /* =====================================================
+       MAC KARTI
+    ===================================================== */
+
+    function createMatchCard(match){
+
+        const home =
+            match.evSahibi ||
+            match.homeTeam ||
+            match.home ||
+            "Ev Sahibi";
 
 
-    const fragment =
-        document.createDocumentFragment();
+        const away =
+            match.deplasman ||
+            match.awayTeam ||
+            match.away ||
+            "Deplasman";
 
 
-    filteredMatches.forEach(
-        (
-            match,
-            index
-        )=>{
-
-            const card =
-                createMatchCard(
-                    match
-                );
+        const homeShort =
+            match.evKisa ||
+            match.homeShort ||
+            getInitials(home);
 
 
-            fragment.appendChild(
-                card
+        const awayShort =
+            match.depKisa ||
+            match.awayShort ||
+            getInitials(away);
+
+
+        const homeLogoUrl =
+            match.resolvedEvLogo ||
+            "";
+
+
+        const awayLogoUrl =
+            match.resolvedDepLogo ||
+            "";
+
+
+        const status =
+            getMatchStatus(
+                match
             );
 
 
-            requestAnimationFrame(
-                ()=>{
+        const matchId =
+            match.id;
 
-                    card.animate(
-                        [
-                            {
-                                opacity:0,
 
-                                transform:
-                                    "translateY(25px) scale(.96)"
-                            },
-
-                            {
-                                opacity:1,
-
-                                transform:
-                                    "translateY(0) scale(1)"
-                            }
-                        ],
-                        {
-                            duration:550,
-
-                            delay:
-                                Math.min(
-                                    index * 45,
-                                    350
-                                ),
-
-                            easing:
-                                "cubic-bezier(.16,1,.3,1)",
-
-                            fill:"both"
-                        }
-                    );
-
-                }
+        const date =
+            formatDate(
+                match
             );
+
+
+        const score =
+            String(
+                match.skor ||
+                match.score ||
+                ""
+            ).trim();
+
+
+        let homeScoreHtml =
+            "";
+
+
+        let awayScoreHtml =
+            "";
+
+
+        let centerContent =
+            `<div class="vs">VS</div>`;
+
+
+        if(
+            score &&
+            score.includes("-")
+        ){
+
+            const parts =
+                score.split("-");
+
+
+            const hScore =
+                parts[0].trim();
+
+
+            const aScore =
+                parts[1].trim();
+
+
+            homeScoreHtml =
+                `<div class="team-score">
+                    ${escapeHTML(hScore)}
+                </div>`;
+
+
+            awayScoreHtml =
+                `<div class="team-score">
+                    ${escapeHTML(aScore)}
+                </div>`;
+
+
+            centerContent =
+                `<div class="vs">-</div>`;
 
         }
-    );
 
 
-    matchGrid.appendChild(
-        fragment
-    );
+        const card =
+            document.createElement(
+                "article"
+            );
 
-}
 
+        card.className =
+            "match-card";
 
-/* =========================================================
-   MAC KARTI
-========================================================= */
 
-function createMatchCard(match){
+        card.dataset.search =
+            [
+                home,
+                away,
+                league.name
+            ].join(" ");
 
-    const home =
-        match.evSahibi ||
-        match.homeTeam ||
-        match.home ||
-        "Ev Sahibi";
 
+        let statusText;
 
-    const away =
-        match.deplasman ||
-        match.awayTeam ||
-        match.away ||
-        "Deplasman";
 
+        if(
+            status === "finished"
+        ){
 
-    const homeShort =
-        match.evKisa ||
-        match.homeShort ||
-        getInitials(home);
+            statusText =
+                "TAMAMLANDI";
 
+        }
 
-    const awayShort =
-        match.depKisa ||
-        match.awayShort ||
-        getInitials(away);
+        else if(
+            status === "live"
+        ){
 
+            statusText =
+                "CANLI";
 
-    const homeLogoUrl =
-        match.resolvedEvLogo ||
-        "";
+        }
 
+        else{
 
-    const awayLogoUrl =
-        match.resolvedDepLogo ||
-        "";
+            statusText =
+                "YAKLAŞIYOR";
 
+        }
 
-    const status =
-        getMatchStatus(
-            match
-        );
 
+        const homeLogoHTML =
+            homeLogoUrl
 
-    const matchId =
-        match.id;
+            ? `
 
-
-    const date =
-        formatDate(
-            match
-        );
-
-
-    const score =
-        String(
-            match.skor ||
-            match.score ||
-            ""
-        ).trim();
-
-
-    let homeScoreHtml =
-        "";
-
-
-    let awayScoreHtml =
-        "";
-
-
-    let centerContent =
-        `<div class="vs">VS</div>`;
-
-
-    if(
-        score &&
-        score.includes("-")
-    ){
-
-        const parts =
-            score.split("-");
-
-
-        const hScore =
-            parts[0].trim();
-
-
-        const aScore =
-            parts[1].trim();
-
-
-        homeScoreHtml =
-            `<div class="team-score">
-                ${escapeHTML(hScore)}
-            </div>`;
-
-
-        awayScoreHtml =
-            `<div class="team-score">
-                ${escapeHTML(aScore)}
-            </div>`;
-
-
-        centerContent =
-            `<div class="vs">-</div>`;
-
-    }
-
-
-    const card =
-        document.createElement(
-            "article"
-        );
-
-
-    card.className =
-        "match-card";
-
-
-    card.dataset.search =
-        [
-            home,
-            away,
-            league.name
-        ].join(" ");
-
-
-    let statusText;
-
-
-    if(
-        status === "finished"
-    ){
-
-        statusText =
-            "TAMAMLANDI";
-
-    }
-
-    else if(
-        status === "live"
-    ){
-
-        statusText =
-            "CANLI";
-
-    }
-
-    else{
-
-        statusText =
-            "YAKLAŞIYOR";
-
-    }
-
-
-    const homeLogoHTML =
-        homeLogoUrl
-
-        ? `
-
-            <img
-                src="${escapeAttr(
-                    homeLogoUrl
-                )}"
-                alt="${escapeAttr(
-                    home
-                )}"
-                loading="lazy"
-                decoding="async"
-                referrerpolicy="no-referrer"
-                onerror="handleTeamLogoError(
-                    this,
-                    '${escapeJS(homeShort)}'
-                )"
-            >
-
-        `
-
-        : escapeHTML(
-            homeShort
-        );
-
-
-    const awayLogoHTML =
-        awayLogoUrl
-
-        ? `
-
-            <img
-                src="${escapeAttr(
-                    awayLogoUrl
-                )}"
-                alt="${escapeAttr(
-                    away
-                )}"
-                loading="lazy"
-                decoding="async"
-                referrerpolicy="no-referrer"
-                onerror="handleTeamLogoError(
-                    this,
-                    '${escapeJS(awayShort)}'
-                )"
-            >
-
-        `
-
-        : escapeHTML(
-            awayShort
-        );
-
-
-    card.innerHTML = `
-
-        <div class="card-glow"></div>
-
-
-        <div class="match-content">
-
-
-            <div class="match-top">
-
-
-                <div class="match-league-tag">
-
-                    ${escapeHTML(
-                        match.ligAdi ||
-                        match.leagueName ||
-                        league.name
-                    )}
-
-                </div>
-
-
-                <div class="match-status">
-
-                    ${statusText}
-
-                </div>
-
-
-            </div>
-
-
-            <div class="teams">
-
-
-                <div class="team">
-
-
-                    <div class="team-logo">
-
-                        ${homeLogoHTML}
-
-                    </div>
-
-
-                    ${homeScoreHtml}
-
-
-                    <div class="team-name">
-
-                        ${escapeHTML(
-                            home
-                        )}
-
-                    </div>
-
-
-                </div>
-
-
-                ${centerContent}
-
-
-                <div class="team">
-
-
-                    <div class="team-logo">
-
-                        ${awayLogoHTML}
-
-                    </div>
-
-
-                    ${awayScoreHtml}
-
-
-                    <div class="team-name">
-
-                        ${escapeHTML(
-                            away
-                        )}
-
-                    </div>
-
-
-                </div>
-
-
-            </div>
-
-
-            <div class="match-bottom">
-
-
-                <div class="match-date">
-
-                    ${escapeHTML(
-                        date
-                    )}
-
-                </div>
-
-
-                <a
-                    href="mac.html?id=${encodeURIComponent(
-                        String(matchId)
+                <img
+                    src="${escapeAttr(
+                        homeLogoUrl
                     )}"
-                    class="watch-btn"
+                    alt="${escapeAttr(
+                        home
+                    )}"
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                    onerror="handleTeamLogoError(
+                        this,
+                        '${escapeJS(homeShort)}'
+                    )"
                 >
 
-                    MAÇA GİT
+            `
 
-                    <span>
-                        →
-                    </span>
+            : escapeHTML(
+                homeShort
+            );
 
-                </a>
+
+        const awayLogoHTML =
+            awayLogoUrl
+
+            ? `
+
+                <img
+                    src="${escapeAttr(
+                        awayLogoUrl
+                    )}"
+                    alt="${escapeAttr(
+                        away
+                    )}"
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                    onerror="handleTeamLogoError(
+                        this,
+                        '${escapeJS(awayShort)}'
+                    )"
+                >
+
+            `
+
+            : escapeHTML(
+                awayShort
+            );
+
+
+        card.innerHTML = `
+
+            <div class="card-glow"></div>
+
+
+            <div class="match-content">
+
+
+                <div class="match-top">
+
+
+                    <div class="match-league-tag">
+
+                        ${escapeHTML(
+                            match.ligAdi ||
+                            match.leagueName ||
+                            league.name
+                        )}
+
+                    </div>
+
+
+                    <div class="match-status">
+
+                        ${statusText}
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="teams">
+
+
+                    <div class="team">
+
+
+                        <div class="team-logo">
+
+                            ${homeLogoHTML}
+
+                        </div>
+
+
+                        ${homeScoreHtml}
+
+
+                        <div class="team-name">
+
+                            ${escapeHTML(
+                                home
+                            )}
+
+                        </div>
+
+
+                    </div>
+
+
+                    ${centerContent}
+
+
+                    <div class="team">
+
+
+                        <div class="team-logo">
+
+                            ${awayLogoHTML}
+
+                        </div>
+
+
+                        ${awayScoreHtml}
+
+
+                        <div class="team-name">
+
+                            ${escapeHTML(
+                                away
+                            )}
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="match-bottom">
+
+
+                    <div class="match-date">
+
+                        ${escapeHTML(
+                            date
+                        )}
+
+                    </div>
+
+
+                    <a
+                        href="mac.html?id=${encodeURIComponent(
+                            String(matchId)
+                        )}"
+                        class="watch-btn"
+                    >
+
+                        MAÇA GİT
+
+                        <span>
+                            →
+                        </span>
+
+                    </a>
+
+
+                </div>
 
 
             </div>
 
-
-        </div>
-
-    `;
+        `;
 
 
-    return card;
+        return card;
 
-}
-
-
-/* =========================================================
-   TAKIM LOGO HATASI
-========================================================= */
-
-function handleTeamLogoError(
-    img,
-    fallbackText
-){
-
-    if(!img)
-        return;
+    }
 
 
-    img.onerror =
-        null;
+    /* =====================================================
+       TAKIM LOGO HATASI
+    ===================================================== */
+
+    function handleTeamLogoError(
+        img,
+        fallbackText
+    ){
+
+        if(!img)
+            return;
 
 
-    const parent =
-        img.parentElement;
+        img.onerror =
+            null;
 
 
-    if(!parent)
-        return;
+        const parent =
+            img.parentElement;
 
 
-    img.remove();
+        if(!parent)
+            return;
 
 
-    parent.classList.add(
-        "text-logo"
-    );
+        img.remove();
 
 
-    parent.textContent =
-        fallbackText ||
-        "TEAM";
-
-}
+        parent.classList.add(
+            "text-logo"
+        );
 
 
-/* =========================================================
-   TAKIM BAŞ HARFLERİ
-========================================================= */
+        parent.textContent =
+            fallbackText ||
+            "TEAM";
 
-function getInitials(name){
-
-    const words =
-        String(name)
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
+    }
 
 
-    if(!words.length)
-        return "TEAM";
+    /* =====================================================
+       TAKIM BAŞ HARFLERİ
+    ===================================================== */
+
+    function getInitials(name){
+
+        const words =
+            String(name)
+            .trim()
+            .split(/\s+/)
+            .filter(Boolean);
 
 
-    if(words.length === 1){
+        if(!words.length)
+            return "TEAM";
 
-        return words[0]
-            .slice(0,3)
+
+        if(words.length === 1){
+
+            return words[0]
+                .slice(0,3)
+                .toUpperCase();
+
+        }
+
+
+        return words
+            .slice(0,2)
+            .map(
+                word =>
+                    word.charAt(0)
+            )
+            .join("")
             .toUpperCase();
 
     }
 
 
-    return words
-        .slice(0,2)
-        .map(
-            word =>
-                word.charAt(0)
+    /* =====================================================
+       HTML GÜVENLİĞİ
+    ===================================================== */
+
+    function escapeHTML(value){
+
+        return String(
+            value ?? ""
         )
-        .join("")
-        .toUpperCase();
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+        .replace(
+            /</g,
+            "&lt;"
+        )
+        .replace(
+            />/g,
+            "&gt;"
+        )
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+        .replace(
+            /'/g,
+            "&#039;"
+        );
 
-}
-
-
-/* =========================================================
-   HTML GÜVENLİĞİ
-========================================================= */
-
-function escapeHTML(value){
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /&/g,
-        "&amp;"
-    )
-    .replace(
-        /</g,
-        "&lt;"
-    )
-    .replace(
-        />/g,
-        "&gt;"
-    )
-    .replace(
-        /"/g,
-        "&quot;"
-    )
-    .replace(
-        /'/g,
-        "&#039;"
-    );
-
-}
-
-
-function escapeAttr(value){
-
-    return escapeHTML(
-        value
-    );
-
-}
-
-
-function escapeJS(value){
-
-    return String(
-        value ?? ""
-    )
-    .replace(
-        /\\/g,
-        "\\\\"
-    )
-    .replace(
-        /'/g,
-        "\\'"
-    )
-    .replace(
-        /"/g,
-        '\\"'
-    )
-    .replace(
-        /\n/g,
-        "\\n"
-    )
-    .replace(
-        /\r/g,
-        "\\r"
-    );
-
-}
-
-
-/* =========================================================
-   ARAMA
-========================================================= */
-
-searchInput.addEventListener(
-    "input",
-    ()=>{
-        applyFilters();
     }
-);
 
 
-/* =========================================================
-   FİLTRE BUTONLARI
-========================================================= */
+    function escapeAttr(value){
 
-document
-    .querySelectorAll(
-        ".filter"
-    )
-    .forEach(
-        button => {
+        return escapeHTML(
+            value
+        );
 
-            button.addEventListener(
-                "click",
-                ()=>{
+    }
 
-                    document
-                        .querySelectorAll(
-                            ".filter"
-                        )
-                        .forEach(
-                            btn =>
-                                btn.classList.remove(
-                                    "active"
-                                )
+
+    function escapeJS(value){
+
+        return String(
+            value ?? ""
+        )
+        .replace(
+            /\\/g,
+            "\\\\"
+        )
+        .replace(
+            /'/g,
+            "\\'"
+        )
+        .replace(
+            /"/g,
+            '\\"'
+        )
+        .replace(
+            /\n/g,
+            "\\n"
+        )
+        .replace(
+            /\r/g,
+            "\\r"
+        );
+
+    }
+
+
+    /* =====================================================
+       ARAMA
+    ===================================================== */
+
+    searchInput.addEventListener(
+        "input",
+        ()=>{
+            applyFilters();
+        }
+    );
+
+
+    /* =====================================================
+       FİLTRE BUTONLARI
+    ===================================================== */
+
+    document
+        .querySelectorAll(
+            ".filter"
+        )
+        .forEach(
+            button => {
+
+                button.addEventListener(
+                    "click",
+                    ()=>{
+
+                        document
+                            .querySelectorAll(
+                                ".filter"
+                            )
+                            .forEach(
+                                btn =>
+                                    btn.classList.remove(
+                                        "active"
+                                    )
+                            );
+
+
+                        button.classList.add(
+                            "active"
                         );
 
 
-                    button.classList.add(
-                        "active"
-                    );
+                        currentFilter =
+                            button.dataset.filter;
 
 
-                    currentFilter =
-                        button.dataset.filter;
+                        applyFilters();
+
+                    }
+                );
+
+            }
+        );
 
 
-                    applyFilters();
+    /* =====================================================
+       MOUSE CARD EFFECT
+    ===================================================== */
 
-                }
+    document.addEventListener(
+        "mousemove",
+        event => {
+
+            const card =
+                event.target.closest(
+                    ".match-card"
+                );
+
+
+            if(!card)
+                return;
+
+
+            const rect =
+                card.getBoundingClientRect();
+
+
+            const x =
+                (
+                    (
+                        event.clientX -
+                        rect.left
+                    )
+                    /
+                    rect.width
+                ) * 100;
+
+
+            const y =
+                (
+                    (
+                        event.clientY -
+                        rect.top
+                    )
+                    /
+                    rect.height
+                ) * 100;
+
+
+            card.style.setProperty(
+                "--mx",
+                x + "%"
             );
+
+
+            card.style.setProperty(
+                "--my",
+                y + "%"
+            );
+
+        },
+        {
+            passive:true
+        }
+    );
+
+
+    /* =====================================================
+       HERO LOGO HATA
+    ===================================================== */
+
+    heroLogo.addEventListener(
+        "error",
+        ()=>{
+
+            heroLogo.style.display =
+                "none";
 
         }
     );
 
 
-/* =========================================================
-   MOUSE CARD EFFECT
-========================================================= */
+    /* =====================================================
+       URL KONTROL
+    ===================================================== */
 
-document.addEventListener(
-    "mousemove",
-    event => {
+    if(
+        requestedLeague &&
+        !resolvedSlug
+    ){
 
-        const card =
-            event.target.closest(
-                ".match-card"
-            );
-
-
-        if(!card)
-            return;
-
-
-        const rect =
-            card.getBoundingClientRect();
-
-
-        const x =
-            (
-                (
-                    event.clientX -
-                    rect.left
-                )
-                /
-                rect.width
-            ) * 100;
-
-
-        const y =
-            (
-                (
-                    event.clientY -
-                    rect.top
-                )
-                /
-                rect.height
-            ) * 100;
-
-
-        card.style.setProperty(
-            "--mx",
-            x + "%"
+        console.warn(
+            "CREX: Tanımsız lig:",
+            requestedLeague
         );
 
-
-        card.style.setProperty(
-            "--my",
-            y + "%"
-        );
-
-    },
-    {
-        passive:true
     }
-);
 
 
-/* =========================================================
-   HERO LOGO HATA
-========================================================= */
+    /* =====================================================
+       BAŞLAT
+    ===================================================== */
 
-heroLogo.addEventListener(
-    "error",
-    ()=>{
-
-        heroLogo.style.display =
-            "none";
-
-    }
-);
-
-
-/* =========================================================
-   URL DÜZELTME
-========================================================= */
-
-/*
- * Geçersiz bir lig gönderilirse
- * Premier League'e düşmek yerine
- * mevcut URL korunur ve sistem
- * Premier League'i gösterir.
- */
-
-if(
-    requestedLeague &&
-    !resolvedSlug
-){
-
-    console.warn(
-        "CREX: Tanımsız lig:",
-        requestedLeague
-    );
+    loadMatches();
 
 }
-
-
-/* =========================================================
-   BAŞLAT
-========================================================= */
-
-loadMatches();
 
 </script>
 
