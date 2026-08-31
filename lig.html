@@ -18,13 +18,18 @@
     --bg:#02050a;
     --panel:#080e16;
     --panel2:#0c141e;
+
     --blue:#1595ff;
     --blue2:#62c0ff;
+
     --white:#f7fbff;
     --text:#dce5ef;
     --muted:#718096;
+
     --line:rgba(255,255,255,.075);
-    --league:#9846d7;
+
+    --league:#1595ff;
+
     --ease:cubic-bezier(.16,1,.3,1);
 }
 
@@ -70,11 +75,14 @@ body{
     left:-260px;
     top:10%;
     border-radius:50%;
+
     background:var(--league);
     filter:blur(150px);
     opacity:.07;
+
     pointer-events:none;
     z-index:-5;
+
     animation:ambientMove 14s ease-in-out infinite alternate;
 }
 
@@ -85,11 +93,14 @@ body{
     right:-260px;
     bottom:0;
     border-radius:50%;
+
     background:#315dff;
     filter:blur(160px);
     opacity:.06;
+
     pointer-events:none;
     z-index:-5;
+
     animation:ambientMove2 16s ease-in-out infinite alternate;
 }
 
@@ -143,9 +154,13 @@ body::before{
     position:sticky;
     top:0;
     z-index:1000;
+
     height:74px;
+
     border-bottom:1px solid var(--line);
+
     background:rgba(2,6,11,.78);
+
     backdrop-filter:blur(25px) saturate(150%);
     -webkit-backdrop-filter:blur(25px) saturate(150%);
 }
@@ -162,13 +177,17 @@ body::before{
 
 .logo{
     position:relative;
+
     color:#fff;
     text-decoration:none;
+
     font-family:"Barlow Condensed",sans-serif;
     font-size:40px;
     line-height:1;
     font-weight:900;
+
     letter-spacing:2px;
+
     transition:.35s var(--ease);
 }
 
@@ -182,13 +201,18 @@ body::before{
 
 .logo::after{
     content:"";
+
     position:absolute;
     left:1px;
     bottom:-7px;
+
     width:30px;
     height:2px;
+
     border-radius:10px;
+
     background:var(--blue);
+
     box-shadow:0 0 14px var(--blue);
 }
 
@@ -202,10 +226,13 @@ body::before{
 .main-nav a{
     color:#718096;
     text-decoration:none;
+
     padding:11px 14px;
     border-radius:10px;
+
     font-size:10px;
     font-weight:900;
+
     transition:.3s var(--ease);
 }
 
@@ -263,8 +290,10 @@ body::before{
     width:100%;
     border:0;
     outline:0;
+
     color:#fff;
     background:transparent;
+
     font-family:inherit;
     font-size:10px;
 }
@@ -307,6 +336,7 @@ body::before{
         );
 
     box-shadow:0 30px 80px rgba(0,0,0,.35);
+
     isolation:isolate;
 }
 
@@ -314,6 +344,7 @@ body::before{
     content:"";
     position:absolute;
     inset:0;
+
     border-radius:inherit;
     pointer-events:none;
 
@@ -326,7 +357,9 @@ body::before{
         );
 
     transform:translateX(-100%);
+
     animation:heroShine 8s ease-in-out infinite;
+
     z-index:2;
 }
 
@@ -350,6 +383,7 @@ body::before{
 
 .hero-bg::before{
     content:"";
+
     position:absolute;
 
     width:550px;
@@ -384,6 +418,7 @@ body::before{
 
 .hero-bg::after{
     content:"";
+
     position:absolute;
 
     width:130%;
@@ -430,9 +465,11 @@ body::before{
     width:100%;
 
     display:grid;
+
     grid-template-columns:170px 1fr auto;
 
     align-items:center;
+
     gap:35px;
 
     padding:35px 45px;
@@ -454,6 +491,7 @@ body::before{
 
 .hero-logo-wrap::before{
     content:"";
+
     position:absolute;
     inset:15px;
 
@@ -781,6 +819,7 @@ body::before{
 
 .match-card::before{
     content:"";
+
     position:absolute;
     inset:0;
 
@@ -807,6 +846,7 @@ body::before{
 
 .match-card::after{
     content:"";
+
     position:absolute;
     inset:1px;
 
@@ -1468,7 +1508,9 @@ body::before{
     .hero-content{
         display:flex;
         flex-direction:column;
+
         text-align:center;
+
         padding:30px 20px;
     }
 
@@ -1542,7 +1584,9 @@ body::before{
 
     .footer{
         width:calc(100% - 24px);
+
         flex-direction:column;
+
         gap:10px;
     }
 
@@ -1641,10 +1685,12 @@ body::before{
 </style>
 </head>
 
+
 <body>
 
 <div class="ambient"></div>
 <div class="ambient2"></div>
+
 
 <header class="header">
 
@@ -1774,31 +1820,49 @@ CREX
 
 <div class="filters">
 
-<button class="filter active" data-filter="all">
+<button
+    class="filter active"
+    data-filter="all"
+>
     TÜMÜ
 </button>
 
-<button class="filter" data-filter="upcoming">
+<button
+    class="filter"
+    data-filter="upcoming"
+>
     GELECEK
 </button>
 
-<button class="filter" data-filter="finished">
+<button
+    class="filter"
+    data-filter="finished"
+>
     TAMAMLANAN
 </button>
 
 </div>
 
-<div id="resultCount" class="result-count">
+<div
+    id="resultCount"
+    class="result-count"
+>
     0 MAÇ
 </div>
 
 </div>
 
 
-<div id="matchGrid" class="matches"></div>
+<div
+    id="matchGrid"
+    class="matches"
+></div>
 
 
-<div id="empty" class="empty">
+<div
+    id="empty"
+    class="empty"
+>
 
 <div class="empty-icon">
     ⚽
@@ -1815,7 +1879,10 @@ CREX
 </div>
 
 
-<div id="loader" class="loader">
+<div
+    id="loader"
+    class="loader"
+>
 
 <div class="loader-ring"></div>
 
@@ -1842,51 +1909,95 @@ CREX
 <script>
 
 /* =========================================================
-   CREX LİG SİSTEMİ
+   CREX OTOMATİK LİG SİSTEMİ
    GÜNCELLENMİŞ SÜRÜM
 ========================================================= */
 
-const params = new URLSearchParams(
-    window.location.search
-);
+
+/*
+    ARTIK AŞAĞIDAKİLERİN TAMAMI ÇALIŞIR:
+
+    lig.html?lig=premier-league
+
+    lig.html?lig=la-liga
+    lig.html?lig=serie-a
+    lig.html?lig=bundesliga
+    lig.html?lig=ligue-1
+    lig.html?lig=super-lig
+
+    lig.html?lig=champions-league
+
+    lig.html?lig=europa-league
+    lig.html?lig=europa-ligi
+    lig.html?lig=avrupa-ligi
+    lig.html?lig=uefa-europa-league
+    lig.html?lig=uel
+
+    lig.html?lig=conference-league
+    lig.html?lig=conference-ligi
+    lig.html?lig=konferans-ligi
+    lig.html?lig=uefa-conference-league
+    lig.html?lig=uefa-europa-conference-league
+    lig.html?lig=uecl
+
+    Ayrıca:
+
+    lig.html?league=europa-league
+    lig.html?league=conference-league
+
+    lig.html?slug=europa-league
+    lig.html?slug=conference-league
+*/
+
+
+/* =========================================================
+   URL PARAMETRELERİ
+========================================================= */
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
 
 
 /*
- * Artık hem ?lig= hem de ?league=
- * destekleniyor.
- */
+    Eski sistem:
+    ?lig=
+
+    Yeni sistem:
+    ?lig=
+    ?league=
+    ?slug=
+
+    Hepsi destekleniyor.
+*/
 
 const requestedLeague =
     params.get("lig") ||
-    params.get("league");
+    params.get("league") ||
+    params.get("slug");
 
 
 /*
- * Parametre yoksa Premier League.
- *
- * Parametre varsa ama tanınmıyorsa
- * "Lig bulunamadı" gösterilir.
- */
+    URL'de hiçbir lig yoksa
+    Premier League varsayılan.
+*/
 
 const leagueSlug =
     requestedLeague &&
     String(requestedLeague).trim()
-        ? String(requestedLeague).trim()
+        ? requestedLeague
         : "premier-league";
 
 
-/*
- * Maksimum 10 maç.
- */
+/* =========================================================
+   AYARLAR
+========================================================= */
 
 const MAX_MATCHES = 10;
 
-
-/*
- * Logo cache.
- */
-
-const LOGO_VERSION = "20260901";
+const LOGO_VERSION =
+    "20260901";
 
 
 /* =========================================================
@@ -1894,6 +2005,11 @@ const LOGO_VERSION = "20260901";
 ========================================================= */
 
 const leagues = {
+
+
+    /* =====================================================
+       PREMIER LEAGUE
+    ===================================================== */
 
     "premier-league":{
 
@@ -1907,33 +2023,12 @@ const leagues = {
             "premierleague",
             "premier-league",
 
-            /* Türkçe */
-            "premier lig",
-            "premier ligi",
-            "premier-lig",
-            "premier-ligi",
-
-            /* İngilizce */
             "england premier league",
-            "england-premier-league",
-            "england premier",
             "english premier league",
 
-            /* Türkçe ülke */
             "ingiltere premier league",
-            "ingiltere premier lig",
             "ingiltere premier ligi",
-            "ingiltere-premier-ligi",
-            "ingiltere-premier-lig",
-
-            /* Kısa adlar */
-            "epl",
-            "pl",
-
-            /* Muhtemel ID / link değerleri */
-            "premier",
-            "premier_league",
-            "premierleague-england"
+            "premier ligi"
 
         ],
 
@@ -1944,6 +2039,10 @@ const leagues = {
 
     },
 
+
+    /* =====================================================
+       LA LIGA
+    ===================================================== */
 
     "la-liga":{
 
@@ -1956,9 +2055,12 @@ const leagues = {
             "la liga",
             "laliga",
             "la-liga",
-            "la_liga",
+
             "spain la liga",
-            "ispanya la liga"
+            "spanish la liga",
+
+            "ispanya la liga",
+            "ispanya ligi"
 
         ],
 
@@ -1969,6 +2071,10 @@ const leagues = {
 
     },
 
+
+    /* =====================================================
+       SERIE A
+    ===================================================== */
 
     "serie-a":{
 
@@ -1981,9 +2087,12 @@ const leagues = {
             "serie a",
             "seriea",
             "serie-a",
-            "serie_a",
+
             "italy serie a",
-            "italya serie a"
+            "italian serie a",
+
+            "italya serie a",
+            "italya ligi"
 
         ],
 
@@ -1995,6 +2104,10 @@ const leagues = {
     },
 
 
+    /* =====================================================
+       BUNDESLIGA
+    ===================================================== */
+
     "bundesliga":{
 
         name:"Bundesliga",
@@ -2004,8 +2117,12 @@ const leagues = {
         aliases:[
 
             "bundesliga",
+
             "germany bundesliga",
-            "almanya bundesliga"
+            "german bundesliga",
+
+            "almanya bundesliga",
+            "almanya ligi"
 
         ],
 
@@ -2016,6 +2133,10 @@ const leagues = {
 
     },
 
+
+    /* =====================================================
+       LIGUE 1
+    ===================================================== */
 
     "ligue-1":{
 
@@ -2028,9 +2149,12 @@ const leagues = {
             "ligue 1",
             "ligue1",
             "ligue-1",
-            "ligue_1",
+
             "france ligue 1",
-            "fransa ligue 1"
+            "french ligue 1",
+
+            "fransa ligue 1",
+            "fransa ligi"
 
         ],
 
@@ -2041,6 +2165,10 @@ const leagues = {
 
     },
 
+
+    /* =====================================================
+       SÜPER LİG
+    ===================================================== */
 
     "super-lig":{
 
@@ -2054,11 +2182,15 @@ const leagues = {
             "super lig",
             "superlig",
             "super-lig",
-            "super_lig",
+
             "turkey super lig",
+            "turkish super lig",
+
             "turkiye super lig",
             "türkiye süper lig",
-            "türkiye süper ligi"
+
+            "türkiye ligi",
+            "turkiye ligi"
 
         ],
 
@@ -2069,6 +2201,10 @@ const leagues = {
 
     },
 
+
+    /* =====================================================
+       CHAMPIONS LEAGUE
+    ===================================================== */
 
     "champions-league":{
 
@@ -2081,18 +2217,21 @@ const leagues = {
             "champions league",
             "championsleague",
             "champions-league",
-            "champions_league",
+
             "uefa champions league",
+            "uefa-champions-league",
+
+            "ucl",
+            "uefa champions",
 
             "şampiyonlar ligi",
             "sampiyonlar ligi",
+
             "şampiyonlar-ligi",
             "sampiyonlar-ligi",
-            "şampiyonlar",
-            "sampiyonlar",
 
-            "ucl",
-            "uefa champions"
+            "şampiyonlar",
+            "sampiyonlar"
 
         ],
 
@@ -2104,6 +2243,10 @@ const leagues = {
     },
 
 
+    /* =====================================================
+       EUROPA LEAGUE
+    ===================================================== */
+
     "europa-league":{
 
         name:"Europa League",
@@ -2112,19 +2255,56 @@ const leagues = {
 
         aliases:[
 
+            /*
+             * İNGİLİZCE
+             */
+
             "europa league",
             "europaleague",
             "europa-league",
-            "europa_league",
+
             "uefa europa league",
+            "uefa-europa-league",
+
+            "uefaeuropaleague",
+
+            "uel",
+            "uefa europa",
+
+
+            /*
+             * TÜRKÇE
+             */
 
             "avrupa ligi",
             "avrupa-ligi",
-            "avrupa",
-            "uefa avrupa ligi",
+            "avrupa ligi",
 
-            "uel",
-            "uefa europa"
+            "avrupa",
+            "avrupa lig",
+
+            "europa ligi",
+            "europa-ligi",
+
+            /*
+             * ESKİ / ALTERNATİF YAZIMLAR
+             */
+
+            "europa lig",
+            "europaligi",
+
+            "uefa avrupa ligi",
+            "uefa-avrupa-ligi",
+
+            "uefa avrupa",
+            "uefa-avrupa",
+
+            "uefa europa-ligi",
+            "uefa-europa-ligi",
+
+            "uefa europa lig",
+
+            "europaleague"
 
         ],
 
@@ -2136,6 +2316,10 @@ const leagues = {
     },
 
 
+    /* =====================================================
+       CONFERENCE LEAGUE
+    ===================================================== */
+
     "conference-league":{
 
         name:"Conference League",
@@ -2144,21 +2328,76 @@ const leagues = {
 
         aliases:[
 
+            /*
+             * GÜNCEL RESMİ İSİM
+             */
+
             "conference league",
             "conferenceleague",
             "conference-league",
-            "conference_league",
+
             "uefa conference league",
+            "uefa-conference-league",
+
+            "uefa conference",
+
+            "uefa-conference",
+
+            "uecl",
+
+
+            /*
+             * ESKİ RESMİ İSİM
+             */
+
+            "uefa europa conference league",
+            "uefa-europa-conference-league",
+
             "europa conference league",
+            "europa-conference-league",
+
+            "europa conference",
+            "europa-conference",
+
+
+            /*
+             * TÜRKÇE
+             */
 
             "konferans ligi",
             "konferans-ligi",
-            "konferans",
-            "uefa konferans ligi",
-            "avrupa konferans ligi",
 
-            "uecl",
-            "uefa conference"
+            "konferans ligi",
+            "konferans",
+
+            "uefa konferans ligi",
+            "uefa-konferans-ligi",
+
+            "uefa konferans",
+            "uefa-konferans",
+
+            "avrupa konferans ligi",
+            "avrupa-konferans-ligi",
+
+            "avrupa konferans",
+            "avrupa-konferans",
+
+
+            /*
+             * ALTERNATİF URL YAZIMLARI
+             */
+
+            "conference ligi",
+            "conference-ligi",
+
+            "conference lig",
+            "conference-lig",
+
+            "konferans lig",
+            "konferans-lig",
+
+            "konferansligi",
+            "conference"
 
         ],
 
@@ -2178,23 +2417,27 @@ const leagues = {
 
 function normalizeText(value){
 
-    return String(value ?? "")
-        .normalize("NFD")
-        .replace(
-            /[\u0300-\u036f]/g,
-            ""
-        )
-        .toLocaleLowerCase("tr-TR")
-        .replaceAll("ı","i")
-        .replaceAll("ş","s")
-        .replaceAll("ğ","g")
-        .replaceAll("ü","u")
-        .replaceAll("ö","o")
-        .replaceAll("ç","c")
-        .replace(
-            /[^a-z0-9]/g,
-            ""
-        );
+    return String(
+        value ?? ""
+    )
+    .normalize("NFD")
+    .replace(
+        /[\u0300-\u036f]/g,
+        ""
+    )
+    .toLocaleLowerCase(
+        "tr-TR"
+    )
+    .replaceAll("ı","i")
+    .replaceAll("ş","s")
+    .replaceAll("ğ","g")
+    .replaceAll("ü","u")
+    .replaceAll("ö","o")
+    .replaceAll("ç","c")
+    .replace(
+        /[^a-z0-9]/g,
+        ""
+    );
 
 }
 
@@ -2209,9 +2452,8 @@ function resolveLeagueSlug(value){
         normalizeText(value);
 
 
-    if(!normalized){
+    if(!normalized)
         return null;
-    }
 
 
     /*
@@ -2260,33 +2502,129 @@ function resolveLeagueSlug(value){
 
 
     /*
-     * 3 — Premier League için
-     * ekstra toleranslı kontrol.
+     * 3 — EKSTRA GÜVENLİ URL KONTROLÜ
+     *
+     * Bazı index.html bağlantılarında
+     * farklı isimler kullanılabiliyor.
      */
 
-    const premierKeywords = [
-
-        "premier",
-        "premierleague",
-        "premierlig",
-        "premierligi",
-        "epl",
-        "englandpremier",
-        "ingilterepremier"
-
-    ];
-
-
     if(
-        premierKeywords.some(
-            keyword =>
-                normalized.includes(
-                    keyword
-                )
+        normalized.includes("premier") &&
+        (
+            normalized.includes("league") ||
+            normalized.includes("lig")
         )
     ){
 
         return "premier-league";
+
+    }
+
+
+    if(
+        (
+            normalized.includes("laliga") ||
+            normalized === "laliga"
+        )
+    ){
+
+        return "la-liga";
+
+    }
+
+
+    if(
+        normalized.includes("seriea")
+    ){
+
+        return "serie-a";
+
+    }
+
+
+    if(
+        normalized.includes("bundesliga")
+    ){
+
+        return "bundesliga";
+
+    }
+
+
+    if(
+        normalized.includes("ligue1")
+    ){
+
+        return "ligue-1";
+
+    }
+
+
+    if(
+        normalized.includes("superlig") ||
+        normalized.includes("superligi")
+    ){
+
+        return "super-lig";
+
+    }
+
+
+    if(
+        normalized.includes("champions") ||
+        normalized.includes("sampiyonlar")
+    ){
+
+        return "champions-league";
+
+    }
+
+
+    /*
+     * EUROPA LEAGUE
+     *
+     * ÖNEMLİ:
+     * conference kontrolünden önce.
+     */
+
+    if(
+        normalized.includes("europaleague") ||
+        normalized.includes("europa") ||
+        normalized.includes("avrupali") ||
+        normalized.includes("avrupa")
+    ){
+
+        /*
+         * Eğer konferans kelimesi de varsa
+         * Conference League olmalı.
+         */
+
+        if(
+            normalized.includes("conference") ||
+            normalized.includes("konferans")
+        ){
+
+            return "conference-league";
+
+        }
+
+
+        return "europa-league";
+
+    }
+
+
+    /*
+     * CONFERENCE LEAGUE
+     */
+
+    if(
+        normalized.includes("conference") ||
+        normalized.includes("konferans") ||
+        normalized.includes("uecl")
+    ){
+
+        return "conference-league";
 
     }
 
@@ -2297,7 +2635,7 @@ function resolveLeagueSlug(value){
 
 
 /* =========================================================
-   URL LİGİNİ BUL
+   LİGİ BUL
 ========================================================= */
 
 const resolvedSlug =
@@ -2305,6 +2643,16 @@ const resolvedSlug =
         leagueSlug
     );
 
+
+/*
+ * URL'de lig yoksa Premier League.
+ *
+ * URL'de lig varsa ve tanınıyorsa
+ * o lig.
+ *
+ * URL'de lig var ama tanınmıyorsa
+ * hata ekranı.
+ */
 
 const league =
     resolvedSlug
@@ -2393,8 +2741,7 @@ if(!league){
         "none";
 
 
-    matchGrid.innerHTML =
-        "";
+    matchGrid.innerHTML = "";
 
 
     resultCount.textContent =
@@ -2415,11 +2762,15 @@ if(!league){
 
 
     const emptyTitle =
-        empty.querySelector("h3");
+        empty.querySelector(
+            "h3"
+        );
 
 
     const emptyText =
-        empty.querySelector("p");
+        empty.querySelector(
+            "p"
+        );
 
 
     if(emptyTitle){
@@ -2442,28 +2793,39 @@ if(!league){
         "show"
     );
 
+
 }
 else{
 
-    /* =====================================================
-       LİG RENKLERİ
-    ===================================================== */
-
-    document.documentElement.style
-        .setProperty(
-            "--league",
-            league.color
-        );
-
 
     /* =====================================================
-       BAŞLIK
+       SAYFA BAŞLIĞI
     ===================================================== */
 
     document.title =
         "CREX — " +
         league.name;
 
+
+    /* =====================================================
+       RENK
+    ===================================================== */
+
+    if(league.color){
+
+        document.documentElement
+            .style
+            .setProperty(
+                "--league",
+                league.color
+            );
+
+    }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     leagueTitle.textContent =
         league.name;
@@ -2472,52 +2834,6 @@ else{
     leagueCountry.textContent =
         league.country +
         " • CREX MAÇ MERKEZİ";
-
-
-    /* =====================================================
-       HERO LOGO
-    ===================================================== */
-
-    function addLogoCache(url){
-
-        if(!url){
-            return "";
-        }
-
-
-        const cleanUrl =
-            String(url).trim();
-
-
-        if(!cleanUrl){
-            return "";
-        }
-
-
-        if(
-            cleanUrl.startsWith("data:") ||
-            cleanUrl.startsWith("blob:")
-        ){
-
-            return cleanUrl;
-
-        }
-
-
-        const separator =
-            cleanUrl.includes("?")
-                ? "&"
-                : "?";
-
-
-        return (
-            cleanUrl +
-            separator +
-            "v=" +
-            LOGO_VERSION
-        );
-
-    }
 
 
     if(league.logo){
@@ -2556,6 +2872,51 @@ else{
 
     let currentFilter =
         "all";
+
+
+    /* =====================================================
+       LOGO CACHE
+    ===================================================== */
+
+    function addLogoCache(url){
+
+        if(!url)
+            return "";
+
+
+        const cleanUrl =
+            String(url)
+            .trim();
+
+
+        if(!cleanUrl)
+            return "";
+
+
+        if(
+            cleanUrl.startsWith("data:") ||
+            cleanUrl.startsWith("blob:")
+        ){
+
+            return cleanUrl;
+
+        }
+
+
+        const separator =
+            cleanUrl.includes("?")
+                ? "&"
+                : "?";
+
+
+        return (
+            cleanUrl +
+            separator +
+            "v=" +
+            LOGO_VERSION
+        );
+
+    }
 
 
     /* =====================================================
@@ -2619,7 +2980,8 @@ else{
             "bitti",
             "bitmiş",
             "bitmis",
-            "ended"
+            "full time",
+            "ft"
 
         ];
 
@@ -2642,9 +3004,9 @@ else{
             "live",
             "yayında",
             "yayinda",
-            "playing",
-            "inplay",
-            "in-play"
+            "devam ediyor",
+            "oynanıyor",
+            "oynaniyor"
 
         ];
 
@@ -2667,8 +3029,8 @@ else{
             "yaklasiyor",
             "upcoming",
             "scheduled",
-            "not started",
-            "bekliyor"
+            "başlamadı",
+            "baslamadi"
 
         ];
 
@@ -2690,9 +3052,8 @@ else{
             );
 
 
-        if(!date){
+        if(!date)
             return "upcoming";
-        }
 
 
         return date < new Date()
@@ -2715,9 +3076,8 @@ else{
             match.match_date;
 
 
-        if(!rawDate){
+        if(!rawDate)
             return null;
-        }
 
 
         const dateValue =
@@ -2726,9 +3086,8 @@ else{
             ).trim();
 
 
-        if(!dateValue){
+        if(!dateValue)
             return null;
-        }
 
 
         let dateString =
@@ -2738,6 +3097,7 @@ else{
         const rawTime =
             match.saat ||
             match.time ||
+            match.kickoff ||
             "";
 
 
@@ -2792,7 +3152,7 @@ else{
 
 
     /* =====================================================
-       TARİH GÖSTER
+       TARİH GÖSTERİMİ
     ===================================================== */
 
     function formatDate(match){
@@ -2839,63 +3199,34 @@ else{
         }
 
 
-        if(
-            match.saat &&
-            String(
-                match.saat
-            ).trim()
-        ){
-
-            return String(
-                match.saat
-            ).trim();
-
-        }
-
-
         return "TARİH YOK";
 
     }
 
 
     /* =========================================================
-       GELİŞMİŞ LİG KONTROLÜ
-       
-       Premier League hatasını düzeltmek için:
-       - lig
-       - ligAdi
-       - league
-       - leagueName
-       - leagueSlug
-       - league_id
-       - leagueId
-       - tournament
-       - competition
-       - competitionName
-       alanlarının tamamı kontrol edilir.
+       LİG KONTROL
     ========================================================= */
 
     function isCorrectLeague(match){
+
+        /*
+         * JSON'daki olası lig alanlarının tamamı.
+         */
 
         const matchValues = [
 
             match.lig,
             match.ligAdi,
-
             match.league,
             match.leagueName,
             match.leagueSlug,
-
-            match.league_id,
-            match.leagueId,
-
-            match.tournament,
-            match.tournamentName,
-
+            match.league_slug,
             match.competition,
             match.competitionName,
-
-            match.organizer
+            match.competitionSlug,
+            match.turnuva,
+            match.organizasyon
 
         ]
         .filter(
@@ -2906,6 +3237,25 @@ else{
         );
 
 
+        const targetSlug =
+            resolvedSlug;
+
+
+        /*
+         * Hedef lig kesin olarak belli değilse
+         * maç gösterme.
+         */
+
+        if(!targetSlug)
+            return false;
+
+
+        /*
+         * JSON'da lig alanı yoksa
+         * otomatik olarak başka ligdeki maçı
+         * göstermiyoruz.
+         */
+
         if(
             matchValues.length === 0
         ){
@@ -2915,72 +3265,82 @@ else{
         }
 
 
-        return matchValues.some(
-            value => {
+        /*
+         * Önce normal resolver.
+         */
 
-                const valueString =
-                    String(
-                        value
-                    ).trim();
-
-
-                const matchSlug =
+        if(
+            matchValues.some(
+                value =>
                     resolveLeagueSlug(
-                        valueString
-                    );
+                        value
+                    ) === targetSlug
+            )
+        ){
+
+            return true;
+
+        }
 
 
-                if(
-                    matchSlug ===
-                    resolvedSlug
-                ){
+        /*
+         * Ekstra güvenlik:
+         * JSON'da bazen "UEFA Europa League 2026/27"
+         * gibi sezon bilgisi olabilir.
+         */
 
-                    return true;
-
-                }
-
-
-                /*
-                 * Premier League özel kontrol.
-                 */
-
-                if(
-                    resolvedSlug ===
-                    "premier-league"
-                ){
-
-                    const normalized =
-                        normalizeText(
-                            valueString
-                        );
+        const combined =
+            matchValues
+            .map(
+                value =>
+                    normalizeText(value)
+            )
+            .join(" ");
 
 
-                    return (
+        if(
+            targetSlug ===
+            "europa-league"
+        ){
 
-                        normalized.includes(
-                            "premierleague"
-                        ) ||
+            return (
+                (
+                    combined.includes(
+                        "europa"
+                    ) ||
+                    combined.includes(
+                        "avrupa"
+                    )
+                ) &&
+                !combined.includes(
+                    "conference"
+                ) &&
+                !combined.includes(
+                    "konferans"
+                )
+            );
 
-                        normalized.includes(
-                            "premierlig"
-                        ) ||
-
-                        normalized.includes(
-                            "premierligi"
-                        ) ||
-
-                        normalized ===
-                            "epl"
-
-                    );
-
-                }
+        }
 
 
-                return false;
+        if(
+            targetSlug ===
+            "conference-league"
+        ){
 
-            }
-        );
+            return (
+                combined.includes(
+                    "conference"
+                ) ||
+                combined.includes(
+                    "konferans"
+                )
+            );
+
+        }
+
+
+        return false;
 
     }
 
@@ -3057,6 +3417,18 @@ else{
 
             }
 
+            else if(
+                data &&
+                Array.isArray(
+                    data.data
+                )
+            ){
+
+                matches =
+                    data.data;
+
+            }
+
             else{
 
                 throw new Error(
@@ -3065,6 +3437,10 @@ else{
 
             }
 
+
+            /*
+             * LİG FİLTRESİ
+             */
 
             allMatches =
                 matches
@@ -3091,10 +3467,44 @@ else{
                 );
 
 
+            /*
+             * Tarihe göre sırala.
+             */
+
+            allMatches.sort(
+                (a,b)=>{
+
+                    const dateA =
+                        getMatchDate(a);
+
+                    const dateB =
+                        getMatchDate(b);
+
+
+                    if(!dateA && !dateB)
+                        return 0;
+
+
+                    if(!dateA)
+                        return 1;
+
+
+                    if(!dateB)
+                        return -1;
+
+
+                    return (
+                        dateA.getTime() -
+                        dateB.getTime()
+                    );
+
+                }
+            );
+
+
             updateStats();
 
             applyFilters();
-
 
         }
         catch(error){
@@ -3109,8 +3519,7 @@ else{
 
             filteredMatches = [];
 
-            matchGrid.innerHTML =
-                "";
+            matchGrid.innerHTML = "";
 
 
             leagueCountry.textContent =
@@ -3172,7 +3581,7 @@ else{
 
 
     /* =====================================================
-       FİLTRE
+       FİLTRELER
     ===================================================== */
 
     function applyFilters(){
@@ -3200,14 +3609,12 @@ else{
                         status === currentFilter;
 
 
-                    if(!filterOK){
+                    if(!filterOK)
                         return false;
-                    }
 
 
-                    if(!query){
+                    if(!query)
                         return true;
-                    }
 
 
                     const searchable = [
@@ -3215,14 +3622,14 @@ else{
                         match.evSahibi,
                         match.deplasman,
 
+                        match.evKisa,
+                        match.depKisa,
+
                         match.homeTeam,
                         match.awayTeam,
 
                         match.home,
                         match.away,
-
-                        match.evKisa,
-                        match.depKisa,
 
                         match.lig,
                         match.ligAdi,
@@ -3236,7 +3643,10 @@ else{
                         match.saat,
 
                         match.skor,
-                        match.durum
+                        match.score,
+
+                        match.durum,
+                        match.status
 
                     ]
                     .filter(Boolean)
@@ -3253,6 +3663,10 @@ else{
                 }
             );
 
+
+        /*
+         * Maksimum 10 maç.
+         */
 
         filteredMatches =
             results.slice(
@@ -3294,8 +3708,7 @@ else{
 
     function renderMatches(){
 
-        matchGrid.innerHTML =
-            "";
+        matchGrid.innerHTML = "";
 
 
         if(
@@ -3344,12 +3757,14 @@ else{
                             [
                                 {
                                     opacity:0,
+
                                     transform:
                                         "translateY(25px) scale(.96)"
                                 },
 
                                 {
                                     opacity:1,
+
                                     transform:
                                         "translateY(0) scale(1)"
                                 }
@@ -3604,9 +4019,12 @@ else{
 
             <div class="card-glow"></div>
 
+
             <div class="match-content">
 
+
                 <div class="match-top">
+
 
                     <div class="match-league-tag">
 
@@ -3618,18 +4036,22 @@ else{
 
                     </div>
 
+
                     <div class="match-status">
 
                         ${statusText}
 
                     </div>
 
+
                 </div>
 
 
                 <div class="teams">
 
+
                     <div class="team">
+
 
                         <div class="team-logo">
 
@@ -3637,7 +4059,9 @@ else{
 
                         </div>
 
+
                         ${homeScoreHtml}
+
 
                         <div class="team-name">
 
@@ -3647,6 +4071,7 @@ else{
 
                         </div>
 
+
                     </div>
 
 
@@ -3655,13 +4080,16 @@ else{
 
                     <div class="team">
 
+
                         <div class="team-logo">
 
                             ${awayLogoHTML}
 
                         </div>
 
+
                         ${awayScoreHtml}
+
 
                         <div class="team-name">
 
@@ -3671,12 +4099,15 @@ else{
 
                         </div>
 
+
                     </div>
+
 
                 </div>
 
 
                 <div class="match-bottom">
+
 
                     <div class="match-date">
 
@@ -3702,7 +4133,9 @@ else{
 
                     </a>
 
+
                 </div>
+
 
             </div>
 
@@ -3723,9 +4156,8 @@ else{
         fallbackText
     ){
 
-        if(!img){
+        if(!img)
             return;
-        }
 
 
         img.onerror =
@@ -3736,9 +4168,8 @@ else{
             img.parentElement;
 
 
-        if(!parent){
+        if(!parent)
             return;
-        }
 
 
         img.remove();
@@ -3769,9 +4200,8 @@ else{
             .filter(Boolean);
 
 
-        if(!words.length){
+        if(!words.length)
             return "TEAM";
-        }
 
 
         if(words.length === 1){
@@ -3879,7 +4309,7 @@ else{
 
 
     /* =====================================================
-       FİLTRE
+       FİLTRE BUTONLARI
     ===================================================== */
 
     document
@@ -3937,9 +4367,8 @@ else{
                 );
 
 
-            if(!card){
+            if(!card)
                 return;
-            }
 
 
             const rect =
@@ -4011,7 +4440,10 @@ else{
             requestedLeague,
             leagueSlug,
             resolvedSlug,
-            league:league.name
+            league:
+                league
+                    ? league.name
+                    : null
         }
     );
 
