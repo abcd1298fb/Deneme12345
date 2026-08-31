@@ -1826,17 +1826,9 @@ function createSecureEmbed(url){
     iframe.title =
         "CREX yayın oynatıcı";
 
-    /* MixDrop ve benzeri embed sağlayıcıların hata vermemesi için sandbox izinleri genişletildi */
-    iframe.sandbox =
-        "allow-scripts " +
-        "allow-same-origin " +
-        "allow-forms " +
-        "allow-presentation " +
-        "allow-popups " +
-        "allow-popups-to-escape-sandbox";
-
+    // Sandbox tamamen kaldırıldı, doğrudan tam yetki ve standart izinler tanımlandı
     iframe.allow =
-        "autoplay; fullscreen; picture-in-picture";
+        "autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope";
 
     iframe.allowFullscreen =
         true;
