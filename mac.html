@@ -682,6 +682,23 @@ body::before{
 }
 
 /* =========================================================
+   1. ŞEFFAF PERDE (OVERLAY) & AKILLI TIKLAMA YAKALAMA
+========================================================= */
+.crex-click-shield {
+    position: absolute;
+    inset: 0;
+    z-index: 20;
+    background: transparent;
+    cursor: pointer;
+    display: block;
+}
+
+.crex-click-shield.disabled {
+    pointer-events: none;
+}
+
+
+/* =========================================================
    FULLSCREEN
 ========================================================= */
 
@@ -1622,12 +1639,6 @@ function renderMatch(match){
 
     /* =====================================================
        TEAM LOGOS
-       
-       SADECE maclar.json
-       İÇİNDEN OKUNUR.
-       
-       evLogo  -> ev sahibi
-       depLogo -> deplasman
     ===================================================== */
 
     setTeamLogo(
@@ -1672,17 +1683,7 @@ function setTeamLogo(
     fallback
 ){
 
-    /*
-       Önce eski içeriği temizle.
-    */
-
     element.innerHTML = "";
-
-
-    /*
-       Logo URL'si yoksa direkt
-       takım kısaltmasını göster.
-    */
 
     if(
         typeof url !== "string" ||
@@ -1695,11 +1696,6 @@ function setTeamLogo(
         return;
 
     }
-
-
-    /*
-       Logo resmi.
-    */
 
     const img =
         document.createElement("img");
@@ -1716,12 +1712,6 @@ function setTeamLogo(
     img.decoding =
         "async";
 
-
-    /*
-       Logo başarılı şekilde yüklenirse
-       göster.
-    */
-
     img.onload = function(){
 
         element.innerHTML = "";
@@ -1729,12 +1719,6 @@ function setTeamLogo(
         element.appendChild(img);
 
     };
-
-
-    /*
-       URL çalışmıyorsa kısaltmayı
-       göster.
-    */
 
     img.onerror = function(){
 
@@ -1749,13 +1733,6 @@ function setTeamLogo(
             fallback;
 
     };
-
-
-    /*
-       Önceden ekliyoruz.
-       Böylece yüklenme sırasında
-       boş kutu kalmaz.
-    */
 
     element.appendChild(img);
 
@@ -1833,7 +1810,7 @@ function renderPlayer(match){
 
 
 /* =========================================================
-   SECURE EMBED + CREX FULLSCREEN
+   SECURE EMBED + CREX FULLSCREEN + TRANSPARENT OVERLAY
 ========================================================= */
 
 function createSecureEmbed(url){
@@ -1852,6 +1829,15 @@ function createSecureEmbed(url){
 
     if(oldButton){
         oldButton.remove();
+    }
+
+    const oldShield =
+        player.querySelector(
+            ".crex-click-shield"
+        );
+
+    if(oldShield){
+        oldShield.remove();
     }
 
     placeholder.style.display =
@@ -1888,6 +1874,33 @@ function createSecureEmbed(url){
     player.appendChild(
         iframe
     );
+
+
+    /* =====================================================
+       1. ŞEFFAF PERDE (OVERLAY) & AKILLI TIKLAMA YAKALAMA
+    ===================================================== */
+    const clickShield =
+        document.createElement("div");
+
+    clickShield.className =
+        "crex-click-shield";
+
+    clickShield.title =
+        "Yayını başlatmak veya kontrol etmek için tıklayın";
+
+    player.appendChild(clickShield);
+
+    clickShield.addEventListener("click", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Tıklamayı engelle ve geçici olarak devre dışı bırak (oynatıcı kontrollerine izin ver)
+        clickShield.classList.add("disabled");
+
+        setTimeout(function(){
+            clickShield.classList.remove("disabled");
+        }, 600); // 600ms sonra perde tekrar aktif olur
+    });
 
 
     /* =====================================================
