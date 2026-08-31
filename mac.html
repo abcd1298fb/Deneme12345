@@ -682,15 +682,54 @@ body::before{
 }
 
 /* =========================================================
-   PLAYER OVERLAY (REKLAM ENGELLEME PERDESİ)
+   PLAYER OVERLAY (GÜÇLENDİRİLMİŞ İLK TIKLAMA KORUMASI)
 ========================================================= */
 
 .player-overlay {
     position: absolute;
     inset: 0;
     z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
     cursor: pointer;
-    background: transparent;
+    background: rgba(2, 5, 10, 0.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: background 0.3s ease;
+}
+
+.player-overlay:hover {
+    background: rgba(2, 5, 10, 0.78);
+}
+
+.player-overlay-btn {
+    width: 72px;
+    height: 72px;
+    display: grid;
+    place-items: center;
+    color: #fff;
+    background: var(--blue);
+    border-radius: 50%;
+    box-shadow: 0 0 30px rgba(21, 149, 255, 0.4);
+    font-size: 24px;
+    padding-left: 4px;
+    transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+}
+
+.player-overlay:hover .player-overlay-btn {
+    transform: scale(1.1);
+    box-shadow: 0 0 45px rgba(21, 149, 255, 0.7);
+}
+
+.player-overlay-text {
+    color: #fff;
+    font-family: "Barlow Condensed", sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
 
 /* =========================================================
@@ -1351,8 +1390,6 @@ DURUM
 
 </div>
 
-</div>
-
 </section>
 
 <section class="error" id="errorBox">
@@ -1804,7 +1841,7 @@ function renderPlayer(match){
 
 
 /* =========================================================
-   SECURE EMBED + CREX FULLSCREEN
+   SECURE EMBED + CLICK-TO-LOAD (REKLAM KORUMALI)
 ========================================================= */
 
 function createSecureEmbed(url){
@@ -1838,42 +1875,48 @@ function createSecureEmbed(url){
         "none";
 
 
-    const iframe =
-        document.createElement("iframe");
-
-    iframe.src =
-        url;
-
-    iframe.title =
-        "CREX yayın oynatıcı";
-
-    iframe.allow =
-        "autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope";
-
-    iframe.allowFullscreen =
-        true;
-
-    iframe.referrerPolicy =
-        "strict-origin-when-cross-origin";
-
-    iframe.loading =
-        "eager";
-
-    player.appendChild(
-        iframe
-    );
-
-
     /* =====================================================
-       PLAYER OVERLAY (REKLAM ENGELLEME PERDESİ)
+       KULLANICI TIKLAYANA KADAR IFRAME HİÇ OLUŞMAZ
     ===================================================== */
 
     const overlay = document.createElement("div");
     overlay.className = "player-overlay";
-    overlay.title = "Oynatmak için tıklayın";
+    overlay.innerHTML = `
+        <div class="player-overlay-btn">▶</div>
+        <div class="player-overlay-text">YAYINI BAŞLATMAK İÇİN TIKLAYIN</div>
+    `;
 
     overlay.addEventListener("click", function(){
-        overlay.remove(); // İlk tıklandığında perde kalkar ve video normal kontrol edilir
+        overlay.remove();
+
+        const iframe =
+            document.createElement("iframe");
+
+        iframe.src =
+            url;
+
+        iframe.title =
+            "CREX yayın oynatıcı";
+
+        iframe.allow =
+            "autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope";
+
+        iframe.allowFullscreen =
+            true;
+
+        iframe.referrerPolicy =
+            "strict-origin-when-cross-origin";
+
+        iframe.loading =
+            "eager";
+
+        player.appendChild(
+            iframe
+        );
+
+        player.appendChild(
+            fullscreenButton
+        );
     });
 
     player.appendChild(overlay);
@@ -1915,10 +1958,6 @@ function createSecureEmbed(url){
             <path d="M16 21h3a2 2 0 0 1 2-2v-3"/>
         </svg>
     `;
-
-    player.appendChild(
-        fullscreenButton
-    );
 
 
     /* =====================================================
@@ -1972,17 +2011,20 @@ function createSecureEmbed(url){
 
             }
 
+            const iframeRef = player.querySelector("iframe");
             if(
-                iframe.requestFullscreen
+                iframeRef &&
+                iframeRef.requestFullscreen
             ){
 
-                await iframe.requestFullscreen();
+                await iframeRef.requestFullscreen();
 
             }else if(
-                iframe.webkitRequestFullscreen
+                iframeRef &&
+                iframeRef.webkitRequestFullscreen
             ){
 
-                iframe.webkitRequestFullscreen();
+                iframeRef.webkitRequestFullscreen();
 
             }
 
