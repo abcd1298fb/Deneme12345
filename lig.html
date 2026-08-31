@@ -1371,14 +1371,17 @@ body::before{
         );
 }
 
+/* HAFTA */
 .match-date{
-    color:#68778a;
+    color:#9aa8b8;
 
-    font-size:8px;
+    font-size:11px;
 
-    font-weight:800;
+    font-weight:900;
 
     line-height:1.4;
+
+    letter-spacing:.3px;
 }
 
 .watch-btn{
@@ -2470,38 +2473,29 @@ function getMatchDate(match){
 }
 
 
+/* =========================================================
+   HAFTA GÖSTERIMI
+   Tarih yerine maclar.json içindeki hafta değeri
+   gösterilir.
+   ========================================================= */
+
 function formatDate(match){
 
-    if(!match.tarih){
-
-        return "TARİH YOK";
-
-    }
-
-
-    let result =
-        formatSimpleDate(
-            match.tarih
-        );
-
-
     if(
-        match.saat &&
+        match.hafta &&
         String(
-            match.saat
+            match.hafta
         ).trim()
     ){
 
-        result +=
-            " • " +
-            String(
-                match.saat
-            ).trim();
+        return String(
+            match.hafta
+        ).trim();
 
     }
 
 
-    return result;
+    return "HAFTA YOK";
 
 }
 
@@ -3483,41 +3477,3 @@ function getInitials(name){
 
     if(
         words.length === 1
-    ){
-
-        return words[0]
-            .slice(0,3)
-            .toUpperCase();
-
-    }
-
-
-    return words
-        .slice(0,3)
-        .map(
-            word =>
-                word[0]
-        )
-        .join("")
-        .toUpperCase();
-
-}
-
-
-heroLogo.addEventListener(
-    "error",
-    ()=>{
-
-        heroLogo.style.display =
-            "none";
-
-    }
-);
-
-
-loadMatches();
-
-</script>
-
-</body>
-</html>
