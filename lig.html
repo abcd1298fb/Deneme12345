@@ -18,18 +18,13 @@
     --bg:#02050a;
     --panel:#080e16;
     --panel2:#0c141e;
-
     --blue:#1595ff;
     --blue2:#62c0ff;
-
     --white:#f7fbff;
     --text:#dce5ef;
     --muted:#718096;
-
     --line:rgba(255,255,255,.075);
-
-    --league:#1595ff;
-
+    --league:#9846d7;
     --ease:cubic-bezier(.16,1,.3,1);
 }
 
@@ -75,14 +70,11 @@ body{
     left:-260px;
     top:10%;
     border-radius:50%;
-
     background:var(--league);
     filter:blur(150px);
     opacity:.07;
-
     pointer-events:none;
     z-index:-5;
-
     animation:ambientMove 14s ease-in-out infinite alternate;
 }
 
@@ -93,14 +85,11 @@ body{
     right:-260px;
     bottom:0;
     border-radius:50%;
-
     background:#315dff;
     filter:blur(160px);
     opacity:.06;
-
     pointer-events:none;
     z-index:-5;
-
     animation:ambientMove2 16s ease-in-out infinite alternate;
 }
 
@@ -154,13 +143,9 @@ body::before{
     position:sticky;
     top:0;
     z-index:1000;
-
     height:74px;
-
     border-bottom:1px solid var(--line);
-
     background:rgba(2,6,11,.78);
-
     backdrop-filter:blur(25px) saturate(150%);
     -webkit-backdrop-filter:blur(25px) saturate(150%);
 }
@@ -177,17 +162,13 @@ body::before{
 
 .logo{
     position:relative;
-
     color:#fff;
     text-decoration:none;
-
     font-family:"Barlow Condensed",sans-serif;
     font-size:40px;
     line-height:1;
     font-weight:900;
-
     letter-spacing:2px;
-
     transition:.35s var(--ease);
 }
 
@@ -201,18 +182,13 @@ body::before{
 
 .logo::after{
     content:"";
-
     position:absolute;
     left:1px;
     bottom:-7px;
-
     width:30px;
     height:2px;
-
     border-radius:10px;
-
     background:var(--blue);
-
     box-shadow:0 0 14px var(--blue);
 }
 
@@ -226,13 +202,10 @@ body::before{
 .main-nav a{
     color:#718096;
     text-decoration:none;
-
     padding:11px 14px;
     border-radius:10px;
-
     font-size:10px;
     font-weight:900;
-
     transition:.3s var(--ease);
 }
 
@@ -290,10 +263,8 @@ body::before{
     width:100%;
     border:0;
     outline:0;
-
     color:#fff;
     background:transparent;
-
     font-family:inherit;
     font-size:10px;
 }
@@ -336,7 +307,6 @@ body::before{
         );
 
     box-shadow:0 30px 80px rgba(0,0,0,.35);
-
     isolation:isolate;
 }
 
@@ -344,7 +314,6 @@ body::before{
     content:"";
     position:absolute;
     inset:0;
-
     border-radius:inherit;
     pointer-events:none;
 
@@ -357,9 +326,7 @@ body::before{
         );
 
     transform:translateX(-100%);
-
     animation:heroShine 8s ease-in-out infinite;
-
     z-index:2;
 }
 
@@ -383,7 +350,6 @@ body::before{
 
 .hero-bg::before{
     content:"";
-
     position:absolute;
 
     width:550px;
@@ -418,7 +384,6 @@ body::before{
 
 .hero-bg::after{
     content:"";
-
     position:absolute;
 
     width:130%;
@@ -465,11 +430,9 @@ body::before{
     width:100%;
 
     display:grid;
-
     grid-template-columns:170px 1fr auto;
 
     align-items:center;
-
     gap:35px;
 
     padding:35px 45px;
@@ -491,7 +454,6 @@ body::before{
 
 .hero-logo-wrap::before{
     content:"";
-
     position:absolute;
     inset:15px;
 
@@ -819,7 +781,6 @@ body::before{
 
 .match-card::before{
     content:"";
-
     position:absolute;
     inset:0;
 
@@ -846,7 +807,6 @@ body::before{
 
 .match-card::after{
     content:"";
-
     position:absolute;
     inset:1px;
 
@@ -1508,9 +1468,7 @@ body::before{
     .hero-content{
         display:flex;
         flex-direction:column;
-
         text-align:center;
-
         padding:30px 20px;
     }
 
@@ -1584,9 +1542,7 @@ body::before{
 
     .footer{
         width:calc(100% - 24px);
-
         flex-direction:column;
-
         gap:10px;
     }
 
@@ -1685,12 +1641,10 @@ body::before{
 </style>
 </head>
 
-
 <body>
 
 <div class="ambient"></div>
 <div class="ambient2"></div>
-
 
 <header class="header">
 
@@ -1820,49 +1774,31 @@ CREX
 
 <div class="filters">
 
-<button
-    class="filter active"
-    data-filter="all"
->
+<button class="filter active" data-filter="all">
     TÜMÜ
 </button>
 
-<button
-    class="filter"
-    data-filter="upcoming"
->
+<button class="filter" data-filter="upcoming">
     GELECEK
 </button>
 
-<button
-    class="filter"
-    data-filter="finished"
->
+<button class="filter" data-filter="finished">
     TAMAMLANAN
 </button>
 
 </div>
 
-<div
-    id="resultCount"
-    class="result-count"
->
+<div id="resultCount" class="result-count">
     0 MAÇ
 </div>
 
 </div>
 
 
-<div
-    id="matchGrid"
-    class="matches"
-></div>
+<div id="matchGrid" class="matches"></div>
 
 
-<div
-    id="empty"
-    class="empty"
->
+<div id="empty" class="empty">
 
 <div class="empty-icon">
     ⚽
@@ -1879,10 +1815,7 @@ CREX
 </div>
 
 
-<div
-    id="loader"
-    class="loader"
->
+<div id="loader" class="loader">
 
 <div class="loader-ring"></div>
 
@@ -1909,75 +1842,55 @@ CREX
 <script>
 
 /* =========================================================
-   CREX OTOMATİK LİG SİSTEMİ
+   CREX LİG SİSTEMİ
+   GÜNCELLENMİŞ SÜRÜM
 ========================================================= */
 
+const params = new URLSearchParams(
+    window.location.search
+);
+
 
 /*
- * DESTEKLENEN URL'LER:
- *
- * lig.html?lig=premier-league
- * lig.html?lig=la-liga
- * lig.html?lig=serie-a
- * lig.html?lig=bundesliga
- * lig.html?lig=ligue-1
- * lig.html?lig=super-lig
- *
- * lig.html?lig=champions-league
- * lig.html?lig=europa-league
- * lig.html?lig=conference-league
- *
- * Türkçe alternatifler de desteklenir:
- *
- * lig.html?lig=sampiyonlar-ligi
- * lig.html?lig=avrupa-ligi
- * lig.html?lig=konferans-ligi
+ * Artık hem ?lig= hem de ?league=
+ * destekleniyor.
  */
 
-
-const params =
-    new URLSearchParams(
-        window.location.search
-    );
-
-
 const requestedLeague =
-    params.get("lig");
+    params.get("lig") ||
+    params.get("league");
 
 
 /*
- * URL'de lig belirtilmemişse
- * Premier League varsayılan olur.
+ * Parametre yoksa Premier League.
  *
- * ÖNEMLİ:
- * URL'de lig belirtilmiş fakat geçersizse
- * artık Premier League açılmaz.
+ * Parametre varsa ama tanınmıyorsa
+ * "Lig bulunamadı" gösterilir.
  */
 
 const leagueSlug =
     requestedLeague &&
     String(requestedLeague).trim()
-        ? requestedLeague
+        ? String(requestedLeague).trim()
         : "premier-league";
 
 
 /*
- * Lig sayfasında maksimum 10 maç.
+ * Maksimum 10 maç.
  */
 
 const MAX_MATCHES = 10;
 
 
 /*
- * Logo cache sürümü.
+ * Logo cache.
  */
 
-const LOGO_VERSION =
-    "20260901";
+const LOGO_VERSION = "20260901";
 
 
 /* =========================================================
-   9 LİG
+   LİGLER
 ========================================================= */
 
 const leagues = {
@@ -1989,11 +1902,39 @@ const leagues = {
         country:"İngiltere",
 
         aliases:[
+
             "premier league",
             "premierleague",
             "premier-league",
+
+            /* Türkçe */
+            "premier lig",
+            "premier ligi",
+            "premier-lig",
+            "premier-ligi",
+
+            /* İngilizce */
             "england premier league",
-            "ingiltere premier league"
+            "england-premier-league",
+            "england premier",
+            "english premier league",
+
+            /* Türkçe ülke */
+            "ingiltere premier league",
+            "ingiltere premier lig",
+            "ingiltere premier ligi",
+            "ingiltere-premier-ligi",
+            "ingiltere-premier-lig",
+
+            /* Kısa adlar */
+            "epl",
+            "pl",
+
+            /* Muhtemel ID / link değerleri */
+            "premier",
+            "premier_league",
+            "premierleague-england"
+
         ],
 
         logo:
@@ -2011,11 +1952,14 @@ const leagues = {
         country:"İspanya",
 
         aliases:[
+
             "la liga",
             "laliga",
             "la-liga",
+            "la_liga",
             "spain la liga",
             "ispanya la liga"
+
         ],
 
         logo:
@@ -2033,11 +1977,14 @@ const leagues = {
         country:"İtalya",
 
         aliases:[
+
             "serie a",
             "seriea",
             "serie-a",
+            "serie_a",
             "italy serie a",
             "italya serie a"
+
         ],
 
         logo:
@@ -2055,9 +2002,11 @@ const leagues = {
         country:"Almanya",
 
         aliases:[
+
             "bundesliga",
             "germany bundesliga",
             "almanya bundesliga"
+
         ],
 
         logo:
@@ -2075,11 +2024,14 @@ const leagues = {
         country:"Fransa",
 
         aliases:[
+
             "ligue 1",
             "ligue1",
             "ligue-1",
+            "ligue_1",
             "france ligue 1",
             "fransa ligue 1"
+
         ],
 
         logo:
@@ -2097,13 +2049,17 @@ const leagues = {
         country:"Türkiye",
 
         aliases:[
+
             "süper lig",
             "super lig",
             "superlig",
             "super-lig",
+            "super_lig",
             "turkey super lig",
             "turkiye super lig",
-            "türkiye süper lig"
+            "türkiye süper lig",
+            "türkiye süper ligi"
+
         ],
 
         logo:
@@ -2113,10 +2069,6 @@ const leagues = {
 
     },
 
-
-    /* =====================================================
-       ŞAMPİYONLAR LİGİ
-    ===================================================== */
 
     "champions-league":{
 
@@ -2129,9 +2081,9 @@ const leagues = {
             "champions league",
             "championsleague",
             "champions-league",
+            "champions_league",
             "uefa champions league",
 
-            /* Türkçe */
             "şampiyonlar ligi",
             "sampiyonlar ligi",
             "şampiyonlar-ligi",
@@ -2139,7 +2091,6 @@ const leagues = {
             "şampiyonlar",
             "sampiyonlar",
 
-            /* Alternatif */
             "ucl",
             "uefa champions"
 
@@ -2153,10 +2104,6 @@ const leagues = {
     },
 
 
-    /* =====================================================
-       AVRUPA LİGİ
-    ===================================================== */
-
     "europa-league":{
 
         name:"Europa League",
@@ -2168,15 +2115,14 @@ const leagues = {
             "europa league",
             "europaleague",
             "europa-league",
+            "europa_league",
             "uefa europa league",
 
-            /* Türkçe */
             "avrupa ligi",
             "avrupa-ligi",
             "avrupa",
             "uefa avrupa ligi",
 
-            /* Alternatif */
             "uel",
             "uefa europa"
 
@@ -2190,10 +2136,6 @@ const leagues = {
     },
 
 
-    /* =====================================================
-       KONFERANS LİGİ
-    ===================================================== */
-
     "conference-league":{
 
         name:"Conference League",
@@ -2205,17 +2147,16 @@ const leagues = {
             "conference league",
             "conferenceleague",
             "conference-league",
+            "conference_league",
             "uefa conference league",
             "europa conference league",
 
-            /* Türkçe */
             "konferans ligi",
             "konferans-ligi",
             "konferans",
             "uefa konferans ligi",
             "avrupa konferans ligi",
 
-            /* Alternatif */
             "uecl",
             "uefa conference"
 
@@ -2232,35 +2173,35 @@ const leagues = {
 
 
 /* =========================================================
-   LİGİ BUL
+   METİN NORMALİZASYONU
 ========================================================= */
 
 function normalizeText(value){
 
-    return String(
-        value ?? ""
-    )
-    .normalize("NFD")
-    .replace(
-        /[\u0300-\u036f]/g,
-        ""
-    )
-    .toLocaleLowerCase(
-        "tr-TR"
-    )
-    .replaceAll("ı","i")
-    .replaceAll("ş","s")
-    .replaceAll("ğ","g")
-    .replaceAll("ü","u")
-    .replaceAll("ö","o")
-    .replaceAll("ç","c")
-    .replace(
-        /[^a-z0-9]/g,
-        ""
-    );
+    return String(value ?? "")
+        .normalize("NFD")
+        .replace(
+            /[\u0300-\u036f]/g,
+            ""
+        )
+        .toLocaleLowerCase("tr-TR")
+        .replaceAll("ı","i")
+        .replaceAll("ş","s")
+        .replaceAll("ğ","g")
+        .replaceAll("ü","u")
+        .replaceAll("ö","o")
+        .replaceAll("ç","c")
+        .replace(
+            /[^a-z0-9]/g,
+            ""
+        );
 
 }
 
+
+/* =========================================================
+   LİG ÇÖZÜMLEME
+========================================================= */
 
 function resolveLeagueSlug(value){
 
@@ -2268,12 +2209,13 @@ function resolveLeagueSlug(value){
         normalizeText(value);
 
 
-    if(!normalized)
+    if(!normalized){
         return null;
+    }
 
 
     /*
-     * Önce doğrudan slug kontrolü.
+     * 1 — Direkt slug kontrolü
      */
 
     for(
@@ -2294,7 +2236,7 @@ function resolveLeagueSlug(value){
 
 
     /*
-     * Sonra alias kontrolü.
+     * 2 — Alias kontrolü
      */
 
     for(
@@ -2317,13 +2259,45 @@ function resolveLeagueSlug(value){
     }
 
 
+    /*
+     * 3 — Premier League için
+     * ekstra toleranslı kontrol.
+     */
+
+    const premierKeywords = [
+
+        "premier",
+        "premierleague",
+        "premierlig",
+        "premierligi",
+        "epl",
+        "englandpremier",
+        "ingilterepremier"
+
+    ];
+
+
+    if(
+        premierKeywords.some(
+            keyword =>
+                normalized.includes(
+                    keyword
+                )
+        )
+    ){
+
+        return "premier-league";
+
+    }
+
+
     return null;
 
 }
 
 
 /* =========================================================
-   URL'DEKİ LİGİ ÇÖZ
+   URL LİGİNİ BUL
 ========================================================= */
 
 const resolvedSlug =
@@ -2331,14 +2305,6 @@ const resolvedSlug =
         leagueSlug
     );
 
-
-/*
- * Eğer URL'de lig parametresi yoksa
- * Premier League kullan.
- *
- * Eğer parametre VAR ama geçersizse
- * artık Premier League kullanma.
- */
 
 const league =
     resolvedSlug
@@ -2427,7 +2393,8 @@ if(!league){
         "none";
 
 
-    matchGrid.innerHTML = "";
+    matchGrid.innerHTML =
+        "";
 
 
     resultCount.textContent =
@@ -2475,9 +2442,19 @@ if(!league){
         "show"
     );
 
-
 }
 else{
+
+    /* =====================================================
+       LİG RENKLERİ
+    ===================================================== */
+
+    document.documentElement.style
+        .setProperty(
+            "--league",
+            league.color
+        );
+
 
     /* =====================================================
        BAŞLIK
@@ -2488,10 +2465,6 @@ else{
         league.name;
 
 
-    /* =====================================================
-       LİG HERO
-    ===================================================== */
-
     leagueTitle.textContent =
         league.name;
 
@@ -2499,6 +2472,52 @@ else{
     leagueCountry.textContent =
         league.country +
         " • CREX MAÇ MERKEZİ";
+
+
+    /* =====================================================
+       HERO LOGO
+    ===================================================== */
+
+    function addLogoCache(url){
+
+        if(!url){
+            return "";
+        }
+
+
+        const cleanUrl =
+            String(url).trim();
+
+
+        if(!cleanUrl){
+            return "";
+        }
+
+
+        if(
+            cleanUrl.startsWith("data:") ||
+            cleanUrl.startsWith("blob:")
+        ){
+
+            return cleanUrl;
+
+        }
+
+
+        const separator =
+            cleanUrl.includes("?")
+                ? "&"
+                : "?";
+
+
+        return (
+            cleanUrl +
+            separator +
+            "v=" +
+            LOGO_VERSION
+        );
+
+    }
 
 
     if(league.logo){
@@ -2540,51 +2559,6 @@ else{
 
 
     /* =====================================================
-       LOGO CACHE
-    ===================================================== */
-
-    function addLogoCache(url){
-
-        if(!url)
-            return "";
-
-
-        const cleanUrl =
-            String(url)
-            .trim();
-
-
-        if(!cleanUrl)
-            return "";
-
-
-        if(
-            cleanUrl.startsWith("data:") ||
-            cleanUrl.startsWith("blob:")
-        ){
-
-            return cleanUrl;
-
-        }
-
-
-        const separator =
-            cleanUrl.includes("?")
-                ? "&"
-                : "?";
-
-
-        return (
-            cleanUrl +
-            separator +
-            "v=" +
-            LOGO_VERSION
-        );
-
-    }
-
-
-    /* =====================================================
        TAKIM LOGOLARI
     ===================================================== */
 
@@ -2599,6 +2573,7 @@ else{
                     match.evLogo ||
                     match.homeLogo ||
                     match.ev_logo ||
+                    match.home_logo ||
                     ""
                 ),
 
@@ -2607,6 +2582,7 @@ else{
                     match.depLogo ||
                     match.awayLogo ||
                     match.dep_logo ||
+                    match.away_logo ||
                     ""
                 )
 
@@ -2616,7 +2592,7 @@ else{
 
 
     /* =====================================================
-       MAC DURUMU
+       MAÇ DURUMU
     ===================================================== */
 
     function getMatchStatus(match){
@@ -2639,9 +2615,11 @@ else{
             "tamamlandı",
             "tamamlandi",
             "finished",
+            "finish",
             "bitti",
             "bitmiş",
-            "bitmis"
+            "bitmis",
+            "ended"
 
         ];
 
@@ -2663,7 +2641,10 @@ else{
             "canli",
             "live",
             "yayında",
-            "yayinda"
+            "yayinda",
+            "playing",
+            "inplay",
+            "in-play"
 
         ];
 
@@ -2685,7 +2666,9 @@ else{
             "yaklaşıyor",
             "yaklasiyor",
             "upcoming",
-            "scheduled"
+            "scheduled",
+            "not started",
+            "bekliyor"
 
         ];
 
@@ -2707,8 +2690,9 @@ else{
             );
 
 
-        if(!date)
+        if(!date){
             return "upcoming";
+        }
 
 
         return date < new Date()
@@ -2727,11 +2711,13 @@ else{
         const rawDate =
             match.tarih ||
             match.date ||
-            match.matchDate;
+            match.matchDate ||
+            match.match_date;
 
 
-        if(!rawDate)
+        if(!rawDate){
             return null;
+        }
 
 
         const dateValue =
@@ -2740,8 +2726,9 @@ else{
             ).trim();
 
 
-        if(!dateValue)
+        if(!dateValue){
             return null;
+        }
 
 
         let dateString =
@@ -2759,11 +2746,17 @@ else{
             String(rawTime).trim()
         ){
 
-            dateString +=
-                "T" +
-                String(
-                    rawTime
-                ).trim();
+            if(
+                !dateString.includes("T")
+            ){
+
+                dateString +=
+                    "T" +
+                    String(
+                        rawTime
+                    ).trim();
+
+            }
 
         }
         else if(
@@ -2799,7 +2792,7 @@ else{
 
 
     /* =====================================================
-       HAFTA / TARİH
+       TARİH GÖSTER
     ===================================================== */
 
     function formatDate(match){
@@ -2846,14 +2839,41 @@ else{
         }
 
 
+        if(
+            match.saat &&
+            String(
+                match.saat
+            ).trim()
+        ){
+
+            return String(
+                match.saat
+            ).trim();
+
+        }
+
+
         return "TARİH YOK";
 
     }
 
 
-    /* =====================================================
-       LİG KONTROL
-    ===================================================== */
+    /* =========================================================
+       GELİŞMİŞ LİG KONTROLÜ
+       
+       Premier League hatasını düzeltmek için:
+       - lig
+       - ligAdi
+       - league
+       - leagueName
+       - leagueSlug
+       - league_id
+       - leagueId
+       - tournament
+       - competition
+       - competitionName
+       alanlarının tamamı kontrol edilir.
+    ========================================================= */
 
     function isCorrectLeague(match){
 
@@ -2861,9 +2881,21 @@ else{
 
             match.lig,
             match.ligAdi,
+
             match.league,
             match.leagueName,
-            match.leagueSlug
+            match.leagueSlug,
+
+            match.league_id,
+            match.leagueId,
+
+            match.tournament,
+            match.tournamentName,
+
+            match.competition,
+            match.competitionName,
+
+            match.organizer
 
         ]
         .filter(
@@ -2873,15 +2905,6 @@ else{
                 String(value).trim() !== ""
         );
 
-
-        const targetSlug =
-            resolvedSlug;
-
-
-        /*
-         * JSON'da lig bilgisi yoksa
-         * maçı bu ligde gösterme.
-         */
 
         if(
             matchValues.length === 0
@@ -2895,16 +2918,66 @@ else{
         return matchValues.some(
             value => {
 
+                const valueString =
+                    String(
+                        value
+                    ).trim();
+
+
                 const matchSlug =
                     resolveLeagueSlug(
-                        value
+                        valueString
                     );
 
 
-                return (
+                if(
                     matchSlug ===
-                    targetSlug
-                );
+                    resolvedSlug
+                ){
+
+                    return true;
+
+                }
+
+
+                /*
+                 * Premier League özel kontrol.
+                 */
+
+                if(
+                    resolvedSlug ===
+                    "premier-league"
+                ){
+
+                    const normalized =
+                        normalizeText(
+                            valueString
+                        );
+
+
+                    return (
+
+                        normalized.includes(
+                            "premierleague"
+                        ) ||
+
+                        normalized.includes(
+                            "premierlig"
+                        ) ||
+
+                        normalized.includes(
+                            "premierligi"
+                        ) ||
+
+                        normalized ===
+                            "epl"
+
+                    );
+
+                }
+
+
+                return false;
 
             }
         );
@@ -2913,7 +2986,7 @@ else{
 
 
     /* =====================================================
-       MACLARI YÜKLE
+       MAÇLARI YÜKLE
     ===================================================== */
 
     async function loadMatches(){
@@ -3022,6 +3095,7 @@ else{
 
             applyFilters();
 
+
         }
         catch(error){
 
@@ -3035,7 +3109,8 @@ else{
 
             filteredMatches = [];
 
-            matchGrid.innerHTML = "";
+            matchGrid.innerHTML =
+                "";
 
 
             leagueCountry.textContent =
@@ -3125,18 +3200,26 @@ else{
                         status === currentFilter;
 
 
-                    if(!filterOK)
+                    if(!filterOK){
                         return false;
+                    }
 
 
-                    if(!query)
+                    if(!query){
                         return true;
+                    }
 
 
                     const searchable = [
 
                         match.evSahibi,
                         match.deplasman,
+
+                        match.homeTeam,
+                        match.awayTeam,
+
+                        match.home,
+                        match.away,
 
                         match.evKisa,
                         match.depKisa,
@@ -3170,10 +3253,6 @@ else{
                 }
             );
 
-
-        /*
-         * Maksimum 10 maç.
-         */
 
         filteredMatches =
             results.slice(
@@ -3215,7 +3294,8 @@ else{
 
     function renderMatches(){
 
-        matchGrid.innerHTML = "";
+        matchGrid.innerHTML =
+            "";
 
 
         if(
@@ -3264,14 +3344,12 @@ else{
                             [
                                 {
                                     opacity:0,
-
                                     transform:
                                         "translateY(25px) scale(.96)"
                                 },
 
                                 {
                                     opacity:1,
-
                                     transform:
                                         "translateY(0) scale(1)"
                                 }
@@ -3307,7 +3385,7 @@ else{
 
 
     /* =====================================================
-       MAC KARTI
+       MAÇ KARTI
     ===================================================== */
 
     function createMatchCard(match){
@@ -3526,12 +3604,9 @@ else{
 
             <div class="card-glow"></div>
 
-
             <div class="match-content">
 
-
                 <div class="match-top">
-
 
                     <div class="match-league-tag">
 
@@ -3543,22 +3618,18 @@ else{
 
                     </div>
 
-
                     <div class="match-status">
 
                         ${statusText}
 
                     </div>
 
-
                 </div>
 
 
                 <div class="teams">
 
-
                     <div class="team">
-
 
                         <div class="team-logo">
 
@@ -3566,9 +3637,7 @@ else{
 
                         </div>
 
-
                         ${homeScoreHtml}
-
 
                         <div class="team-name">
 
@@ -3578,7 +3647,6 @@ else{
 
                         </div>
 
-
                     </div>
 
 
@@ -3587,16 +3655,13 @@ else{
 
                     <div class="team">
 
-
                         <div class="team-logo">
 
                             ${awayLogoHTML}
 
                         </div>
 
-
                         ${awayScoreHtml}
-
 
                         <div class="team-name">
 
@@ -3606,15 +3671,12 @@ else{
 
                         </div>
 
-
                     </div>
-
 
                 </div>
 
 
                 <div class="match-bottom">
-
 
                     <div class="match-date">
 
@@ -3640,9 +3702,7 @@ else{
 
                     </a>
 
-
                 </div>
-
 
             </div>
 
@@ -3663,8 +3723,9 @@ else{
         fallbackText
     ){
 
-        if(!img)
+        if(!img){
             return;
+        }
 
 
         img.onerror =
@@ -3675,8 +3736,9 @@ else{
             img.parentElement;
 
 
-        if(!parent)
+        if(!parent){
             return;
+        }
 
 
         img.remove();
@@ -3707,8 +3769,9 @@ else{
             .filter(Boolean);
 
 
-        if(!words.length)
+        if(!words.length){
             return "TEAM";
+        }
 
 
         if(words.length === 1){
@@ -3816,7 +3879,7 @@ else{
 
 
     /* =====================================================
-       FİLTRE BUTONLARI
+       FİLTRE
     ===================================================== */
 
     document
@@ -3874,8 +3937,9 @@ else{
                 );
 
 
-            if(!card)
+            if(!card){
                 return;
+            }
 
 
             const rect =
@@ -3938,20 +4002,18 @@ else{
 
 
     /* =====================================================
-       URL KONTROL
+       DEBUG
     ===================================================== */
 
-    if(
-        requestedLeague &&
-        !resolvedSlug
-    ){
-
-        console.warn(
-            "CREX: Tanımsız lig:",
-            requestedLeague
-        );
-
-    }
+    console.log(
+        "CREX Lig:",
+        {
+            requestedLeague,
+            leagueSlug,
+            resolvedSlug,
+            league:league.name
+        }
+    );
 
 
     /* =====================================================
