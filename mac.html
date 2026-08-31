@@ -1826,7 +1826,10 @@ function createSecureEmbed(url){
     iframe.title =
         "CREX yayın oynatıcı";
 
-    // Sandbox tamamen kaldırıldı, doğrudan tam yetki ve standart izinler tanımlandı
+    // Sandbox eklendi: allow-popups ve allow-top-navigation hariç tutularak yönlendirmeler mühürlendi
+    iframe.sandbox =
+        "allow-scripts allow-same-origin allow-presentation allow-forms";
+
     iframe.allow =
         "autoplay; fullscreen; picture-in-picture; encrypted-media; accelerometer; gyroscope";
 
