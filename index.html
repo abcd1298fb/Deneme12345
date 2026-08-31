@@ -58,10 +58,6 @@ body{
     font-family:"Manrope",sans-serif;
 }
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
 body::before{
     content:"";
     position:fixed;
@@ -372,10 +368,6 @@ body::before{
     margin:45px auto 0;
 }
 
-/* =========================================================
-   SECTION HEADER
-========================================================= */
-
 .section-head{
     display:flex;
     justify-content:space-between;
@@ -452,10 +444,6 @@ body::before{
     gap:17px;
 }
 
-/* =========================================================
-   MODERN MATCH CARD
-========================================================= */
-
 .match-card{
     position:relative;
     min-height:310px;
@@ -487,7 +475,6 @@ body::before{
 }
 
 @keyframes cardIn{
-
     from{
         opacity:0;
         transform:
@@ -499,44 +486,17 @@ body::before{
         opacity:1;
         transform:none;
     }
-
 }
 
-.match-card:nth-child(2){
-    animation-delay:.06s;
-}
-
-.match-card:nth-child(3){
-    animation-delay:.12s;
-}
-
-.match-card:nth-child(4){
-    animation-delay:.18s;
-}
-
-.match-card:nth-child(5){
-    animation-delay:.24s;
-}
-
-.match-card:nth-child(6){
-    animation-delay:.30s;
-}
-
-.match-card:nth-child(7){
-    animation-delay:.36s;
-}
-
-.match-card:nth-child(8){
-    animation-delay:.42s;
-}
-
-.match-card:nth-child(9){
-    animation-delay:.48s;
-}
-
-.match-card:nth-child(10){
-    animation-delay:.54s;
-}
+.match-card:nth-child(2){animation-delay:.06s}
+.match-card:nth-child(3){animation-delay:.12s}
+.match-card:nth-child(4){animation-delay:.18s}
+.match-card:nth-child(5){animation-delay:.24s}
+.match-card:nth-child(6){animation-delay:.30s}
+.match-card:nth-child(7){animation-delay:.36s}
+.match-card:nth-child(8){animation-delay:.42s}
+.match-card:nth-child(9){animation-delay:.48s}
+.match-card:nth-child(10){animation-delay:.54s}
 
 .match-card:hover{
     transform:
@@ -551,8 +511,6 @@ body::before{
         0 0 45px rgba(21,149,255,.09),
         inset 0 1px 0 rgba(255,255,255,.08);
 }
-
-/* üst ışık */
 
 .match-card:before{
     content:"";
@@ -582,8 +540,6 @@ body::before{
     opacity:.75;
 }
 
-/* mouse glow */
-
 .match-card .mouse-glow{
     position:absolute;
     width:180px;
@@ -607,8 +563,6 @@ body::before{
 .match-card:hover .mouse-glow{
     opacity:1;
 }
-
-/* üst çizgi */
 
 .match-card .card-glow{
     position:absolute;
@@ -643,8 +597,6 @@ body::before{
     opacity:1;
 }
 
-/* numara */
-
 .match-number{
     position:absolute;
     right:-5px;
@@ -666,24 +618,15 @@ body::before{
     transform:translateX(-5px);
 }
 
-/* =========================================================
-   MATCH CONTENT
-========================================================= */
-
 .match-content{
     position:relative;
     z-index:3;
-
     min-height:310px;
     padding:19px;
 
     display:flex;
     flex-direction:column;
 }
-
-/* =========================================================
-   TOP
-========================================================= */
 
 .match-top{
     display:flex;
@@ -705,8 +648,7 @@ body::before{
     border:1px solid rgba(255,255,255,.065);
     border-radius:9px;
 
-    background:
-        rgba(255,255,255,.025);
+    background:rgba(255,255,255,.025);
 
     font-size:8px;
     font-weight:900;
@@ -726,17 +668,14 @@ body::before{
         0 0 9px var(--blue),
         0 0 15px rgba(21,149,255,.4);
 
-    animation:
-        liveDot 1.5s infinite;
+    animation:liveDot 1.5s infinite;
 }
 
 @keyframes liveDot{
-
     50%{
         transform:scale(1.7);
         opacity:.5;
     }
-
 }
 
 .match-status{
@@ -748,17 +687,12 @@ body::before{
 
     border-radius:8px;
 
-    background:
-        rgba(21,149,255,.055);
+    background:rgba(21,149,255,.055);
 
     font-size:8px;
     font-weight:900;
     letter-spacing:1px;
 }
-
-/* =========================================================
-   TEAMS
-========================================================= */
 
 .teams{
     flex:1;
@@ -778,7 +712,6 @@ body::before{
     flex-direction:column;
     align-items:center;
     gap:10px;
-
     min-width:0;
 }
 
@@ -888,10 +821,6 @@ body::before{
     font-weight:800;
 }
 
-/* =========================================================
-   VS
-========================================================= */
-
 .vs{
     position:relative;
 
@@ -937,13 +866,8 @@ body::before{
         );
 }
 
-.vs:before{
-    left:-8px;
-}
-
-.vs:after{
-    right:-8px;
-}
+.vs:before{left:-8px}
+.vs:after{right:-8px}
 
 .match-card:hover .vs{
     color:#fff;
@@ -952,10 +876,6 @@ body::before{
         0 0 20px rgba(21,149,255,.09),
         inset 0 0 15px rgba(21,149,255,.04);
 }
-
-/* =========================================================
-   MATCH INFO
-========================================================= */
 
 .match-bottom{
     display:flex;
@@ -968,13 +888,10 @@ body::before{
     border-top:1px solid rgba(255,255,255,.055);
 }
 
-/* HAFTA */
-
 .match-week{
     display:flex;
     flex-direction:column;
     gap:3px;
-
     min-width:82px;
 }
 
@@ -1000,8 +917,6 @@ body::before{
     text-transform:uppercase;
 }
 
-/* TARİH */
-
 .match-date{
     display:flex;
     flex-direction:column;
@@ -1023,11 +938,6 @@ body::before{
     font-weight:900;
     letter-spacing:1.2px;
 }
-
-
-/* =========================================================
-   WATCH BUTTON — GÜNCELLENDİ
-========================================================= */
 
 .watch-btn{
     position:relative;
@@ -1078,9 +988,6 @@ body::before{
         filter .35s;
 }
 
-
-/* parlak üst çizgi */
-
 .watch-btn:after{
     content:"";
 
@@ -1102,9 +1009,6 @@ body::before{
 
     opacity:.7;
 }
-
-
-/* ışık geçişi */
 
 .watch-btn:before{
     content:"";
@@ -1133,9 +1037,6 @@ body::before{
     pointer-events:none;
 }
 
-
-/* hover */
-
 .watch-btn:hover{
     transform:
         translateY(-4px)
@@ -1154,13 +1055,9 @@ body::before{
         0 1px 0 rgba(255,255,255,.25) inset;
 }
 
-
 .watch-btn:hover:before{
     left:135%;
 }
-
-
-/* tıklama */
 
 .watch-btn:active{
     transform:
@@ -1171,26 +1068,15 @@ body::before{
         0 7px 18px rgba(21,149,255,.22);
 }
 
-
-/* ok animasyonu */
-
 .watch-btn{
     text-shadow:
         0 1px 3px rgba(0,0,0,.25);
 }
 
-
-/* yayın yok butonu mevcut yapısını korur */
-
 .watch-btn[style*="opacity"]{
     box-shadow:none;
     filter:none;
 }
-
-
-/* =========================================================
-   LOADING
-========================================================= */
 
 .loading-box{
     grid-column:1 / -1;
@@ -1208,8 +1094,7 @@ body::before{
     border:1px solid rgba(255,255,255,.06);
     border-radius:20px;
 
-    background:
-        rgba(255,255,255,.018);
+    background:rgba(255,255,255,.018);
 
     font-size:10px;
     font-weight:800;
@@ -1224,8 +1109,7 @@ body::before{
 
     border-radius:50%;
 
-    animation:
-        spin .8s linear infinite;
+    animation:spin .8s linear infinite;
 
     box-shadow:
         0 0 20px rgba(21,149,255,.15);
@@ -1236,10 +1120,6 @@ body::before{
         transform:rotate(360deg);
     }
 }
-
-/* =========================================================
-   ERROR
-========================================================= */
 
 .error-box{
     grid-column:1 / -1;
@@ -1588,43 +1468,15 @@ body::before{
         );
 }
 
-/* league colors */
-
-.premier{
-    --league:#9846d7;
-}
-
-.laliga{
-    --league:#ef4937;
-}
-
-.seriea{
-    --league:#168cff;
-}
-
-.bundesliga{
-    --league:#e51c35;
-}
-
-.ligue1{
-    --league:#159fe8;
-}
-
-.superlig{
-    --league:#e51d3b;
-}
-
-.champions{
-    --league:#426dff;
-}
-
-.europa{
-    --league:#ff7417;
-}
-
-.conference{
-    --league:#18b98b;
-}
+.premier{--league:#9846d7}
+.laliga{--league:#ef4937}
+.seriea{--league:#168cff}
+.bundesliga{--league:#e51c35}
+.ligue1{--league:#159fe8}
+.superlig{--league:#e51d3b}
+.champions{--league:#426dff}
+.europa{--league:#ff7417}
+.conference{--league:#18b98b}
 
 /* =========================================================
    FOOTER
@@ -1658,15 +1510,10 @@ body::before{
     letter-spacing:2px;
 }
 
-/* =========================================================
-   REVEAL
-========================================================= */
-
 .reveal{
     opacity:0;
 
-    transform:
-        translateY(30px);
+    transform:translateY(30px);
 
     transition:
         opacity .8s var(--ease),
@@ -1767,11 +1614,6 @@ body::before{
         font-size:10px;
     }
 
-
-    /* =====================================================
-       MOBİL WATCH BUTTON — BÜYÜK
-    ===================================================== */
-
     .watch-btn{
         min-width:112px;
         height:43px;
@@ -1790,7 +1632,6 @@ body::before{
             translateY(-2px)
             scale(1.02);
     }
-
 
     .leagues{
         grid-template-columns:
@@ -1872,9 +1713,6 @@ body::before{
         font-size:9px;
     }
 
-
-    /* küçük ekranlarda da buton ezilmesin */
-
     .watch-btn{
         min-width:106px;
         height:42px;
@@ -1903,21 +1741,17 @@ body::before{
 <div class="ambient"></div>
 <div class="ambient2"></div>
 
-<!-- =======================================================
-     HEADER
-======================================================= -->
-
 <header class="header">
 
 <div class="header-inner">
 
-<a href="index.html" class="logo">
+<a href="/" class="logo">
     CR<span>EX</span>
 </a>
 
 <nav class="main-nav">
 
-<a href="index.html" class="active">
+<a href="/" class="active">
     ANA SAYFA
 </a>
 
@@ -1963,7 +1797,7 @@ body::before{
 
 <div class="league-scroll" id="leagueScroll">
 
-<a href="lig.html?lig=premier-league"
+<a href="/lig/premier-lig"
    class="league-link active"
    style="--lc:#9846d7">
 
@@ -1977,7 +1811,7 @@ body::before{
 
 </a>
 
-<a href="lig.html?lig=la-liga"
+<a href="/lig/la-liga"
    class="league-link"
    style="--lc:#ef4937">
 
@@ -1991,7 +1825,7 @@ body::before{
 
 </a>
 
-<a href="lig.html?lig=serie-a"
+<a href="/lig/serie-a"
    class="league-link"
    style="--lc:#168cff">
 
@@ -2005,7 +1839,7 @@ body::before{
 
 </a>
 
-<a href="lig.html?lig=bundesliga"
+<a href="/lig/bundesliga"
    class="league-link"
    style="--lc:#e51c35">
 
@@ -2019,7 +1853,7 @@ body::before{
 
 </a>
 
-<a href="lig.html?lig=ligue-1"
+<a href="/lig/ligue-1"
    class="league-link"
    style="--lc:#159fe8">
 
@@ -2033,7 +1867,7 @@ body::before{
 
 </a>
 
-<a href="lig.html?lig=super-lig"
+<a href="/lig/super-lig"
    class="league-link"
    style="--lc:#e51d3b">
 
@@ -2047,7 +1881,7 @@ body::before{
 
 </a>
 
-<a href="lig.html?lig=champions-league"
+<a href="/lig/sampiyonlar-ligi"
    class="league-link"
    style="--lc:#426dff">
 
@@ -2061,7 +1895,7 @@ body::before{
 
 </a>
 
-<a href="lig.html?lig=europa-league"
+<a href="/lig/europa-ligi"
    class="league-link"
    style="--lc:#ff7417">
 
@@ -2075,7 +1909,7 @@ body::before{
 
 </a>
 
-<a href="lig.html?lig=conference-league"
+<a href="/lig/conference-ligi"
    class="league-link"
    style="--lc:#18b98b">
 
@@ -2093,10 +1927,6 @@ body::before{
 
 </div>
 
-
-<!-- =======================================================
-     MAIN
-======================================================= -->
 
 <main class="main">
 
@@ -2142,10 +1972,6 @@ TÜM MAÇLAR →
 </section>
 
 
-<!-- =======================================================
-     LEAGUES
-======================================================= -->
-
 <section id="leagues" class="leagues-section reveal">
 
 <div class="section-head">
@@ -2173,19 +1999,15 @@ Bir lige gir ve karşılaşmaları keşfet
 <div class="leagues">
 
 
-<!-- PREMIER -->
-
 <a
-href="lig.html?lig=premier-league"
+href="/lig/premier-lig"
 class="league-card premier">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-01
-</div>
+<div class="league-index">01</div>
 
 <div class="league-country">
 ENGLAND
@@ -2213,13 +2035,9 @@ Premier<br>League
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2230,19 +2048,15 @@ LİGE GİT
 </a>
 
 
-<!-- LA LIGA -->
-
 <a
-href="lig.html?lig=la-liga"
+href="/lig/la-liga"
 class="league-card laliga">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-02
-</div>
+<div class="league-index">02</div>
 
 <div class="league-country">
 SPAIN
@@ -2270,13 +2084,9 @@ La<br>Liga
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2287,19 +2097,15 @@ LİGE GİT
 </a>
 
 
-<!-- SERIE A -->
-
 <a
-href="lig.html?lig=serie-a"
+href="/lig/serie-a"
 class="league-card seriea">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-03
-</div>
+<div class="league-index">03</div>
 
 <div class="league-country">
 ITALY
@@ -2327,13 +2133,9 @@ Serie<br>A
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2344,19 +2146,15 @@ LİGE GİT
 </a>
 
 
-<!-- BUNDESLIGA -->
-
 <a
-href="lig.html?lig=bundesliga"
+href="/lig/bundesliga"
 class="league-card bundesliga">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-04
-</div>
+<div class="league-index">04</div>
 
 <div class="league-country">
 GERMANY
@@ -2384,13 +2182,9 @@ Almanya'nın en üst düzey futbol ligi.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2401,19 +2195,15 @@ LİGE GİT
 </a>
 
 
-<!-- LIGUE 1 -->
-
 <a
-href="lig.html?lig=ligue-1"
+href="/lig/ligue-1"
 class="league-card ligue1">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-05
-</div>
+<div class="league-index">05</div>
 
 <div class="league-country">
 FRANCE
@@ -2441,13 +2231,9 @@ Fransa'nın en üst düzey futbol ligi.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2458,19 +2244,15 @@ LİGE GİT
 </a>
 
 
-<!-- SUPER LIG -->
-
 <a
-href="lig.html?lig=super-lig"
+href="/lig/super-lig"
 class="league-card superlig">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-06
-</div>
+<div class="league-index">06</div>
 
 <div class="league-country">
 TÜRKİYE
@@ -2498,13 +2280,9 @@ Türkiye'nin en üst düzey futbol ligi.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2515,19 +2293,15 @@ LİGE GİT
 </a>
 
 
-<!-- CHAMPIONS -->
-
 <a
-href="lig.html?lig=champions-league"
+href="/lig/sampiyonlar-ligi"
 class="league-card champions">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-07
-</div>
+<div class="league-index">07</div>
 
 <div class="league-country">
 UEFA
@@ -2555,13 +2329,9 @@ Avrupa'nın en prestijli kulüp turnuvası.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2572,19 +2342,15 @@ LİGE GİT
 </a>
 
 
-<!-- EUROPA -->
-
 <a
-href="lig.html?lig=europa-league"
+href="/lig/europa-ligi"
 class="league-card europa">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-08
-</div>
+<div class="league-index">08</div>
 
 <div class="league-country">
 UEFA
@@ -2612,13 +2378,9 @@ UEFA Avrupa Ligi karşılaşmaları.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2629,19 +2391,15 @@ LİGE GİT
 </a>
 
 
-<!-- CONFERENCE -->
-
 <a
-href="lig.html?lig=conference-league"
+href="/lig/conference-ligi"
 class="league-card conference">
 
 <div class="league-bg"></div>
 
 <div class="league-inner">
 
-<div class="league-index">
-09
-</div>
+<div class="league-index">09</div>
 
 <div class="league-country">
 UEFA
@@ -2669,13 +2427,9 @@ UEFA Konferans Ligi karşılaşmaları.
 
 <div class="league-go">
 
-<span>
-LİGE GİT
-</span>
+<span>LİGE GİT</span>
 
-<div class="league-arrow">
-→
-</div>
+<div class="league-arrow">→</div>
 
 </div>
 
@@ -2713,14 +2467,69 @@ CREX
 ========================================================= */
 
 const matchGrid =
-document.getElementById("matchGrid");
+    document.getElementById("matchGrid");
 
 const searchInput =
-document.getElementById("searchInput");
+    document.getElementById("searchInput");
 
 const MAX_MATCHES = 10;
 
 let allMatches = [];
+
+
+/* =========================================================
+   SLUG OLUŞTURMA
+   ÖRNEK:
+   Galatasaray -> galatasaray
+   Fenerbahçe -> fenerbahce
+========================================================= */
+
+function slugify(text){
+
+    return String(text ?? "")
+        .toLocaleLowerCase("tr-TR")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/ı/g,"i")
+        .replace(/ğ/g,"g")
+        .replace(/ü/g,"u")
+        .replace(/ş/g,"s")
+        .replace(/ö/g,"o")
+        .replace(/ç/g,"c")
+        .replace(/[^a-z0-9]+/g,"-")
+        .replace(/^-+|-+$/g,"");
+
+}
+
+
+/* =========================================================
+   MAÇ URL OLUŞTUR
+========================================================= */
+
+function createMatchUrl(match){
+
+    const evSahibi =
+        slugify(
+            match.evSahibi ||
+            match.evKisa ||
+            "ev-sahibi"
+        );
+
+    const deplasman =
+        slugify(
+            match.deplasman ||
+            match.depKisa ||
+            "deplasman"
+        );
+
+    const id =
+        encodeURIComponent(
+            match.id
+        );
+
+    return `/mac/${evSahibi}-${deplasman}-${id}`;
+
+}
 
 
 /* =========================================================
@@ -2734,7 +2543,9 @@ function formatDate(dateString){
     }
 
     const date =
-        new Date(dateString + "T00:00:00");
+        new Date(
+            dateString + "T00:00:00"
+        );
 
     if(Number.isNaN(date.getTime())){
         return dateString;
@@ -2748,6 +2559,7 @@ function formatDate(dateString){
             year:"numeric"
         }
     );
+
 }
 
 
@@ -2777,6 +2589,7 @@ function createMatchCard(match,index){
         .join(" ")
         .toLocaleLowerCase("tr-TR");
 
+
     const evLogo =
         match.evLogo || "";
 
@@ -2800,9 +2613,6 @@ function createMatchCard(match,index){
         match.lig ||
         "Lig";
 
-    const id =
-        match.id;
-
     const status =
         match.durum ||
         "MAÇ";
@@ -2821,6 +2631,18 @@ function createMatchCard(match,index){
 
     const tarih =
         formatDate(match.tarih);
+
+
+    /*
+       YENİ TEMİZ MAÇ URL'Sİ
+
+       Örnek:
+       /mac/galatasaray-fenerbahce-20
+    */
+
+    const matchUrl =
+        createMatchUrl(match);
+
 
     article.innerHTML = `
 
@@ -2969,7 +2791,7 @@ function createMatchCard(match,index){
                     ?
                     `
                     <a
-                        href="mac.html?id=${encodeURIComponent(id)}"
+                        href="${escapeAttribute(matchUrl)}"
                         class="watch-btn"
                         aria-label="${escapeAttribute(evSahibi)} - ${escapeAttribute(deplasman)} maçını izle"
                     >
@@ -2996,6 +2818,7 @@ function createMatchCard(match,index){
     `;
 
     return article;
+
 }
 
 
@@ -3011,6 +2834,7 @@ function escapeHtml(value){
         .replace(/>/g,"&gt;")
         .replace(/"/g,"&quot;")
         .replace(/'/g,"&#039;");
+
 }
 
 
@@ -3041,6 +2865,7 @@ function initMatchEffects(){
 
             if(window.innerWidth<=760)
                 return;
+
 
             const rect =
                 card.getBoundingClientRect();
