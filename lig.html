@@ -46,19 +46,13 @@ html{
 body{
     min-height:100vh;
     overflow-x:hidden;
-
     color:var(--text);
-
     font-family:"Manrope",sans-serif;
 
     background:
         radial-gradient(
             800px 500px at 0 -10%,
-            color-mix(
-                in srgb,
-                var(--league) 16%,
-                transparent
-            ),
+            color-mix(in srgb,var(--league) 16%,transparent),
             transparent 65%
         ),
         radial-gradient(
@@ -76,23 +70,15 @@ body{
 
 .ambient{
     position:fixed;
-
     width:520px;
     height:520px;
-
     left:-260px;
     top:10%;
-
     border-radius:50%;
-
     background:var(--league);
-
     filter:blur(150px);
-
     opacity:.07;
-
     pointer-events:none;
-
     z-index:-5;
 
     animation:
@@ -105,23 +91,15 @@ body{
 
 .ambient2{
     position:fixed;
-
     width:500px;
     height:500px;
-
     right:-260px;
     bottom:0;
-
     border-radius:50%;
-
     background:#315dff;
-
     filter:blur(160px);
-
     opacity:.06;
-
     pointer-events:none;
-
     z-index:-5;
 
     animation:
@@ -133,42 +111,27 @@ body{
 }
 
 @keyframes ambientMove{
-
     to{
         transform:
-            translate(
-                180px,
-                -80px
-            )
+            translate(180px,-80px)
             scale(1.2);
     }
-
 }
 
 @keyframes ambientMove2{
-
     to{
         transform:
-            translate(
-                -120px,
-                80px
-            )
+            translate(-120px,80px)
             scale(1.2);
     }
-
 }
 
 body::before{
     content:"";
-
     position:fixed;
-
     inset:0;
-
     z-index:-4;
-
     pointer-events:none;
-
     opacity:.14;
 
     background-image:
@@ -195,15 +158,12 @@ body::before{
 
 /* =========================================================
    HEADER
-   ========================================================= */
+========================================================= */
 
 .header{
     position:sticky;
-
     top:0;
-
     z-index:1000;
-
     height:74px;
 
     border-bottom:
@@ -211,12 +171,7 @@ body::before{
         var(--line);
 
     background:
-        rgba(
-            2,
-            6,
-            11,
-            .78
-        );
+        rgba(2,6,11,.78);
 
     backdrop-filter:
         blur(25px)
@@ -228,27 +183,18 @@ body::before{
 }
 
 .header-inner{
-    width:min(
-        1480px,
-        calc(100% - 40px)
-    );
-
+    width:min(1480px,calc(100% - 40px));
     height:100%;
-
     margin:auto;
 
     display:flex;
-
     align-items:center;
-
     gap:28px;
 }
 
 .logo{
     position:relative;
-
     color:#fff;
-
     text-decoration:none;
 
     font-family:
@@ -256,11 +202,8 @@ body::before{
         sans-serif;
 
     font-size:40px;
-
     line-height:1;
-
     font-weight:900;
-
     letter-spacing:2px;
 }
 
@@ -270,19 +213,12 @@ body::before{
 
 .logo::after{
     content:"";
-
     position:absolute;
-
     left:1px;
-
     bottom:-7px;
-
     width:30px;
-
     height:2px;
-
     border-radius:10px;
-
     background:var(--blue);
 
     box-shadow:
@@ -292,17 +228,13 @@ body::before{
 
 .main-nav{
     display:flex;
-
     align-items:center;
-
     gap:4px;
-
     flex:1;
 }
 
 .main-nav a{
     color:#718096;
-
     text-decoration:none;
 
     padding:11px 14px;
@@ -310,7 +242,6 @@ body::before{
     border-radius:10px;
 
     font-size:10px;
-
     font-weight:900;
 
     transition:.3s var(--ease);
@@ -321,23 +252,15 @@ body::before{
     color:#fff;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            .04
-        );
+        rgba(255,255,255,.04);
 }
 
 .search{
     width:245px;
-
     height:42px;
 
     display:flex;
-
     align-items:center;
-
     gap:10px;
 
     padding:0 14px;
@@ -349,16 +272,9 @@ body::before{
     border-radius:13px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            .035
-        );
+        rgba(255,255,255,.035);
 
-    transition:
-        .35s
-        var(--ease);
+    transition:.35s var(--ease);
 }
 
 .search:focus-within{
@@ -380,25 +296,17 @@ body::before{
 
 .search svg{
     width:16px;
-
     color:#68788d;
-
     flex:none;
 }
 
 .search input{
     width:100%;
-
     border:0;
-
     outline:0;
-
     color:#fff;
-
     background:transparent;
-
     font-family:inherit;
-
     font-size:10px;
 }
 
@@ -409,93 +317,58 @@ body::before{
 
 /* =========================================================
    MAIN
-   ========================================================= */
+========================================================= */
 
 .main{
-    width:min(
-        1480px,
-        calc(100% - 40px)
-    );
-
-    margin:
-        42px auto 0;
+    width:min(1480px,calc(100% - 40px));
+    margin:42px auto 0;
 }
 
 
 /* =========================================================
    LEAGUE HERO
-   ========================================================= */
+========================================================= */
 
 .league-hero{
     position:relative;
-
-    min-height:360px;
-
+    min-height:255px;
     overflow:hidden;
 
     display:flex;
-
     align-items:center;
-
-    justify-content:center;
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .075
-        );
+        rgba(255,255,255,.075);
 
     border-radius:30px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(
-                255,
-                255,
-                255,
-                .055
-            ),
-            rgba(
-                255,
-                255,
-                255,
-                .012
-            )
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.012)
         );
 
     box-shadow:
         0 30px 80px
-        rgba(
-            0,
-            0,
-            0,
-            .35
-        );
+        rgba(0,0,0,.35);
 }
 
 .hero-bg{
     position:absolute;
-
     inset:0;
-
     overflow:hidden;
 }
 
 .hero-bg::before{
     content:"";
-
     position:absolute;
 
     width:550px;
-
     height:550px;
 
     right:-150px;
-
     top:-200px;
 
     border-radius:50%;
@@ -508,7 +381,6 @@ body::before{
         );
 
     opacity:.18;
-
     filter:blur(15px);
 
     animation:
@@ -520,26 +392,20 @@ body::before{
 }
 
 @keyframes heroPulse{
-
     to{
         transform:scale(1.2);
-
         opacity:.28;
     }
-
 }
 
 .hero-bg::after{
     content:"";
-
     position:absolute;
 
     width:130%;
-
     height:160px;
 
     left:-15%;
-
     top:55px;
 
     transform:rotate(-9deg);
@@ -573,62 +439,33 @@ body::before{
         );
 }
 
-
-/* =========================================================
-   HERO MAIN
-   ========================================================= */
-
 .hero-content{
     position:relative;
-
     z-index:3;
-
     width:100%;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:20px;
-
-    padding:42px 45px;
-
-    text-align:center;
-}
-
-.hero-main{
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    width:100%;
-}
-
-
-/* =========================================================
-   LIG LOGOSU
-   ========================================================= */
-
-.hero-logo-wrap{
-    width:120px;
-
-    height:120px;
 
     display:grid;
 
+    grid-template-columns:
+        170px
+        1fr
+        auto;
+
+    align-items:center;
+
+    gap:35px;
+
+    padding:35px 45px;
+}
+
+.hero-logo-wrap{
+    width:150px;
+    height:150px;
+
+    display:grid;
     place-items:center;
 
     position:relative;
-
-    margin-bottom:17px;
 
     transform-style:preserve-3d;
 
@@ -641,10 +478,8 @@ body::before{
 
 .hero-logo-wrap::before{
     content:"";
-
     position:absolute;
-
-    inset:5px;
+    inset:15px;
 
     border-radius:50%;
 
@@ -653,87 +488,48 @@ body::before{
             circle,
             color-mix(
                 in srgb,
-                var(--league) 32%,
+                var(--league) 22%,
                 transparent
             ),
             transparent 70%
         );
 
-    filter:blur(18px);
-
-    opacity:.8;
-}
-
-.hero-logo-wrap::after{
-    content:"";
-
-    position:absolute;
-
-    inset:-9px;
-
-    border-radius:50%;
-
-    border:
-        1px solid
-        color-mix(
-            in srgb,
-            var(--league) 28%,
-            transparent
-        );
-
-    opacity:.55;
-
-    animation:
-        logoRing
-        4s
-        ease-in-out
-        infinite;
+    filter:blur(15px);
 }
 
 .hero-logo{
     position:relative;
 
-    z-index:2;
-
-    width:105px;
-
-    height:105px;
+    width:140px;
+    height:140px;
 
     object-fit:contain;
 
     filter:
         drop-shadow(
-            0 18px 22px
-            rgba(
-                0,
-                0,
-                0,
-                .6
-            )
+            0 25px 25px
+            rgba(0,0,0,.55)
         )
         drop-shadow(
-            0 0 28px
+            0 0 30px
             color-mix(
                 in srgb,
-                var(--league) 24%,
+                var(--league) 20%,
                 transparent
             )
         );
 
-    transition:
-        .5s
-        var(--ease);
+    transition:.5s var(--ease);
 }
 
 .hero-logo-wrap:hover .hero-logo{
     transform:
-        scale(1.1)
+        scale(1.08)
         rotateY(10deg)
         rotateZ(2deg);
 }
 
 @keyframes floatingLogo{
-
     0%,100%{
         transform:
             translateY(0)
@@ -745,53 +541,24 @@ body::before{
             translateY(-8px)
             rotateZ(-1deg);
     }
-
 }
-
-@keyframes logoRing{
-
-    0%,100%{
-        transform:scale(.96);
-
-        opacity:.3;
-    }
-
-    50%{
-        transform:scale(1.08);
-
-        opacity:.65;
-    }
-
-}
-
-
-/* =========================================================
-   CREX
-   ========================================================= */
 
 .hero-kicker{
     display:flex;
-
     align-items:center;
-
-    justify-content:center;
-
     gap:8px;
 
-    margin-bottom:8px;
+    margin-bottom:9px;
 
     color:#748399;
 
-    font-size:10px;
-
+    font-size:9px;
     font-weight:900;
-
-    letter-spacing:2.5px;
+    letter-spacing:1.8px;
 }
 
 .hero-dot{
     width:6px;
-
     height:6px;
 
     border-radius:50%;
@@ -809,19 +576,11 @@ body::before{
 }
 
 @keyframes dotPulse{
-
     50%{
         transform:scale(1.4);
-
         opacity:.5;
     }
-
 }
-
-
-/* =========================================================
-   LIG BAŞLIĞI
-   ========================================================= */
 
 .hero-title{
     color:#fff;
@@ -831,54 +590,30 @@ body::before{
         sans-serif;
 
     font-size:72px;
-
-    line-height:.85;
-
+    line-height:.82;
     font-weight:900;
 
     text-transform:uppercase;
-
     letter-spacing:-1px;
-
-    text-shadow:
-        0 5px 30px
-        rgba(
-            0,
-            0,
-            0,
-            .45
-        );
 }
 
 .hero-country{
-    margin-top:13px;
+    margin-top:14px;
 
     color:#728095;
 
     font-size:10px;
-
     font-weight:800;
-
     letter-spacing:1px;
 }
 
-
-/* =========================================================
-   STATS
-   ========================================================= */
-
 .hero-stats{
     display:flex;
-
-    justify-content:center;
-
     gap:10px;
-
-    margin-top:3px;
 }
 
 .stat{
-    min-width:110px;
+    min-width:100px;
 
     padding:15px 17px;
 
@@ -886,24 +621,12 @@ body::before{
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .065
-        );
+        rgba(255,255,255,.065);
 
     border-radius:15px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            .025
-        );
-
-    backdrop-filter:blur(8px);
+        rgba(255,255,255,.025);
 }
 
 .stat strong{
@@ -916,7 +639,6 @@ body::before{
         sans-serif;
 
     font-size:28px;
-
     font-weight:900;
 }
 
@@ -924,38 +646,31 @@ body::before{
     color:#66768a;
 
     font-size:7px;
-
     font-weight:900;
-
     letter-spacing:1px;
 }
 
 
 /* =========================================================
    FILTERS
-   ========================================================= */
+========================================================= */
 
 .controls{
     display:flex;
-
     align-items:center;
-
     justify-content:space-between;
 
     gap:15px;
 
     margin-top:30px;
-
     margin-bottom:20px;
 }
 
 .filters{
     display:flex;
-
     gap:8px;
 
     overflow-x:auto;
-
     scrollbar-width:none;
 }
 
@@ -972,34 +687,21 @@ body::before{
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .065
-        );
+        rgba(255,255,255,.065);
 
     border-radius:11px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            .025
-        );
+        rgba(255,255,255,.025);
 
     cursor:pointer;
 
     font-family:inherit;
 
     font-size:8px;
-
     font-weight:900;
 
-    transition:
-        .3s
-        var(--ease);
+    transition:.3s var(--ease);
 }
 
 .filter:hover,
@@ -1035,26 +737,19 @@ body::before{
     color:#58677a;
 
     font-size:8px;
-
     font-weight:900;
 }
 
 
 /* =========================================================
    MATCH GRID
-   ========================================================= */
+========================================================= */
 
 .matches{
     display:grid;
 
     grid-template-columns:
-        repeat(
-            4,
-            minmax(
-                0,
-                1fr
-            )
-        );
+        repeat(4,minmax(0,1fr));
 
     gap:17px;
 }
@@ -1062,23 +757,17 @@ body::before{
 
 /* =========================================================
    MATCH CARD
-   ========================================================= */
+========================================================= */
 
 .match-card{
     position:relative;
 
     min-height:315px;
-
     overflow:hidden;
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .075
-        );
+        rgba(255,255,255,.075);
 
     border-radius:25px;
 
@@ -1090,13 +779,9 @@ body::before{
         );
 
     transition:
-        transform
-        .5s
-        var(--ease),
-        border-color
-        .35s,
-        box-shadow
-        .5s;
+        transform .5s var(--ease),
+        border-color .35s,
+        box-shadow .5s;
 
     transform-style:preserve-3d;
 }
@@ -1105,7 +790,6 @@ body::before{
     content:"";
 
     position:absolute;
-
     inset:0;
 
     opacity:0;
@@ -1146,12 +830,7 @@ body::before{
 
     box-shadow:
         0 35px 70px
-        rgba(
-            0,
-            0,
-            0,
-            .5
-        ),
+        rgba(0,0,0,.5),
         0 0 35px
         color-mix(
             in srgb,
@@ -1164,9 +843,7 @@ body::before{
     position:absolute;
 
     top:0;
-
     left:8%;
-
     right:8%;
 
     height:3px;
@@ -1183,9 +860,7 @@ body::before{
 
     transform:scaleX(.25);
 
-    transition:
-        .6s
-        var(--ease);
+    transition:.6s var(--ease);
 
     box-shadow:
         0 0 15px
@@ -1198,7 +873,6 @@ body::before{
 
 .match-content{
     position:relative;
-
     z-index:3;
 
     height:315px;
@@ -1206,15 +880,12 @@ body::before{
     padding:19px;
 
     display:flex;
-
     flex-direction:column;
 }
 
 .match-top{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
 }
 
@@ -1225,41 +896,26 @@ body::before{
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .06
-        );
+        rgba(255,255,255,.06);
 
     border-radius:8px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            .025
-        );
+        rgba(255,255,255,.025);
 
     font-size:8px;
-
     font-weight:900;
 }
 
 .match-status{
     display:flex;
-
     align-items:center;
-
     gap:6px;
 
     color:#45adff;
 
     font-size:8px;
-
     font-weight:900;
-
     letter-spacing:1px;
 }
 
@@ -1267,7 +923,6 @@ body::before{
     content:"";
 
     width:5px;
-
     height:5px;
 
     border-radius:50%;
@@ -1282,7 +937,7 @@ body::before{
 
 /* =========================================================
    TEAMS
-   ========================================================= */
+========================================================= */
 
 .teams{
     flex:1;
@@ -1301,33 +956,23 @@ body::before{
 
 .team{
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
-
     gap:11px;
 }
 
 .team-logo{
     width:78px;
-
     height:78px;
 
     display:grid;
-
     place-items:center;
 
     color:#fff;
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .09
-        );
+        rgba(255,255,255,.09);
 
     border-radius:23px;
 
@@ -1343,38 +988,22 @@ body::before{
         sans-serif;
 
     font-size:17px;
-
     font-weight:900;
 
     box-shadow:
         0 20px 35px
-        rgba(
-            0,
-            0,
-            0,
-            .45
-        ),
-        inset
-        0 1px 1px
-        rgba(
-            255,
-            255,
-            255,
-            .1
-        );
+        rgba(0,0,0,.45),
+        inset 0 1px 1px
+        rgba(255,255,255,.1);
 
-    transition:
-        .5s
-        var(--ease);
+    transition:.5s var(--ease);
 }
 
 .team-logo img{
     width:100%;
-
     height:100%;
 
     object-fit:contain;
-
     padding:10px;
 
     display:block;
@@ -1395,12 +1024,7 @@ body::before{
 
     box-shadow:
         0 25px 35px
-        rgba(
-            0,
-            0,
-            0,
-            .55
-        ),
+        rgba(0,0,0,.55),
         0 0 22px
         color-mix(
             in srgb,
@@ -1417,9 +1041,7 @@ body::before{
     text-align:center;
 
     font-size:9px;
-
     line-height:1.3;
-
     font-weight:800;
 }
 
@@ -1431,32 +1053,20 @@ body::before{
     height:34px;
 
     display:grid;
-
     place-items:center;
 
     color:#667589;
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .065
-        );
+        rgba(255,255,255,.065);
 
     border-radius:50%;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            .025
-        );
+        rgba(255,255,255,.025);
 
     font-size:7px;
-
     font-weight:900;
 
     white-space:nowrap;
@@ -1465,7 +1075,7 @@ body::before{
 
 /* =========================================================
    SKOR
-   ========================================================= */
+========================================================= */
 
 .team-score{
     margin-top:4px;
@@ -1475,7 +1085,6 @@ body::before{
         sans-serif;
 
     font-size:16px;
-
     font-weight:900;
 
     color:#fff;
@@ -1487,105 +1096,167 @@ body::before{
 
 
 /* =========================================================
-   ALT BOLUM
-   ========================================================= */
+   HAFTA + MAÇA GİT
+========================================================= */
 
 .match-bottom{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
+
+    gap:12px;
 
     padding-top:14px;
 
     border-top:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .055
-        );
+        rgba(255,255,255,.055);
 }
 
 
-/* HAFTA */
+/* BÜYÜTÜLMÜŞ HAFTA */
 
 .match-date{
-    color:#9aa8b8;
+    color:#c2cedb;
 
-    font-size:11px;
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:16px;
 
     font-weight:900;
 
-    line-height:1.4;
+    line-height:1.15;
 
-    letter-spacing:.3px;
+    letter-spacing:.7px;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 14px
+        rgba(255,255,255,.08);
 }
 
+
+/* DAHA BÜYÜK MAVİ BUTON */
+
 .watch-btn{
+    position:relative;
+
     display:flex;
-
     align-items:center;
+    justify-content:center;
 
-    gap:7px;
+    gap:8px;
 
-    padding:9px 13px;
+    min-width:112px;
+
+    min-height:40px;
+
+    padding:10px 16px;
 
     color:#fff;
 
     text-decoration:none;
 
-    border-radius:9px;
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius:11px;
 
     background:
         linear-gradient(
             135deg,
-            var(--league),
-            #075fb6
+            #1595ff 0%,
+            #0874d1 55%,
+            #0753a5 100%
         );
 
     box-shadow:
-        0 8px 22px
-        color-mix(
-            in srgb,
-            var(--league) 20%,
-            transparent
-        );
+        0 10px 25px
+        rgba(21,149,255,.22),
+        inset 0 1px 0
+        rgba(255,255,255,.2);
 
-    font-size:8px;
+    font-family:
+        "Manrope",
+        sans-serif;
+
+    font-size:10px;
 
     font-weight:900;
+
+    letter-spacing:.4px;
+
+    overflow:hidden;
 
     transition:
         .35s
         var(--ease);
 }
 
-.watch-btn:hover{
-    transform:
-        translateY(-3px);
+.watch-btn::before{
+    content:"";
 
-    box-shadow:
-        0 14px 30px
-        color-mix(
-            in srgb,
-            var(--league) 30%,
+    position:absolute;
+
+    top:0;
+    left:-120%;
+
+    width:80%;
+    height:100%;
+
+    transform:skewX(-20deg);
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.3),
             transparent
         );
+
+    transition:.55s ease;
+}
+
+.watch-btn:hover::before{
+    left:130%;
+}
+
+.watch-btn:hover{
+    transform:
+        translateY(-3px)
+        scale(1.035);
+
+    border-color:
+        rgba(98,192,255,.55);
+
+    box-shadow:
+        0 16px 34px
+        rgba(21,149,255,.38),
+        0 0 22px
+        rgba(21,149,255,.18),
+        inset 0 1px 0
+        rgba(255,255,255,.25);
+}
+
+.watch-btn:active{
+    transform:
+        translateY(0)
+        scale(.98);
 }
 
 
 /* =========================================================
    LOADING
-   ========================================================= */
+========================================================= */
 
 .loader{
     display:none;
 
     justify-content:center;
-
     align-items:center;
 
     padding:35px;
@@ -1597,17 +1268,11 @@ body::before{
 
 .loader-ring{
     width:35px;
-
     height:35px;
 
     border:
         3px solid
-        rgba(
-            255,
-            255,
-            255,
-            .08
-        );
+        rgba(255,255,255,.08);
 
     border-top-color:
         var(--league);
@@ -1622,11 +1287,9 @@ body::before{
 }
 
 @keyframes spin{
-
     to{
         transform:rotate(360deg);
     }
-
 }
 
 .empty{
@@ -1638,22 +1301,12 @@ body::before{
 
     border:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .06
-        );
+        rgba(255,255,255,.06);
 
     border-radius:22px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            .02
-        );
+        rgba(255,255,255,.02);
 }
 
 .empty.show{
@@ -1662,57 +1315,41 @@ body::before{
 
 .empty-icon{
     font-size:35px;
-
     margin-bottom:15px;
-
     opacity:.4;
 }
 
 .empty h3{
     color:#fff;
-
     font-size:16px;
 }
 
 .empty p{
     margin-top:7px;
-
     color:#68778a;
-
     font-size:9px;
 }
 
 
 /* =========================================================
    FOOTER
-   ========================================================= */
+========================================================= */
 
 .footer{
-    width:min(
-        1480px,
-        calc(100% - 40px)
-    );
+    width:min(1480px,calc(100% - 40px));
 
-    margin:
-        80px auto 25px;
+    margin:80px auto 25px;
 
     padding-top:25px;
 
     display:flex;
-
     justify-content:space-between;
 
     border-top:
         1px solid
-        rgba(
-            255,
-            255,
-            255,
-            .055
-        );
+        rgba(255,255,255,.055);
 
     color:#4f5d70;
-
     font-size:8px;
 }
 
@@ -1724,30 +1361,43 @@ body::before{
         sans-serif;
 
     font-size:25px;
-
     font-weight:900;
-
     letter-spacing:2px;
 }
 
 
 /* =========================================================
    RESPONSIVE
-   ========================================================= */
+========================================================= */
 
 @media(max-width:1150px){
 
     .matches{
         grid-template-columns:
-            repeat(
-                2,
-                minmax(
-                    0,
-                    1fr
-                )
-            );
+            repeat(2,minmax(0,1fr));
     }
 
+    .hero-content{
+        grid-template-columns:
+            130px
+            1fr;
+
+        padding:30px;
+    }
+
+    .hero-logo-wrap{
+        width:120px;
+        height:120px;
+    }
+
+    .hero-logo{
+        width:110px;
+        height:110px;
+    }
+
+    .hero-stats{
+        grid-column:1/-1;
+    }
 }
 
 
@@ -1758,11 +1408,7 @@ body::before{
     }
 
     .header-inner{
-        width:
-            calc(
-                100% - 24px
-            );
-
+        width:calc(100% - 24px);
         gap:12px;
     }
 
@@ -1776,89 +1422,49 @@ body::before{
 
     .search{
         width:170px;
-
         height:38px;
-
         margin-left:auto;
     }
 
     .main{
-        width:
-            calc(
-                100% - 24px
-            );
-
+        width:calc(100% - 24px);
         margin-top:25px;
     }
 
     .league-hero{
-        min-height:370px;
-
-        border-radius:24px;
+        min-height:350px;
     }
 
     .hero-content{
         display:flex;
-
         flex-direction:column;
-
-        align-items:center;
-
-        justify-content:center;
-
-        padding:32px 20px;
-
         text-align:center;
 
-        gap:18px;
+        padding:30px 20px;
     }
 
     .hero-logo-wrap{
-        width:100px;
-
-        height:100px;
-
-        margin-bottom:13px;
+        width:110px;
+        height:110px;
     }
 
     .hero-logo{
-        width:88px;
-
-        height:88px;
+        width:105px;
+        height:105px;
     }
 
     .hero-title{
         font-size:54px;
-
-        line-height:.9;
-    }
-
-    .hero-kicker{
-        font-size:9px;
-
-        letter-spacing:2px;
-    }
-
-    .hero-country{
-        margin-top:12px;
-
-        font-size:9px;
     }
 
     .hero-stats{
         width:100%;
-
         justify-content:center;
-
-        margin-top:5px;
     }
 
     .stat{
         flex:1;
-
         min-width:0;
-
-        max-width:150px;
     }
 
     .matches{
@@ -1867,7 +1473,6 @@ body::before{
 
     .controls{
         align-items:flex-start;
-
         flex-direction:column;
     }
 
@@ -1875,17 +1480,22 @@ body::before{
         margin-left:3px;
     }
 
-    .footer{
-        width:
-            calc(
-                100% - 24px
-            );
-
-        flex-direction:column;
-
-        gap:10px;
+    .match-date{
+        font-size:15px;
     }
 
+    .watch-btn{
+        min-width:118px;
+        min-height:42px;
+        font-size:10px;
+    }
+
+    .footer{
+        width:calc(100% - 24px);
+
+        flex-direction:column;
+        gap:10px;
+    }
 }
 
 
@@ -1899,18 +1509,14 @@ body::before{
         font-size:48px;
     }
 
-    .hero-logo-wrap{
-        width:90px;
-
-        height:90px;
+    .match-date{
+        font-size:14px;
     }
 
-    .hero-logo{
-        width:80px;
-
-        height:80px;
+    .watch-btn{
+        min-width:108px;
+        padding:9px 12px;
     }
-
 }
 
 
@@ -1919,10 +1525,8 @@ body::before{
     *,
     *::before{
         animation:none!important;
-
         transition:none!important;
     }
-
 }
 
 </style>
@@ -1935,10 +1539,6 @@ body::before{
 <div class="ambient2"></div>
 
 
-<!-- =======================================================
-     HEADER
-     ======================================================= -->
-
 <header class="header">
 
 <div class="header-inner">
@@ -1946,7 +1546,6 @@ body::before{
 <a href="index.html" class="logo">
     CR<span>EX</span>
 </a>
-
 
 <nav class="main-nav">
 
@@ -1963,7 +1562,6 @@ body::before{
 </a>
 
 </nav>
-
 
 <div class="search">
 
@@ -1996,29 +1594,15 @@ body::before{
 </header>
 
 
-<!-- =======================================================
-     MAIN
-     ======================================================= -->
-
 <main class="main">
 
-
-<!-- =======================================================
-     LIG HERO
-     ======================================================= -->
 
 <section class="league-hero">
 
 <div class="hero-bg"></div>
 
-
 <div class="hero-content">
 
-
-<div class="hero-main">
-
-
-<!-- LIG LOGOSU -->
 
 <div class="hero-logo-wrap">
 
@@ -2032,7 +1616,7 @@ body::before{
 </div>
 
 
-<!-- CREX -->
+<div>
 
 <div class="hero-kicker">
 
@@ -2043,8 +1627,6 @@ CREX
 </div>
 
 
-<!-- LIG ADI -->
-
 <h1
     id="leagueTitle"
     class="hero-title"
@@ -2053,8 +1635,6 @@ CREX
 </h1>
 
 
-<!-- ÜLKE -->
-
 <div
     id="leagueCountry"
     class="hero-country"
@@ -2062,11 +1642,8 @@ CREX
     MAÇLAR YÜKLENİYOR
 </div>
 
-
 </div>
 
-
-<!-- ISTATISTIKLER -->
 
 <div class="hero-stats">
 
@@ -2103,15 +1680,10 @@ CREX
 </section>
 
 
-<!-- =======================================================
-     MATCHES
-     ======================================================= -->
-
 <section id="matches">
 
 
 <div class="controls">
-
 
 <div class="filters">
 
@@ -2145,7 +1717,6 @@ CREX
 >
     0 MAÇ
 </div>
-
 
 </div>
 
@@ -2191,10 +1762,6 @@ CREX
 </main>
 
 
-<!-- =======================================================
-     FOOTER
-     ======================================================= -->
-
 <footer class="footer">
 
 <div class="footer-logo">
@@ -2212,34 +1779,25 @@ CREX
 
 /* =========================================================
    CREX LIG SISTEMI
-   ========================================================= */
-
-
-/* URL'den lig değerini al */
+========================================================= */
 
 const params =
     new URLSearchParams(
         window.location.search
     );
 
-
 const leagueSlug =
     params.get("lig") ||
     "premier-league";
 
-
-/*
-   Logo cache versiyonu.
-   Logo değişirse bunu artırabilirsin.
-*/
 
 const LOGO_VERSION =
     "20260901";
 
 
 /* =========================================================
-   LIGLER
-   ========================================================= */
+   LIGLER + LIG LOGOLARI
+========================================================= */
 
 const leagues = {
 
@@ -2259,7 +1817,7 @@ const leagues = {
         country:"İspanya",
 
         logo:
-        "https://upload.wikimedia.org/wikipedia/commons/2/20/LaLiga_2023_Vertical_Logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+        "https://upload.wikimedia.org/wikipedia/commons/2/20/LaLiga_2023_Vertical_Logo.svg",
 
         color:"#ef4937"
     },
@@ -2270,7 +1828,7 @@ const leagues = {
         country:"İtalya",
 
         logo:
-        "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+        "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg",
 
         color:"#168cff"
     },
@@ -2314,7 +1872,7 @@ const leagues = {
         country:"UEFA",
 
         logo:
-        "https://upload.wikimedia.org/wikipedia/commons/e/e2/UEFA_Champions_League_logo.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+        "https://upload.wikimedia.org/wikipedia/commons/e/e2/UEFA_Champions_League_logo.png",
 
         color:"#426dff"
     },
@@ -2346,6 +1904,10 @@ const leagues = {
         name:"Eredivisie",
         country:"Hollanda",
 
+        /*
+         * Eredivisie için link verilmediği için
+         * mevcut sistem korunuyor.
+         */
         logo:"",
 
         color:"#ed5b21"
@@ -2354,16 +1916,10 @@ const leagues = {
 };
 
 
-/* Aktif ligi bul */
-
 const league =
     leagues[leagueSlug] ||
     leagues["premier-league"];
 
-
-/* =========================================================
-   RENK
-   ========================================================= */
 
 document.documentElement
     .style
@@ -2375,61 +1931,52 @@ document.documentElement
 
 /* =========================================================
    ELEMENTLER
-   ========================================================= */
+========================================================= */
 
 const heroLogo =
     document.getElementById(
         "heroLogo"
     );
 
-
 const leagueTitle =
     document.getElementById(
         "leagueTitle"
     );
-
 
 const leagueCountry =
     document.getElementById(
         "leagueCountry"
     );
 
-
 const matchGrid =
     document.getElementById(
         "matchGrid"
     );
-
 
 const searchInput =
     document.getElementById(
         "searchInput"
     );
 
-
 const empty =
     document.getElementById(
         "empty"
     );
-
 
 const loader =
     document.getElementById(
         "loader"
     );
 
-
 const resultCount =
     document.getElementById(
         "resultCount"
     );
 
-
 const totalMatches =
     document.getElementById(
         "totalMatches"
     );
-
 
 const upcomingMatches =
     document.getElementById(
@@ -2437,18 +1984,14 @@ const upcomingMatches =
     );
 
 
-/* =========================================================
-   SAYFA BASLIGI
-   ========================================================= */
-
 document.title =
     "CREX — " +
     league.name;
 
 
 /* =========================================================
-   LIG LOGOSUNU YUKLE
-   ========================================================= */
+   LIG LOGOSUNU YÜKLE
+========================================================= */
 
 if(league.logo){
 
@@ -2458,8 +2001,7 @@ if(league.logo){
         );
 
     heroLogo.alt =
-        league.name +
-        " logosu";
+        league.name;
 
     heroLogo.style.display =
         "block";
@@ -2473,10 +2015,6 @@ else{
 }
 
 
-/* =========================================================
-   LIG BILGILERI
-   ========================================================= */
-
 leagueTitle.textContent =
     league.name;
 
@@ -2487,8 +2025,8 @@ leagueCountry.textContent =
 
 
 /* =========================================================
-   MAC VERISI
-   ========================================================= */
+   VERI
+========================================================= */
 
 const matchesJsonPath =
     "./data/maclar.json";
@@ -2502,33 +2040,24 @@ let currentFilter = "all";
 
 let renderedCount = 0;
 
-
-/*
-   Sonsuz kaydırma.
-   Bir seferde 24 maç.
-*/
-
 const PAGE_SIZE = 24;
 
 
 /* =========================================================
    LOGO CACHE
-   ========================================================= */
+========================================================= */
 
 function addLogoCache(url){
 
     if(!url)
         return "";
 
-
     const cleanUrl =
         String(url)
         .trim();
 
-
     if(!cleanUrl)
         return "";
-
 
     if(
         cleanUrl.startsWith("data:") ||
@@ -2539,12 +2068,10 @@ function addLogoCache(url){
 
     }
 
-
     const separator =
         cleanUrl.includes("?")
             ? "&"
             : "?";
-
 
     return (
         cleanUrl +
@@ -2557,8 +2084,8 @@ function addLogoCache(url){
 
 
 /* =========================================================
-   METIN NORMALIZE
-   ========================================================= */
+   NORMALIZE
+========================================================= */
 
 function normalizeText(value){
 
@@ -2588,8 +2115,8 @@ function normalizeText(value){
 
 
 /* =========================================================
-   MATCH LOGOLARI
-   ========================================================= */
+   TAKIM LOGOLARI
+========================================================= */
 
 function resolveMatchLogos(match){
 
@@ -2616,7 +2143,7 @@ function resolveMatchLogos(match){
 
 /* =========================================================
    MAC DURUMU
-   ========================================================= */
+========================================================= */
 
 function getMatchStatus(match){
 
@@ -2717,23 +2244,20 @@ function getMatchStatus(match){
 
 /* =========================================================
    MAC TARIHI
-   ========================================================= */
+========================================================= */
 
 function getMatchDate(match){
 
     if(!match.tarih)
         return null;
 
-
     const dateValue =
         String(
             match.tarih
         ).trim();
 
-
     if(!dateValue)
         return null;
-
 
     let dateString =
         dateValue;
@@ -2785,7 +2309,7 @@ function getMatchDate(match){
 
 /* =========================================================
    HAFTA
-   ========================================================= */
+========================================================= */
 
 function formatDate(match){
 
@@ -2809,8 +2333,8 @@ function formatDate(match){
 
 
 /* =========================================================
-   LIG KONTROLU
-   ========================================================= */
+   LIG KONTROL
+========================================================= */
 
 function isCorrectLeague(match){
 
@@ -2819,12 +2343,10 @@ function isCorrectLeague(match){
             match.lig
         );
 
-
     const targetLeague =
         normalizeText(
             leagueSlug
         );
-
 
     return (
         matchLeague ===
@@ -2836,7 +2358,7 @@ function isCorrectLeague(match){
 
 /* =========================================================
    MACLARI YUKLE
-   ========================================================= */
+========================================================= */
 
 async function loadMatches(){
 
@@ -2986,7 +2508,7 @@ async function loadMatches(){
 
 /* =========================================================
    ISTATISTIK
-   ========================================================= */
+========================================================= */
 
 function updateStats(){
 
@@ -3018,8 +2540,8 @@ function updateStats(){
 
 
 /* =========================================================
-   FILTRELEME
-   ========================================================= */
+   FILTRE
+========================================================= */
 
 function applyFilters(){
 
@@ -3108,7 +2630,7 @@ function applyFilters(){
 
 /* =========================================================
    MAC KARTI
-   ========================================================= */
+========================================================= */
 
 function createMatchCard(match){
 
@@ -3159,13 +2681,13 @@ function createMatchCard(match){
 
 
     const score =
-        String(match.skor || "").trim();
+        String(
+            match.skor || ""
+        ).trim();
 
 
     let homeScoreHtml = "";
-
     let awayScoreHtml = "";
-
     let centerContent = "";
 
 
@@ -3177,48 +2699,33 @@ function createMatchCard(match){
         const parts =
             score.split("-");
 
-
         const hScore =
             parts[0].trim();
-
 
         const aScore =
             parts[1].trim();
 
 
         homeScoreHtml =
-            `
-            <div class="team-score">
+            `<div class="team-score">
                 ${escapeHTML(hScore)}
-            </div>
-            `;
+            </div>`;
 
 
         awayScoreHtml =
-            `
-            <div class="team-score">
+            `<div class="team-score">
                 ${escapeHTML(aScore)}
-            </div>
-            `;
+            </div>`;
 
 
         centerContent =
-            `
-            <div class="vs">
-                -
-            </div>
-            `;
+            `<div class="vs">-</div>`;
 
     }
-
     else{
 
         centerContent =
-            `
-            <div class="vs">
-                VS
-            </div>
-            `;
+            `<div class="vs">VS</div>`;
 
     }
 
@@ -3417,7 +2924,8 @@ function createMatchCard(match){
                     class="watch-btn"
                 >
 
-                    MAÇA GİT →
+                    MAÇA GİT
+                    <span>→</span>
 
                 </a>
 
@@ -3435,7 +2943,7 @@ function createMatchCard(match){
 
 /* =========================================================
    TAKIM LOGO HATASI
-   ========================================================= */
+========================================================= */
 
 function handleTeamLogoError(
     img,
@@ -3474,8 +2982,8 @@ function handleTeamLogoError(
 
 
 /* =========================================================
-   SONRAKI SAYFA
-   ========================================================= */
+   SAYFALAMA
+========================================================= */
 
 function renderNextPage(){
 
@@ -3493,7 +3001,6 @@ function renderNextPage(){
             );
 
         }
-
         else{
 
             empty.classList.remove(
@@ -3596,7 +3103,7 @@ function renderNextPage(){
 
 /* =========================================================
    ARAMA
-   ========================================================= */
+========================================================= */
 
 searchInput.addEventListener(
     "input",
@@ -3608,7 +3115,7 @@ searchInput.addEventListener(
 
 /* =========================================================
    FILTRE BUTONLARI
-   ========================================================= */
+========================================================= */
 
 document
     .querySelectorAll(
@@ -3653,7 +3160,7 @@ document
 
 /* =========================================================
    INFINITE SCROLL
-   ========================================================= */
+========================================================= */
 
 const infiniteObserver =
     new IntersectionObserver(
@@ -3705,8 +3212,8 @@ infiniteObserver.observe(
 
 
 /* =========================================================
-   KART MOUSE EFFECT
-   ========================================================= */
+   MOUSE CARD EFFECT
+========================================================= */
 
 document.addEventListener(
     "mousemove",
@@ -3767,8 +3274,8 @@ document.addEventListener(
 
 
 /* =========================================================
-   GUVENLI HTML
-   ========================================================= */
+   ESCAPE
+========================================================= */
 
 function escapeHTML(value){
 
@@ -3833,10 +3340,6 @@ function escapeJS(value){
 }
 
 
-/* =========================================================
-   TAKIM BAS HARFLERI
-   ========================================================= */
-
 function getInitials(name){
 
     const words =
@@ -3870,8 +3373,8 @@ function getInitials(name){
 
 
 /* =========================================================
-   HERO LOGO HATASI
-   ========================================================= */
+   HERO LOGO HATA
+========================================================= */
 
 heroLogo.addEventListener(
     "error",
@@ -3886,12 +3389,11 @@ heroLogo.addEventListener(
 
 /* =========================================================
    BASLAT
-   ========================================================= */
+========================================================= */
 
 loadMatches();
 
 </script>
 
 </body>
-
     </html>
