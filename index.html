@@ -2360,7 +2360,7 @@ UEFA
 
 <img
 class="league-logo"
-src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UEFA_Europa_League_logo_%282024_version%29.svg/960px-UEFA_Europa_League_logo_%282024_version%29.svg.png"
+src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UEFA_Europa_League_logo_%282024_version%29.svg/960px-UEFA-Europa_League_logo_%282024_version%29.svg.png"
 alt="Europa League"
 loading="lazy">
 
@@ -2479,9 +2479,6 @@ let allMatches = [];
 
 /* =========================================================
    SLUG OLUŞTURMA
-   ÖRNEK:
-   Galatasaray -> galatasaray
-   Fenerbahçe -> fenerbahce
 ========================================================= */
 
 function slugify(text){
@@ -2504,30 +2501,48 @@ function slugify(text){
 
 /* =========================================================
    MAÇ URL OLUŞTUR
+   YENİ FORMAT:
+   /mac.html?id=20
+
+   ÖNCEKİ:
+   /mac/galatasaray-fenerbahce-20
+
+   Artık takım isimleri URL'ye eklenmiyor.
+   mac.html doğrudan id parametresini okuyacak.
 ========================================================= */
 
 function createMatchUrl(match){
 
-    const evSahibi =
-        slugify(
-            match.evSahibi ||
-            match.evKisa ||
-            "ev-sahibi"
-        );
+    /*
+       ID kontrolü
 
-    const deplasman =
-        slugify(
-            match.deplasman ||
-            match.depKisa ||
-            "deplasman"
-        );
+       Örnek:
+       match.id = 20
 
-    const id =
-        encodeURIComponent(
-            match.id
-        );
+       Sonuç:
+       /mac.html?id=20
+    */
 
-    return `/mac/${evSahibi}-${deplasman}-${id}`;
+    if(
+        match &&
+        match.id !== undefined &&
+        match.id !== null &&
+        String(match.id).trim() !== ""
+    ){
+
+        return `/mac.html?id=${encodeURIComponent(
+            String(match.id)
+        )}`;
+
+    }
+
+
+    /*
+       ID yoksa geçersiz URL üretmemek için
+       # kullanıyoruz.
+    */
+
+    return "#";
 
 }
 
@@ -2634,14 +2649,31 @@ function createMatchCard(match,index){
 
 
     /*
-       YENİ TEMİZ MAÇ URL'Sİ
+       YENİ MAÇ URL'Sİ
 
        Örnek:
-       /mac/galatasaray-fenerbahce-20
+       mac.html?id=20
+
+       Bu URL mac.html tarafından
+       URLSearchParams ile okunabilir.
     */
 
     const matchUrl =
         createMatchUrl(match);
+
+
+    /*
+       ID yoksa İZLE butonunu aktif etmiyoruz.
+       Böylece:
+       mac.html?id=undefined
+       gibi bozuk URL oluşmaz.
+    */
+
+    const hasValidId =
+        match &&
+        match.id !== undefined &&
+        match.id !== null &&
+        String(match.id).trim() !== "";
 
 
     article.innerHTML = `
@@ -2787,7 +2819,7 @@ function createMatchCard(match,index){
 
 
                 ${
-                    yayinAktif
+                    yayinAktif && hasValidId
                     ?
                     `
                     <a
@@ -2807,7 +2839,13 @@ function createMatchCard(match,index){
                             cursor:default;
                         "
                     >
-                        YAYIN YOK
+                        ${
+                            !hasValidId
+                            ?
+                            "ID YOK"
+                            :
+                            "YAYIN YOK"
+                        }
                     </span>
                     `
                 }
