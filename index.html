@@ -1424,8 +1424,6 @@ TÜM MAÇLAR →
 </div>
 
 
-<!-- JSON'DAN DOLDURULACAK -->
-
 <div class="matches" id="matchGrid">
 
 <div class="loading-box" id="loadingBox">
@@ -1443,7 +1441,6 @@ TÜM MAÇLAR →
 
 <!-- =======================================================
      LEAGUES
-     EREDIVISIE KALDIRILDI
 ======================================================= -->
 
 <section id="leagues" class="leagues-section reveal">
@@ -2020,6 +2017,11 @@ document.getElementById("searchInput");
 
 let allMatches = [];
 
+/*
+   ANA SAYFADA GÖSTERİLECEK MAKSİMUM MAÇ SAYISI
+*/
+const MAX_HOME_MATCHES = 10;
+
 
 /* =========================================================
    DATE FORMAT
@@ -2365,6 +2367,13 @@ async function loadMatches(){
 
         }
 
+        /*
+         * TÜM MAÇLARI ALIYORUZ.
+         * Burada henüz 10 sınırı uygulamıyoruz.
+         * Böylece arama sistemi JSON'dAKİ tüm maçlarda
+         * çalışmaya devam ediyor.
+         */
+
         allMatches =
             data
             .filter(match => match && typeof match === "object")
@@ -2386,7 +2395,13 @@ async function loadMatches(){
 
             });
 
-        renderMatches(allMatches);
+        /*
+         * NORMAL ANA SAYFA GÖRÜNÜMÜ:
+         * SADECE SON 10 MAÇ
+         */
+        renderMatches(
+            allMatches.slice(0,MAX_HOME_MATCHES)
+        );
 
     }catch(error){
 
@@ -2447,8 +2462,8 @@ function renderMatches(matches){
                 <strong>Maç bulunamadı</strong>
 
                 <small>
-                    data/maclar.json içerisinde
-                    herhangi bir karşılaşma bulunmuyor.
+                    Aramanızla eşleşen herhangi bir
+                    karşılaşma bulunmuyor.
                 </small>
 
             </div>
@@ -2486,14 +2501,31 @@ function(){
         .toLocaleLowerCase("tr-TR")
         .trim();
 
+    /*
+     * ARAMA BOŞSA:
+     * Tekrar SADECE SON 10 MAÇ gösterilir.
+     */
     if(!query){
 
-        renderMatches(allMatches);
+        renderMatches(
+            allMatches.slice(
+                0,
+                MAX_HOME_MATCHES
+            )
+        );
 
         return;
 
     }
 
+
+    /*
+     * ARAMA YAPILIYORSA:
+     * 10 MAÇ SINIRI UYGULANMAZ.
+     *
+     * Böylece JSON'da örneğin 50. sıradaki
+     * bir maç bile aranabilir.
+     */
     const filtered =
         allMatches.filter(match=>{
 
