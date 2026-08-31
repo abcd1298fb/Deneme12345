@@ -193,7 +193,9 @@ body::before{
 }
 
 
-/* HEADER */
+/* =========================================================
+   HEADER
+   ========================================================= */
 
 .header{
     position:sticky;
@@ -405,7 +407,9 @@ body::before{
 }
 
 
-/* MAIN */
+/* =========================================================
+   MAIN
+   ========================================================= */
 
 .main{
     width:min(
@@ -418,18 +422,22 @@ body::before{
 }
 
 
-/* LEAGUE HERO */
+/* =========================================================
+   LEAGUE HERO
+   ========================================================= */
 
 .league-hero{
     position:relative;
 
-    min-height:255px;
+    min-height:360px;
 
     overflow:hidden;
 
     display:flex;
 
     align-items:center;
+
+    justify-content:center;
 
     border:
         1px solid
@@ -565,6 +573,11 @@ body::before{
         );
 }
 
+
+/* =========================================================
+   HERO MAIN
+   ========================================================= */
+
 .hero-content{
     position:relative;
 
@@ -572,30 +585,50 @@ body::before{
 
     width:100%;
 
-    display:grid;
+    display:flex;
 
-    grid-template-columns:
-        170px
-        1fr
-        auto;
+    flex-direction:column;
 
     align-items:center;
 
-    gap:35px;
+    justify-content:center;
 
-    padding:35px 45px;
+    gap:20px;
+
+    padding:42px 45px;
+
+    text-align:center;
 }
 
-.hero-logo-wrap{
-    width:150px;
+.hero-main{
+    display:flex;
 
-    height:150px;
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+}
+
+
+/* =========================================================
+   LIG LOGOSU
+   ========================================================= */
+
+.hero-logo-wrap{
+    width:120px;
+
+    height:120px;
 
     display:grid;
 
     place-items:center;
 
     position:relative;
+
+    margin-bottom:17px;
 
     transform-style:preserve-3d;
 
@@ -611,7 +644,7 @@ body::before{
 
     position:absolute;
 
-    inset:15px;
+    inset:5px;
 
     border-radius:50%;
 
@@ -620,39 +653,69 @@ body::before{
             circle,
             color-mix(
                 in srgb,
-                var(--league) 22%,
+                var(--league) 32%,
                 transparent
             ),
             transparent 70%
         );
 
-    filter:blur(15px);
+    filter:blur(18px);
+
+    opacity:.8;
+}
+
+.hero-logo-wrap::after{
+    content:"";
+
+    position:absolute;
+
+    inset:-9px;
+
+    border-radius:50%;
+
+    border:
+        1px solid
+        color-mix(
+            in srgb,
+            var(--league) 28%,
+            transparent
+        );
+
+    opacity:.55;
+
+    animation:
+        logoRing
+        4s
+        ease-in-out
+        infinite;
 }
 
 .hero-logo{
     position:relative;
 
-    width:140px;
+    z-index:2;
 
-    height:140px;
+    width:105px;
+
+    height:105px;
 
     object-fit:contain;
 
     filter:
         drop-shadow(
-            0 25px 25px
+            0 18px 22px
             rgba(
                 0,
                 0,
                 0,
-                .55
+                .6
             )
         )
         drop-shadow(
-            0 0 30px
+            0 0 28px
             color-mix(
                 in srgb,
-                var(--league) 20%,
+                var(--league) 24%,
                 transparent
             )
         );
@@ -664,7 +727,7 @@ body::before{
 
 .hero-logo-wrap:hover .hero-logo{
     transform:
-        scale(1.08)
+        scale(1.1)
         rotateY(10deg)
         rotateZ(2deg);
 }
@@ -685,22 +748,45 @@ body::before{
 
 }
 
+@keyframes logoRing{
+
+    0%,100%{
+        transform:scale(.96);
+
+        opacity:.3;
+    }
+
+    50%{
+        transform:scale(1.08);
+
+        opacity:.65;
+    }
+
+}
+
+
+/* =========================================================
+   CREX
+   ========================================================= */
+
 .hero-kicker{
     display:flex;
 
     align-items:center;
 
+    justify-content:center;
+
     gap:8px;
 
-    margin-bottom:9px;
+    margin-bottom:8px;
 
     color:#748399;
 
-    font-size:9px;
+    font-size:10px;
 
     font-weight:900;
 
-    letter-spacing:1.8px;
+    letter-spacing:2.5px;
 }
 
 .hero-dot{
@@ -732,6 +818,11 @@ body::before{
 
 }
 
+
+/* =========================================================
+   LIG BAŞLIĞI
+   ========================================================= */
+
 .hero-title{
     color:#fff;
 
@@ -741,17 +832,26 @@ body::before{
 
     font-size:72px;
 
-    line-height:.82;
+    line-height:.85;
 
     font-weight:900;
 
     text-transform:uppercase;
 
     letter-spacing:-1px;
+
+    text-shadow:
+        0 5px 30px
+        rgba(
+            0,
+            0,
+            0,
+            .45
+        );
 }
 
 .hero-country{
-    margin-top:14px;
+    margin-top:13px;
 
     color:#728095;
 
@@ -762,14 +862,23 @@ body::before{
     letter-spacing:1px;
 }
 
+
+/* =========================================================
+   STATS
+   ========================================================= */
+
 .hero-stats{
     display:flex;
 
+    justify-content:center;
+
     gap:10px;
+
+    margin-top:3px;
 }
 
 .stat{
-    min-width:100px;
+    min-width:110px;
 
     padding:15px 17px;
 
@@ -793,6 +902,8 @@ body::before{
             255,
             .025
         );
+
+    backdrop-filter:blur(8px);
 }
 
 .stat strong{
@@ -820,7 +931,9 @@ body::before{
 }
 
 
-/* FILTERS */
+/* =========================================================
+   FILTERS
+   ========================================================= */
 
 .controls{
     display:flex;
@@ -927,7 +1040,9 @@ body::before{
 }
 
 
-/* MATCH GRID */
+/* =========================================================
+   MATCH GRID
+   ========================================================= */
 
 .matches{
     display:grid;
@@ -945,7 +1060,9 @@ body::before{
 }
 
 
-/* MATCH CARD */
+/* =========================================================
+   MATCH CARD
+   ========================================================= */
 
 .match-card{
     position:relative;
@@ -1163,7 +1280,9 @@ body::before{
 }
 
 
-/* TEAMS */
+/* =========================================================
+   TEAMS
+   ========================================================= */
 
 .teams{
     flex:1;
@@ -1259,7 +1378,6 @@ body::before{
     padding:10px;
 
     display:block;
-
 }
 
 .team-logo.text-logo{
@@ -1307,7 +1425,9 @@ body::before{
 
 .vs{
     min-width:34px;
+
     padding:0 6px;
+
     height:34px;
 
     display:grid;
@@ -1338,19 +1458,37 @@ body::before{
     font-size:7px;
 
     font-weight:900;
+
     white-space:nowrap;
 }
 
-/* SKOR ALANI (Logoların Altı) */
-.team-score {
-    margin-top: 4px;
-    font-family: "Barlow Condensed", sans-serif;
-    font-size: 16px;
-    font-weight: 900;
-    color: #fff;
-    text-align: center;
-    letter-spacing: 1px;
+
+/* =========================================================
+   SKOR
+   ========================================================= */
+
+.team-score{
+    margin-top:4px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:16px;
+
+    font-weight:900;
+
+    color:#fff;
+
+    text-align:center;
+
+    letter-spacing:1px;
 }
+
+
+/* =========================================================
+   ALT BOLUM
+   ========================================================= */
 
 .match-bottom{
     display:flex;
@@ -1371,7 +1509,9 @@ body::before{
         );
 }
 
+
 /* HAFTA */
+
 .match-date{
     color:#9aa8b8;
 
@@ -1437,7 +1577,9 @@ body::before{
 }
 
 
-/* LOADING */
+/* =========================================================
+   LOADING
+   ========================================================= */
 
 .loader{
     display:none;
@@ -1530,7 +1672,6 @@ body::before{
     color:#fff;
 
     font-size:16px;
-
 }
 
 .empty p{
@@ -1542,7 +1683,9 @@ body::before{
 }
 
 
-/* FOOTER */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 
 .footer{
     width:min(
@@ -1588,7 +1731,9 @@ body::before{
 }
 
 
-/* RESPONSIVE */
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
 
 @media(max-width:1150px){
 
@@ -1603,31 +1748,8 @@ body::before{
             );
     }
 
-    .hero-content{
-        grid-template-columns:
-            130px
-            1fr;
-
-        padding:30px;
-    }
-
-    .hero-logo-wrap{
-        width:120px;
-
-        height:120px;
-    }
-
-    .hero-logo{
-        width:110px;
-
-        height:110px;
-    }
-
-    .hero-stats{
-        grid-column:1/-1;
-    }
-
 }
+
 
 @media(max-width:760px){
 
@@ -1670,7 +1792,9 @@ body::before{
     }
 
     .league-hero{
-        min-height:350px;
+        min-height:370px;
+
+        border-radius:24px;
     }
 
     .hero-content{
@@ -1678,37 +1802,63 @@ body::before{
 
         flex-direction:column;
 
+        align-items:center;
+
+        justify-content:center;
+
+        padding:32px 20px;
+
         text-align:center;
 
-        padding:30px 20px;
+        gap:18px;
     }
 
     .hero-logo-wrap{
-        width:110px;
+        width:100px;
 
-        height:110px;
+        height:100px;
+
+        margin-bottom:13px;
     }
 
     .hero-logo{
-        width:105px;
+        width:88px;
 
-        height:105px;
+        height:88px;
     }
 
     .hero-title{
         font-size:54px;
+
+        line-height:.9;
+    }
+
+    .hero-kicker{
+        font-size:9px;
+
+        letter-spacing:2px;
+    }
+
+    .hero-country{
+        margin-top:12px;
+
+        font-size:9px;
     }
 
     .hero-stats{
         width:100%;
 
         justify-content:center;
+
+        margin-top:5px;
     }
 
     .stat{
         flex:1;
 
         min-width:0;
+
+        max-width:150px;
     }
 
     .matches{
@@ -1738,6 +1888,7 @@ body::before{
 
 }
 
+
 @media(max-width:400px){
 
     .search{
@@ -1748,7 +1899,20 @@ body::before{
         font-size:48px;
     }
 
+    .hero-logo-wrap{
+        width:90px;
+
+        height:90px;
+    }
+
+    .hero-logo{
+        width:80px;
+
+        height:80px;
+    }
+
 }
+
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1770,6 +1934,10 @@ body::before{
 <div class="ambient"></div>
 <div class="ambient2"></div>
 
+
+<!-- =======================================================
+     HEADER
+     ======================================================= -->
 
 <header class="header">
 
@@ -1828,8 +1996,16 @@ body::before{
 </header>
 
 
+<!-- =======================================================
+     MAIN
+     ======================================================= -->
+
 <main class="main">
 
+
+<!-- =======================================================
+     LIG HERO
+     ======================================================= -->
 
 <section class="league-hero">
 
@@ -1838,6 +2014,11 @@ body::before{
 
 <div class="hero-content">
 
+
+<div class="hero-main">
+
+
+<!-- LIG LOGOSU -->
 
 <div class="hero-logo-wrap">
 
@@ -1851,7 +2032,7 @@ body::before{
 </div>
 
 
-<div>
+<!-- CREX -->
 
 <div class="hero-kicker">
 
@@ -1862,6 +2043,8 @@ CREX
 </div>
 
 
+<!-- LIG ADI -->
+
 <h1
     id="leagueTitle"
     class="hero-title"
@@ -1870,6 +2053,8 @@ CREX
 </h1>
 
 
+<!-- ÜLKE -->
+
 <div
     id="leagueCountry"
     class="hero-country"
@@ -1877,8 +2062,11 @@ CREX
     MAÇLAR YÜKLENİYOR
 </div>
 
+
 </div>
 
+
+<!-- ISTATISTIKLER -->
 
 <div class="hero-stats">
 
@@ -1914,6 +2102,10 @@ CREX
 
 </section>
 
+
+<!-- =======================================================
+     MATCHES
+     ======================================================= -->
 
 <section id="matches">
 
@@ -1999,6 +2191,10 @@ CREX
 </main>
 
 
+<!-- =======================================================
+     FOOTER
+     ======================================================= -->
+
 <footer class="footer">
 
 <div class="footer-logo">
@@ -2014,10 +2210,12 @@ CREX
 
 <script>
 
-
 /* =========================================================
    CREX LIG SISTEMI
    ========================================================= */
+
+
+/* URL'den lig değerini al */
 
 const params =
     new URLSearchParams(
@@ -2030,89 +2228,142 @@ const leagueSlug =
     "premier-league";
 
 
-const LOGO_VERSION =
-    "20260829";
+/*
+   Logo cache versiyonu.
+   Logo değişirse bunu artırabilirsin.
+*/
 
+const LOGO_VERSION =
+    "20260901";
+
+
+/* =========================================================
+   LIGLER
+   ========================================================= */
 
 const leagues = {
 
     "premier-league":{
         name:"Premier League",
         country:"İngiltere",
-        logo:"",
+
+        logo:
+        "https://download.logo.wine/logo/Premier_League/Premier_League-Logo.wine.png",
+
         color:"#9846d7"
     },
+
 
     "la-liga":{
         name:"La Liga",
         country:"İspanya",
-        logo:"",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/2/20/LaLiga_2023_Vertical_Logo.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+
         color:"#ef4937"
     },
+
 
     "serie-a":{
         name:"Serie A",
         country:"İtalya",
-        logo:"",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/e/e9/Serie_A_logo_2022.svg?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+
         color:"#168cff"
     },
+
 
     "bundesliga":{
         name:"Bundesliga",
         country:"Almanya",
-        logo:"",
+
+        logo:
+        "https://assets.football-logos.cc/logos/germany/1500x1500/bundesliga.77719ba2.png",
+
         color:"#e51c35"
     },
+
 
     "ligue-1":{
         name:"Ligue 1",
         country:"Fransa",
-        logo:"",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Ligue_1_2024_Logo.png/960px-Ligue_1_2024_Logo.png",
+
         color:"#159fe8"
     },
+
 
     "super-lig":{
         name:"Süper Lig",
         country:"Türkiye",
-        logo:"",
+
+        logo:
+        "https://assets.footylogos.com/previews/super-lig-turkey/super-lig-turkey-logo-footylogos-1200.webp",
+
         color:"#e51d3b"
     },
+
 
     "champions-league":{
         name:"Champions League",
         country:"UEFA",
-        logo:"",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/e/e2/UEFA_Champions_League_logo.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original",
+
         color:"#426dff"
     },
+
 
     "europa-league":{
         name:"Europa League",
         country:"UEFA",
-        logo:"",
+
+        logo:
+        "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/UEFA_Europa_League_logo_%282024_version%29.svg/960px-UEFA_Europa_League_logo_%282024_version%29.svg.png",
+
         color:"#ff7417"
     },
+
 
     "conference-league":{
         name:"Conference League",
         country:"UEFA",
-        logo:"",
+
+        logo:
+        "https://assets.football-logos.cc/logos/tournaments/700x700/uefa-conference-league.4a977457.png",
+
         color:"#18b98b"
     },
+
 
     "eredivisie":{
         name:"Eredivisie",
         country:"Hollanda",
+
         logo:"",
+
         color:"#ed5b21"
     }
 
 };
 
 
+/* Aktif ligi bul */
+
 const league =
     leagues[leagueSlug] ||
     leagues["premier-league"];
 
+
+/* =========================================================
+   RENK
+   ========================================================= */
 
 document.documentElement
     .style
@@ -2122,50 +2373,63 @@ document.documentElement
     );
 
 
+/* =========================================================
+   ELEMENTLER
+   ========================================================= */
+
 const heroLogo =
     document.getElementById(
         "heroLogo"
     );
+
 
 const leagueTitle =
     document.getElementById(
         "leagueTitle"
     );
 
+
 const leagueCountry =
     document.getElementById(
         "leagueCountry"
     );
+
 
 const matchGrid =
     document.getElementById(
         "matchGrid"
     );
 
+
 const searchInput =
     document.getElementById(
         "searchInput"
     );
+
 
 const empty =
     document.getElementById(
         "empty"
     );
 
+
 const loader =
     document.getElementById(
         "loader"
     );
+
 
 const resultCount =
     document.getElementById(
         "resultCount"
     );
 
+
 const totalMatches =
     document.getElementById(
         "totalMatches"
     );
+
 
 const upcomingMatches =
     document.getElementById(
@@ -2173,10 +2437,18 @@ const upcomingMatches =
     );
 
 
+/* =========================================================
+   SAYFA BASLIGI
+   ========================================================= */
+
 document.title =
     "CREX — " +
     league.name;
 
+
+/* =========================================================
+   LIG LOGOSUNU YUKLE
+   ========================================================= */
 
 if(league.logo){
 
@@ -2186,7 +2458,11 @@ if(league.logo){
         );
 
     heroLogo.alt =
-        league.name;
+        league.name +
+        " logosu";
+
+    heroLogo.style.display =
+        "block";
 
 }
 else{
@@ -2197,6 +2473,10 @@ else{
 }
 
 
+/* =========================================================
+   LIG BILGILERI
+   ========================================================= */
+
 leagueTitle.textContent =
     league.name;
 
@@ -2205,6 +2485,10 @@ leagueCountry.textContent =
     league.country +
     " • CREX MAÇ MERKEZİ";
 
+
+/* =========================================================
+   MAC VERISI
+   ========================================================= */
 
 const matchesJsonPath =
     "./data/maclar.json";
@@ -2218,8 +2502,18 @@ let currentFilter = "all";
 
 let renderedCount = 0;
 
+
+/*
+   Sonsuz kaydırma.
+   Bir seferde 24 maç.
+*/
+
 const PAGE_SIZE = 24;
 
+
+/* =========================================================
+   LOGO CACHE
+   ========================================================= */
 
 function addLogoCache(url){
 
@@ -2262,6 +2556,10 @@ function addLogoCache(url){
 }
 
 
+/* =========================================================
+   METIN NORMALIZE
+   ========================================================= */
+
 function normalizeText(value){
 
     return String(
@@ -2289,6 +2587,10 @@ function normalizeText(value){
 }
 
 
+/* =========================================================
+   MATCH LOGOLARI
+   ========================================================= */
+
 function resolveMatchLogos(match){
 
     return {
@@ -2311,6 +2613,10 @@ function resolveMatchLogos(match){
 
 }
 
+
+/* =========================================================
+   MAC DURUMU
+   ========================================================= */
 
 function getMatchStatus(match){
 
@@ -2409,6 +2715,10 @@ function getMatchStatus(match){
 }
 
 
+/* =========================================================
+   MAC TARIHI
+   ========================================================= */
+
 function getMatchDate(match){
 
     if(!match.tarih)
@@ -2474,9 +2784,7 @@ function getMatchDate(match){
 
 
 /* =========================================================
-   HAFTA GÖSTERIMI
-   Tarih yerine maclar.json içindeki hafta değeri
-   gösterilir.
+   HAFTA
    ========================================================= */
 
 function formatDate(match){
@@ -2500,37 +2808,9 @@ function formatDate(match){
 }
 
 
-function formatSimpleDate(value){
-
-    const date =
-        new Date(
-            String(value) +
-            "T00:00:00"
-        );
-
-
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-
-        return String(value);
-
-    }
-
-
-    return new Intl.DateTimeFormat(
-        "tr-TR",
-        {
-            day:"2-digit",
-            month:"2-digit",
-            year:"numeric"
-        }
-    ).format(date);
-
-}
-
+/* =========================================================
+   LIG KONTROLU
+   ========================================================= */
 
 function isCorrectLeague(match){
 
@@ -2553,6 +2833,10 @@ function isCorrectLeague(match){
 
 }
 
+
+/* =========================================================
+   MACLARI YUKLE
+   ========================================================= */
 
 async function loadMatches(){
 
@@ -2700,6 +2984,10 @@ async function loadMatches(){
 }
 
 
+/* =========================================================
+   ISTATISTIK
+   ========================================================= */
+
 function updateStats(){
 
     const total =
@@ -2728,6 +3016,10 @@ function updateStats(){
 
 }
 
+
+/* =========================================================
+   FILTRELEME
+   ========================================================= */
 
 function applyFilters(){
 
@@ -2814,6 +3106,10 @@ function applyFilters(){
 }
 
 
+/* =========================================================
+   MAC KARTI
+   ========================================================= */
+
 function createMatchCard(match){
 
     const home =
@@ -2867,20 +3163,63 @@ function createMatchCard(match){
 
 
     let homeScoreHtml = "";
+
     let awayScoreHtml = "";
+
     let centerContent = "";
 
 
-    if(score && score.includes("-")){
-        const parts = score.split("-");
-        const hScore = parts[0].trim();
-        const aScore = parts[1].trim();
+    if(
+        score &&
+        score.includes("-")
+    ){
 
-        homeScoreHtml = `<div class="team-score">${escapeHTML(hScore)}</div>`;
-        awayScoreHtml = `<div class="team-score">${escapeHTML(aScore)}</div>`;
-        centerContent = `<div class="vs">-</div>`;
-    } else {
-        centerContent = `<div class="vs">VS</div>`;
+        const parts =
+            score.split("-");
+
+
+        const hScore =
+            parts[0].trim();
+
+
+        const aScore =
+            parts[1].trim();
+
+
+        homeScoreHtml =
+            `
+            <div class="team-score">
+                ${escapeHTML(hScore)}
+            </div>
+            `;
+
+
+        awayScoreHtml =
+            `
+            <div class="team-score">
+                ${escapeHTML(aScore)}
+            </div>
+            `;
+
+
+        centerContent =
+            `
+            <div class="vs">
+                -
+            </div>
+            `;
+
+    }
+
+    else{
+
+        centerContent =
+            `
+            <div class="vs">
+                VS
+            </div>
+            `;
+
     }
 
 
@@ -3094,6 +3433,10 @@ function createMatchCard(match){
 }
 
 
+/* =========================================================
+   TAKIM LOGO HATASI
+   ========================================================= */
+
 function handleTeamLogoError(
     img,
     fallbackText
@@ -3129,6 +3472,10 @@ function handleTeamLogoError(
 
 }
 
+
+/* =========================================================
+   SONRAKI SAYFA
+   ========================================================= */
 
 function renderNextPage(){
 
@@ -3247,6 +3594,10 @@ function renderNextPage(){
 }
 
 
+/* =========================================================
+   ARAMA
+   ========================================================= */
+
 searchInput.addEventListener(
     "input",
     ()=>{
@@ -3254,6 +3605,10 @@ searchInput.addEventListener(
     }
 );
 
+
+/* =========================================================
+   FILTRE BUTONLARI
+   ========================================================= */
 
 document
     .querySelectorAll(
@@ -3295,6 +3650,10 @@ document
         }
     );
 
+
+/* =========================================================
+   INFINITE SCROLL
+   ========================================================= */
 
 const infiniteObserver =
     new IntersectionObserver(
@@ -3344,6 +3703,10 @@ infiniteObserver.observe(
     sentinel
 );
 
+
+/* =========================================================
+   KART MOUSE EFFECT
+   ========================================================= */
 
 document.addEventListener(
     "mousemove",
@@ -3402,6 +3765,10 @@ document.addEventListener(
     }
 );
 
+
+/* =========================================================
+   GUVENLI HTML
+   ========================================================= */
 
 function escapeHTML(value){
 
@@ -3466,6 +3833,10 @@ function escapeJS(value){
 }
 
 
+/* =========================================================
+   TAKIM BAS HARFLERI
+   ========================================================= */
+
 function getInitials(name){
 
     const words =
@@ -3498,6 +3869,10 @@ function getInitials(name){
 }
 
 
+/* =========================================================
+   HERO LOGO HATASI
+   ========================================================= */
+
 heroLogo.addEventListener(
     "error",
     ()=>{
@@ -3509,9 +3884,14 @@ heroLogo.addEventListener(
 );
 
 
+/* =========================================================
+   BASLAT
+   ========================================================= */
+
 loadMatches();
 
 </script>
 
 </body>
+
     </html>
