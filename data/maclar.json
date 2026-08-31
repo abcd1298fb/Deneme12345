@@ -2077,7 +2077,7 @@
       "tip": "embed",
       "url": "https://www.dailymotion.com/embed/video/xaxtmjq"
     },
-          {
+     {
     "id": 100,
     "lig": "super-lig",
     "ligAdi": "Türkiye - Süper Lig",
@@ -2096,6 +2096,5 @@
       "aktif": true,
       "tip": "embed",
       "url": "https://www.dailymotion.com/embed/video/xay8csm"
-    }
     }
 ]
