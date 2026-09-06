@@ -1910,12 +1910,12 @@ CREX
 
 /* =========================================================
    CREX OTOMATİK LİG SİSTEMİ
-   GÜNCELLENMİŞ SÜRÜM
+   TÜM MAÇLARI GÖSTEREN SÜRÜM
 ========================================================= */
 
 
 /*
-    ARTIK AŞAĞIDAKİLERİN TAMAMI ÇALIŞIR:
+    DESTEKLENEN URL'LER:
 
     lig.html?lig=premier-league
 
@@ -1960,28 +1960,11 @@ const params =
     );
 
 
-/*
-    Eski sistem:
-    ?lig=
-
-    Yeni sistem:
-    ?lig=
-    ?league=
-    ?slug=
-
-    Hepsi destekleniyor.
-*/
-
 const requestedLeague =
     params.get("lig") ||
     params.get("league") ||
     params.get("slug");
 
-
-/*
-    URL'de hiçbir lig yoksa
-    Premier League varsayılan.
-*/
 
 const leagueSlug =
     requestedLeague &&
@@ -1994,7 +1977,17 @@ const leagueSlug =
    AYARLAR
 ========================================================= */
 
-const MAX_MATCHES = 10;
+/*
+ * MAÇ SAYISI SINIRI KALDIRILDI.
+ *
+ * Artık maclar.json içerisinde bulunan
+ * ilgili lige ait TÜM MAÇLAR gösterilir.
+ */
+
+
+/*
+ * Logo cache versiyonu.
+ */
 
 const LOGO_VERSION =
     "20260901";
@@ -2255,10 +2248,6 @@ const leagues = {
 
         aliases:[
 
-            /*
-             * İNGİLİZCE
-             */
-
             "europa league",
             "europaleague",
             "europa-league",
@@ -2271,24 +2260,14 @@ const leagues = {
             "uel",
             "uefa europa",
 
-
-            /*
-             * TÜRKÇE
-             */
-
             "avrupa ligi",
             "avrupa-ligi",
-            "avrupa ligi",
 
             "avrupa",
             "avrupa lig",
 
             "europa ligi",
             "europa-ligi",
-
-            /*
-             * ESKİ / ALTERNATİF YAZIMLAR
-             */
 
             "europa lig",
             "europaligi",
@@ -2328,10 +2307,6 @@ const leagues = {
 
         aliases:[
 
-            /*
-             * GÜNCEL RESMİ İSİM
-             */
-
             "conference league",
             "conferenceleague",
             "conference-league",
@@ -2345,11 +2320,6 @@ const leagues = {
 
             "uecl",
 
-
-            /*
-             * ESKİ RESMİ İSİM
-             */
-
             "uefa europa conference league",
             "uefa-europa-conference-league",
 
@@ -2359,15 +2329,9 @@ const leagues = {
             "europa conference",
             "europa-conference",
 
-
-            /*
-             * TÜRKÇE
-             */
-
             "konferans ligi",
             "konferans-ligi",
 
-            "konferans ligi",
             "konferans",
 
             "uefa konferans ligi",
@@ -2381,11 +2345,6 @@ const leagues = {
 
             "avrupa konferans",
             "avrupa-konferans",
-
-
-            /*
-             * ALTERNATİF URL YAZIMLARI
-             */
 
             "conference ligi",
             "conference-ligi",
@@ -2456,10 +2415,6 @@ function resolveLeagueSlug(value){
         return null;
 
 
-    /*
-     * 1 — Direkt slug kontrolü
-     */
-
     for(
         const [slug]
         of Object.entries(leagues)
@@ -2476,10 +2431,6 @@ function resolveLeagueSlug(value){
 
     }
 
-
-    /*
-     * 2 — Alias kontrolü
-     */
 
     for(
         const [slug,data]
@@ -2501,13 +2452,6 @@ function resolveLeagueSlug(value){
     }
 
 
-    /*
-     * 3 — EKSTRA GÜVENLİ URL KONTROLÜ
-     *
-     * Bazı index.html bağlantılarında
-     * farklı isimler kullanılabiliyor.
-     */
-
     if(
         normalized.includes("premier") &&
         (
@@ -2522,10 +2466,8 @@ function resolveLeagueSlug(value){
 
 
     if(
-        (
-            normalized.includes("laliga") ||
-            normalized === "laliga"
-        )
+        normalized.includes("laliga") ||
+        normalized === "laliga"
     ){
 
         return "la-liga";
@@ -2580,24 +2522,12 @@ function resolveLeagueSlug(value){
     }
 
 
-    /*
-     * EUROPA LEAGUE
-     *
-     * ÖNEMLİ:
-     * conference kontrolünden önce.
-     */
-
     if(
         normalized.includes("europaleague") ||
         normalized.includes("europa") ||
         normalized.includes("avrupali") ||
         normalized.includes("avrupa")
     ){
-
-        /*
-         * Eğer konferans kelimesi de varsa
-         * Conference League olmalı.
-         */
 
         if(
             normalized.includes("conference") ||
@@ -2613,10 +2543,6 @@ function resolveLeagueSlug(value){
 
     }
 
-
-    /*
-     * CONFERENCE LEAGUE
-     */
 
     if(
         normalized.includes("conference") ||
@@ -2643,16 +2569,6 @@ const resolvedSlug =
         leagueSlug
     );
 
-
-/*
- * URL'de lig yoksa Premier League.
- *
- * URL'de lig varsa ve tanınıyorsa
- * o lig.
- *
- * URL'de lig var ama tanınmıyorsa
- * hata ekranı.
- */
 
 const league =
     resolvedSlug
@@ -2792,7 +2708,6 @@ if(!league){
     loader.classList.remove(
         "show"
     );
-
 
 }
 else{
@@ -3204,15 +3119,11 @@ else{
     }
 
 
-    /* =========================================================
+    /* =====================================================
        LİG KONTROL
-    ========================================================= */
+    ===================================================== */
 
     function isCorrectLeague(match){
-
-        /*
-         * JSON'daki olası lig alanlarının tamamı.
-         */
 
         const matchValues = [
 
@@ -3241,20 +3152,9 @@ else{
             resolvedSlug;
 
 
-        /*
-         * Hedef lig kesin olarak belli değilse
-         * maç gösterme.
-         */
-
         if(!targetSlug)
             return false;
 
-
-        /*
-         * JSON'da lig alanı yoksa
-         * otomatik olarak başka ligdeki maçı
-         * göstermiyoruz.
-         */
 
         if(
             matchValues.length === 0
@@ -3264,10 +3164,6 @@ else{
 
         }
 
-
-        /*
-         * Önce normal resolver.
-         */
 
         if(
             matchValues.some(
@@ -3282,12 +3178,6 @@ else{
 
         }
 
-
-        /*
-         * Ekstra güvenlik:
-         * JSON'da bazen "UEFA Europa League 2026/27"
-         * gibi sezon bilgisi olabilir.
-         */
 
         const combined =
             matchValues
@@ -3440,6 +3330,9 @@ else{
 
             /*
              * LİG FİLTRESİ
+             *
+             * Burada artık hiçbir şekilde
+             * 10 maç sınırı uygulanmıyor.
              */
 
             allMatches =
@@ -3665,39 +3558,32 @@ else{
 
 
         /*
-         * Maksimum 10 maç.
+         * =================================================
+         * ÖNEMLİ:
+         *
+         * ESKİ SİSTEM:
+         *
+         * results.slice(0,10)
+         *
+         * kullanıyordu.
+         *
+         * ARTIK TÜM SONUÇLAR GÖSTERİLİYOR.
+         * =================================================
          */
 
         filteredMatches =
-            results.slice(
-                0,
-                MAX_MATCHES
-            );
+            results;
 
 
         renderMatches();
 
 
-        if(
-            results.length >
-            MAX_MATCHES
-        ){
-
-            resultCount.textContent =
-                MAX_MATCHES +
-                " MAÇ GÖSTERİLİYOR";
-
-        }
-        else{
-
-            resultCount.textContent =
-                filteredMatches.length
-                .toLocaleString(
-                    "tr-TR"
-                ) +
-                " MAÇ";
-
-        }
+        resultCount.textContent =
+            filteredMatches.length
+            .toLocaleString(
+                "tr-TR"
+            ) +
+            " MAÇ";
 
     }
 
@@ -3771,6 +3657,12 @@ else{
                             ],
                             {
                                 duration:550,
+
+                                /*
+                                 * Çok fazla maç olduğunda
+                                 * yüzlerce animasyon oluşmasın.
+                                 * İlk 350ms içinde kademeli giriş.
+                                 */
 
                                 delay:
                                     Math.min(
