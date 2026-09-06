@@ -684,7 +684,7 @@ body::before{
 
 
 /* =========================================================
-   FILTER
+   FILTER + WEEK SELECT
 ========================================================= */
 
 .controls{
@@ -696,6 +696,14 @@ body::before{
 
     margin-top:30px;
     margin-bottom:20px;
+}
+
+.controls-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    min-width:0;
 }
 
 .filters{
@@ -761,6 +769,422 @@ body::before{
 
     transform:translateY(-2px);
 }
+
+
+/* =========================================================
+   HAFTA SEÇİCİ
+========================================================= */
+
+.week-picker{
+    position:relative;
+    flex:none;
+}
+
+.week-button{
+    min-width:175px;
+    height:42px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+
+    padding:0 13px 0 15px;
+
+    color:#dce8f4;
+
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.055),
+            rgba(255,255,255,.018)
+        );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.045),
+        0 10px 25px rgba(0,0,0,.15);
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    transition:.35s var(--ease);
+}
+
+.week-button:hover,
+.week-picker.open .week-button{
+    border-color:
+        color-mix(
+            in srgb,
+            var(--league) 42%,
+            transparent
+        );
+
+    background:
+        color-mix(
+            in srgb,
+            var(--league) 8%,
+            #080e16
+        );
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.25),
+        0 0 24px
+        color-mix(
+            in srgb,
+            var(--league) 10%,
+            transparent
+        );
+}
+
+.week-button-content{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    min-width:0;
+}
+
+.week-button-icon{
+    width:25px;
+    height:25px;
+
+    display:grid;
+    place-items:center;
+
+    flex:none;
+
+    border-radius:8px;
+
+    color:#fff;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--league) 16%,
+            transparent
+        );
+
+    border:1px solid
+        color-mix(
+            in srgb,
+            var(--league) 22%,
+            transparent
+        );
+}
+
+.week-button-icon svg{
+    width:13px;
+    height:13px;
+}
+
+.week-button-text{
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+    align-items:flex-start;
+    gap:1px;
+}
+
+.week-button-label{
+    color:#627288;
+
+    font-size:6px;
+    font-weight:900;
+
+    letter-spacing:1.1px;
+}
+
+#selectedWeekText{
+    max-width:105px;
+
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+
+    color:#fff;
+
+    font-family:"Barlow Condensed",sans-serif;
+
+    font-size:16px;
+    line-height:1;
+
+    font-weight:800;
+
+    letter-spacing:.3px;
+}
+
+.week-chevron{
+    width:16px;
+    height:16px;
+
+    flex:none;
+
+    color:#748398;
+
+    transition:.35s var(--ease);
+}
+
+.week-picker.open .week-chevron{
+    color:var(--league);
+    transform:rotate(180deg);
+}
+
+
+/* =========================================================
+   HAFTA MENÜSÜ
+========================================================= */
+
+.week-menu{
+    position:absolute;
+
+    top:calc(100% + 9px);
+    right:0;
+
+    width:235px;
+    max-height:310px;
+
+    padding:7px;
+
+    overflow-y:auto;
+
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(14,23,34,.98),
+            rgba(5,10,16,.99)
+        );
+
+    box-shadow:
+        0 25px 60px rgba(0,0,0,.55),
+        0 0 30px
+        color-mix(
+            in srgb,
+            var(--league) 7%,
+            transparent
+        );
+
+    backdrop-filter:blur(25px);
+    -webkit-backdrop-filter:blur(25px);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+
+    transform:
+        translateY(-8px)
+        scale(.97);
+
+    transform-origin:top right;
+
+    transition:
+        opacity .25s var(--ease),
+        transform .25s var(--ease),
+        visibility .25s;
+    
+    z-index:200;
+}
+
+.week-picker.open .week-menu{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+
+    transform:
+        translateY(0)
+        scale(1);
+}
+
+.week-menu::-webkit-scrollbar{
+    width:5px;
+}
+
+.week-menu::-webkit-scrollbar-track{
+    background:transparent;
+}
+
+.week-menu::-webkit-scrollbar-thumb{
+    border-radius:20px;
+    background:rgba(255,255,255,.12);
+}
+
+.week-menu-title{
+    padding:8px 9px 7px;
+
+    color:#58697d;
+
+    font-size:7px;
+    font-weight:900;
+
+    letter-spacing:1.2px;
+}
+
+.week-option{
+    width:100%;
+
+    min-height:40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    gap:10px;
+
+    padding:8px 10px;
+
+    color:#91a0b2;
+
+    border:1px solid transparent;
+    border-radius:10px;
+
+    background:transparent;
+
+    cursor:pointer;
+
+    font-family:inherit;
+
+    font-size:9px;
+    font-weight:900;
+
+    text-align:left;
+
+    transition:.25s var(--ease);
+}
+
+.week-option:hover{
+    color:#fff;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--league) 8%,
+            transparent
+        );
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--league) 15%,
+            transparent
+        );
+
+    transform:translateX(2px);
+}
+
+.week-option.active{
+    color:#fff;
+
+    background:
+        color-mix(
+            in srgb,
+            var(--league) 13%,
+            transparent
+        );
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--league) 25%,
+            transparent
+        );
+}
+
+.week-option-left{
+    display:flex;
+    align-items:center;
+    gap:9px;
+
+    min-width:0;
+}
+
+.week-number{
+    width:24px;
+    height:24px;
+
+    display:grid;
+    place-items:center;
+
+    flex:none;
+
+    color:#78899d;
+
+    border:1px solid rgba(255,255,255,.06);
+    border-radius:7px;
+
+    background:rgba(255,255,255,.025);
+
+    font-family:"Barlow Condensed",sans-serif;
+
+    font-size:12px;
+    font-weight:900;
+}
+
+.week-option.active .week-number{
+    color:#fff;
+
+    border-color:
+        color-mix(
+            in srgb,
+            var(--league) 35%,
+            transparent
+        );
+
+    background:
+        color-mix(
+            in srgb,
+            var(--league) 16%,
+            transparent
+        );
+}
+
+.week-name{
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
+
+.week-check{
+    width:15px;
+    height:15px;
+
+    flex:none;
+
+    color:var(--league);
+
+    opacity:0;
+
+    transform:scale(.7);
+
+    transition:.25s var(--ease);
+}
+
+.week-option.active .week-check{
+    opacity:1;
+    transform:scale(1);
+}
+
+.week-empty{
+    padding:20px 10px;
+
+    color:#617186;
+
+    text-align:center;
+
+    font-size:8px;
+    font-weight:800;
+}
+
+
+/* =========================================================
+   SONUÇ SAYACI
+========================================================= */
 
 .result-count{
     flex:none;
@@ -1544,12 +1968,33 @@ body::before{
     }
 
     .controls{
-        align-items:flex-start;
+        align-items:stretch;
         flex-direction:column;
+    }
+
+    .controls-left{
+        width:100%;
+        flex-direction:column;
+        align-items:stretch;
     }
 
     .filters{
         width:100%;
+    }
+
+    .week-picker{
+        width:100%;
+    }
+
+    .week-button{
+        width:100%;
+        min-width:0;
+    }
+
+    .week-menu{
+        width:100%;
+        right:0;
+        max-height:280px;
     }
 
     .result-count{
@@ -1818,6 +2263,8 @@ CREX
 
 <div class="controls">
 
+<div class="controls-left">
+
 <div class="filters">
 
 <button
@@ -1842,6 +2289,106 @@ CREX
 </button>
 
 </div>
+
+
+<!-- =====================================================
+     HAFTA SEÇ BUTONU
+===================================================== -->
+
+<div
+    id="weekPicker"
+    class="week-picker"
+>
+
+<button
+    id="weekButton"
+    class="week-button"
+    type="button"
+    aria-haspopup="listbox"
+    aria-expanded="false"
+>
+
+<div class="week-button-content">
+
+<div class="week-button-icon">
+
+<svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+>
+    <rect
+        x="3"
+        y="4"
+        width="18"
+        height="17"
+        rx="2"
+    ></rect>
+
+    <path d="M16 2v4"></path>
+    <path d="M8 2v4"></path>
+
+    <path d="M3 10h18"></path>
+
+    <path d="M8 14h2"></path>
+    <path d="M14 14h2"></path>
+    <path d="M8 18h2"></path>
+    <path d="M14 18h2"></path>
+</svg>
+
+</div>
+
+<div class="week-button-text">
+
+<span class="week-button-label">
+    HAFTA SEÇ
+</span>
+
+<strong id="selectedWeekText">
+    TÜM HAFTALAR
+</strong>
+
+</div>
+
+</div>
+
+
+<svg
+    class="week-chevron"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+>
+    <path d="m6 9 6 6 6-6"></path>
+</svg>
+
+</button>
+
+
+<div
+    id="weekMenu"
+    class="week-menu"
+    role="listbox"
+>
+
+<div class="week-menu-title">
+    HAFTA SEÇ
+</div>
+
+<div id="weekOptions"></div>
+
+</div>
+
+</div>
+
+</div>
+
 
 <div
     id="resultCount"
@@ -1873,7 +2420,7 @@ CREX
 </h3>
 
 <p>
-    Arama veya filtre kriterlerini değiştirmeyi deneyin.
+    Arama, filtre veya hafta kriterlerini değiştirmeyi deneyin.
 </p>
 
 </div>
@@ -1910,7 +2457,7 @@ CREX
 
 /* =========================================================
    CREX OTOMATİK LİG SİSTEMİ
-   TÜM MAÇLARI GÖSTEREN SÜRÜM
+   TÜM MAÇLAR + HAFTA SEÇME SİSTEMİ
 ========================================================= */
 
 
@@ -1939,14 +2486,6 @@ CREX
     lig.html?lig=uefa-conference-league
     lig.html?lig=uefa-europa-conference-league
     lig.html?lig=uecl
-
-    Ayrıca:
-
-    lig.html?league=europa-league
-    lig.html?league=conference-league
-
-    lig.html?slug=europa-league
-    lig.html?slug=conference-league
 */
 
 
@@ -1977,18 +2516,6 @@ const leagueSlug =
    AYARLAR
 ========================================================= */
 
-/*
- * MAÇ SAYISI SINIRI KALDIRILDI.
- *
- * Artık maclar.json içerisinde bulunan
- * ilgili lige ait TÜM MAÇLAR gösterilir.
- */
-
-
-/*
- * Logo cache versiyonu.
- */
-
 const LOGO_VERSION =
     "20260901";
 
@@ -1998,11 +2525,6 @@ const LOGO_VERSION =
 ========================================================= */
 
 const leagues = {
-
-
-    /* =====================================================
-       PREMIER LEAGUE
-    ===================================================== */
 
     "premier-league":{
 
@@ -2033,10 +2555,6 @@ const leagues = {
     },
 
 
-    /* =====================================================
-       LA LIGA
-    ===================================================== */
-
     "la-liga":{
 
         name:"La Liga",
@@ -2064,10 +2582,6 @@ const leagues = {
 
     },
 
-
-    /* =====================================================
-       SERIE A
-    ===================================================== */
 
     "serie-a":{
 
@@ -2097,10 +2611,6 @@ const leagues = {
     },
 
 
-    /* =====================================================
-       BUNDESLIGA
-    ===================================================== */
-
     "bundesliga":{
 
         name:"Bundesliga",
@@ -2126,10 +2636,6 @@ const leagues = {
 
     },
 
-
-    /* =====================================================
-       LIGUE 1
-    ===================================================== */
 
     "ligue-1":{
 
@@ -2158,10 +2664,6 @@ const leagues = {
 
     },
 
-
-    /* =====================================================
-       SÜPER LİG
-    ===================================================== */
 
     "super-lig":{
 
@@ -2194,10 +2696,6 @@ const leagues = {
 
     },
 
-
-    /* =====================================================
-       CHAMPIONS LEAGUE
-    ===================================================== */
 
     "champions-league":{
 
@@ -2235,10 +2733,6 @@ const leagues = {
 
     },
 
-
-    /* =====================================================
-       EUROPA LEAGUE
-    ===================================================== */
 
     "europa-league":{
 
@@ -2294,10 +2788,6 @@ const leagues = {
 
     },
 
-
-    /* =====================================================
-       CONFERENCE LEAGUE
-    ===================================================== */
 
     "conference-league":{
 
@@ -2636,6 +3126,36 @@ const upcomingMatches =
 
 
 /* =========================================================
+   HAFTA ELEMENTLERİ
+========================================================= */
+
+const weekPicker =
+    document.getElementById(
+        "weekPicker"
+    );
+
+const weekButton =
+    document.getElementById(
+        "weekButton"
+    );
+
+const weekMenu =
+    document.getElementById(
+        "weekMenu"
+    );
+
+const weekOptions =
+    document.getElementById(
+        "weekOptions"
+    );
+
+const selectedWeekText =
+    document.getElementById(
+        "selectedWeekText"
+    );
+
+
+/* =========================================================
    GEÇERSİZ LİG
 ========================================================= */
 
@@ -2789,6 +3309,22 @@ else{
         "all";
 
 
+    /*
+     * null = TÜM HAFTALAR
+     *
+     * Örneğin:
+     *
+     * "1"
+     * "2"
+     * "15"
+     *
+     * şeklinde tutulur.
+     */
+
+    let currentWeek =
+        null;
+
+
     /* =====================================================
        LOGO CACHE
     ===================================================== */
@@ -2860,6 +3396,7 @@ else{
                     match.dep_logo ||
                     match.away_logo ||
                     ""
+
                 )
 
         };
@@ -3120,6 +3657,729 @@ else{
 
 
     /* =====================================================
+       HAFTA DEĞERİNİ BUL
+    ===================================================== */
+
+    function getWeekRawValue(match){
+
+        /*
+         * Birden fazla JSON isimlendirmesini
+         * destekliyoruz.
+         */
+
+        const value =
+            match.hafta ??
+            match.week ??
+            match.haftaNo ??
+            match.weekNumber ??
+            match.week_number ??
+            match.matchWeek ??
+            match.match_week ??
+            match.round ??
+            match.fixtureRound ??
+            match.fixture_round;
+
+
+        if(
+            value === undefined ||
+            value === null
+        ){
+
+            return "";
+
+        }
+
+
+        return String(
+            value
+        ).trim();
+
+    }
+
+
+    /* =====================================================
+       HAFTA NUMARASI
+    ===================================================== */
+
+    function getWeekNumber(match){
+
+        const raw =
+            getWeekRawValue(
+                match
+            );
+
+
+        if(!raw)
+            return null;
+
+
+        /*
+         * "1"
+         * "1. Hafta"
+         * "Hafta 1"
+         * "HAFTA: 1"
+         * "Round 1"
+         * gibi değerleri yakalar.
+         */
+
+        const matchNumber =
+            raw.match(
+                /\d+/
+            );
+
+
+        if(
+            matchNumber &&
+            matchNumber[0]
+        ){
+
+            const number =
+                parseInt(
+                    matchNumber[0],
+                    10
+                );
+
+
+            if(
+                Number.isFinite(
+                    number
+                )
+            ){
+
+                return number;
+
+            }
+
+        }
+
+
+        /*
+         * Sayı bulunamazsa null.
+         */
+
+        return null;
+
+    }
+
+
+    /* =====================================================
+       HAFTA GÖRÜNEN METNİ
+    ===================================================== */
+
+    function getWeekDisplayName(
+        match,
+        fallbackNumber
+    ){
+
+        const raw =
+            getWeekRawValue(
+                match
+            );
+
+
+        const number =
+            getWeekNumber(
+                match
+            );
+
+
+        if(number !== null){
+
+            return (
+                number +
+                ". HAFTA"
+            );
+
+        }
+
+
+        if(raw){
+
+            return raw.toLocaleUpperCase(
+                "tr-TR"
+            );
+
+        }
+
+
+        if(
+            fallbackNumber !== undefined &&
+            fallbackNumber !== null
+        ){
+
+            return (
+                fallbackNumber +
+                ". HAFTA"
+            );
+
+        }
+
+
+        return "HAFTA YOK";
+
+    }
+
+
+    /* =====================================================
+       HAFTA LİSTESİ OLUŞTUR
+    ===================================================== */
+
+    function buildWeekList(){
+
+        /*
+         * Aynı hafta birden fazla maçta bulunduğu için
+         * Map kullanıyoruz.
+         */
+
+        const weekMap =
+            new Map();
+
+
+        allMatches.forEach(
+            match => {
+
+                const number =
+                    getWeekNumber(
+                        match
+                    );
+
+
+                const raw =
+                    getWeekRawValue(
+                        match
+                    );
+
+
+                /*
+                 * Öncelik hafta numarasında.
+                 */
+
+                if(number !== null){
+
+                    if(
+                        !weekMap.has(
+                            String(number)
+                        )
+                    ){
+
+                        weekMap.set(
+                            String(number),
+                            {
+                                key:String(number),
+                                number:number,
+                                label:
+                                    number +
+                                    ". HAFTA"
+                            }
+                        );
+
+                    }
+
+                    return;
+
+                }
+
+
+                /*
+                 * Numarasız hafta değeri varsa
+                 * onu da gösterebiliriz.
+                 */
+
+                if(raw){
+
+                    const key =
+                        normalizeText(
+                            raw
+                        );
+
+
+                    if(
+                        !weekMap.has(
+                            key
+                        )
+                    ){
+
+                        weekMap.set(
+                            key,
+                            {
+                                key:key,
+                                number:null,
+                                label:
+                                    raw.toLocaleUpperCase(
+                                        "tr-TR"
+                                    )
+                            }
+                        );
+
+                    }
+
+                }
+
+            }
+        );
+
+
+        const weeks =
+            Array.from(
+                weekMap.values()
+            );
+
+
+        /*
+         * Sayısal haftaları sıralıyoruz.
+         * Sayısal olmayanlar en alta gelir.
+         */
+
+        weeks.sort(
+            (a,b)=>{
+
+                if(
+                    a.number !== null &&
+                    b.number !== null
+                ){
+
+                    return (
+                        a.number -
+                        b.number
+                    );
+
+                }
+
+
+                if(
+                    a.number !== null
+                ){
+
+                    return -1;
+
+                }
+
+
+                if(
+                    b.number !== null
+                ){
+
+                    return 1;
+
+                }
+
+
+                return a.label.localeCompare(
+                    b.label,
+                    "tr"
+                );
+
+            }
+        );
+
+
+        renderWeekOptions(
+            weeks
+        );
+
+    }
+
+
+    /* =====================================================
+       HAFTA BUTONLARINI RENDER
+    ===================================================== */
+
+    function renderWeekOptions(
+        weeks
+    ){
+
+        weekOptions.innerHTML =
+            "";
+
+
+        /*
+         * Hafta verisi yoksa
+         */
+
+        if(
+            weeks.length === 0
+        ){
+
+            weekOptions.innerHTML = `
+
+                <div class="week-empty">
+
+                    Bu lig için hafta bilgisi bulunamadı.
+
+                </div>
+
+            `;
+
+            return;
+
+        }
+
+
+        const fragment =
+            document.createDocumentFragment();
+
+
+        /*
+         * TÜM HAFTALAR
+         */
+
+        const allButton =
+            createWeekOption(
+                {
+                    key:null,
+                    number:null,
+                    label:"TÜM HAFTALAR"
+                }
+            );
+
+
+        fragment.appendChild(
+            allButton
+        );
+
+
+        /*
+         * Haftalar
+         */
+
+        weeks.forEach(
+            week => {
+
+                const option =
+                    createWeekOption(
+                        week
+                    );
+
+
+                fragment.appendChild(
+                    option
+                );
+
+            }
+        );
+
+
+        weekOptions.appendChild(
+            fragment
+        );
+
+    }
+
+
+    /* =====================================================
+       HAFTA OPTION OLUŞTUR
+    ===================================================== */
+
+    function createWeekOption(
+        week
+    ){
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+
+        button.type =
+            "button";
+
+
+        button.className =
+            "week-option";
+
+
+        button.setAttribute(
+            "role",
+            "option"
+        );
+
+
+        const isActive =
+            currentWeek === null
+                ? week.key === null
+                : String(
+                    currentWeek
+                ) === String(
+                    week.key
+                );
+
+
+        if(isActive){
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+
+        const numberText =
+            week.number !== null
+                ? String(
+                    week.number
+                )
+                : "—";
+
+
+        button.innerHTML = `
+
+            <div class="week-option-left">
+
+                <span class="week-number">
+
+                    ${escapeHTML(
+                        numberText
+                    )}
+
+                </span>
+
+                <span class="week-name">
+
+                    ${escapeHTML(
+                        week.label
+                    )}
+
+                </span>
+
+            </div>
+
+
+            <svg
+                class="week-check"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
+                <path d="m5 12 4 4L19 6"></path>
+            </svg>
+
+        `;
+
+
+        button.addEventListener(
+            "click",
+            ()=>{
+
+                currentWeek =
+                    week.key === null
+                        ? null
+                        : String(
+                            week.key
+                        );
+
+
+                updateSelectedWeekText(
+                    week
+                );
+
+
+                updateWeekActiveState();
+
+
+                closeWeekMenu();
+
+
+                applyFilters();
+
+            }
+        );
+
+
+        return button;
+
+    }
+
+
+    /* =====================================================
+       SEÇİLİ HAFTA YAZISI
+    ===================================================== */
+
+    function updateSelectedWeekText(
+        week
+    ){
+
+        if(
+            !week ||
+            week.key === null
+        ){
+
+            selectedWeekText.textContent =
+                "TÜM HAFTALAR";
+
+            return;
+
+        }
+
+
+        selectedWeekText.textContent =
+            week.label;
+
+    }
+
+
+    /* =====================================================
+       HAFTA ACTIVE DURUMU
+    ===================================================== */
+
+    function updateWeekActiveState(){
+
+        document
+            .querySelectorAll(
+                ".week-option"
+            )
+            .forEach(
+                option => {
+
+                    option.classList.remove(
+                        "active"
+                    );
+
+                }
+            );
+
+
+        /*
+         * Yeniden seçili butonu bul.
+         */
+
+        const options =
+            document.querySelectorAll(
+                ".week-option"
+            );
+
+
+        options.forEach(
+            option => {
+
+                const name =
+                    option.querySelector(
+                        ".week-name"
+                    );
+
+
+                if(!name)
+                    return;
+
+
+                const text =
+                    name.textContent
+                    .trim()
+                    .toLocaleUpperCase(
+                        "tr-TR"
+                    );
+
+
+                if(
+                    currentWeek === null &&
+                    text === "TÜM HAFTALAR"
+                ){
+
+                    option.classList.add(
+                        "active"
+                    );
+
+                    return;
+
+                }
+
+
+                if(
+                    currentWeek !== null &&
+                    text ===
+                        (
+                            String(
+                                currentWeek
+                            ) +
+                            ". HAFTA"
+                        )
+                ){
+
+                    option.classList.add(
+                        "active"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       HAFTA FİLTRE KONTROLÜ
+    ===================================================== */
+
+    function matchBelongsToCurrentWeek(
+        match
+    ){
+
+        /*
+         * Tüm haftalar seçili.
+         */
+
+        if(
+            currentWeek === null
+        ){
+
+            return true;
+
+        }
+
+
+        const matchWeek =
+            getWeekNumber(
+                match
+            );
+
+
+        /*
+         * Sayısal hafta varsa
+         */
+
+        if(
+            matchWeek !== null
+        ){
+
+            return (
+                String(
+                    matchWeek
+                ) ===
+                String(
+                    currentWeek
+                )
+            );
+
+        }
+
+
+        /*
+         * Numarasız değerler için
+         * normalize karşılaştırma.
+         */
+
+        const raw =
+            normalizeText(
+                getWeekRawValue(
+                    match
+                )
+            );
+
+
+        return (
+            raw ===
+            normalizeText(
+                currentWeek
+            )
+        );
+
+    }
+
+
+    /* =====================================================
        LİG KONTROL
     ===================================================== */
 
@@ -3330,9 +4590,6 @@ else{
 
             /*
              * LİG FİLTRESİ
-             *
-             * Burada artık hiçbir şekilde
-             * 10 maç sınırı uygulanmıyor.
              */
 
             allMatches =
@@ -3393,6 +4650,13 @@ else{
 
                 }
             );
+
+
+            /*
+             * HAFTA MENÜSÜNÜ OLUŞTUR
+             */
+
+            buildWeekList();
 
 
             updateStats();
@@ -3491,6 +4755,25 @@ else{
             allMatches.filter(
                 match => {
 
+                    /*
+                     * HAFTA FİLTRESİ
+                     */
+
+                    if(
+                        !matchBelongsToCurrentWeek(
+                            match
+                        )
+                    ){
+
+                        return false;
+
+                    }
+
+
+                    /*
+                     * DURUM FİLTRESİ
+                     */
+
                     const status =
                         getMatchStatus(
                             match
@@ -3505,6 +4788,10 @@ else{
                     if(!filterOK)
                         return false;
 
+
+                    /*
+                     * ARAMA
+                     */
 
                     if(!query)
                         return true;
@@ -3531,6 +4818,7 @@ else{
                         match.leagueName,
 
                         match.hafta,
+                        match.week,
 
                         match.tarih,
                         match.saat,
@@ -3558,17 +4846,7 @@ else{
 
 
         /*
-         * =================================================
-         * ÖNEMLİ:
-         *
-         * ESKİ SİSTEM:
-         *
-         * results.slice(0,10)
-         *
-         * kullanıyordu.
-         *
-         * ARTIK TÜM SONUÇLAR GÖSTERİLİYOR.
-         * =================================================
+         * TÜM SONUÇLAR
          */
 
         filteredMatches =
@@ -3657,12 +4935,6 @@ else{
                             ],
                             {
                                 duration:550,
-
-                                /*
-                                 * Çok fazla maç olduğunda
-                                 * yüzlerce animasyon oluşmasın.
-                                 * İlk 350ms içinde kademeli giriş.
-                                 */
 
                                 delay:
                                     Math.min(
@@ -4243,6 +5515,118 @@ else{
 
             }
         );
+
+
+    /* =====================================================
+       HAFTA MENÜSÜ AÇ / KAPAT
+    ===================================================== */
+
+    weekButton.addEventListener(
+        "click",
+        event => {
+
+            event.stopPropagation();
+
+
+            const isOpen =
+                weekPicker.classList.contains(
+                    "open"
+                );
+
+
+            if(isOpen){
+
+                closeWeekMenu();
+
+            }
+            else{
+
+                openWeekMenu();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       HAFTA MENÜSÜNÜ AÇ
+    ===================================================== */
+
+    function openWeekMenu(){
+
+        weekPicker.classList.add(
+            "open"
+        );
+
+
+        weekButton.setAttribute(
+            "aria-expanded",
+            "true"
+        );
+
+    }
+
+
+    /* =====================================================
+       HAFTA MENÜSÜNÜ KAPAT
+    ===================================================== */
+
+    function closeWeekMenu(){
+
+        weekPicker.classList.remove(
+            "open"
+        );
+
+
+        weekButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+
+    /* =====================================================
+       DIŞARI TIKLAMA
+    ===================================================== */
+
+    document.addEventListener(
+        "click",
+        event => {
+
+            if(
+                !weekPicker.contains(
+                    event.target
+                )
+            ){
+
+                closeWeekMenu();
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       ESC İLE KAPAT
+    ===================================================== */
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if(
+                event.key === "Escape"
+            ){
+
+                closeWeekMenu();
+
+            }
+
+        }
+    );
 
 
     /* =====================================================
