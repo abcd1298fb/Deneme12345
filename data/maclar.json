@@ -2245,5 +2245,47 @@
       "tip": "embed",
       "url": "https://dt-switch.akamaized.net/api/er/Get?ai=636&ak=null&switch=beinsports&customerid=1&format=4&action=redirect&ar=ligtvcomtr_tauri_ozt_20262027_1_sam_goz_1h_17agu_ip&secure=1"
     }
+  },
+  {
+  "id": 108,
+  "lig": "la-liga",
+  "ligAdi": "La Liga",
+  "hafta": "",
+  "evSahibi": "Real Sociedad",
+  "evKisa": "RSO",
+  "evLogo": "",
+  "deplasman": "Celta Vigo",
+  "depKisa": "CEL",
+  "depLogo": "",
+  "skor": "0 - 0",
+  "durum": "MS",
+  "tarih": "",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "",
+    "url": ""
   }
+},
+{
+  "id": 109,
+  "lig": "ligue-1",
+  "ligAdi": "Ligue 1",
+  "hafta": "",
+  "evSahibi": "Toulouse",
+  "evKisa": "TOU",
+  "evLogo": "",
+  "deplasman": "Lille",
+  "depKisa": "LIL",
+  "depLogo": "",
+  "skor": "0 - 1",
+  "durum": "MS",
+  "tarih": "",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "",
+    "url": ""
+  }
+}
 ]
