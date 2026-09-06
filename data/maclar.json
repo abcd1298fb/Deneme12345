@@ -1,4 +1,4 @@
-[
+
   {
     "id": 1,
     "lig": "premier-league",
@@ -2180,7 +2180,112 @@
     "yayin": {
       "aktif": true,
       "tip": "embed",
-      "url": "https://dt-switch.akamaized.net/api/er/Get?ai=636&ak=null&switch=beinsports"
+      "url": "https://dt-switch.akamaized.net/api/er/Get?ai=636&ak=null&switch=beinsports&customerid=1&format=4&action=redirect&ar=ligtvcomtr_tauri_ozt_20262027_1_bas_koca_1h_16agu_ip&secure=1"
     }
+  },
+  {
+    "id": 105,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Amed SK",
+    "evKisa": "AMD",
+    "evLogo": "https://assets.football-logos.cc/logos/turkey/700x700/amed.013c2443.png",
+    "deplasman": "Erzurumspor",
+    "depKisa": "ERZ",
+    "depLogo": "https://assets.football-logos.cc/logos/turkey/700x700/erzurumspor.c58a43cc.png",
+    "skor": "3 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-16",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": "https://dt-vod-beinsports.akamaized.net/4/38/2f1e/ligtvcomtr_tauri_ozt_20262027_1_amed_erzurum_1h_15agu_ip.mp4?hdnts=test~hmac=2c7e463584e68e56486c0e2a12ab02f5f83671f194ddf5212e569d52c051e80c"
+    }
+  },
+  {
+    "id": 106,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Beşiktaş",
+    "evKisa": "BJK",
+    "evLogo": "https://assets.football-logos.cc/logos/turkey/700x700/besiktas.c60ea853.png",
+    "deplasman": "Eyüpspor",
+    "depKisa": "EYÜ",
+    "depLogo": "https://assets.football-logos.cc/logos/turkey/700x700/eyupspor.b1731077.png",
+    "skor": "1 - 0",
+    "durum": "MS",
+    "tarih": "2026-08-16",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": "https://dt-switch.akamaized.net/api/er/Get?ai=636&ak=null&switch=beinsports&customerid=1&format=4&action=redirect&ar=ligtvcomtr_tauri_ozt_20262027_1_bjk_eyup_1h_15agu_ip&secure=1"
+    }
+  },
+  {
+    "id": 107,
+    "lig": "super-lig",
+    "ligAdi": "Türkiye - Süper Lig",
+    "hafta": "1. Hafta",
+    "evSahibi": "Samsunspor",
+    "evKisa": "SAM",
+    "evLogo": "https://assets.football-logos.cc/logos/turkey/700x700/samsunspor.3af81479.png",
+    "deplasman": "Göztepe",
+    "depKisa": "GÖZ",
+    "depLogo": "https://assets.football-logos.cc/logos/turkey/700x700/goztepe-izmir.38f41b7f.png",
+    "skor": "3 - 3",
+    "durum": "MS",
+    "tarih": "2026-08-17",
+    "saat": "",
+    "yayin": {
+      "aktif": true,
+      "tip": "embed",
+      "url": "https://dt-switch.akamaized.net/api/er/Get?ai=636&ak=null&switch=beinsports&customerid=1&format=4&action=redirect&ar=ligtvcomtr_tauri_ozt_20262027_1_sam_goz_1h_17agu_ip&secure=1"
+    }
+  },
+  {
+  "id": 108,
+  "lig": "la-liga",
+  "ligAdi": "La Liga",
+  "hafta": "6. Hafta",
+  "evSahibi": "Real Sociedad",
+  "evKisa": "RSO",
+  "evLogo": "https://assets.football-logos.cc/logos/spain/700x700/real-sociedad.ea69a441.png",
+  "deplasman": "Celta Vigo",
+  "depKisa": "CEL",
+  "depLogo": "https://assets.football-logos.cc/logos/spain/700x700/celta.7c11481f.png",
+  "skor": "0 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-03",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": "https://file-na-lax-1.gofile.io/download/web/e8ef3494-6b6f-4d57-8d07-92478e82fd2d/Brighton%20vs%20Leeds%20-%20Full%20Match%20-%201080p50.mp4"
   }
-]
+},
+{
+  "id": 109,
+  "lig": "ligue-1",
+  "ligAdi": "Ligue 1",
+  "hafta": "3. Hafta",
+  "evSahibi": "Toulouse",
+  "evKisa": "TOU",
+  "evLogo": "https://assets.football-logos.cc/logos/france/700x700/toulouse.18048063.png",
+  "deplasman": "Lille",
+  "depKisa": "LIL",
+  "depLogo": "https://assets.football-logos.cc/logos/france/700x700/lille.3695616f.png",
+  "skor": "0 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-03",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "",
+    "url": ""
+  }
+}
+    ]
