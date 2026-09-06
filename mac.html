@@ -1198,6 +1198,183 @@ body::before{
 
 
 /* =========================================================
+   DOWNLOAD
+========================================================= */
+
+.download-area{
+    display:none;
+
+    margin-top:16px;
+}
+
+.download-button{
+    position:relative;
+
+    width:100%;
+    min-height:72px;
+
+    display:flex;
+    align-items:center;
+    gap:16px;
+
+    padding:14px 18px;
+
+    color:#fff;
+    text-decoration:none;
+
+    border:1px solid rgba(21,149,255,.18);
+    border-radius:18px;
+
+    background:
+        radial-gradient(
+            350px circle at 0% 50%,
+            rgba(21,149,255,.12),
+            transparent 70%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(21,149,255,.075),
+            rgba(255,255,255,.018)
+        );
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.25),
+        inset 0 1px 0 rgba(255,255,255,.035);
+
+    overflow:hidden;
+
+    transition:
+        transform .3s var(--ease),
+        border-color .3s ease,
+        background .3s ease,
+        box-shadow .3s ease;
+}
+
+.download-button::before{
+    content:"";
+
+    position:absolute;
+    left:0;
+    top:0;
+    bottom:0;
+
+    width:3px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--blue2),
+            var(--blue)
+        );
+
+    box-shadow:
+        0 0 18px rgba(21,149,255,.7);
+}
+
+.download-button:hover{
+    transform:translateY(-3px);
+
+    border-color:
+        rgba(21,149,255,.4);
+
+    background:
+        radial-gradient(
+            450px circle at 0% 50%,
+            rgba(21,149,255,.18),
+            transparent 70%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(21,149,255,.1),
+            rgba(255,255,255,.025)
+        );
+
+    box-shadow:
+        0 22px 45px rgba(0,0,0,.35),
+        0 0 30px rgba(21,149,255,.07),
+        inset 0 1px 0 rgba(255,255,255,.05);
+}
+
+.download-button:active{
+    transform:scale(.99);
+}
+
+.download-icon{
+    width:43px;
+    height:43px;
+
+    flex:0 0 43px;
+
+    display:grid;
+    place-items:center;
+
+    color:#fff;
+
+    border:1px solid rgba(98,192,255,.2);
+    border-radius:13px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #1595ff,
+            #086fc1
+        );
+
+    box-shadow:
+        0 8px 25px rgba(21,149,255,.2);
+
+    font-size:24px;
+    font-weight:900;
+
+    line-height:1;
+}
+
+.download-content{
+    min-width:0;
+
+    display:flex;
+    flex-direction:column;
+
+    gap:3px;
+
+    flex:1;
+}
+
+.download-content strong{
+    color:#f4f9ff;
+
+    font-family:"Barlow Condensed",sans-serif;
+    font-size:20px;
+    font-weight:900;
+
+    letter-spacing:.8px;
+}
+
+.download-content small{
+    color:#718499;
+
+    font-size:8px;
+    font-weight:800;
+
+    letter-spacing:.3px;
+}
+
+.download-arrow{
+    color:#63bfff;
+
+    font-size:24px;
+    font-weight:700;
+
+    transition:
+        transform .3s var(--ease);
+}
+
+.download-button:hover .download-arrow{
+    transform:translateX(5px);
+}
+
+
+/* =========================================================
    INFO SECTION
 ========================================================= */
 
@@ -1614,6 +1791,47 @@ body::before{
     }
 
 
+    /* DOWNLOAD MOBILE */
+
+    .download-area{
+        margin-top:11px;
+    }
+
+    .download-button{
+        min-height:64px;
+
+        padding:11px 13px;
+
+        gap:11px;
+
+        border-radius:15px;
+    }
+
+    .download-icon{
+        width:38px;
+        height:38px;
+
+        flex-basis:38px;
+
+        border-radius:11px;
+
+        font-size:20px;
+    }
+
+    .download-content strong{
+        font-size:17px;
+        letter-spacing:.6px;
+    }
+
+    .download-content small{
+        font-size:7px;
+    }
+
+    .download-arrow{
+        font-size:21px;
+    }
+
+
     /* INFO MOBILE */
 
     .info-grid{
@@ -1949,6 +2167,49 @@ Bu karşılaşma için henüz yayın veya tekrar bağlantısı eklenmemiş.
 
 </div>
 
+
+<!-- =====================================================
+     DOWNLOAD BUTTON
+===================================================== -->
+
+<div
+    class="download-area"
+    id="downloadArea"
+>
+
+<a
+    id="downloadButton"
+    class="download-button"
+    href="#"
+    target="_blank"
+    rel="noopener noreferrer"
+>
+
+    <span class="download-icon">
+        ↓
+    </span>
+
+    <span class="download-content">
+
+        <strong>
+            MAÇI İNDİR
+        </strong>
+
+        <small>
+            İndirme sayfasını yeni sekmede aç
+        </small>
+
+    </span>
+
+    <span class="download-arrow">
+        →
+    </span>
+
+</a>
+
+</div>
+
+
 </div>
 
 
@@ -2109,6 +2370,16 @@ document.getElementById("playerInfo");
 
 const errorBox =
 document.getElementById("errorBox");
+
+/* =========================================================
+   DOWNLOAD DOM
+========================================================= */
+
+const downloadArea =
+document.getElementById("downloadArea");
+
+const downloadButton =
+document.getElementById("downloadButton");
 
 
 /* =========================================================
@@ -2360,6 +2631,13 @@ function renderMatch(match){
 
     renderPlayer(match);
 
+
+    /* =====================================================
+       DOWNLOAD
+    ===================================================== */
+
+    renderDownload(match);
+
 }
 
 
@@ -2500,6 +2778,73 @@ function renderPlayer(match){
 
     playerInfo.textContent =
         "Desteklenmeyen yayın tipi";
+
+}
+
+
+/* =========================================================
+   DOWNLOAD
+========================================================= */
+
+function renderDownload(match){
+
+    /*
+        maclar.json örneği:
+
+        "indirme": {
+            "aktif": true,
+            "url": "https://mixdrop.top/f/67qzoo0xb04mpm?download"
+        }
+    */
+
+    if(
+        !match.indirme ||
+        match.indirme.aktif !== true ||
+        !match.indirme.url
+    ){
+
+        downloadArea.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    const downloadUrl =
+        String(
+            match.indirme.url
+        ).trim();
+
+
+    if(!downloadUrl){
+
+        downloadArea.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    /*
+        Link doğrudan maclar.json'dan alınır.
+        Örneğin MixDrop indirme sayfası ise
+        kullanıcı yeni sekmede o sayfaya gider.
+    */
+
+    downloadButton.href =
+        downloadUrl;
+
+    downloadButton.target =
+        "_blank";
+
+    downloadButton.rel =
+        "noopener noreferrer";
+
+
+    downloadArea.style.display =
+        "block";
 
 }
 
