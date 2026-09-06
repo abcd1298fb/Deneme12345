@@ -2287,5 +2287,152 @@
     "tip": "embed",
     "url": "https://playmate.to/embed/HmExB1L5Ss7B4"
   }
+},
+{
+  "id": 110,
+  "lig": "super-lig",
+  "ligAdi": "Türkiye - Süper Lig",
+  "hafta": "3. Hafta",
+  "evSahibi": "Başakşehir",
+  "evKisa": "BAŞ",
+  "evLogo": "https://assets.football-logos.cc/logos/turkey/700x700/basaksehir.c7750a25.png",
+  "deplasman": "Galatasaray",
+  "depKisa": "GS",
+  "depLogo": "https://assets.football-logos.cc/logos/turkey/700x700/galatasaray.090f837e.png",
+  "skor": "2 - 3",
+  "durum": "MS",
+  "tarih": "2026-09-05",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "embed",
+    "url": ""
+  }
+},
+{
+  "id": 111,
+  "lig": "premier-league",
+  "ligAdi": "Premier League",
+  "hafta": "3. Hafta",
+  "evSahibi": "Ipswich",
+  "evKisa": "IPS",
+  "evLogo": "https://assets.football-logos.cc/logos/england/700x700/ipswich.b79854fa.png",
+  "deplasman": "Liverpool",
+  "depKisa": "LIV",
+  "depLogo": "https://assets.football-logos.cc/logos/england/700x700/liverpool.868c28cb.png",
+  "skor": "0 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "embed",
+    "url": ""
+  }
+},
+{
+  "id": 112,
+  "lig": "la-liga",
+  "ligAdi": "La Liga",
+  "hafta": "4. Hafta",
+  "evSahibi": "Real Betis",
+  "evKisa": "BET",
+  "evLogo": "https://assets.football-logos.cc/logos/spain/700x700/real-betis.5bac0c39.png",
+  "deplasman": "Real Madrid",
+  "depKisa": "RMA",
+  "depLogo": "https://assets.football-logos.cc/logos/spain/700x700/real-madrid.81d3d699.png",
+  "skor": "1 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "embed",
+    "url": ""
+  }
+},
+{
+  "id": 113,
+  "lig": "bundesliga",
+  "ligAdi": "Bundesliga",
+  "hafta": "2. Hafta",
+  "evSahibi": "Stuttgart",
+  "evKisa": "STU",
+  "evLogo": "https://assets.football-logos.cc/logos/germany/700x700/vfb-stuttgart.384702b0.png",
+  "deplasman": "Köln",
+  "depKisa": "KÖL",
+  "depLogo": "https://assets.football-logos.cc/logos/germany/700x700/koln.455c33da.png",
+  "skor": "4 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "embed",
+    "url": ""
+  }
+},
+{
+  "id": 114,
+  "lig": "serie-a",
+  "ligAdi": "Serie A",
+  "hafta": "3. Hafta",
+  "evSahibi": "Genoa",
+  "evKisa": "GEN",
+  "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/genoa.e9e4cc28.png",
+  "deplasman": "Como",
+  "depKisa": "COM",
+  "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/como-1907.9113270a.png",
+  "skor": "1 - 4",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "embed",
+    "url": ""
+  }
+},
+{
+  "id": 115,
+  "lig": "ligue-1",
+  "ligAdi": "Ligue 1",
+  "hafta": "3. Hafta",
+  "evSahibi": "Lyon",
+  "evKisa": "OL",
+  "evLogo": "https://assets.football-logos.cc/logos/france/700x700/lyon.7a2d5809.png",
+  "deplasman": "Auxerre",
+  "depKisa": "AUX",
+  "depLogo": "https://assets.football-logos.cc/logos/france/700x700/auxerre.17dfcd8d.png",
+  "skor": "3 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "embed",
+    "url": ""
+  }
+},
+{
+  "id": 116,
+  "lig": "ligue-1",
+  "ligAdi": "Ligue 1",
+  "hafta": "3. Hafta",
+  "evSahibi": "PSG",
+  "evKisa": "PSG",
+  "evLogo": "https://assets.football-logos.cc/logos/france/700x700/paris-saint-germain.a1c91d55.png",
+  "deplasman": "Monaco",
+  "depKisa": "ASM",
+  "depLogo": "https://assets.football-logos.cc/logos/france/700x700/as-monaco.b63e9cff.png",
+  "skor": "1 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": false,
+    "tip": "embed",
+    "url": ""
+  }
 }
 ]
