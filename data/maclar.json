@@ -2180,7 +2180,7 @@
     "yayin": {
       "aktif": true,
       "tip": "embed",
-      "url": "https://dt-switch.akamaized.net/api/er/Get?ai=636&ak=null&switch=beinsports&customerid=1&format=4&action=redirect&ar=ligtvcomtr_tauri_ozt_20262027_1_bas_koc_1h_16agu_ip&secure=1"
+      "url": "https://dt-switch.akamaized.net/api/er/Get?ai=636&ak=null&switch=beinsports"
     }
   }
 ]
