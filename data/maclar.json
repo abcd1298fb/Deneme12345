@@ -4323,5 +4323,280 @@
     "aktif": false,
     "url": ""
   }
+},
+  {
+  "id": 174,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Fenerbahçe",
+  "evKisa": "FB",
+  "evLogo": "https://media.api-sports.io/football/teams/611.png",
+  "deplasman": "Roma",
+  "depKisa": "ROM",
+  "depLogo": "https://media.api-sports.io/football/teams/497.png",
+  "skor": "1 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-10",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 175,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "PSV",
+  "evKisa": "PSV",
+  "evLogo": "https://media.api-sports.io/football/teams/197.png",
+  "deplasman": "Shakhtar",
+  "depKisa": "SHK",
+  "depLogo": "https://media.api-sports.io/football/teams/600.png",
+  "skor": "1 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-10",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 176,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Bayern Münih",
+  "evKisa": "BAY",
+  "evLogo": "https://media.api-sports.io/football/teams/157.png",
+  "deplasman": "Bodo/Glimt",
+  "depKisa": "BOD",
+  "depLogo": "https://media.api-sports.io/football/teams/327.png",
+  "skor": "5 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-10",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 177,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Como",
+  "evKisa": "COM",
+  "evLogo": "https://media.api-sports.io/football/teams/895.png",
+  "deplasman": "Leipzig",
+  "depKisa": "RBL",
+  "depLogo": "https://media.api-sports.io/football/teams/173.png",
+  "skor": "4 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-10",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 178,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Man. United",
+  "evKisa": "MUN",
+  "evLogo": "https://media.api-sports.io/football/teams/33.png",
+  "deplasman": "Sabah",
+  "depKisa": "SAB",
+  "depLogo": "https://media.api-sports.io/football/teams/7576.png",
+  "skor": "4 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-10",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 179,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Slavia Prag",
+  "evKisa": "SLA",
+  "evLogo": "https://media.api-sports.io/football/teams/620.png",
+  "deplasman": "Lens",
+  "depKisa": "LEN",
+  "depLogo": "https://media.api-sports.io/football/teams/116.png",
+  "skor": "2 - 3",
+  "durum": "MS",
+  "tarih": "2026-09-10",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+  {
+  "id": 180,
+  "lig": "super-lig",
+  "ligAdi": "Türkiye - Süper Lig",
+  "hafta": "4. Hafta",
+  "evSahibi": "Beşiktaş",
+  "evKisa": "BJK",
+  "evLogo": "https://media.api-sports.io/football/teams/549.png",
+  "deplasman": "Erzurumspor",
+  "depKisa": "ERZ",
+  "depLogo": "https://media.api-sports.io/football/teams/1323.png",
+  "skor": "3 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-11",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 181,
+  "lig": "la-liga",
+  "ligAdi": "İspanya - LALIGA",
+  "hafta": "4. Hafta",
+  "evSahibi": "Sevilla",
+  "evKisa": "SEV",
+  "evLogo": "https://media.api-sports.io/football/teams/536.png",
+  "deplasman": "Valencia",
+  "depKisa": "VAL",
+  "depLogo": "https://media.api-sports.io/football/teams/532.png",
+  "skor": "1 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-11",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 182,
+  "lig": "bundesliga",
+  "ligAdi": "Almanya - Bundesliga",
+  "hafta": "4. Hafta",
+  "evSahibi": "Union Berlin",
+  "evKisa": "UBE",
+  "evLogo": "https://media.api-sports.io/football/teams/182.png",
+  "deplasman": "Schalke",
+  "depKisa": "SCH",
+  "depLogo": "https://media.api-sports.io/football/teams/174.png",
+  "skor": "1 - 3",
+  "durum": "MS",
+  "tarih": "2026-09-11",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 183,
+  "lig": "serie-a",
+  "ligAdi": "İtalya - Serie A",
+  "hafta": "4. Hafta",
+  "evSahibi": "Venezia",
+  "evKisa": "VEN",
+  "evLogo": "https://media.api-sports.io/football/teams/517.png",
+  "deplasman": "Fiorentina",
+  "depKisa": "FIO",
+  "depLogo": "https://media.api-sports.io/football/teams/502.png",
+  "skor": "2 - 4",
+  "durum": "MS",
+  "tarih": "2026-09-11",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 184,
+  "lig": "ligue-1",
+  "ligAdi": "Fransa - Ligue 1",
+  "hafta": "4. Hafta",
+  "evSahibi": "Rennes",
+  "evKisa": "REN",
+  "evLogo": "https://media.api-sports.io/football/teams/94.png",
+  "deplasman": "Marsilya",
+  "depKisa": "OM",
+  "depLogo": "https://media.api-sports.io/football/teams/81.png",
+  "skor": "1 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-11",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
 }
 ]
