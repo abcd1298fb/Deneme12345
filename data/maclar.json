@@ -3498,5 +3498,829 @@
       "aktif": true,
       "url": "https://dt-vod-beinsports.akamaized.net/f/94/f74d/ligtvcomtr_tauri_ozt_20262027_4_fb_bjk_4h_5eyl_ip.mp4?hdnts=test~hmac=2c7e463584e68e56486c0e2a12ab02f5f83671f194ddf5212"
     }
+  },
+  {
+  "id": 141,
+  "lig": "premier-league",
+  "ligAdi": "İngiltere - Premier League",
+  "hafta": "3. Hafta",
+  "evSahibi": "Everton",
+  "evKisa": "EVE",
+  "evLogo": "https://media.api-sports.io/football/teams/45.png",
+  "deplasman": "Man. United",
+  "depKisa": "MUN",
+  "depLogo": "https://media.api-sports.io/football/teams/33.png",
+  "skor": "2 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
   }
-    ]
+},
+{
+  "id": 142,
+  "lig": "premier-league",
+  "ligAdi": "İngiltere - Premier League",
+  "hafta": "3. Hafta",
+  "evSahibi": "Arsenal",
+  "evKisa": "ARS",
+  "evLogo": "https://media.api-sports.io/football/teams/42.png",
+  "deplasman": "Chelsea",
+  "depKisa": "CHE",
+  "depLogo": "https://media.api-sports.io/football/teams/49.png",
+  "skor": "2 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 143,
+  "lig": "la-liga",
+  "ligAdi": "İspanya - La Liga",
+  "hafta": "4. Hafta",
+  "evSahibi": "Valencia",
+  "evKisa": "VAL",
+  "evLogo": "https://media.api-sports.io/football/teams/532.png",
+  "deplasman": "Barcelona",
+  "depKisa": "BAR",
+  "depLogo": "https://media.api-sports.io/football/teams/529.png",
+  "skor": "0 - 5",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 144,
+  "lig": "la-liga",
+  "ligAdi": "İspanya - La Liga",
+  "hafta": "4. Hafta",
+  "evSahibi": "Alaves",
+  "evKisa": "ALA",
+  "evLogo": "https://media.api-sports.io/football/teams/542.png",
+  "deplasman": "Osasuna",
+  "depKisa": "OSA",
+  "depLogo": "https://media.api-sports.io/football/teams/727.png",
+  "skor": "5 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 145,
+  "lig": "la-liga",
+  "ligAdi": "İspanya - La Liga",
+  "hafta": "4. Hafta",
+  "evSahibi": "Malaga",
+  "evKisa": "MAL",
+  "evLogo": "https://media.api-sports.io/football/teams/535.png",
+  "deplasman": "Levante",
+  "depKisa": "LEV",
+  "depLogo": "https://media.api-sports.io/football/teams/539.png",
+  "skor": "0 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 146,
+  "lig": "la-liga",
+  "ligAdi": "İspanya - La Liga",
+  "hafta": "4. Hafta",
+  "evSahibi": "Espanyol",
+  "evKisa": "ESP",
+  "evLogo": "https://media.api-sports.io/football/teams/540.png",
+  "deplasman": "Sevilla",
+  "depKisa": "SEV",
+  "depLogo": "https://media.api-sports.io/football/teams/536.png",
+  "skor": "1 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 147,
+  "lig": "bundesliga",
+  "ligAdi": "Almanya - Bundesliga",
+  "hafta": "2. Hafta",
+  "evSahibi": "Hamburg",
+  "evKisa": "HAM",
+  "evLogo": "https://media.api-sports.io/football/teams/160.png",
+  "deplasman": "Mainz",
+  "depKisa": "MAI",
+  "depLogo": "https://media.api-sports.io/football/teams/164.png",
+  "skor": "0 - 5",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 148,
+  "lig": "bundesliga",
+  "ligAdi": "Almanya - Bundesliga",
+  "hafta": "2. Hafta",
+  "evSahibi": "E. Frankfurt",
+  "evKisa": "FRA",
+  "evLogo": "https://media.api-sports.io/football/teams/169.png",
+  "deplasman": "Augsburg",
+  "depKisa": "AUG",
+  "depLogo": "https://media.api-sports.io/football/teams/170.png",
+  "skor": "1 - 4",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 149,
+  "lig": "serie-a",
+  "ligAdi": "İtalya - Serie A",
+  "hafta": "3. Hafta",
+  "evSahibi": "Frosinone",
+  "evKisa": "FRO",
+  "evLogo": "https://media.api-sports.io/football/teams/470.png",
+  "deplasman": "Venezia",
+  "depKisa": "VEN",
+  "depLogo": "https://media.api-sports.io/football/teams/517.png",
+  "skor": "3 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 150,
+  "lig": "serie-a",
+  "ligAdi": "İtalya - Serie A",
+  "hafta": "3. Hafta",
+  "evSahibi": "Parma",
+  "evKisa": "PAR",
+  "evLogo": "https://media.api-sports.io/football/teams/126.png",
+  "deplasman": "Monza",
+  "depKisa": "MON",
+  "depLogo": "https://media.api-sports.io/football/teams/157.png",
+  "skor": "1 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 151,
+  "lig": "serie-a",
+  "ligAdi": "İtalya - Serie A",
+  "hafta": "3. Hafta",
+  "evSahibi": "Bologna",
+  "evKisa": "BOL",
+  "evLogo": "https://media.api-sports.io/football/teams/500.png",
+  "deplasman": "Sassuolo",
+  "depKisa": "SAS",
+  "depLogo": "https://media.api-sports.io/football/teams/488.png",
+  "skor": "2 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 152,
+  "lig": "serie-a",
+  "ligAdi": "İtalya - Serie A",
+  "hafta": "3. Hafta",
+  "evSahibi": "Juventus",
+  "evKisa": "JUV",
+  "evLogo": "https://media.api-sports.io/football/teams/496.png",
+  "deplasman": "Milan",
+  "depKisa": "MIL",
+  "depLogo": "https://media.api-sports.io/football/teams/489.png",
+  "skor": "1 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 153,
+  "lig": "ligue-1",
+  "ligAdi": "Fransa - Ligue 1",
+  "hafta": "3. Hafta",
+  "evSahibi": "Troyes",
+  "evKisa": "TRO",
+  "evLogo": "https://media.api-sports.io/football/teams/110.png",
+  "deplasman": "Strasbourg",
+  "depKisa": "STR",
+  "depLogo": "https://media.api-sports.io/football/teams/95.png",
+  "skor": "2 - 6",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 154,
+  "lig": "ligue-1",
+  "ligAdi": "Fransa - Ligue 1",
+  "hafta": "3. Hafta",
+  "evSahibi": "Angers",
+  "evKisa": "ANG",
+  "evLogo": "https://media.api-sports.io/football/teams/77.png",
+  "deplasman": "Rennes",
+  "depKisa": "REN",
+  "depLogo": "https://media.api-sports.io/football/teams/94.png",
+  "skor": "1 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 155,
+  "lig": "ligue-1",
+  "ligAdi": "Fransa - Ligue 1",
+  "hafta": "3. Hafta",
+  "evSahibi": "Marsilya",
+  "evKisa": "MAR",
+  "evLogo": "https://media.api-sports.io/football/teams/81.png",
+  "deplasman": "Paris FC",
+  "depKisa": "PFC",
+  "depLogo": "https://media.api-sports.io/football/teams/111.png",
+  "skor": "2 - 3",
+  "durum": "MS",
+  "tarih": "2026-09-06",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+  {
+  "id": 156,
+  "lig": "super-lig",
+  "ligAdi": "Süper Lig",
+  "hafta": "4. Hafta",
+  "evSahibi": "Ç. Rizespor",
+  "evKisa": "RIZ",
+  "evLogo": "https://assets.football-logos.cc/logos/turkey/700x700/rizespor.4c9c2e3e.png",
+  "deplasman": "Alanyaspor",
+  "depKisa": "ALA",
+  "depLogo": "https://assets.football-logos.cc/logos/turkey/700x700/alanyaspor.0e5d5d6e.png",
+  "skor": "0 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-07",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 157,
+  "lig": "super-lig",
+  "ligAdi": "Süper Lig",
+  "hafta": "4. Hafta",
+  "evSahibi": "Göztepe",
+  "evKisa": "GOZ",
+  "evLogo": "https://assets.football-logos.cc/logos/turkey/700x700/goztepe.7c6f2f1a.png",
+  "deplasman": "Gaziantep FK",
+  "depKisa": "GFK",
+  "depLogo": "https://assets.football-logos.cc/logos/turkey/700x700/gaziantep-fk.6d4e3a4f.png",
+  "skor": "2 - 4",
+  "durum": "MS",
+  "tarih": "2026-09-07",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 158,
+  "lig": "la-liga",
+  "ligAdi": "İspanya - La Liga",
+  "hafta": "4. Hafta",
+  "evSahibi": "Getafe",
+  "evKisa": "GET",
+  "evLogo": "https://assets.football-logos.cc/logos/spain/700x700/getafe.4e2e9a11.png",
+  "deplasman": "Celta Vigo",
+  "depKisa": "CEL",
+  "depLogo": "https://assets.football-logos.cc/logos/spain/700x700/celta-vigo.3a9d4c72.png",
+  "skor": "1 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-07",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 159,
+  "lig": "la-liga",
+  "ligAdi": "İspanya - La Liga",
+  "hafta": "4. Hafta",
+  "evSahibi": "Elche",
+  "evKisa": "ELC",
+  "evLogo": "https://assets.football-logos.cc/logos/spain/700x700/elche.9a8b7c6d.png",
+  "deplasman": "Real Sociedad",
+  "depKisa": "RSO",
+  "depLogo": "https://assets.football-logos.cc/logos/spain/700x700/real-sociedad.2b4c6d8e.png",
+  "skor": "2 - 3",
+  "durum": "MS",
+  "tarih": "2026-09-07",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 160,
+  "lig": "serie-a",
+  "ligAdi": "İtalya - Serie A",
+  "hafta": "3. Hafta",
+  "evSahibi": "Cagliari",
+  "evKisa": "CAG",
+  "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/cagliari.5d6e7f81.png",
+  "deplasman": "Lecce",
+  "depKisa": "LEC",
+  "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/lecce.1a2b3c4d.png",
+  "skor": "1 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-07",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 161,
+  "lig": "serie-a",
+  "ligAdi": "İtalya - Serie A",
+  "hafta": "3. Hafta",
+  "evSahibi": "Udinese",
+  "evKisa": "UDI",
+  "evLogo": "https://assets.football-logos.cc/logos/italy/700x700/udinese.6e7f8a91.png",
+  "deplasman": "Lazio",
+  "depKisa": "LAZ",
+  "depLogo": "https://assets.football-logos.cc/logos/italy/700x700/lazio.2c3d4e5f.png",
+  "skor": "1 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-07",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+  {
+  "id": 162,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "Lig Aşaması",
+  "evSahibi": "AEK Athens",
+  "evKisa": "AEK",
+  "evLogo": "https://media.api-sports.io/football/teams/611.png",
+  "deplasman": "LASK",
+  "depKisa": "LASK",
+  "depLogo": "https://media.api-sports.io/football/teams/574.png",
+  "skor": "1 - 0",
+  "durum": "MS",
+  "tarih": "2026-09-08",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 163,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "Lig Aşaması",
+  "evSahibi": "Club Brugge",
+  "evKisa": "BRU",
+  "evLogo": "https://media.api-sports.io/football/teams/569.png",
+  "deplasman": "Aston Villa",
+  "depKisa": "AVL",
+  "depLogo": "https://media.api-sports.io/football/teams/66.png",
+  "skor": "2 - 3",
+  "durum": "MS",
+  "tarih": "2026-09-08",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 164,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "Lig Aşaması",
+  "evSahibi": "Dortmund",
+  "evKisa": "BVB",
+  "evLogo": "https://media.api-sports.io/football/teams/165.png",
+  "deplasman": "Villarreal",
+  "depKisa": "VIL",
+  "depLogo": "https://media.api-sports.io/football/teams/533.png",
+  "skor": "3 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-08",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 165,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "Lig Aşaması",
+  "evSahibi": "Lille",
+  "evKisa": "LIL",
+  "evLogo": "https://media.api-sports.io/football/teams/79.png",
+  "deplasman": "Real Betis",
+  "depKisa": "BET",
+  "depLogo": "https://media.api-sports.io/football/teams/543.png",
+  "skor": "2 - 3",
+  "durum": "MS",
+  "tarih": "2026-09-08",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 166,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "Lig Aşaması",
+  "evSahibi": "Porto",
+  "evKisa": "POR",
+  "evLogo": "https://media.api-sports.io/football/teams/212.png",
+  "deplasman": "Man. City",
+  "depKisa": "MCI",
+  "depLogo": "https://media.api-sports.io/football/teams/50.png",
+  "skor": "0 - 2",
+  "durum": "MS",
+  "tarih": "2026-09-08",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 167,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "Lig Aşaması",
+  "evSahibi": "Real Madrid",
+  "evKisa": "RMA",
+  "evLogo": "https://media.api-sports.io/football/teams/541.png",
+  "deplasman": "Inter",
+  "depKisa": "INT",
+  "depLogo": "https://media.api-sports.io/football/teams/505.png",
+  "skor": "2 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-08",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+  {
+  "id": 168,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Sporting CP",
+  "evKisa": "SCP",
+  "evLogo": "https://media.api-sports.io/football/teams/228.png",
+  "deplasman": "Galatasaray",
+  "depKisa": "GAL",
+  "depLogo": "https://media.api-sports.io/football/teams/645.png",
+  "skor": "3 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-09",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 169,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Barcelona",
+  "evKisa": "BAR",
+  "evLogo": "https://media.api-sports.io/football/teams/529.png",
+  "deplasman": "Feyenoord",
+  "depKisa": "FEY",
+  "depLogo": "https://media.api-sports.io/football/teams/234.png",
+  "skor": "5 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-09",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 170,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Stuttgart",
+  "evKisa": "STU",
+  "evLogo": "https://media.api-sports.io/football/teams/172.png",
+  "deplasman": "Viking",
+  "depKisa": "VIK",
+  "depLogo": "https://media.api-sports.io/football/teams/397.png",
+  "skor": "3 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-09",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 171,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Liverpool",
+  "evKisa": "LIV",
+  "evLogo": "https://media.api-sports.io/football/teams/40.png",
+  "deplasman": "Atl. Madrid",
+  "depKisa": "ATM",
+  "depLogo": "https://media.api-sports.io/football/teams/530.png",
+  "skor": "2 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-09",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 172,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "Napoli",
+  "evKisa": "NAP",
+  "evLogo": "https://media.api-sports.io/football/teams/492.png",
+  "deplasman": "Arsenal",
+  "depKisa": "ARS",
+  "depLogo": "https://media.api-sports.io/football/teams/42.png",
+  "skor": "0 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-09",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+},
+{
+  "id": 173,
+  "lig": "champions-league",
+  "ligAdi": "Şampiyonlar Ligi - Lig Aşaması",
+  "hafta": "1. Hafta",
+  "evSahibi": "PSG",
+  "evKisa": "PSG",
+  "evLogo": "https://media.api-sports.io/football/teams/85.png",
+  "deplasman": "S. Bratislava",
+  "depKisa": "SLO",
+  "depLogo": "https://media.api-sports.io/football/teams/622.png",
+  "skor": "6 - 1",
+  "durum": "MS",
+  "tarih": "2026-09-09",
+  "saat": "",
+  "yayin": {
+    "aktif": true,
+    "tip": "embed",
+    "url": ""
+  },
+  "indirme": {
+    "aktif": false,
+    "url": ""
+  }
+}
